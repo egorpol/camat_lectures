@@ -143,7 +143,7 @@ The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, v
 Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an `<annot>` in the MEI file says so. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.
 
 !!! info "Source and licence"
-    MEI: the first page (bars 1–15) of `buxtehude_op1_01_sonata_f_major_corr.mei` from the CAMAT corpus edition [*DdT 1, vol. 11: Dietrich Buxtehude, Instrumental Works*](https://github.com/egorpol/DdT_1_vol_11) (work in progress, commit `7af4ae8`), [MIT License](examples/facsimile/LICENSE); two ties into bar 16 on the next page were removed. [Download the MEI file](examples/facsimile/buxtehude_op1_01_page1.mei){: download }. Scan: Bayerische Staatsbibliothek, [`bsb00023199`, image 13](https://www.digitale-sammlungen.de/en/view/bsb00023199?page=13) (copy of the Hochschule für Musik und Theater München, Bibliothek), licensed [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). The page loads the scan from the library's IIIF server when you open it; it is not copied here.
+    MEI: the first page (bars 1–15) of `buxtehude_op1_01_sonata_f_major_corr.mei` from the CAMAT corpus edition [*DdT 1, vol. 11: Dietrich Buxtehude, Instrumental Works*](https://github.com/egorpol/DdT_1_vol_11) (work in progress, commit `7af4ae8`), [MIT License](examples/facsimile/LICENSE); two ties into bar 16 on the next page were removed. [Download the MEI file](examples/facsimile/buxtehude_op1_01_page1.mei){: download="buxtehude_op1_01_page1.mei" }. Scan: Bayerische Staatsbibliothek, [`bsb00023199`, image 13](https://www.digitale-sammlungen.de/en/view/bsb00023199?page=13) (copy of the Hochschule für Musik und Theater München, Bibliothek), licensed [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). The page loads the scan from the library's IIIF server when you open it; it is not copied here.
 
 *Discussion: Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?*
 
@@ -269,10 +269,11 @@ You do not need your own LLM account for this: the recorded answers and the inst
 
 ## Notebooks
 
-The notebooks repeat the demos with inputs you can change. Download them and upload them to Jupyter4NFDI (see [setup](../../setup.md)).
+The notebooks repeat the demos with inputs you can change. Download them and upload them to Jupyter4NFDI (see [setup](../../setup.md)). Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets).
 
-!!! note "Coming before the session"
-    `01_formats_verovio.ipynb` (Demos B and D), `01_player_piano.ipynb` (Demo A) and `01_binary_grid.ipynb` (Demo C).
+- [`01_formats_verovio.ipynb`](notebooks/01_formats_verovio.ipynb){: download="01_formats_verovio.ipynb" }: Demos B and D, the seven encodings and the LLM's melody. Start here.
+- [`01_player_piano.ipynb`](notebooks/01_player_piano.ipynb){: download="01_player_piano.ipynb" }: Demo A, Debussy's roll as raw and expressive MIDI. Downloads the MIDI files from GitHub when you run it.
+- [`01_binary_grid.ipynb`](notebooks/01_binary_grid.ipynb){: download="01_binary_grid.ipynb" }: Demo C, the melody as a 0/1 grid and back.
 
 ## Sources
 

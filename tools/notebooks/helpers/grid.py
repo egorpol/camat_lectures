@@ -1,0 +1,272 @@
+# Melody <-> binary pitch x time grid (Demo C). Pure functions, no DOM.
+# The Python version in 01_binary_grid.ipynb follows the same rules.
+#
+# A cell covers [i / res, (i + 1) / res) quarter notes. A note fills every
+# cell whose start lies inside the note. Notes that cover no cell start are lost.
+
+import math
+
+NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+
+def pitch_name(midi):
+    return NAMES[midi % 12] + str(math.floor(midi / 12) - 1)
+
+
+def is_black_key(midi):
+    return len(NAMES[midi % 12]) > 1
+
+
+# Notes from a Verovio timemap: [{pitch, on, off}] in quarter notes.
+# pitches: dict xml:id -> MIDI pitch (pitches_from_mei in mei.py); ids not in
+# the map (rests) are skipped.
+def notes_from_timemap(timemap, pitches):
+    offs = {}
+    for event in timemap:
+        for id_ in event.get("off") or []:
+            offs[id_] = event["qstamp"]
+    notes = []
+    for event in timemap:
+        for id_ in event.get("on") or []:
+            if id_ not in pitches:
+                continue
+            notes.append({
+                "pitch": pitches[id_],
+                "on": event["qstamp"],
+                "off": offs.get(id_, event["qstamp"]),
+            })
+    notes.sort(key=lambda n: (n["on"], n["pitch"]))
+    return notes
+
+
+def bar_quarters(meter):
+    return (meter["count"] * 4) / meter["unit"]
+
+
+# Start of the cell grid: round to avoid 0.9999 artefacts.
+EPS = 1e-9
+
+
+def _js_round(x):
+    # Math.round is round-half-up; Python round() is banker's rounding.
+    return math.floor(x + 0.5)
+
+
+# to_grid(notes, res, meter) — res and meter are positional (JS passes {res, meter}).
+def to_grid(notes, res, meter):
+    bar_cells = _js_round(bar_quarters(meter) * res)
+    end = max([0] + [n["off"] for n in notes])
+    bars = max(1, math.ceil(end / bar_quarters(meter) - EPS))
+    n_cols = bars * bar_cells
+    pitch_list = [n["pitch"] for n in notes]
+    # Math.min(...[]) is Infinity; Math.max(...[]) is -Infinity.
+    low = min(pitch_list) if pitch_list else float("inf")
+    high = max(pitch_list) if pitch_list else float("-inf")
+    occ = {}
+    ons = {}
+    p = low
+    while p <= high:
+        occ[p] = [0] * n_cols
+        ons[p] = [0] * n_cols
+        p += 1
+    lost = []
+    for n in notes:
+        first = math.ceil(n["on"] * res - EPS)
+        stop = math.ceil(n["off"] * res - EPS)  # first cell not covered
+        if first >= stop:
+            lost.append(n)
+            continue
+        i = first
+        while i < stop and i < n_cols:
+            occ[n["pitch"]][i] = 1
+            i += 1
+        ons[n["pitch"]][first] = 1
+    return {
+        "res": res,
+        "meter": meter,
+        "barCells": bar_cells,
+        "nCols": n_cols,
+        "low": low,
+        "high": high,
+        "occ": occ,
+        "ons": ons,
+        "lost": lost,
+    }
+
+
+# Rows to show, highest first. compact: hide black-key rows that stay empty.
+def grid_rows(grid, compact=True):
+    rows = []
+    p = grid["high"]
+    while p >= grid["low"]:
+        if compact and is_black_key(p) and not any(grid["occ"][p]):
+            p -= 1
+            continue
+        rows.append(p)
+        p -= 1
+    return rows
+
+
+# Grid as text, one row per pitch, cells grouped by bar (as on the slides).
+def grid_to_text(grid, compact=True, onsets=False):
+    rows = grid_rows(grid, compact)
+    bars = grid["nCols"] / grid["barCells"]
+    width = max(grid["barCells"], 5) + 2
+
+    def label(s):
+        return s.ljust(6)
+
+    def block(cells):
+        header = label("") + "".join(
+            f"bar {b + 1}".ljust(width) for b in range(int(bars))
+        ).rstrip()
+        lines = [header]
+        for p in rows:
+            line = label(pitch_name(p))
+            for b in range(int(bars)):
+                chunk = cells[p][b * grid["barCells"]:(b + 1) * grid["barCells"]]
+                line += "".join(str(v) for v in chunk).ljust(width)
+            lines.append(line.rstrip())
+        return "\n".join(lines)
+
+    if not onsets:
+        return block(grid["occ"])
+    return (
+        f"Sounding (1 = the pitch sounds):\n{block(grid['occ'])}\n\n"
+        f"Onsets (1 = a note starts):\n{block(grid['ons'])}"
+    )
+
+
+# Read the grid back as events: a new event starts whenever the set of
+# sounding pitches changes or (with onsets) a sounding pitch has an onset.
+def grid_to_events(grid, onsets=False):
+    events = []
+    current = None
+    for i in range(grid["nCols"]):
+        active = []
+        attack = False
+        p = grid["low"]
+        while p <= grid["high"]:
+            if grid["occ"][p][i]:
+                active.append(p)
+                if onsets and grid["ons"][p][i]:
+                    attack = True
+            p += 1
+        key = ",".join(str(x) for x in active)
+        if current and current["key"] == key and not attack:
+            current["len"] += 1
+        else:
+            current = {"key": key, "start": i, "len": 1, "pitches": active}
+            events.append(current)
+    return [{"start": e["start"], "len": e["len"], "pitches": e["pitches"]} for e in events]
+
+
+def events_to_notes(events, res):
+    notes = []
+    for e in events:
+        for p in e["pitches"]:
+            notes.append({
+                "pitch": p,
+                "on": e["start"] / res,
+                "off": (e["start"] + e["len"]) / res,
+            })
+    notes.sort(key=lambda n: (n["on"], n["pitch"]))
+    return notes
+
+
+# kern pitch: c = C4, cc = C5, C = C3, CC = C2.
+def kern_pitch(midi):
+    name = NAMES[midi % 12]
+    octave = math.floor(midi / 12) - 1
+    letter = name[0]
+    accidental = "#" if len(name) > 1 else ""
+    repeat = octave - 3 if octave >= 4 else 4 - octave
+    base = letter.lower() if octave >= 4 else letter
+    return base * repeat + accidental
+
+
+# Durations kern can write as one token, in quarter notes, largest first.
+KERN_DURATIONS = [
+    (6, "1."), (4, "1"), (3, "2."), (2, "2"), (1.5, "4."), (1, "4"),
+    (0.75, "8."), (0.5, "8"), (0.375, "16."), (0.25, "16"), (0.125, "32"),
+]
+
+
+def _split_duration(quarters):
+    parts = []
+    left = quarters
+    while left > EPS:
+        fit = next(((q, recip) for q, recip in KERN_DURATIONS if q <= left + EPS), None)
+        if not fit:
+            break
+        parts.append(fit)
+        left -= fit[0]
+    return parts
+
+
+# Events (from grid_to_events) -> a **kern score Verovio can render.
+def events_to_kern(events, grid):
+    res, meter, bar_cells = grid["res"], grid["meter"], grid["barCells"]
+    sounding = [p for e in events for p in e["pitches"]]
+    sorted_p = sorted(sounding)
+    median = sorted_p[len(sorted_p) // 2] if sorted_p else 60
+    lines = [
+        "**kern",
+        "*clefF4" if median < 57 else "*clefG2",
+        f"*M{meter['count']}/{meter['unit']}",
+    ]
+    # Cut each event at bar lines, then into writable durations.
+    pieces = []
+    for e in events:
+        start = e["start"]
+        end = e["start"] + e["len"]
+        chunks = []
+        while start < end:
+            bar_end = (math.floor(start / bar_cells) + 1) * bar_cells
+            stop = min(end, bar_end)
+            for q, recip in _split_duration((stop - start) / res):
+                chunks.append({"recip": recip, "start": start, "bar": math.floor(start / bar_cells)})
+            start = stop
+        for k, c in enumerate(chunks):
+            if len(chunks) == 1:
+                tie = ""
+            elif k == 0:
+                tie = "["
+            elif k == len(chunks) - 1:
+                tie = "]"
+            else:
+                tie = "_"
+            pieces.append({**c, "pitches": e["pitches"], "tie": tie})
+    bar = -1
+    for piece in pieces:
+        if piece["bar"] != bar:
+            bar = piece["bar"]
+            lines.append(f"={bar + 1}")
+        if not piece["pitches"]:
+            lines.append(f"{piece['recip']}r")
+            continue
+        tokens = []
+        for p in piece["pitches"]:
+            token = piece["recip"] + kern_pitch(p)
+            if piece["tie"] == "[":
+                tokens.append("[" + token)
+            else:
+                tokens.append(token + piece["tie"])
+        lines.append(" ".join(tokens))
+    lines.extend(["==", "*-"])
+    return "\n".join(lines) + "\n"
+
+
+# Compare two note lists: same pitches at the same times?
+# Key by (pitch, on, off) so 1 and 1.0 match (JS string keys would differ).
+def compare_notes(before, after):
+    def key(n):
+        return (n["pitch"], n["on"], n["off"])
+
+    after_keys = {key(n) for n in after}
+    before_keys = {key(n) for n in before}
+    return {
+        "kept": sum(1 for n in before if key(n) in after_keys),
+        "missing": [n for n in before if key(n) not in after_keys],
+        "added": [n for n in after if key(n) not in before_keys],
+    }

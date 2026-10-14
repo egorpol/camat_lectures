@@ -268,8 +268,8 @@ Demo D.
 - [x] Example encodings, tested with Verovio 6.3 ([examples/](examples/)).
 - [x] Live page: session text + demos A–D (served locally first).
 - [x] Part 3: eu-pd-composers showcase and Demo E (facsimile preview).
-- [ ] Notebooks `01_formats_verovio.ipynb`, `01_player_piano.ipynb`, `01_binary_grid.ipynb`.
-- [ ] Recorded LLM answers (ABC and kern) for Demo D.
+- [x] Notebooks `01_formats_verovio.ipynb`, `01_player_piano.ipynb`, `01_binary_grid.ipynb`.
+- [x] Recorded LLM answers (ABC and kern) for Demo D.
 - [ ] Run all notebooks once on Jupyter4NFDI.
 - [ ] Slides for parts 2–4 and 6, or present them from the live page.
 
