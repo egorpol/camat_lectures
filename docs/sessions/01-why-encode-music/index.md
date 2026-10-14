@@ -184,16 +184,18 @@ Chant is still encoded today, in GABC and Volpiano; Verovio reads both (the GABC
 
 When the reader is a machine, notation becomes a program: positions on a cylinder or holes in paper that trigger sound.
 
-| When | What | Why it matters here |
-|---|---|---|
-| 9th century, Baghdad | Banū Mūsā, *Book of Ingenious Devices*: an automatic flute player driven by a rotating pinned cylinder | often called an early programmable machine (a popular claim, not a consensus) |
-| 17th century onward | pinned barrels in barrel organs and music boxes | music stored as physical positions |
-| 1801–1804 | Jacquard loom: punched cards control weaving patterns | not music, but punched cards become the medium of music machines and computers |
-| 1843 | Ada Lovelace's notes on the Analytical Engine | if the relations of pitched sounds could be expressed in symbols, the engine might compose music: the encoding problem, stated before computers existed |
-| 1890s | Edwin Votey's piano player, sold by Aeolian as the Pianola (1897) | executable notation for the mass market |
-| 1904 | Welte-Mignon reproducing piano (Edwin Welte and Karl Bockisch, Freiburg; public launch 1905) | records tempo, dynamics and pedalling, not only notes |
-| 1908 | US manufacturers agree on an 88-note roll standard in Buffalo (most sources say December 1908; some give 1910 or 1911) | a format standard: any roll plays on any instrument |
-| from 1948 | Conlon Nancarrow punches his *Studies for Player Piano* by hand | the roll as a medium for music no human can play |
+Click a source to see the machine or its notation: book scans on the Internet Archive, photographs on Wikimedia Commons, and a museum's reconstruction.
+
+| When | What | Why it matters here | Look at a source |
+|---|---|---|---|
+| 9th century, Baghdad | Banū Mūsā, *The Instrument That Plays by Itself*: an automatic flute player driven by a rotating pinned cylinder | often called an early programmable machine (a popular claim, not a consensus) | [a reconstruction](https://zkm.de/en/artwork/automatische-hydraulische-orgel-der-banu-musa-ibn-shakir) built from the treatise at ZKM Karlsruhe (2015) |
+| 17th century onward | pinned barrels in barrel organs and music boxes | music stored as physical positions | [Salomon de Caus's water-driven barrel organ](https://commons.wikimedia.org/wiki/File:Barrel-organ_1.png) (1615), as redrawn in the 1911 *Encyclopædia Britannica*; Joseph Engramelle, [*La tonotechnie, ou l'art de noter les cylindres*](https://archive.org/details/latonotechnieoul0000engr/page/n290/mode/1up) ("the art of notating cylinders"), Paris 1775, plate III: a march written out for a barrel, with the barrel's divisions numbered under the notes |
+| 1801–1804 | Jacquard loom: punched cards control weaving patterns | not music, but punched cards become the medium of music machines and computers | [a Jacquard loom with its chain of punched cards](https://commons.wikimedia.org/wiki/File:A_Jacquard_loom_showing_information_punchcards,_National_Museum_of_Scotland.jpg), National Museum of Scotland: each card controls one row of the weave |
+| 1843 | Ada Lovelace's notes on the Analytical Engine | if the relations of pitched sounds could be expressed in symbols, the engine might compose music: the encoding problem, stated before computers existed | [her Note A, p. 694](https://archive.org/details/india.history.resource.53369/page/694/mode/1up), in *Scientific Memoirs*, vol. 3 (London, 1843): the sentence on music is in the upper half of the page |
+| 1890s | Edwin Votey's piano player, sold by Aeolian as the Pianola (1897) | executable notation for the mass market | [a roll in a Pianola](https://commons.wikimedia.org/wiki/File:Pianola_Museum_4.JPG) (Pianola Museum, Amsterdam): the player steers the pointer along the wavy Metrostyle line, which sets the tempo; [the first Pianola](https://commons.wikimedia.org/wiki/File:First_Pianola_%28cropped%29.jpg), photographed in 1922 when it was given to the Smithsonian |
+| 1904 | Welte-Mignon reproducing piano (Edwin Welte and Karl Bockisch, Freiburg; public launch 1905) | records tempo, dynamics and pedalling, not only notes | Debussy's roll from [Demo A](#demo-a-debussy-plays-childrens-corner) in [Stanford's viewer](https://purl.stanford.edu/dc920rk8870): zoom in to see the holes |
+| 1908 | US manufacturers agree on an 88-note roll standard in Buffalo (most sources say December 1908; some give 1910 or 1911) | a format standard: any roll plays on any instrument | [the box of an 88-note roll](https://commons.wikimedia.org/wiki/File:88_NOTE,_THEMODIST-METROSTYLE,_92882,_Follies_of_1910._%28piano_roll%29_-_The_Aeolian_Company,_New_York._The_Orchestrelie_Company,_London._Made_in_U.S.A..jpg) (Aeolian, *Follies of 1910*): "88 NOTE" on the label tells the buyer which players it fits |
+| from 1948 | Conlon Nancarrow punches his *Studies for Player Piano* by hand | the roll as a medium for music no human can play | [Nancarrow at his punching machine](https://www.paul-sacher-stiftung.ch/en/research/1-2-Conlon-Nancarrow-Edition-project.html) and a page of his score of Study No. 37 (Paul Sacher Stiftung, Basel, which holds his rolls and manuscripts) |
 
 ### Demo A: Debussy plays *Children's Corner*
 
@@ -219,18 +221,20 @@ The second half of block 1 is for getting everyone into Jupyter4NFDI: see [Setup
 
 ## 7. Notation for computers, 1940s to the 1990s
 
-| When | System | People | Made for |
-|---|---|---|---|
-| 1940s | punched cards for *Barbara Allen* tune variants | Bertrand Bronson | sorting folk tunes into families |
-| 1950–1951 | CSIRAC (Australia) plays tunes; the BBC records the Ferranti Mark 1 in 1951 | Christopher Strachey (Ferranti) | computers *play* music (no CSIRAC recording survives; it was reconstructed) |
-| 1957 | *Illiac Suite* for string quartet | Lejaren Hiller, Leonard Isaacson | computers *compose* (the output was copied into a score by hand) |
-| 1960s | DARMS (Ford-Columbia Music Representation) | Stefan Bauer-Mengelberg | computer-printed parts for the New York Philharmonic, typed by counting lines and spaces |
-| 1964 | Plaine & Easie Code | Barry S. Brook, Murray Gould | incipits typed on an ordinary typewriter; RISM adopted it for incipits and still uses it |
-| from 1982 | EsAC and the Essen Folksong Collection | Helmut Schaffrath | folksongs on DOS PCs; pitches as scale degrees, inspired by jianpu |
-| 1983 | MIDI | instrument makers | performance events between instruments, not notation: the piano roll's descendant |
-| 1984 | CCARH and MuseData | Walter Hewlett | large encoded repertories |
-| 1980s–1990s | Humdrum toolkit and `**kern` | David Huron | analysis with Unix text tools, one column ("spine") per voice; *kern* is German for "core" |
-| 1980s–1990s | ABC | Chris Walshaw | folk tunes typed as letters; the text format behind music language models such as ChatMusician (2024) |
+Click a source to see or hear it. The encoded scores open in the Verovio Humdrum Viewer, which is built on Verovio and shows the code next to the notation.
+
+| When | System | People | Made for | Look at a source |
+|---|---|---|---|---|
+| 1940s | punched cards for *Barbara Allen* tune variants | Bertrand Bronson | sorting folk tunes into families | the cards are not online; [*Barbara Allen* as sung in a California migrant camp in 1940](https://blogs.loc.gov/folklife/2017/02/song-of-the-week-barbara-allen/) (Library of Congress blog, two recordings) is one of the variants |
+| 1950–1951 | CSIRAC (Australia) plays tunes; the BBC records the Ferranti Mark 1 in 1951 | Christopher Strachey (Ferranti) | computers *play* music (no CSIRAC recording survives; it was reconstructed) | [the music of CSIRAC](https://cis.unimelb.edu.au/about/history/csirac/music) (University of Melbourne): the reconstructed *Colonel Bogey* and the 1951 Ferranti recording; [how the Ferranti recording was restored](https://www.bl.uk/stories/blogs/posts/restoring-the-first-recording-of-computer-music) (British Library) |
+| 1957 | *Illiac Suite* for string quartet | Lejaren Hiller, Leonard Isaacson | computers *compose* (the output was copied into a score by hand) | [the first page of the score](https://archive.org/details/experimentalmusi00hill/page/182/mode/1up), printed in their book *Experimental Music* (1959) |
+| 1960s | DARMS (Ford-Columbia Music Representation) | Stefan Bauer-Mengelberg | computer-printed parts for the New York Philharmonic, typed by counting lines and spaces | [how DARMS numbers the lines and spaces](https://commons.wikimedia.org/wiki/File:How_the_Space_Code_is_assigned_within_the_DARMS_music_encoding_language.png) (a diagram drawn for Wikipedia): the bottom line of the staff is 21 |
+| 1964 | Plaine & Easie Code | Barry S. Brook, Murray Gould | incipits typed on an ordinary typewriter; RISM adopted it for incipits and still uses it | [a RISM record](https://rism.online/sources/190006990) of a Buxtehude sonata copied in the 1690s (Uppsala University Library): the incipit of each movement is stored as Plaine & Easie and drawn as notation |
+| from 1982 | EsAC and the Essen Folksong Collection | Helmut Schaffrath | folksongs on DOS PCs; pitches as scale degrees, inspired by jianpu | [*Schlaf, Kindlein, schlaf*](https://verovio.humdrum.org/?file=https://raw.githubusercontent.com/ccarh/essen-folksong-collection/main/europa/deutschl/kinder/kindr001.krn), song K0001 of the collection in its kern version: the curly brackets mark the phrases of the EsAC original (EsAC itself is in [part 8](#8-todays-formats-in-verovio)) |
+| 1983 | MIDI | instrument makers | performance events between instruments, not notation: the piano roll's descendant | the two MIDI files of the Debussy roll in [Demo A](#demo-a-debussy-plays-childrens-corner) |
+| 1984 | CCARH and MuseData | Walter Hewlett | large encoded repertories | [Corelli, Op. 1 No. 1, first movement](https://verovio.humdrum.org/?file=github:musedata/corelli/op1/musedata/corelli-op1n01-01.msd) in MuseData |
+| 1980s–1990s | Humdrum toolkit and `**kern` | David Huron | analysis with Unix text tools, one column ("spine") per voice; *kern* is German for "core" | [Bach's chorale *Aus meines Herzens Grunde* (BWV 269)](https://verovio.humdrum.org/?file=https://raw.githubusercontent.com/craigsapp/bach-370-chorales/main/kern/chor001.krn), one spine per voice |
+| 1980s–1990s | ABC | Chris Walshaw | folk tunes typed as letters; the text format behind music language models such as ChatMusician (2024) | [*The Kesh*](https://thesession.org/tunes/55), an Irish jig on The Session: dozens of settings, each in ABC and as notation |
 
 The 1960s needed music for **printing** (DARMS) and **cataloguing** (Plaine & Easie). The 1980s brought **corpora for analysis** (Essen, MuseData, kern). Folk song made the first large data sets because single melodic lines were simple enough to encode at scale. After 1999 came MEI (Perry Roland's XML schema, built on the principles of TEI) for editions, and from 2000 MusicXML (Recordare) for exchange between notation programs.
 

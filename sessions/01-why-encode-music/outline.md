@@ -138,7 +138,7 @@ When the reader is a machine, notation becomes a program: positions on a cylinde
 
 | When | What | Point for the seminar |
 |---|---|---|
-| 9th century, Baghdad | Banū Mūsā, *Book of Ingenious Devices*: automatic flute player driven by a rotating pinned cylinder | often called an early programmable machine (popular claim; present it with care) |
+| 9th century, Baghdad | Banū Mūsā, *The Instrument That Plays by Itself* (not the *Book of Ingenious Devices*; see ZKM's reconstruction): automatic flute player driven by a rotating pinned cylinder | often called an early programmable machine (popular claim; present it with care) |
 | 17th century onward | pinned barrels in barrel organs and music boxes | music stored as physical positions |
 | 1801–1804 | Jacquard loom: punched cards control weaving patterns | not music, but punched cards become the medium of music machines and computers |
 | 1843 | Ada Lovelace's Notes on the Analytical Engine: if the relations of pitched sounds could be expressed in symbols, the engine "might compose elaborate and scientific pieces of music of any degree of complexity or extent" | the encoding problem, stated before computers existed |

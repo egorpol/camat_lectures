@@ -49,9 +49,21 @@ instead of versioned, and the date is the day the change went live on the
   player-piano notebook gets `speed` for its sound and sliders. When the
   browser cannot draw the sliders, the cell now says what to do instead of
   printing `interactive(children=(...`.
+- Session 1, parts 5 and 7: the tables of notation for machines and for
+  computers link each row to a source to look at or listen to (Engramelle's
+  *La tonotechnie* and Lovelace's Note A on the Internet Archive, photographs
+  on Wikimedia Commons, the Banū Mūsā reconstruction at ZKM, the CSIRAC and
+  Ferranti recordings, the *Illiac Suite* score, a RISM incipit, and kern,
+  Essen and MuseData scores in the Verovio Humdrum Viewer).
 
 ### Changed
 
 - Demo A and its notebook: the shade of a note now spans the roll's own
   loudness range (velocity 33 to 85), so soft and loud notes look different;
   before, most notes had nearly the same shade.
+
+### Fixed
+
+- Session 1, part 5: the Banū Mūsā flute player is described in their
+  treatise *The Instrument That Plays by Itself*, not in the *Book of
+  Ingenious Devices*.
