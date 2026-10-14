@@ -31,8 +31,15 @@ urllib.request.urlretrieve("https://raw.githubusercontent.com/egorpol/camat_lect
 
 This copies the notebooks of all sessions into `camat_lectures/`, one folder
 per session, without git. Run it again after each session to get the new
-ones; notebooks you already have are never overwritten. In a terminal, run
-`python get_notebooks.py` instead. The
+ones; notebooks you already have are never overwritten. In a terminal
+(in JupyterLab: *File → New → Terminal*), use the bash version instead:
+
+```sh
+curl -fsSLO https://raw.githubusercontent.com/egorpol/camat_lectures/main/get_notebooks.sh
+bash get_notebooks.sh
+```
+
+The
 [setup page](https://egorpol.github.io/camat_lectures/setup/) has the steps
 from the first login.
 
@@ -44,7 +51,7 @@ mido, matplotlib, ipywidgets). Python 3.10 or later.
 - `docs/`: the live site ([MkDocs Material](https://squidfunk.github.io/mkdocs-material/)); the demo code is in `docs/javascripts/`.
 - `sessions/NN-slug/`: per session, the outline, the example encodings (`examples/`) and the notebooks (`notebooks/`).
 - `tools/notebooks/`: the notebook sources (percent format) and their helpers. `tools/build_notebooks.py` builds the `.ipynb` files from them, so edit the sources, not the notebooks.
-- `get_notebooks.py`: the download script above.
+- `get_notebooks.py`, `get_notebooks.sh`: the download scripts above (Python for a notebook cell, bash for a terminal; they do the same).
 
 ## Build the site
 

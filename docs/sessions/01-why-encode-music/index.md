@@ -149,16 +149,27 @@ Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the en
 
 ## 4. Notation for human readers: systems made for users
 
-| System | Records | Computational analogy |
-|---|---|---|
-| Greek alphabetic notation (Seikilos epitaph) | symbols mapped to pitches | lookup table |
-| Neumes (9th century onward) | melodic contour, often without fixed pitch | relative constraints |
-| Guidonian hand, staff lines | pitch as a position in space | spatial lookup |
-| Mensural notation | durations that depend on context | rule engine |
-| Lute and organ tablature | where to put the fingers, not which pitch | instruction set for one instrument |
-| Jeongganbo (Korea, 15th century onward) | time as a grid of cells | temporal grid, close to a piano roll |
+Click a source to see the notation itself. The manuscripts from St. Gallen and Munich open in the library's own viewer, where you can zoom in and turn the pages; the other pictures are on Wikimedia Commons.
 
-Notations were also made for particular groups of users: shape notes for singing schools, jianpu (scale degrees as numbers) for teaching, music Braille for blind musicians, Klavarskribo for keyboard players. There was never one "music notation"; notations are tools built for a use, and encoding formats continue that tradition.
+| System | Records | Computational analogy | Look at a source |
+|---|---|---|---|
+| Greek alphabetic notation ([Seikilos epitaph](https://en.wikipedia.org/wiki/Seikilos_epitaph)) | symbols mapped to pitches | lookup table | [the stele](https://commons.wikimedia.org/wiki/File:Seikilos_epitaph_04.jpg), 1st or 2nd century, National Museum of Denmark: the pitch signs are written above the text |
+| [Neumes](https://en.wikipedia.org/wiki/Neume) (9th century onward) | melodic contour, often without fixed pitch | relative constraints | [Cantatorium of St. Gallen](https://www.e-codices.unifr.ch/en/csg/0359/23), about 922–925 (Stiftsbibliothek St. Gallen, Cod. Sang. 359, p. 23, on e-codices): neumes above the text, no staff lines |
+| [Guidonian hand](https://en.wikipedia.org/wiki/Guidonian_hand), staff lines | pitch as a position in space | spatial lookup | [a hand with a small staff on each finger](https://commons.wikimedia.org/wiki/File:UCB_Music_Library_MS_1087.jpg), 16th century (UC Berkeley, Music Library MS 1087) |
+| [Mensural notation](https://en.wikipedia.org/wiki/Mensural_notation) | durations that depend on context | rule engine | [Hartmann Schedel's songbook](https://www.digitale-sammlungen.de/en/view/bsb00079055?page=41), 1460s (Bayerische Staatsbibliothek, Cgm 810, f. 18r): one voice after another, no score |
+| [Lute and organ tablature](https://en.wikipedia.org/wiki/Tablature) | where to put the fingers, not which pitch | instruction set for one instrument | organ: [Buxheim Organ Book](https://www.digitale-sammlungen.de/en/view/bsb00104633?page=31), about 1460–1470 (Bayerische Staatsbibliothek, Mus.ms. 3725, f. 9r): the top voice on a staff, the lower voices as letter names; vihuela (a Spanish relative of the lute): [Miguel de Fuenllana, *Orphénica lyra*](https://commons.wikimedia.org/wiki/File:Vihuela-Tab_Fuenllana_1554.jpg), Seville 1554: fret numbers on six lines, one line per course of strings |
+| Jeongganbo (Korea, 15th century onward) | time as a grid of cells | temporal grid, close to a piano roll | [*Daeak hubo*](https://commons.wikimedia.org/wiki/File:Museum_of_Traditional_Korean_Music_041.JPG) (1759), a collection of court music, photographed in the Museum of Traditional Korean Music, Seoul: one cell per beat; [*Six Dragons Fly Again*](https://arxiv.org/abs/2408.01096) (ISMIR 2024) encodes jeongganbo for machine learning |
+
+Notations were also made for particular groups of users:
+
+| Notation | Made for | Look at an example |
+|---|---|---|
+| [Shape notes](https://en.wikipedia.org/wiki/Shape_note) | singing schools: the shape of the note head gives the syllable | ["Star in the East"](https://commons.wikimedia.org/wiki/File:Star_in_the_east.png) in *The Southern Harmony* (1854 edition) |
+| [Jianpu](https://en.wikipedia.org/wiki/Numbered_musical_notation) | teaching and amateur music-making: scale degrees as numbers | ["Amazing Grace" in jianpu](https://commons.wikimedia.org/wiki/File:AmazingGraceNumberedMusicalNotation.png) |
+| [Music Braille](https://en.wikipedia.org/wiki/Braille_music) | blind musicians, who read it with their fingers | [a summary of the signs](https://commons.wikimedia.org/wiki/File:Braillemusicsummary.gif) |
+| [Klavarskribo](https://en.wikipedia.org/wiki/Klavarskribo) | keyboard players: the music runs down the page, low notes left and high notes right, and the staff lines are the black keys | [a keyboard with the staff growing out of it](https://en.wikipedia.org/wiki/File:KlavarExplain_1-E.png): a piano roll on paper |
+
+There was never one "music notation"; notations are tools built for a use, and encoding formats continue that tradition.
 
 Chant is still encoded today, in GABC and Volpiano; Verovio reads both (the GABC example is in [part 8](#8-todays-formats-in-verovio)).
 

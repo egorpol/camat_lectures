@@ -29,3 +29,12 @@ instead of versioned, and the date is the day the change went live on the
   already there. The setup page shows the one notebook cell that runs it;
   downloading and uploading from the session page remains the fallback.
 - README with the link to the live site, and this changelog.
+- `get_notebooks.sh`, a bash version of `get_notebooks.py` for the JupyterLab
+  terminal (curl or wget, never overwrites a notebook). The setup page shows
+  the two commands that run it.
+- Session 1, part 4: the table of notations for human readers links each
+  system to a source to look at (the St. Gallen Cantatorium on e-codices, the
+  Buxheim Organ Book and Schedel's songbook at the Bayerische Staatsbibliothek,
+  pictures on Wikimedia Commons, a jeongganbo encoding paper), and the
+  notations made for user groups have a table of their own with an example for
+  each.

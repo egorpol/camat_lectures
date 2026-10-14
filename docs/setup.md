@@ -25,6 +25,15 @@
 
 After each session, run the cell again to get the new notebooks. Notebooks you already have are kept as they are, so your changes are safe. To start one over, rename or delete your copy and run the cell again.
 
+**Or from a terminal.** If you prefer the command line, open a terminal in JupyterLab (*File → New → Terminal*) and run:
+
+```sh
+curl -fsSLO https://raw.githubusercontent.com/egorpol/camat_lectures/main/get_notebooks.sh
+bash get_notebooks.sh
+```
+
+It does the same as the notebook cell: the notebooks land in `camat_lectures/`, and notebooks you already have are kept. Next time, `bash get_notebooks.sh` is enough. If the terminal says `curl: command not found`, use `wget -q` instead of `curl -fsSLO` in the first line.
+
 If the cell cannot download anything, download the notebooks from the session page (section *Notebooks*) and upload them with the **Upload** button (arrow icon) above the file browser.
 
 Files in your home folder (`/home/jovyan`) are kept when the server stops; everything else is discarded. Installed packages may have to be installed again after a restart: just run the first cell again.

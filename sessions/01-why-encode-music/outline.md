@@ -128,6 +128,8 @@ Short, one slide each, using the "who / what / left out / computational analogy"
 
 One slide on **notations customised for a user group**: shape notes (singing schools), jianpu (scale degrees as numbers, for teaching), music Braille (blind musicians), Klavarskribo (keyboard players). There was never one "music notation"; systems are tools built for a use, and encoding formats continue that tradition.
 
+Sources to open in class (linked in the tables on the live page, all checked 2026-10-14): neumes in the St. Gallen Cantatorium (Cod. Sang. 359, p. 23, e-codices); tablature in the Buxheim Organ Book (BSB Mus.ms. 3725, f. 9r: top voice on a staff, lower voices as letters); jeongganbo in a photo of *Daeak hubo* (1759) on Wikimedia Commons. The live page also links the Seikilos stele, a Guidonian hand (UC Berkeley MS 1087), Schedel's songbook (BSB Cgm 810, f. 18r), Fuenllana's vihuela tablature (1554), the ISMIR 2024 jeongganbo encoding paper, and an example for each user-group notation.
+
 Forward links to mention: chant is encoded today in GABC and Volpiano (Verovio reads both; see [examples/alleluia_fragment.gabc](examples/alleluia_fragment.gabc)); MEI has a mensural module; jianpu inspired the Essen code in part 7.
 
 ## 5. Notation for machines: barrels, rolls, punched cards (15 min)
