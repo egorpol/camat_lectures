@@ -1,0 +1,1447 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Seminar materials: music encoding, Verovio and tools for analysing notated music (WS 2026/27)">
+      
+      
+        <meta name="author" content="Egor Polyakov">
+      
+      
+        <link rel="canonical" href="https://egorpol.github.io/camat_lectures/sessions/01-why-encode-music/">
+      
+      
+        <link rel="prev" href="../../setup/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>1. Why encode music? - From Digital Edition to Computational Music Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/demos.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-why-encode-music-from-notation-to-machine-readable-scores" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="From Digital Edition to Computational Music Analysis" class="md-header__button md-logo" aria-label="From Digital Edition to Computational Music Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            From Digital Edition to Computational Music Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Why encode music?
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="From Digital Edition to Computational Music Analysis" class="md-nav__button md-logo" aria-label="From Digital Edition to Computational Music Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    From Digital Edition to Computational Music Analysis
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup on Jupyter4NFDI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sessions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sessions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Why encode music?
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Why encode music?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-one-melody-seven-encodings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. One melody, seven encodings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-why-encode-music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Why encode music?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scores-today-scans-pdfs-and-facsimile-based-editions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scores today: scans, PDFs and facsimile-based editions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Scores today: scans, PDFs and facsimile-based editions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demo-e-a-facsimile-linked-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demo E: a facsimile-linked page
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-notation-for-human-readers-systems-made-for-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Notation for human readers: systems made for users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-notation-for-machines-barrels-rolls-punched-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Notation for machines: barrels, rolls, punched cards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Notation for machines: barrels, rolls, punched cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demo-a-debussy-plays-childrens-corner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demo A: Debussy plays Children's Corner
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-setup-jupyter4nfdi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Setup: Jupyter4NFDI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-notation-for-computers-1940s-to-the-1990s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Notation for computers, 1940s to the 1990s
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-todays-formats-in-verovio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Today's formats in Verovio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-binary-notation-holes-grids-and-what-survives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Binary notation: holes, grids and what survives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-an-llm-writes-abc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. An LLM writes ABC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Wrap-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-one-melody-seven-encodings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. One melody, seven encodings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-why-encode-music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Why encode music?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scores-today-scans-pdfs-and-facsimile-based-editions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scores today: scans, PDFs and facsimile-based editions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Scores today: scans, PDFs and facsimile-based editions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demo-e-a-facsimile-linked-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demo E: a facsimile-linked page
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-notation-for-human-readers-systems-made-for-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Notation for human readers: systems made for users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-notation-for-machines-barrels-rolls-punched-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Notation for machines: barrels, rolls, punched cards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Notation for machines: barrels, rolls, punched cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#demo-a-debussy-plays-childrens-corner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demo A: Debussy plays Children's Corner
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-setup-jupyter4nfdi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Setup: Jupyter4NFDI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-notation-for-computers-1940s-to-the-1990s" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Notation for computers, 1940s to the 1990s
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-todays-formats-in-verovio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Today's formats in Verovio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-binary-notation-holes-grids-and-what-survives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Binary notation: holes, grids and what survives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-an-llm-writes-abc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. An LLM writes ABC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Wrap-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1-why-encode-music-from-notation-to-machine-readable-scores">1. Why encode music? From notation to machine-readable scores<a class="headerlink" href="#1-why-encode-music-from-notation-to-machine-readable-scores" title="Permanent link">&para;</a></h1>
+<p>Session 1, 15 October 2026 (double session, 2 × 90 minutes).</p>
+<p>Every notation is already an encoding. It was made for a particular reader and a particular use, and it writes down some things while leaving others to the reader's knowledge. Computers, and now language models, are readers without that knowledge, so music encoding formats must state explicitly what human readers infer. Formats differ for the same reason historical notations differ: they serve different users and tasks.</p>
+<div class="admonition tip">
+<p class="admonition-title">How to use this page</p>
+<p>The demos on this page run in your browser; nothing needs to be installed. They load <a href="https://www.verovio.org">Verovio</a> (about 12 MB) the first time you use them. The same demos come as Jupyter notebooks, where you can change the inputs and keep your work: see <a href="#notebooks">Notebooks</a> at the end.</p>
+</div>
+<p><strong>By the end of the session you can</strong></p>
+<ol>
+<li>explain why a score made for human readers is not enough for a computer;</li>
+<li>ask three questions of any notation or format: <em>Who reads it? What does it record? What does it leave out?</em>;</li>
+<li>tell a scan, a PDF, an encoded score and a facsimile-linked edition apart, and say who can use each;</li>
+<li>place key systems on a timeline from mechanical instruments to kern and the Essen folksong collection;</li>
+<li>edit a short ABC, kern or MEI text and render it with Verovio;</li>
+<li>turn a melody into a 0/1 grid and say what the grid loses;</li>
+<li>check an LLM-written melody against what was asked for.</li>
+</ol>
+<h2 id="1-one-melody-seven-encodings">1. One melody, seven encodings<a class="headerlink" href="#1-one-melody-seven-encodings" title="Permanent link">&para;</a></h2>
+<p>Here are the first four bars of <em>Alle meine Entchen</em>, seven times. Before anything is rendered: <em>Which of these is the music? Which can you read? Which can a computer read?</em></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">ABC</label><label for="__tabbed_1_2">kern</label><label for="__tabbed_1_3">Plaine &amp; Easie</label><label for="__tabbed_1_4">EsAC</label><label for="__tabbed_1_5">MusicXML</label><label for="__tabbed_1_6">MEI</label><label for="__tabbed_1_7">0/1 grid</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>X:1
+T:Alle meine Entchen
+M:4/4
+L:1/4
+K:C
+C D E F | G2 G2 | A A A A | G4 |]
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>!!!OTL: Alle meine Entchen
+**kern
+*clefG2
+*k[]
+*M4/4
+=1
+4c
+4d
+4e
+4f
+=2
+2g
+2g
+=3
+4a
+4a
+4a
+4a
+=4
+1g
+==
+*-
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>@clef:G-2
+@keysig:
+@timesig:4/4
+@data:'4CDEF/2GG/4AAAA/1G//
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>DEMO01
+CUT[Alle meine Entchen]
+REG[Europa, Mitteleuropa, Deutschland]
+KEY[X0001 04 C 4/4]
+MEL[1234 5_5_ 6666 5__ //]
+&gt;&gt;
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;score-partwise</span><span class="w"> </span><span class="na">version=</span><span class="s">"4.0"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;work&gt;&lt;work-title&gt;</span>Alle<span class="w"> </span>meine<span class="w"> </span>Entchen<span class="nt">&lt;/work-title&gt;&lt;/work&gt;</span>
+<span class="w">  </span><span class="nt">&lt;part-list&gt;&lt;score-part</span><span class="w"> </span><span class="na">id=</span><span class="s">"P1"</span><span class="nt">&gt;&lt;part-name&gt;</span>Voice<span class="nt">&lt;/part-name&gt;&lt;/score-part&gt;&lt;/part-list&gt;</span>
+<span class="w">  </span><span class="nt">&lt;part</span><span class="w"> </span><span class="na">id=</span><span class="s">"P1"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">number=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;attributes&gt;&lt;divisions&gt;</span>1<span class="nt">&lt;/divisions&gt;&lt;key&gt;&lt;fifths&gt;</span>0<span class="nt">&lt;/fifths&gt;&lt;/key&gt;</span>
+<span class="w">        </span><span class="nt">&lt;time&gt;&lt;beats&gt;</span>4<span class="nt">&lt;/beats&gt;&lt;beat-type&gt;</span>4<span class="nt">&lt;/beat-type&gt;&lt;/time&gt;</span>
+<span class="w">        </span><span class="nt">&lt;clef&gt;&lt;sign&gt;</span>G<span class="nt">&lt;/sign&gt;&lt;line&gt;</span>2<span class="nt">&lt;/line&gt;&lt;/clef&gt;&lt;/attributes&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>C<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>D<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>E<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>F<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">    </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">number=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>G<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>2<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>half<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>G<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>2<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>half<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">    </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">number=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>A<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>A<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>A<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>A<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>1<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>quarter<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">    </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">number=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;note&gt;&lt;pitch&gt;&lt;step&gt;</span>G<span class="nt">&lt;/step&gt;&lt;octave&gt;</span>4<span class="nt">&lt;/octave&gt;&lt;/pitch&gt;&lt;duration&gt;</span>4<span class="nt">&lt;/duration&gt;&lt;type&gt;</span>whole<span class="nt">&lt;/type&gt;&lt;/note&gt;</span>
+<span class="w">      </span><span class="nt">&lt;barline</span><span class="w"> </span><span class="na">location=</span><span class="s">"right"</span><span class="nt">&gt;&lt;bar-style&gt;</span>light-heavy<span class="nt">&lt;/bar-style&gt;&lt;/barline&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/part&gt;</span>
+<span class="nt">&lt;/score-partwise&gt;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;?xml-model href="https://music-encoding.org/schema/dev/mei-all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?&gt;</span>
+<span class="cp">&lt;?xml-model href="https://music-encoding.org/schema/dev/mei-all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?&gt;</span>
+<span class="nt">&lt;mei</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">"http://www.music-encoding.org/ns/mei"</span><span class="w"> </span><span class="na">meiversion=</span><span class="s">"6.0-dev"</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;meiHead&gt;</span>
+<span class="w">      </span><span class="nt">&lt;fileDesc&gt;</span>
+<span class="w">         </span><span class="nt">&lt;titleStmt&gt;</span>
+<span class="w">            </span><span class="nt">&lt;title&gt;</span>Alle<span class="w"> </span>meine<span class="w"> </span>Entchen<span class="nt">&lt;/title&gt;</span>
+<span class="w">         </span><span class="nt">&lt;/titleStmt&gt;</span>
+<span class="w">         </span><span class="nt">&lt;pubStmt&gt;</span>
+<span class="w">            </span><span class="nt">&lt;unpub&gt;</span>This<span class="w"> </span>MEI<span class="w"> </span>file<span class="w"> </span>was<span class="w"> </span>created<span class="w"> </span>by<span class="w"> </span>Verovio's<span class="w"> </span>Humdrum<span class="w"> </span>converter.<span class="w"> </span>When<span class="w"> </span>published,<span class="w"> </span>this<span class="w"> </span>unpub<span class="w"> </span>element<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>removed,<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>enclosing<span class="w"> </span>pubStmt<span class="w"> </span>element<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>properly<span class="w"> </span>filled<span class="w"> </span>out.<span class="nt">&lt;/unpub&gt;</span>
+<span class="w">         </span><span class="nt">&lt;/pubStmt&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/fileDesc&gt;</span>
+<span class="w">      </span><span class="nt">&lt;encodingDesc&gt;</span>
+<span class="w">         </span><span class="nt">&lt;appInfo&gt;</span>
+<span class="w">            </span><span class="nt">&lt;application</span><span class="w"> </span><span class="na">isodate=</span><span class="s">"2026-10-14T14:24:16"</span><span class="w"> </span><span class="na">version=</span><span class="s">"6.3.0-425dd7b"</span><span class="nt">&gt;</span>
+<span class="w">               </span><span class="nt">&lt;name&gt;</span>Verovio<span class="nt">&lt;/name&gt;</span>
+<span class="w">               </span><span class="nt">&lt;p&gt;</span>Transcoded<span class="w"> </span>from<span class="w"> </span>Humdrum<span class="nt">&lt;/p&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/application&gt;</span>
+<span class="w">         </span><span class="nt">&lt;/appInfo&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/encodingDesc&gt;</span>
+<span class="w">      </span><span class="nt">&lt;workList&gt;</span>
+<span class="w">         </span><span class="nt">&lt;work</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"work0_encoded"</span><span class="w"> </span><span class="na">type=</span><span class="s">"encoded"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;title</span><span class="w"> </span><span class="na">type=</span><span class="s">"uniform"</span><span class="nt">&gt;</span>
+<span class="w">               </span><span class="nt">&lt;titlePart</span><span class="w"> </span><span class="na">type=</span><span class="s">"main"</span><span class="w"> </span><span class="na">analog=</span><span class="s">"humdrum:OTL"</span><span class="nt">&gt;</span>Alle<span class="w"> </span>meine<span class="w"> </span>Entchen<span class="nt">&lt;/titlePart&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/title&gt;</span>
+<span class="w">         </span><span class="nt">&lt;/work&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/workList&gt;</span>
+<span class="w">      </span><span class="nt">&lt;extMeta&gt;</span>
+<span class="w">         </span><span class="nt">&lt;frames</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">"http://www.humdrum.org/ns/humxml"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;metaFrame</span><span class="w"> </span><span class="na">n=</span><span class="s">"0"</span><span class="w"> </span><span class="na">token=</span><span class="s">"!!!OTL: Alle meine Entchen"</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"L1"</span><span class="nt">&gt;</span>
+<span class="w">               </span><span class="nt">&lt;frameInfo&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;startTime</span><span class="w"> </span><span class="na">float=</span><span class="s">"0"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;frameType&gt;</span>reference<span class="nt">&lt;/frameType&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;referenceKey&gt;</span>OTL<span class="nt">&lt;/referenceKey&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;referenceValue&gt;</span>Alle<span class="w"> </span>meine<span class="w"> </span>Entchen<span class="nt">&lt;/referenceValue&gt;</span>
+<span class="w">               </span><span class="nt">&lt;/frameInfo&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/metaFrame&gt;</span>
+<span class="w">         </span><span class="nt">&lt;/frames&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/extMeta&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/meiHead&gt;</span>
+<span class="w">   </span><span class="nt">&lt;music</span><span class="w"> </span><span class="na">decls=</span><span class="s">"#work0_encoded"</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;body&gt;</span>
+<span class="w">         </span><span class="nt">&lt;mdiv</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"e6nh3r1"</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;score</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"fhc7yxj"</span><span class="nt">&gt;</span>
+<span class="w">               </span><span class="nt">&lt;scoreDef</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"g185h7q1"</span><span class="w"> </span><span class="na">tempo.dist=</span><span class="s">"3vu"</span><span class="nt">&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;pgHead</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"qhtix66"</span><span class="w"> </span><span class="na">func=</span><span class="s">"first"</span><span class="nt">&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;rend</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"rjw3qv2"</span><span class="w"> </span><span class="na">halign=</span><span class="s">"center"</span><span class="w"> </span><span class="na">valign=</span><span class="s">"middle"</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;rend</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"scqmx8j"</span><span class="w"> </span><span class="na">fontsize=</span><span class="s">"large"</span><span class="nt">&gt;</span>Alle<span class="w"> </span>meine<span class="w"> </span>Entchen<span class="nt">&lt;/rend&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;lb</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"u5b79pu"</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w"> </span>
+<span class="nt">&lt;lb</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"w1kluom4"</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w"> </span><span class="nt">&lt;/rend&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;/pgHead&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;staffGrp</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"rlpmy72"</span><span class="nt">&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;staffDef</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"staffdef-L2F1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="w"> </span><span class="na">lines=</span><span class="s">"5"</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;clef</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"clef-L3F1"</span><span class="w"> </span><span class="na">shape=</span><span class="s">"G"</span><span class="w"> </span><span class="na">line=</span><span class="s">"2"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;keySig</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"keysig-L4F1"</span><span class="w"> </span><span class="na">sig=</span><span class="s">"0"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;meterSig</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"metersig-L5F1"</span><span class="w"> </span><span class="na">count=</span><span class="s">"4"</span><span class="w"> </span><span class="na">unit=</span><span class="s">"4"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;/staffDef&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;/staffGrp&gt;</span>
+<span class="w">               </span><span class="nt">&lt;/scoreDef&gt;</span>
+<span class="w">               </span><span class="nt">&lt;section</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"section-L2F1"</span><span class="nt">&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"measure-L1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;staff</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"staff-L2F1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"layer-L1F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L7F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"c"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L8F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"d"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L9F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"e"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L10F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"f"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/layer&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;/staff&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"measure-L11"</span><span class="w"> </span><span class="na">n=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;staff</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"staff-L11F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"layer-L11F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L12F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"2"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"g"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L13F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"2"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"g"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/layer&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;/staff&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"measure-L14"</span><span class="w"> </span><span class="na">n=</span><span class="s">"3"</span><span class="nt">&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;staff</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"staff-L14F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"layer-L14F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L15F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"a"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L16F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"a"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L17F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"a"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L18F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"4"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"a"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/layer&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;/staff&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;measure</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"measure-L19"</span><span class="w"> </span><span class="na">right=</span><span class="s">"end"</span><span class="w"> </span><span class="na">n=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;staff</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"staff-L19F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;layer</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"layer-L19F1N1"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">                           </span><span class="nt">&lt;note</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"note-L20F1"</span><span class="w"> </span><span class="na">dur=</span><span class="s">"1"</span><span class="w"> </span><span class="na">oct=</span><span class="s">"4"</span><span class="w"> </span><span class="na">pname=</span><span class="s">"g"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/layer&gt;</span>
+<span class="w">                     </span><span class="nt">&lt;/staff&gt;</span>
+<span class="w">                  </span><span class="nt">&lt;/measure&gt;</span>
+<span class="w">               </span><span class="nt">&lt;/section&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/score&gt;</span>
+<span class="w">         </span><span class="nt">&lt;/mdiv&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/body&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/music&gt;</span>
+<span class="nt">&lt;/mei&gt;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>One row per pitch, one column per quarter note, 1 = the pitch sounds.</p>
+<div class="highlight"><pre><span></span><code>      bar 1   bar 2   bar 3   bar 4
+A4    0000    0000    1111    0000
+G4    0000    1111    0000    1111
+F4    0001    0000    0000    0000
+E4    0010    0000    0000    0000
+D4    0100    0000    0000    0000
+C4    1000    0000    0000    0000
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The same 11 notes take 60 bytes in Plaine &amp; Easie, 75 in ABC, 104 in kern, 120 in EsAC, 1,886 in MusicXML and about 4,850 in MEI (as Verovio writes it; its random IDs change the length by a few bytes each time). The difference is not the notes but what else is recorded: title, metadata, an identifier for every element, layout. Six of the seven can be rendered back into the same score (<a href="#8-todays-formats-in-verovio">part 8</a>). The grid cannot, at least not without guessing (<a href="#9-binary-notation-holes-grids-and-what-survives">part 9</a>).</p>
+<p>Language models read music as text too: ChatMusician (2024) was trained on ABC (<a href="#10-an-llm-writes-abc">part 10</a>).</p>
+<h2 id="2-why-encode-music">2. Why encode music?<a class="headerlink" href="#2-why-encode-music" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Notation is a selection</strong> made for a reader who knows the conventions: performance practice, tuning, how to realise an ornament, how repeats work.</li>
+<li><strong>A computer knows none of this.</strong> A scanned score is an image. To search, analyse, render or play music, a machine needs symbols with explicit meaning.</li>
+<li><strong>Written and performed differ.</strong> One written sign (a trill, a grace note, a fermata) stands for performed events that look different from what is written. MEI can keep both, for example <code>@dur</code> (written duration) next to <code>@dur.ges</code> (performed duration).</li>
+<li><strong>Three questions</strong> to ask of every system this semester:<ol>
+<li><em>Who reads it?</em> A singer, a lutenist, a cataloguer, a machine, a language model.</li>
+<li><em>What does it record?</em> Pitch, duration, physical action, sound, structure, layout, metadata.</li>
+<li><em>What does it leave out,</em> or leave to the reader?</li>
+</ol>
+</li>
+</ul>
+<p>A digital edition (MEI) encodes what a source says. Analysis (kern, note tables, piano rolls) treats notes as data. The same encoding has to serve both, and that is what this course is about.</p>
+<h2 id="3-scores-today-scans-pdfs-and-facsimile-based-editions">3. Scores today: scans, PDFs and facsimile-based editions<a class="headerlink" href="#3-scores-today-scans-pdfs-and-facsimile-based-editions" title="Permanent link">&para;</a></h2>
+<p><strong>Where do you meet scores today?</strong> In library digitisations (for example the <a href="https://www.digitale-sammlungen.de">digital collections of the Bayerische Staatsbibliothek</a>), in PDF archives such as <a href="https://imslp.org">IMSLP</a>, in publishers' editions, and in a few encoded editions. Most "digital" music is a picture of a page.</p>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>What the computer has</th>
+<th>You can…</th>
+<th>You cannot…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scan (TIFF, JPEG; often served through a <a href="https://iiif.io">IIIF</a> viewer)</td>
+<td>pixels</td>
+<td>zoom, compare sources, cite a page</td>
+<td>search for a melody, play it, transpose it</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>page images in a container, at most a text layer</td>
+<td>download, print, share</td>
+<td>the same as a scan: the notes are still pictures</td>
+</tr>
+<tr>
+<td>Encoded score (MusicXML, MEI, kern)</td>
+<td>symbols with meaning</td>
+<td>render, play, search, analyse</td>
+<td>see what the source looked like, unless it is linked</td>
+</tr>
+<tr>
+<td>Facsimile-linked edition (MEI with <code>&lt;facsimile&gt;</code>)</td>
+<td>symbols <em>and</em> the page images, linked bar by bar</td>
+<td>all of the above, and check every bar against the source</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Access: who may use a score?</strong> That depends on rights: in the EU, a composer's works are free 70 years after the end of the year of their death, but an edition, an arrangement or a lyricist can still be protected, and countries differ.</p>
+<div class="admonition example">
+<p class="admonition-title">Showcase: the eu-pd-composers viewer</p>
+<p>The <a href="https://egorpol.github.io/eu-pd-composers/">eu-pd-composers viewer</a> (<a href="https://github.com/egorpol/eu-pd-composers">data and code on GitHub</a>) applies the EU rule to the 3,369 composers on Wikipedia's <em>List of 20th-century classical composers</em>, with life dates from Wikidata:</p>
+<ul>
+<li>777 are public domain in the EU now (they died in 1955 or earlier), 1,870 are not yet, and 722 have no death date on record. 21 more follow on 1 January 2027.</li>
+<li>1,254 are matched to their IMSLP category, with links to 29,033 IMSLP work pages; 20,391 of those pages belong to composers who are public domain now.</li>
+<li>You can filter by instrumentation, style, citizenship, popularity and the year the works become free.</li>
+</ul>
+<p><em>Figures from the published viewer (dump r019, checked on 2026-10-14).</em> The status is a heuristic based on the composer's death year only, not legal advice: it cannot see lyricists, editions, arrangements or posthumous publications. Check the work itself before you copy, perform or publish it.</p>
+<p><em>Try it:</em> whose music becomes free in the EU on 1 January 2027? Does IMSLP have scores of it?</p>
+</div>
+<p><strong>Accessibility: who can use a score?</strong> A screen reader cannot read a scan aloud, a scan blurs when enlarged, and it cannot be turned into music Braille or played back. An encoded score can be all of these (music Braille comes up again in <a href="#4-notation-for-human-readers-systems-made-for-users">part 4</a>).</p>
+<p><strong>Facsimile-based editions</strong> keep the source and the encoding together. MEI stores the page images in a <code>&lt;facsimile&gt;</code> element: one <code>&lt;surface&gt;</code> per page, one <code>&lt;zone&gt;</code> (a rectangle) per bar. Each bar of the music points to its rectangle:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;facsimile&gt;</span>
+<span class="w">  </span><span class="nt">&lt;surface</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"surface_aea1770d9c33"</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;graphic</span><span class="w"> </span><span class="na">target=</span><span class="s">"https://api.digitale-sammlungen.de/iiif/image/v2/bsb00023199_00013/full/4134,/0/default.jpg"</span>
+<span class="w">             </span><span class="na">width=</span><span class="s">"4134"</span><span class="w"> </span><span class="na">height=</span><span class="s">"5495"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;zone</span><span class="w"> </span><span class="na">xml:id=</span><span class="s">"zone_6ff938b3aec349c48e"</span><span class="w"> </span><span class="na">type=</span><span class="s">"measure"</span><span class="w"> </span><span class="na">ulx=</span><span class="s">"852"</span><span class="w"> </span><span class="na">uly=</span><span class="s">"945"</span><span class="w"> </span><span class="na">lrx=</span><span class="s">"1593"</span><span class="w"> </span><span class="na">lry=</span><span class="s">"2290"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- one zone for each of the other 14 bars on the page --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/surface&gt;</span>
+<span class="nt">&lt;/facsimile&gt;</span>
+...
+<span class="nt">&lt;pb</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="w"> </span><span class="na">facs=</span><span class="s">"#surface_aea1770d9c33"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;measure</span><span class="w"> </span><span class="na">n=</span><span class="s">"1"</span><span class="w"> </span><span class="na">facs=</span><span class="s">"#zone_6ff938b3aec349c48e"</span><span class="nt">&gt;</span><span class="w"> </span>...<span class="w"> </span><span class="nt">&lt;/measure&gt;</span>
+</code></pre></div>
+<p><em>(Shortened from the file in Demo E below. The coordinates are pixels in the 4,134-pixel-wide version of the scan.)</em> The encoding stays tied to its witness: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to what the source shows. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.</p>
+<p>This is where the course is going. The tools of CAMAT, which we use from the next sessions on, grew out of encoding volumes of <em>Denkmäler deutscher Tonkunst</em> from the Bayerische Staatsbibliothek's scans: optical music recognition (OMR) page by page, correction in <a href="https://mei-friend.mdw.ac.at/">mei-friend</a>, automatic checks, and measure zones that link every bar back to the scan.</p>
+<h3 id="demo-e-a-facsimile-linked-page">Demo E: a facsimile-linked page<a class="headerlink" href="#demo-e-a-facsimile-linked-page" title="Permanent link">&para;</a></h3>
+<p>The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, viola da gamba and harpsichord, as printed in <em>Denkmäler deutscher Tonkunst</em>, vol. 11 (1903). Left: the Bayerische Staatsbibliothek's scan, with the zones from the MEI file drawn on it. Right: the same MEI file rendered by Verovio, with the page's three systems. Point at a bar on either side to find it on the other; click to compare it close up.</p>
+<div data-demo="facsimile" data-mei="facsimile/buxtehude_op1_01_page1.mei"
+     data-title="Denkmäler deutscher Tonkunst 11 (1903), page 3: Buxtehude, Sonata I, bars 1 to 15"></div>
+
+<p>Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an <code>&lt;annot&gt;</code> in the MEI file says so. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.</p>
+<div class="admonition info">
+<p class="admonition-title">Source and licence</p>
+<p>MEI: the first page (bars 1–15) of <code>buxtehude_op1_01_sonata_f_major_corr.mei</code> from the CAMAT corpus edition <a href="https://github.com/egorpol/DdT_1_vol_11"><em>DdT 1, vol. 11: Dietrich Buxtehude, Instrumental Works</em></a> (work in progress, commit <code>7af4ae8</code>), <a href="examples/facsimile/LICENSE">MIT License</a>; two ties into bar 16 on the next page were removed. <a download="buxtehude_op1_01_page1.mei" href="examples/facsimile/buxtehude_op1_01_page1.mei">Download the MEI file</a>. Scan: Bayerische Staatsbibliothek, <a href="https://www.digitale-sammlungen.de/en/view/bsb00023199?page=13"><code>bsb00023199</code>, image 13</a> (copy of the Hochschule für Musik und Theater München, Bibliothek), licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The page loads the scan from the library's IIIF server when you open it; it is not copied here.</p>
+</div>
+<p><em>Discussion: Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?</em></p>
+<h2 id="4-notation-for-human-readers-systems-made-for-users">4. Notation for human readers: systems made for users<a class="headerlink" href="#4-notation-for-human-readers-systems-made-for-users" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Records</th>
+<th>Computational analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Greek alphabetic notation (Seikilos epitaph)</td>
+<td>symbols mapped to pitches</td>
+<td>lookup table</td>
+</tr>
+<tr>
+<td>Neumes (9th century onward)</td>
+<td>melodic contour, often without fixed pitch</td>
+<td>relative constraints</td>
+</tr>
+<tr>
+<td>Guidonian hand, staff lines</td>
+<td>pitch as a position in space</td>
+<td>spatial lookup</td>
+</tr>
+<tr>
+<td>Mensural notation</td>
+<td>durations that depend on context</td>
+<td>rule engine</td>
+</tr>
+<tr>
+<td>Lute and organ tablature</td>
+<td>where to put the fingers, not which pitch</td>
+<td>instruction set for one instrument</td>
+</tr>
+<tr>
+<td>Jeongganbo (Korea, 15th century onward)</td>
+<td>time as a grid of cells</td>
+<td>temporal grid, close to a piano roll</td>
+</tr>
+</tbody>
+</table>
+<p>Notations were also made for particular groups of users: shape notes for singing schools, jianpu (scale degrees as numbers) for teaching, music Braille for blind musicians, Klavarskribo for keyboard players. There was never one "music notation"; notations are tools built for a use, and encoding formats continue that tradition.</p>
+<p>Chant is still encoded today, in GABC and Volpiano; Verovio reads both (the GABC example is in <a href="#8-todays-formats-in-verovio">part 8</a>).</p>
+<h2 id="5-notation-for-machines-barrels-rolls-punched-cards">5. Notation for machines: barrels, rolls, punched cards<a class="headerlink" href="#5-notation-for-machines-barrels-rolls-punched-cards" title="Permanent link">&para;</a></h2>
+<p>When the reader is a machine, notation becomes a program: positions on a cylinder or holes in paper that trigger sound.</p>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>What</th>
+<th>Why it matters here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9th century, Baghdad</td>
+<td>Banū Mūsā, <em>Book of Ingenious Devices</em>: an automatic flute player driven by a rotating pinned cylinder</td>
+<td>often called an early programmable machine (a popular claim, not a consensus)</td>
+</tr>
+<tr>
+<td>17th century onward</td>
+<td>pinned barrels in barrel organs and music boxes</td>
+<td>music stored as physical positions</td>
+</tr>
+<tr>
+<td>1801–1804</td>
+<td>Jacquard loom: punched cards control weaving patterns</td>
+<td>not music, but punched cards become the medium of music machines and computers</td>
+</tr>
+<tr>
+<td>1843</td>
+<td>Ada Lovelace's notes on the Analytical Engine</td>
+<td>if the relations of pitched sounds could be expressed in symbols, the engine might compose music: the encoding problem, stated before computers existed</td>
+</tr>
+<tr>
+<td>1890s</td>
+<td>Edwin Votey's piano player, sold by Aeolian as the Pianola (1897)</td>
+<td>executable notation for the mass market</td>
+</tr>
+<tr>
+<td>1904</td>
+<td>Welte-Mignon reproducing piano (Edwin Welte and Karl Bockisch, Freiburg; public launch 1905)</td>
+<td>records tempo, dynamics and pedalling, not only notes</td>
+</tr>
+<tr>
+<td>1908</td>
+<td>US manufacturers agree on an 88-note roll standard in Buffalo (most sources say December 1908; some give 1910 or 1911)</td>
+<td>a format standard: any roll plays on any instrument</td>
+</tr>
+<tr>
+<td>from 1948</td>
+<td>Conlon Nancarrow punches his <em>Studies for Player Piano</em> by hand</td>
+<td>the roll as a medium for music no human can play</td>
+</tr>
+</tbody>
+</table>
+<h3 id="demo-a-debussy-plays-childrens-corner">Demo A: Debussy plays <em>Children's Corner</em><a class="headerlink" href="#demo-a-debussy-plays-childrens-corner" title="Permanent link">&para;</a></h3>
+<p>Debussy recorded <em>Children's Corner</em> himself for the Welte-Mignon (roll 2733). Stanford's <a href="https://supra.stanford.edu">SUPRA archive</a> scanned the roll; you can see it in <a href="https://purl.stanford.edu/dc920rk8870">Stanford's viewer</a>. SUPRA turned the scan into two MIDI files:</p>
+<ul>
+<li><strong>raw:</strong> every hole becomes an event: 33,508 holes in 4 tracks (bass and treble notes, and two tracks of expression holes that control loudness);</li>
+<li><strong>expressive:</strong> holes merged into notes and the expression holes turned into loudness and pedalling: 6,031 notes.</li>
+</ul>
+<div data-demo="roll"
+     data-exp="https://raw.githubusercontent.com/pianoroll/SUPRA/master/welte-red/midi-exp/dc920rk8870_exp.mid"
+     data-raw="https://raw.githubusercontent.com/pianoroll/SUPRA/master/welte-red/midi-raw/dc920rk8870_raw.mid"></div>
+
+<p>Compare the two versions over the same seconds. A long note on the roll is punched as a chain of holes: at 5.1 s the C3 is a 0.1-second hole in the raw file but a 3-second note in the expressive file.</p>
+<p><em>Is a roll a score, a recording or a program? Where are the bar lines and the quarter notes? What is a "note" when 33,508 holes become 6,031 notes?</em></p>
+<div class="admonition info">
+<p class="admonition-title">Source and licence</p>
+<p>MIDI files: SUPRA, Stanford University Piano Roll Archive, roll <code>dc920rk8870</code>, licensed <a href="https://github.com/pianoroll/SUPRA">CC BY-NC-SA 4.0</a>. Cite: Zhengshan Shi, Craig Stuart Sapp, Kumaran Arul, Jerry McBride and Julius O. Smith III, "SUPRA: Digitizing the Stanford University Piano Roll Archive", <em>ISMIR 2019</em>. The page fetches the files from GitHub when you click the button. Notes are played by a plain synthesiser in your browser, not a piano.</p>
+</div>
+<h2 id="6-setup-jupyter4nfdi">6. Setup: Jupyter4NFDI<a class="headerlink" href="#6-setup-jupyter4nfdi" title="Permanent link">&para;</a></h2>
+<p>The second half of block 1 is for getting everyone into Jupyter4NFDI: see <a href="../../setup/">Setup on Jupyter4NFDI</a>. If it does not work for you today, follow block 2 on this page, which needs no login.</p>
+<h2 id="7-notation-for-computers-1940s-to-the-1990s">7. Notation for computers, 1940s to the 1990s<a class="headerlink" href="#7-notation-for-computers-1940s-to-the-1990s" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>When</th>
+<th>System</th>
+<th>People</th>
+<th>Made for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1940s</td>
+<td>punched cards for <em>Barbara Allen</em> tune variants</td>
+<td>Bertrand Bronson</td>
+<td>sorting folk tunes into families</td>
+</tr>
+<tr>
+<td>1950–1951</td>
+<td>CSIRAC (Australia) plays tunes; the BBC records the Ferranti Mark 1 in 1951</td>
+<td>Christopher Strachey (Ferranti)</td>
+<td>computers <em>play</em> music (no CSIRAC recording survives; it was reconstructed)</td>
+</tr>
+<tr>
+<td>1957</td>
+<td><em>Illiac Suite</em> for string quartet</td>
+<td>Lejaren Hiller, Leonard Isaacson</td>
+<td>computers <em>compose</em> (the output was copied into a score by hand)</td>
+</tr>
+<tr>
+<td>1960s</td>
+<td>DARMS (Ford-Columbia Music Representation)</td>
+<td>Stefan Bauer-Mengelberg</td>
+<td>computer-printed parts for the New York Philharmonic, typed by counting lines and spaces</td>
+</tr>
+<tr>
+<td>1964</td>
+<td>Plaine &amp; Easie Code</td>
+<td>Barry S. Brook, Murray Gould</td>
+<td>incipits typed on an ordinary typewriter; RISM adopted it for incipits and still uses it</td>
+</tr>
+<tr>
+<td>from 1982</td>
+<td>EsAC and the Essen Folksong Collection</td>
+<td>Helmut Schaffrath</td>
+<td>folksongs on DOS PCs; pitches as scale degrees, inspired by jianpu</td>
+</tr>
+<tr>
+<td>1983</td>
+<td>MIDI</td>
+<td>instrument makers</td>
+<td>performance events between instruments, not notation: the piano roll's descendant</td>
+</tr>
+<tr>
+<td>1984</td>
+<td>CCARH and MuseData</td>
+<td>Walter Hewlett</td>
+<td>large encoded repertories</td>
+</tr>
+<tr>
+<td>1980s–1990s</td>
+<td>Humdrum toolkit and <code>**kern</code></td>
+<td>David Huron</td>
+<td>analysis with Unix text tools, one column ("spine") per voice; <em>kern</em> is German for "core"</td>
+</tr>
+<tr>
+<td>1980s–1990s</td>
+<td>ABC</td>
+<td>Chris Walshaw</td>
+<td>folk tunes typed as letters; the text format behind music language models such as ChatMusician (2024)</td>
+</tr>
+</tbody>
+</table>
+<p>The 1960s needed music for <strong>printing</strong> (DARMS) and <strong>cataloguing</strong> (Plaine &amp; Easie). The 1980s brought <strong>corpora for analysis</strong> (Essen, MuseData, kern). Folk song made the first large data sets because single melodic lines were simple enough to encode at scale. After 1999 came MEI (Perry Roland's XML schema, built on the principles of TEI) for editions, and from 2000 MusicXML (Recordare) for exchange between notation programs.</p>
+<details class="note">
+<summary>Dates that are given differently in different sources</summary>
+<ul>
+<li><strong>DARMS:</strong> conceived 1961 (Wikipedia) or 1966 (CCARH wiki); funding is given as 1964–1976. Hence "1960s".</li>
+<li><strong>Humdrum:</strong> "1980s" in some sources, "1990s" in others; the toolkit was reviewed in <em>Music Theory Online</em> in 1996.</li>
+<li><strong>Illiac Suite:</strong> usually 1957; one source names a 1956 premiere.</li>
+<li><strong>Bronson:</strong> the punched-card study is dated "1940s" in the source found; the original article is not confirmed.</li>
+<li><strong>Lovelace:</strong> the wording of the quotation varies between transcriptions.</li>
+</ul>
+</details>
+<h2 id="8-todays-formats-in-verovio">8. Today's formats in Verovio<a class="headerlink" href="#8-todays-formats-in-verovio" title="Permanent link">&para;</a></h2>
+<p>Verovio reads all six text encodings from part 1 and renders them as notation. Edit any box: the score follows as you type. <em>Show as MEI</em> converts the text to MEI; <em>Piano roll</em> draws the notes as time × pitch, the view from Demo A.</p>
+<div data-demo="formats" data-examples="examples/"></div>
+
+<p><strong>Try this:</strong></p>
+<ol>
+<li>Change a note in the ABC and in the kern version. Add a sharp (<code>^F</code> in ABC, <code>f#</code> in kern).</li>
+<li>Change the metre to 3/4 (<code>M:3/4</code> in ABC, <code>*M3/4</code> in kern). What does Verovio do with bars that no longer fit?</li>
+<li>Compare what each format records beyond the notes: the phrase brackets in EsAC, the spines in kern, <code>&lt;divisions&gt;</code> in MusicXML, the header and the <code>xml:id</code> of every element in MEI.</li>
+<li>Break the syntax on purpose and read the message under the score. (Some broken inputs make Verovio crash rather than complain; the page catches those and says what is wrong.)</li>
+</ol>
+<h2 id="9-binary-notation-holes-grids-and-what-survives">9. Binary notation: holes, grids and what survives<a class="headerlink" href="#9-binary-notation-holes-grids-and-what-survives" title="Permanent link">&para;</a></h2>
+<p>A perforation is binary: there is a hole at a position, or there is not. The raw roll in Demo A is exactly that. The same idea turns a melody into a grid with one row per pitch and one column per time step. <em>Which bars of</em> Alle meine Entchen <em>can you no longer tell apart?</em></p>
+<div data-demo="grid" data-examples="examples/"></div>
+
+<ul>
+<li>Bars 2 (two half notes), 3 (four quarter notes) and 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins.</li>
+<li><strong>Resolution is a choice.</strong> A quarter-note grid cannot hold eighth notes; add some to the melody and watch them disappear. CAMAT's default cell is a sixteenth note. Finer grids cost size.</li>
+<li><strong>What would fix it?</strong> A second grid that marks where notes start ("keep an onset grid"), or keeping a note table next to the grid, as CAMAT does, with identifiers that point back into the score.</li>
+</ul>
+<h2 id="10-an-llm-writes-abc">10. An LLM writes ABC<a class="headerlink" href="#10-an-llm-writes-abc" title="Permanent link">&para;</a></h2>
+<p>ABC is compact text, and there are many tune collections online in it, so language models have seen a lot of it. We ask a model for a melody and check the answer. Because the answer is an encoding, we can test it, which a picture of a score would not allow.</p>
+<div data-demo="llm" data-answers="examples/llm/answers.json"></div>
+
+<p><em>Does every bar add up to the metre? Does Verovio warn? Are the key and the range what was asked for? Is the kern valid at all?</em> Note that the checks rely on how Verovio reads the text: Verovio 6.3, for example, ignores a length written after a chord (<code>[DFA]2</code>), and the page warns when it sees one.</p>
+<p>You do not need your own LLM account for this: the recorded answers and the instructor's demo are enough.</p>
+<h2 id="11-wrap-up">11. Wrap-up<a class="headerlink" href="#11-wrap-up" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The three questions once more: <em>who reads it, what does it record, what does it leave out?</em> Apply them to a scan, to the grid and to the LLM's ABC.</li>
+<li>Where the course goes: digital edition (MEI, facsimiles) → CAMAT note tables and piano rolls → statistics and pattern search.</li>
+</ul>
+<p><strong>Homework</strong></p>
+<ol>
+<li>If setup did not work in class, finish it with the <a href="../../setup/">setup page</a> and run <code>01_formats_verovio.ipynb</code>.</li>
+<li>Encode the first phrase of a melody of your choice in ABC or kern and render it (here in <a href="#8-todays-formats-in-verovio">part 8</a> or in the notebook).</li>
+<li>Write down one thing about the melody that your encoding cannot express.</li>
+</ol>
+<h2 id="notebooks">Notebooks<a class="headerlink" href="#notebooks" title="Permanent link">&para;</a></h2>
+<p>The notebooks repeat the demos with inputs you can change. Download them and upload them to Jupyter4NFDI (see <a href="../../setup/">setup</a>). Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets).</p>
+<ul>
+<li><a download="01_formats_verovio.ipynb" href="notebooks/01_formats_verovio.ipynb"><code>01_formats_verovio.ipynb</code></a>: Demos B and D, the seven encodings and the LLM's melody. Start here.</li>
+<li><a download="01_player_piano.ipynb" href="notebooks/01_player_piano.ipynb"><code>01_player_piano.ipynb</code></a>: Demo A, Debussy's roll as raw and expressive MIDI. Downloads the MIDI files from GitHub when you run it.</li>
+<li><a download="01_binary_grid.ipynb" href="notebooks/01_binary_grid.ipynb"><code>01_binary_grid.ipynb</code></a>: Demo C, the melody as a 0/1 grid and back.</li>
+</ul>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Background reading on historical notation and on the systems in parts 5 and 7: <a href="https://en.wikipedia.org/wiki/DARMS_notation">DARMS</a>, <a href="https://en.wikipedia.org/wiki/Plaine_%26_Easie_Code">Plaine &amp; Easie Code</a>, <a href="https://wiki.ccarh.org/wiki/ESAC">ESAC (CCARH)</a>, <a href="https://mtosmt.org/issues/mto.96.2.7/mto.96.2.7.wild.html">Humdrum review, <em>Music Theory Online</em> 2.7 (1996)</a>, <a href="https://abcnotation.com/history">ABC history</a>, <a href="https://wiki.ccarh.org/wiki/MuseData">MuseData</a>, <a href="https://music-encoding.org/about">MEI</a>, <a href="https://michaelgood.info/publications/music/musicxml-the-first-decade/">MusicXML: the first decade</a>.</li>
+<li>Machines and early computers: <a href="https://en.wikipedia.org/wiki/Piano_roll">Piano roll</a>, <a href="https://en.wikipedia.org/wiki/Welte-Mignon">Welte-Mignon</a>, <a href="https://cis.unimelb.edu.au/about/csirac/music">CSIRAC music</a>, <a href="https://en.wikipedia.org/wiki/Ferranti_Mark_1">Ferranti Mark 1</a>, <a href="https://en.wikipedia.org/wiki/Illiac_Suite">Illiac Suite</a>, <a href="https://zkm.de/en/node/62659">Banū Mūsā reconstruction (ZKM)</a>, <a href="https://www.computerhistory.org/babbage/adalovelace/">Ada Lovelace (Computer History Museum)</a>.</li>
+<li>SUPRA: <a href="https://supra.stanford.edu">supra.stanford.edu</a>, <a href="https://github.com/pianoroll/SUPRA">GitHub pianoroll/SUPRA</a>.</li>
+<li>Scores and rights: <a href="https://github.com/egorpol/eu-pd-composers">eu-pd-composers</a>, <a href="https://iiif.io">IIIF</a>, <a href="https://music-encoding.org/guidelines/v5/content/facsimilesrecordings.html">MEI facsimiles (MEI guidelines)</a>, <a href="https://github.com/egorpol/DdT_1_vol_11">CAMAT corpus edition DdT 1, vol. 11</a>, <a href="https://www.digitale-sammlungen.de">BSB digital collections</a>.</li>
+<li>ChatMusician: <a href="https://arxiv.org/abs/2402.16153">arXiv 2402.16153</a>.</li>
+<li>Rendering: <a href="https://www.verovio.org">Verovio</a> 6.3.0.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tabs.link", "navigation.sections", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/demos.js" type="module"></script>
+      
+    
+  </body>
+</html>

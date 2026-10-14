@@ -1,0 +1,28 @@
+{
+  "prompt_abc": "Write a short melody in ABC notation: 8 bars in 3/4 time, in D major, using only quarter notes, half notes, dotted half notes and eighth notes. Keep it between D4 and D5 and end on D. Reply with the ABC only.",
+  "prompt_kern": "Now write the same melody in Humdrum **kern. Reply with the kern only.",
+  "spec": {"meter": [3, 4], "bars": 8, "fifths": 2, "low": "D4", "high": "D5", "final": "D4"},
+  "answers": [
+    {
+      "id": "claude-abc",
+      "label": "Claude Opus 5.5 · ABC",
+      "source": "Claude Opus 5.5 (Anthropic), answering the prompt inside Claude Code while this page was built, 2026-10-14. Not edited.",
+      "format": "abc",
+      "text": "X:1\nT:Morning in D\nM:3/4\nL:1/8\nK:D\nD2 F2 A2 | d4 c2 | B2 A2 F2 | A6 |\nG2 B2 d2 | c2 A2 F2 | E2 F2 E2 | D6 |]\n"
+    },
+    {
+      "id": "claude-kern",
+      "label": "Claude Opus 5.5 · kern",
+      "source": "Claude Opus 5.5 (Anthropic), same conversation, follow-up prompt, 2026-10-14. Not edited.",
+      "format": "humdrum",
+      "text": "**kern\n*clefG2\n*k[f#c#]\n*M3/4\n=1\n4d\n4f#\n4a\n=2\n2dd\n4cc#\n=3\n4b\n4a\n4f#\n=4\n2.a\n=5\n4g\n4b\n4dd\n=6\n4cc#\n4a\n4f#\n=7\n4e\n4f#\n4e\n=8\n2.d\n==\n*-\n"
+    },
+    {
+      "id": "constructed-errors",
+      "label": "Constructed example with typical errors",
+      "source": "Written by hand for this page to show what the checks catch. Not an LLM answer.",
+      "format": "abc",
+      "text": "```abc\nX:1\nT:Waltz in D\nM:3/4\nL:1/8\nK:G\nD2 F2 A2 | d3 c B2 A | B2 A2 F2 | A6 |\nG2 B2 d2 | e2 c2 A2 | F2 E2 | D6 |]\n```\n"
+    }
+  ]
+}
