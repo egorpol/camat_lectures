@@ -1,4 +1,5 @@
 site_name: From Digital Edition to Computational Music Analysis
+site_url: https://egorpol.github.io/camat_lectures/
 site_description: "Seminar materials: music encoding, Verovio and tools for analysing notated music (WS 2026/27)"
 site_author: Egor Polyakov
 docs_dir: docs
