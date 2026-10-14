@@ -86,6 +86,7 @@ C4    1000    0000    0000    0000
 
 - Ask: *Which of these is the music? Which can you read? Which can a computer read?*
 - Then render the six text formats with Verovio: the same score six times. Keep the grid for part 9: it cannot be rendered back into this score without guessing.
+- The live page's last tab, *Common notation*, shows the score Verovio draws from the MEI file, for reference after the question (added 2026-10-14, user's request).
 - Point to the sizes: the same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 1,886 in MusicXML and about 4,850 in MEI (as Verovio writes it; its random IDs change the length by a few bytes each time). The difference is not the notes but what else is recorded: title, metadata, identifiers for every element, layout.
 - AI angle: language models read music as text too. ChatMusician (2024) was trained on ABC notation. Part 10 comes back to this.
 
@@ -110,7 +111,7 @@ Added on 2026-10-14. Answers "why encode?" from what students meet today, and pr
 - **Accessibility: who can use it.** A scan cannot be read aloud by a screen reader, enlarged without blur, played back or turned into music Braille; an encoding can (link to music Braille in part 4).
 - **Facsimile-based editions.** MEI keeps the page images in `<facsimile>` (one `<surface>` per page, one `<zone>` per measure), and each `measure/@facs` points to its zone. The encoding stays tied to its source: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to the witness. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.
 - **CAMAT preview.** CAMAT's edition tools grew out of encoding volumes of *Denkmäler deutscher Tonkunst* (DdT): page-level OMR from musiconn.scoresearch, BSB IIIF facsimiles, correction in mei-friend, automatic checks. A second route links MEI to the pages of a PDF (developed on Webern's *Variations*, Op. 27, Universal Edition print of 1937: nine pages, 143 measure regions). See CAMAT's guides "Editing music with the MEI data format" and "Link MEI to a PDF facsimile".
-- **Demo E (showcase only).** Page 1 of Buxtehude's Sonata I, Op. I (DdT 11, p. 3, BSB image 00013; bars 1–15), cut from the published `DdT_1_vol_11` (commit `7af4ae8`) with `tools/extract_facsimile_page.py` into `examples/facsimile/`. The scan with its 15 zones next to Verovio's rendering (encoded breaks: 3 systems as in the print); point at or click a bar on either side; the selected bar is shown close up (IIIF crop of the zone and Verovio's rendering of that bar alone). Bar 11 carries the page's one editorial `<annot>` (C♯ eighth instead of DdT's sixteenth, after the first edition). Its text says "the 1696 print", but Op. I is usually dated about 1694 (Op. II 1696); the live page caveats this. The full workflow comes later in the course.
+- **Demo E (showcase only).** Page 1 of Buxtehude's Sonata I, Op. I (DdT 11, p. 3, BSB image 00013; bars 1–15), cut from the published `DdT_1_vol_11` (commit `7af4ae8`) with `tools/extract_facsimile_page.py` into `examples/facsimile/`. The scan with its 15 zones next to Verovio's rendering (encoded breaks: 3 systems as in the print); point at or click a bar on either side; the selected bar is shown close up (IIIF crop of the zone and Verovio's rendering of that bar alone). A *Show the bar's MEI* checkbox (added 2026-10-14) shows the selected bar's `<measure>` exactly as written in the file, with its line numbers (bar 11: lines 1,224–1,391 of 1,749). Bar 11 carries the page's one editorial `<annot>` (C♯ eighth instead of DdT's sixteenth, after the first edition). Its text says "the 1696 print", but Op. I is usually dated about 1694 (Op. II 1696); the live page caveats this. The full workflow comes later in the course.
 - **Discussion:** *Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?*
 
 ## 4. Notation for human readers: systems made for users (10 min)
@@ -198,6 +199,8 @@ Demo B: first on the live page, then in `01_formats_verovio.ipynb`:
 4. Convert: kern → MEI with `getMEI()`; MEI → `renderToTimemap()` → piano-roll plot. This links back to Demo A and forward to the CAMAT representations.
 5. Hands-on: change a note in the ABC and the kern version, add a sharp, change the metre, then break the syntax on purpose and read the error.
 
+The live page has a reference table above Demo B (added 2026-10-14): for each format who made it and when, what for, a documentation link and a place to find real files; all links returned 200 on 2026-10-14. EsAC has no working home page (esac-data.org times out, wiki.ccarh.org refuses connections), so its row links the Verovio Humdrum Viewer's EsAC page, a sample Essen record there, and the Essen collection (kern) on GitHub.
+
 Verovio 6.3 (the pip wheel) input formats as tested on 2026-10-14:
 
 | Format | Verovio `inputFrom` | Tested |
@@ -264,6 +267,19 @@ Demo D.
   1. If setup failed in class, finish it with the FAQ on the live page and run `01_formats_verovio.ipynb`.
   2. Encode the first phrase of a melody of your choice in ABC or kern and render it.
   3. Write down one thing about the melody that your encoding cannot express.
+
+### Addendum on the live page: MIDI on a cable and in a file (not timed; for questions)
+
+Added 2026-10-14 (user's request), for the question "how does MIDI work, and what is the difference between the cable and the file?". Facts used: MIDI 1.0 published August 1983; 5-pin DIN, one direction per cable, 31,250 bit/s (8-N-1, so a 3-byte message takes about 1 ms), 16 channels, no audio (Wikipedia, midi.org). A Standard MIDI File puts a delta time in ticks before each message; the header gives ticks per quarter note, a tempo meta event the microseconds per quarter. A Note On at velocity 0 counts as Note Off (MIDI 1.0 text as quoted on the MIDI Association forum). No reliable year for the SMF format was found, so the page gives none.
+
+The page's byte listing comes from Verovio 6.3.0 (pip) writing `examples/alle_meine_entchen.abc` as MIDI: 144 bytes, format 1, 2 tracks, 120 ticks per quarter, tempo 500,000 µs, each note a Note On at velocity 90 and, 119 ticks later, a Note On at velocity 0. Re-check:
+
+```python
+import base64, verovio
+tk = verovio.toolkit(); tk.setOptions({"inputFrom": "abc"})
+tk.loadData(open("examples/alle_meine_entchen.abc").read())
+data = base64.b64decode(tk.renderToMIDI()); print(len(data), data[:40].hex(" "))
+```
 
 ## To prepare before tomorrow
 

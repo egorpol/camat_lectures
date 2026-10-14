@@ -7,6 +7,23 @@ instead of versioned, and the date is the day the change went live on the
 
 ## Unreleased
 
+### Added
+
+- Session 1, part 1: a last tab, *Common notation*, with the melody as Verovio
+  renders it from the MEI file.
+- Session 1, Demo E: a *Show the bar's MEI* checkbox that shows the selected
+  bar's `<measure>` as it is written in the file, with its line numbers.
+- Session 1, part 8: a table of the formats with who made them, what for, a
+  documentation link and where to find real files.
+- Session 1: an addendum on MIDI, as messages on a cable and as a Standard
+  MIDI File, with the bytes Verovio writes for the melody.
+
+### Fixed
+
+- Demo A: dragging the speed or start slider no longer makes the slider jump
+  under the pointer (the labels next to them changed width as the values
+  changed).
+
 ## 2026-10-14
 
 ### Added

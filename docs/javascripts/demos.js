@@ -5,6 +5,7 @@
 //   grid     Demo C: melody -> 0/1 grid -> notes
 //   llm      Demo D: check an LLM-written melody
 //   facsimile Demo E: MEI measure zones on a scan, linked to the rendering
+//   score    one file rendered as notation (part 1's last tab)
 
 import { readScore, verovioReady, VEROVIO_VERSION } from "./lib/vrv.js";
 import { parseMidi } from "./lib/midi.js";
@@ -217,13 +218,13 @@ function buildRollViewer(root, files, status) {
   const canvas = h("canvas", { class: "vrv-roll vrv-roll-large" });
   const legend = h("div", { class: "vrv-legend" });
   const slider = h("input", { type: "range", min: 0, step: 0.5, value: state.start, "aria-label": "Start time in seconds" });
-  const startLabel = h("span", { class: "vrv-size" });
+  const startLabel = h("span", { class: "vrv-size vrv-fixed" });
   const lengthSelect = h("select", { "aria-label": "Window length" }, [5, 10, 20, 40, 80, 160].map((s) => h("option", { value: s, selected: s === state.length }, `${s} s`)));
   const versionSelect = h("select", { "aria-label": "MIDI version" },
     h("option", { value: "exp" }, "expressive: holes merged into notes"),
     h("option", { value: "raw" }, "raw: one event per hole"));
   const speedSlider = h("input", { type: "range", min: 0.25, max: 2, step: 0.25, value: state.speed, "aria-label": "Playback speed" });
-  const speedLabel = h("span", { class: "vrv-size" }, "1×");
+  const speedLabel = h("span", { class: "vrv-size vrv-fixed" }, "1×");
   const playButton = h("button", { type: "button", class: "md-button" }, "▶ Play window");
   const info = h("p", { class: "vrv-note" });
 
@@ -310,6 +311,16 @@ function buildRollViewer(root, files, status) {
     info,
   );
   status.remove();
+  // Labels next to the sliders keep the width of their longest text: a label
+  // that grows while you drag moves the slider under the pointer. The same
+  // for the button, which reads "■ Stop" while playing.
+  const longest = Math.max(versions.exp.duration, versions.raw.duration).toFixed(1);
+  for (const [el, text] of [[startLabel, `${longest}–${longest} s`], [speedLabel, "0.25×"], [playButton, playButton.textContent]]) {
+    const current = el.textContent;
+    el.textContent = text;
+    el.style.minWidth = `${el.offsetWidth}px`;
+    el.textContent = current;
+  }
   draw();
   new ResizeObserver(debounce(draw, 100)).observe(canvas);
 }
@@ -674,6 +685,12 @@ async function initFacsimile(root) {
   const barRender = h("div", { class: "vrv-score facs-bar" });
   const notes = h("div", { class: "facs-notes" });
   const showAll = h("input", { type: "checkbox", checked: true, onchange: () => root.classList.toggle("facs-hide-zones", !showAll.checked) });
+  // The selected bar as it is written in the MEI file, on request.
+  const lineCount = text.replace(/\n$/, "").split("\n").length;
+  const meiCaption = h("p", { class: "vrv-note" });
+  const meiCode = h("pre", { class: "vrv-mei" });
+  const meiView = h("div", { class: "facs-mei", hidden: true }, meiCaption, meiCode);
+  const showMEI = h("input", { type: "checkbox", onchange: () => (meiView.hidden = !showMEI.checked) });
 
   let active = 0;
   let hover = -1;
@@ -706,6 +723,11 @@ async function initFacsimile(root) {
     barRender.innerHTML = bars[active];
     markNotes(barRender, m);
     notes.replaceChildren(...m.notes.map((n) => h("p", {}, h("strong", {}, "Editorial note in the MEI (the note in blue): "), n.text)));
+    meiCaption.textContent = m.source
+      ? `Bar ${m.n} as written in the MEI file: lines ${fmt(m.source.first)}–${fmt(m.source.last)} of ${fmt(lineCount)}.`
+      : `Bar ${m.n} could not be found in the file text.`;
+    meiCode.textContent = m.source?.text ?? "";
+    meiCode.scrollTop = 0;
     paint();
   };
   const pick = (selector) => (e) => {
@@ -736,10 +758,12 @@ async function initFacsimile(root) {
       h("div", { class: "vrv-controls" },
         h("button", { type: "button", class: "md-button", "aria-label": "Previous bar", onclick: () => select(active - 1) }, "◀"),
         barLabel,
-        h("button", { type: "button", class: "md-button", "aria-label": "Next bar", onclick: () => select(active + 1) }, "▶")),
+        h("button", { type: "button", class: "md-button", "aria-label": "Next bar", onclick: () => select(active + 1) }, "▶"),
+        h("label", {}, showMEI, "Show the bar's MEI")),
       code,
       h("div", { class: "facs-panes" }, pane(crop, "Scan: the zone, cut out by the IIIF server"), pane(barRender, "Encoding: the same bar")),
-      notes),
+      notes,
+      meiView),
   );
 
   // Hit areas need the SVG in the document (getBBox). We take the staves'
@@ -768,9 +792,28 @@ async function initFacsimile(root) {
   select(0);
 }
 
+// ---------------------------------------------------------------- score
+
+// data-file, data-format. The placeholder can be a paragraph ({: data-demo=...}
+// in Markdown), since raw HTML inside a tab gets wrapped in <p>. Inside a tab
+// the box has no width until the tab is opened, so it renders on its first
+// real size and again when that changes.
+async function initScore(root) {
+  const text = await fetchText(root.dataset.file);
+  const out = h("div", { class: "vrv-out" }, loadingNote());
+  root.replaceChildren(out);
+  let width = 0;
+  new ResizeObserver(debounce(async () => {
+    const w = root.clientWidth;
+    if (!w || Math.abs(w - width) < 40) return;
+    width = w;
+    showScore(out, await readScore(root.dataset.format || "mei", text, { width: w }));
+  }, 100)).observe(root);
+}
+
 // ---------------------------------------------------------------- start
 
-const DEMOS = { formats: initFormats, roll: initRoll, grid: initGrid, llm: initLLM, facsimile: initFacsimile };
+const DEMOS = { formats: initFormats, roll: initRoll, grid: initGrid, llm: initLLM, facsimile: initFacsimile, score: initScore };
 
 for (const root of document.querySelectorAll("[data-demo]")) {
   const init = DEMOS[root.dataset.demo];

@@ -26,7 +26,7 @@ Every notation is already an encoding. It was made for a particular reader and a
 
 ## 1. One melody, seven encodings
 
-Here are the first four bars of *Alle meine Entchen*, seven times. Before anything is rendered: *Which of these is the music? Which can you read? Which can a computer read?*
+Here are the first four bars of *Alle meine Entchen*, seven times. Before anything is rendered: *Which of these is the music? Which can you read? Which can a computer read?* The last tab shows the same bars as a score, for reference.
 
 === "ABC"
 
@@ -77,6 +77,13 @@ Here are the first four bars of *Alle meine Entchen*, seven times. Before anythi
     D4    0100    0000    0000    0000
     C4    1000    0000    0000    0000
     ```
+
+=== "Common notation"
+
+    For reference: the four bars in common staff notation, drawn by Verovio from the MEI tab.
+
+    *Loading the score…*
+    {: data-demo="score" data-file="examples/alle_meine_entchen.mei" data-format="mei" }
 
 The same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 120 in EsAC, 1,886 in MusicXML and about 4,850 in MEI (as Verovio writes it; its random IDs change the length by a few bytes each time). The difference is not the notes but what else is recorded: title, metadata, an identifier for every element, layout. Six of the seven can be rendered back into the same score ([part 8](#8-todays-formats-in-verovio)). The grid cannot, at least not without guessing ([part 9](#9-binary-notation-holes-grids-and-what-survives)).
 
@@ -142,12 +149,12 @@ This is where the course is going. The tools of CAMAT, which we use from the nex
 
 ### Demo E: a facsimile-linked page
 
-The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, viola da gamba and harpsichord, as printed in *Denkmäler deutscher Tonkunst*, vol. 11 (1903). Left: the Bayerische Staatsbibliothek's scan, with the zones from the MEI file drawn on it. Right: the same MEI file rendered by Verovio, with the page's three systems. Point at a bar on either side to find it on the other; click to compare it close up.
+The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, viola da gamba and harpsichord, as printed in *Denkmäler deutscher Tonkunst*, vol. 11 (1903). Left: the Bayerische Staatsbibliothek's scan, with the zones from the MEI file drawn on it. Right: the same MEI file rendered by Verovio, with the page's three systems. Point at a bar on either side to find it on the other; click to compare it close up. Tick *Show the bar's MEI* to read how the selected bar is encoded.
 
 <div data-demo="facsimile" data-mei="facsimile/buxtehude_op1_01_page1.mei"
      data-title="Denkmäler deutscher Tonkunst 11 (1903), page 3: Buxtehude, Sonata I, bars 1 to 15"></div>
 
-Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an `<annot>` in the MEI file says so. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.
+Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an `<annot>` in the MEI file says so. With *Show the bar's MEI* ticked you can read it in the code: `<staff n="1">` is the violin, `n="2"` the viola da gamba and `n="3"` the harpsichord's bass line; each `<harm>` holds a figure of the figured bass; and the `<annot>` points at the C♯ with `plist`. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.
 
 !!! info "Source and licence"
     MEI: the first page (bars 1–15) of `buxtehude_op1_01_sonata_f_major_corr.mei` from the CAMAT corpus edition [*DdT 1, vol. 11: Dietrich Buxtehude, Instrumental Works*](https://github.com/egorpol/DdT_1_vol_11) (work in progress, commit `7af4ae8`), [MIT License](examples/facsimile/LICENSE); two ties into bar 16 on the next page were removed. [Download the MEI file](examples/facsimile/buxtehude_op1_01_page1.mei){: download="buxtehude_op1_01_page1.mei" }. Scan: Bayerische Staatsbibliothek, [`bsb00023199`, image 13](https://www.digitale-sammlungen.de/en/view/bsb00023199?page=13) (copy of the Hochschule für Musik und Theater München, Bibliothek), licensed [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). The page loads the scan from the library's IIIF server when you open it; it is not copied here.
@@ -231,7 +238,7 @@ Click a source to see or hear it. The encoded scores open in the Verovio Humdrum
 | 1960s | DARMS (Ford-Columbia Music Representation) | Stefan Bauer-Mengelberg | computer-printed parts for the New York Philharmonic, typed by counting lines and spaces | [how DARMS numbers the lines and spaces](https://commons.wikimedia.org/wiki/File:How_the_Space_Code_is_assigned_within_the_DARMS_music_encoding_language.png) (a diagram drawn for Wikipedia): the bottom line of the staff is 21 |
 | 1964 | Plaine & Easie Code | Barry S. Brook, Murray Gould | incipits typed on an ordinary typewriter; RISM adopted it for incipits and still uses it | [a RISM record](https://rism.online/sources/190006990) of a Buxtehude sonata copied in the 1690s (Uppsala University Library): the incipit of each movement is stored as Plaine & Easie and drawn as notation |
 | from 1982 | EsAC and the Essen Folksong Collection | Helmut Schaffrath | folksongs on DOS PCs; pitches as scale degrees, inspired by jianpu | [*Schlaf, Kindlein, schlaf*](https://verovio.humdrum.org/?file=https://raw.githubusercontent.com/ccarh/essen-folksong-collection/main/europa/deutschl/kinder/kindr001.krn), song K0001 of the collection in its kern version: the curly brackets mark the phrases of the EsAC original (EsAC itself is in [part 8](#8-todays-formats-in-verovio)) |
-| 1983 | MIDI | instrument makers | performance events between instruments, not notation: the piano roll's descendant | the two MIDI files of the Debussy roll in [Demo A](#demo-a-debussy-plays-childrens-corner) |
+| 1983 | MIDI | instrument makers | performance events between instruments, not notation: the piano roll's descendant | the two MIDI files of the Debussy roll in [Demo A](#demo-a-debussy-plays-childrens-corner); how MIDI works: [addendum](#addendum-midi-on-a-cable-and-in-a-file) |
 | 1984 | CCARH and MuseData | Walter Hewlett | large encoded repertories | [Corelli, Op. 1 No. 1, first movement](https://verovio.humdrum.org/?file=github:musedata/corelli/op1/musedata/corelli-op1n01-01.msd) in MuseData |
 | 1980s–1990s | Humdrum toolkit and `**kern` | David Huron | analysis with Unix text tools, one column ("spine") per voice; *kern* is German for "core" | [Bach's chorale *Aus meines Herzens Grunde* (BWV 269)](https://verovio.humdrum.org/?file=https://raw.githubusercontent.com/craigsapp/bach-370-chorales/main/kern/chor001.krn), one spine per voice |
 | 1980s–1990s | ABC | Chris Walshaw | folk tunes typed as letters; the text format behind music language models such as ChatMusician (2024) | [*The Kesh*](https://thesession.org/tunes/55), an Irish jig on The Session: dozens of settings, each in ABC and as notation |
@@ -248,6 +255,20 @@ The 1960s needed music for **printing** (DARMS) and **cataloguing** (Plaine & Ea
 ## 8. Today's formats in Verovio
 
 Verovio reads all six text encodings from part 1 and renders them as notation. Edit any box: the score follows as you type. *Show as MEI* converts the text to MEI; *Piano roll* draws the notes as time × pitch, the view from Demo A.
+
+Where each format comes from, and where to find real files in it (the history is in [part 7](#7-notation-for-computers-1940s-to-the-1990s)):
+
+| Format | Made by, when | Made for | Documentation | Real files |
+|---|---|---|---|---|
+| ABC | Chris Walshaw, 1980s–1990s | folk and traditional tunes, typed and shared as plain text | [ABC standard 2.1](https://abcnotation.com/wiki/abc:standard:v2.1) | [The Session](https://thesession.org/tunes): folk tunes, each setting in ABC and as notation |
+| Humdrum `**kern` | David Huron, 1980s–1990s | analysis with text tools: one column ("spine") per voice | [the `**kern` reference](https://www.humdrum.org/rep/kern/) | [Bach's 370 chorales](https://github.com/craigsapp/bach-370-chorales) on GitHub; open any kern file in the [Verovio Humdrum Viewer](https://verovio.humdrum.org/) |
+| Plaine & Easie | Barry S. Brook and Murray Gould, 1964 | incipits in library catalogues; RISM still uses it | [the code](https://www.iaml.info/plaine-easie-code), maintained by IAML | [RISM Online](https://rism.online/) stores its incipits in it, for example in [this Buxtehude sonata](https://rism.online/sources/190006990) |
+| EsAC | Helmut Schaffrath, Essen, from 1982 | folk-song collections: one record per song, with region (`REG`), key and metre (`KEY`) and the melody as scale degrees (`MEL`) | [how the Verovio Humdrum Viewer reads EsAC](https://doc.verovio.humdrum.org/interface/esac/), with [a record from the Essen collection](https://doc.verovio.humdrum.org/interface/esac/b0029.txt) | the [Essen Folksong Collection](https://github.com/ccarh/essen-folksong-collection), over 6,000 songs, converted to kern |
+| MusicXML | Michael Good (Recordare), from 2000; now the W3C Music Notation Community Group | exchange between notation programs | [MusicXML 4.0](https://www.w3.org/2021/06/musicxml40/) (2021), with a tutorial | [a list of sites with MusicXML files](https://www.musicxml.com/music-in-musicxml/); notation programs such as MuseScore export it |
+| MEI | Perry Roland, from 1999; now the MEI community | scholarly editions | [the MEI Guidelines](https://music-encoding.org/guidelines/v5/content/) (version 5) | [MEI sample encodings](https://github.com/music-encoding/sample-encodings) on GitHub; the Buxtehude page in [Demo E](#demo-e-a-facsimile-linked-page) |
+| GABC (chant) | a monk of the Abbey of Sainte-Madeleine du Barroux, improved by Élie Roux and others | typesetting Gregorian chant with the Gregorio software | [GABC, described by the Gregorio project](https://gregorio-project.github.io/gabc/) | [GregoBase](https://gregobase.selapa.net/), a database of chants, each one downloadable as GABC |
+
+MIDI is not on this list: it records what a player does, not what a score shows. See the [addendum](#addendum-midi-on-a-cable-and-in-a-file).
 
 <div data-demo="formats" data-examples="examples/"></div>
 
@@ -290,6 +311,43 @@ You do not need your own LLM account for this: the recorded answers and the inst
 2. Encode the first phrase of a melody of your choice in ABC or kern and render it (here in [part 8](#8-todays-formats-in-verovio) or in the notebook).
 3. Write down one thing about the melody that your encoding cannot express.
 
+## Addendum: MIDI on a cable and in a file
+
+MIDI comes up in Demo A and in part 7. The name is used for two things: messages sent between instruments, and files that store them.
+
+**On a cable: messages, sent as they happen.** MIDI 1.0 was published in August 1983 so that instruments from different makers could control each other. A message says what a player does, not what it sounds like: *channel 1, key 60 down, velocity 90* is three bytes, `90 3C 5A`, and a second message follows when the key is released. The receiving instrument makes the sound; MIDI itself carries no audio. The original cable has five-pin DIN plugs, carries messages in one direction only (from an OUT to an IN socket) at 31,250 bits per second, and has 16 channels, so one cable can play 16 instruments or sounds. A message carries no time: the note starts when the message arrives, and each three-byte message takes about a millisecond on that cable. Today the same messages also travel over USB, Bluetooth and networks, or between programs on one computer.
+
+**In a file: the same messages, each with a wait before it.** A Standard MIDI File (`.mid`) stores the messages and writes before each one how long to wait after the previous one, counted in *ticks*. The header says how many ticks make a quarter note, and a tempo message says how long a quarter note lasts. Verovio writes the four bars of *Alle meine Entchen* as a file of 144 bytes:
+
+```text
+4D 54 68 64  00 00 00 06     "MThd": the header, 6 bytes follow
+00 01  00 02  00 78          format 1, 2 tracks, 120 ticks per quarter
+4D 54 72 6B  00 00 00 0B     "MTrk": track 1, 11 bytes follow
+  00  FF 51 03 07 A1 20        wait 0, tempo
+  00  FF 2F 00                 wait 0, end of track
+4D 54 72 6B  00 00 00 67     "MTrk": track 2, 103 bytes follow
+  00  FF 58 04 04 02 18 08     wait 0, time signature 4/4
+  00  90 3C 5A                 wait 0, key 60 (C4) down, velocity 90
+  77  90 3C 00                 wait 119, key 60 at velocity 0: up
+  01  90 3E 5A                 wait 1, key 62 (D4) down, velocity 90
+  ...
+```
+
+The numbers are hexadecimal: `77` is 119, `3C` is 60, and the tempo `07 A1 20` is 500,000 microseconds per quarter note, 120 quarter notes a minute. In `90`, the `9` means "key down" and the `0` channel 1. Each note sounds for 119 of its quarter note's 120 ticks, and the next starts one tick later. The `90` messages are exactly what a cable carries; the `FF` messages (tempo, time signature, end of track) exist only in files. A key "down" at velocity 0 counts as released: the MIDI 1.0 specification allows both this and a separate Note Off message.
+
+| | On a cable (or USB, Bluetooth) | In a file (`.mid`) |
+|---|---|---|
+| What it is | a live stream of messages | the same messages, stored |
+| Time | the moment a message arrives | a wait in ticks before each message, and a tempo |
+| Parts | up to 16 channels per cable | channels, and tracks played together (format 1) |
+| Example | a keyboard playing a synthesiser | the two files of the Debussy roll in Demo A |
+
+**The three questions, asked of MIDI.**
+
+- *Who reads it?* Instruments, sequencers and recording software; SUPRA turned the Debussy roll into MIDI files.
+- *What does it record?* Which key, how hard (velocity, 0 to 127), when, on which channel, and controllers such as the pedals: the pedal bands in Demo A are Control Change messages 64 (sustain pedal) and 67 (soft pedal).
+- *What does it leave out?* What a score adds for a reader. C♯ and D♭ are the same key, 61. A note lasts so many ticks; it has no note value, so a short quarter note and an eighth note followed by a rest can look the same. There are no stems, beams, voices, ties, slurs or staff layout. Turning a score into MIDI is easy (Verovio does it), but turning MIDI into a score means guessing, as with the grid in part 9.
+
 ## Notebooks
 
 The notebooks repeat the demos with inputs you can change. On Jupyter4NFDI, one cell copies them into your workspace (see [setup](../../setup.md#get-the-session-notebooks)); you can also download them here and upload them. Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets, and Bokeh for interactive piano rolls).
@@ -305,4 +363,5 @@ The notebooks repeat the demos with inputs you can change. On Jupyter4NFDI, one 
 - SUPRA: [supra.stanford.edu](https://supra.stanford.edu), [GitHub pianoroll/SUPRA](https://github.com/pianoroll/SUPRA).
 - Scores and rights: [eu-pd-composers](https://github.com/egorpol/eu-pd-composers), [IIIF](https://iiif.io), [MEI facsimiles (MEI guidelines)](https://music-encoding.org/guidelines/v5/content/facsimilesrecordings.html), [CAMAT corpus edition DdT 1, vol. 11](https://github.com/egorpol/DdT_1_vol_11), [BSB digital collections](https://www.digitale-sammlungen.de).
 - ChatMusician: [arXiv 2402.16153](https://arxiv.org/abs/2402.16153).
+- MIDI: [MIDI 1.0 (MIDI Association)](https://midi.org/midi-1-0), [summary of the MIDI 1.0 messages](https://midi.org/summary-of-midi-1-0-messages), [MIDI (Wikipedia)](https://en.wikipedia.org/wiki/MIDI).
 - Rendering: [Verovio](https://www.verovio.org) 6.3.0.

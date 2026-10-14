@@ -1,6 +1,6 @@
 // Facsimile links in MEI: the page image, its zones and the measures that
 // point to them with @facs. Also builds IIIF Image API URLs for the page
-// and for one zone of it.
+// and for one zone of it, and cuts each measure out of the file text.
 
 const XML_ID = "xml:id";
 
@@ -28,9 +28,29 @@ export function facsimileFromMEI(text) {
       text: a.textContent.trim().replace(/\s+/g, " "),
       targets: (a.getAttribute("plist") || "").split(/\s+/).filter(Boolean).map((r) => r.replace(/^#/, "")),
     }));
-    measures.push({ id: m.getAttribute(XML_ID), n: m.getAttribute("n"), zone, notes });
+    const id = m.getAttribute(XML_ID);
+    measures.push({ id, n: m.getAttribute("n"), zone, notes, source: measureSource(text, id) });
   }
   return { surface, measures };
+}
+
+// The <measure> element as it is written in the file (not re-serialised),
+// with its first and last line numbers. Indentation is kept relative to
+// the <measure> tag.
+export function measureSource(text, id) {
+  const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const start = text.search(new RegExp(`<measure\\b[^>]*\\sxml:id=["']${escaped}["']`));
+  if (start < 0) return null;
+  const openTag = text.slice(start, text.indexOf(">", start) + 1);
+  const end = openTag.endsWith("/>") ? start + openTag.length : text.indexOf("</measure>", start) + "</measure>".length;
+  const lineStart = text.lastIndexOf("\n", start) + 1;
+  const indent = /^[ \t]*$/.test(text.slice(lineStart, start)) ? text.slice(lineStart, start) : "";
+  const lines = text
+    .slice(start - indent.length, end)
+    .split("\n")
+    .map((line) => (line.startsWith(indent) ? line.slice(indent.length) : line));
+  const first = text.slice(0, start).split("\n").length;
+  return { text: lines.join("\n"), first, last: first + lines.length - 1 };
 }
 
 // target is a IIIF Image API URL: {base}/{region}/{size}/{rotation}/{quality}.{format}

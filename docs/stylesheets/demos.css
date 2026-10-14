@@ -136,6 +136,11 @@
   min-width: 8em;
 }
 
+.vrv-controls .vrv-fixed {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
 [data-demo] select,
 [data-demo] input[type="text"] {
   font: inherit;
