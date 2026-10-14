@@ -1,0 +1,59 @@
+site_name: From Digital Edition to Computational Music Analysis
+site_description: "Seminar materials: music encoding, Verovio and tools for analysing notated music (WS 2026/27)"
+site_author: Egor Polyakov
+docs_dir: docs
+strict: true
+
+hooks:
+  - hooks/session_files.py
+
+watch:
+  - sessions
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.tabs.link
+    - navigation.sections
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+extra_css:
+  - stylesheets/demos.css
+
+extra_javascript:
+  - path: javascripts/demos.js
+    type: module
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
+
+nav:
+  - Home: index.md
+  - Setup on Jupyter4NFDI: setup.md
+  - Sessions:
+      - "1. Why encode music?": sessions/01-why-encode-music/index.md

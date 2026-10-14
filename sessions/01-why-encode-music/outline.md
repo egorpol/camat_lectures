@@ -20,7 +20,8 @@ By the end of the session, students can:
 3. Place key systems on a timeline from mechanical instruments to kern and the Essen folksong collection, and relate them to today's formats.
 4. Edit a short ABC, kern or MEI snippet and render it with Verovio, in the browser and in Jupyter4NFDI.
 5. Turn a melody into a 0/1 pitch × time grid and say what the grid loses.
-6. Check an LLM-written ABC melody against what was asked for.
+6. Tell a scan, a PDF, an encoded score and a facsimile-linked edition apart, and say who can use each (including readers who cannot see the page).
+7. Check an LLM-written ABC melody against what was asked for.
 
 ## Plan
 
@@ -29,10 +30,11 @@ By the end of the session, students can:
 | Time | Part | Mode |
 |---|---|---|
 | 0:00–0:10 | 1. Hook: one melody, seven encodings | live page + question |
-| 0:10–0:25 | 2. Why encode music? | input + discussion |
-| 0:25–0:40 | 3. Notation for human readers: systems made for users | input |
-| 0:40–1:00 | 4. Notation for machines: barrels, rolls, punched cards | input + **Demo A** on the live page (player piano) |
-| 1:00–1:30 | 5. Setup: Jupyter4NFDI login and first notebook | hands-on troubleshooting |
+| 0:10–0:20 | 2. Why encode music? | input + discussion |
+| 0:20–0:35 | 3. Scores today: scans, PDFs and facsimile-based editions | input + showcase: eu-pd-composers, **Demo E** (facsimile preview) |
+| 0:35–0:45 | 4. Notation for human readers: systems made for users | input (three examples) |
+| 0:45–1:00 | 5. Notation for machines: barrels, rolls, punched cards | input + **Demo A** on the live page (player piano) |
+| 1:00–1:30 | 6. Setup: Jupyter4NFDI login and first notebook | hands-on troubleshooting |
 
 Setup goes at the end of block 1 so the break absorbs overruns and block 2 starts with everyone logged in. Students who are still stuck can follow block 2 on the live page, which needs no login.
 
@@ -40,13 +42,13 @@ Setup goes at the end of block 1 so the break absorbs overruns and block 2 start
 
 | Time | Part | Mode |
 |---|---|---|
-| 0:00–0:20 | 6. Notation for computers, 1940s to the 1990s | input |
-| 0:20–0:45 | 7. Today's formats in Verovio | **Demo B**, students edit inputs |
-| 0:45–1:05 | 8. Binary notation: holes, grids and what survives | **Demo C**, preview of CAMAT |
-| 1:05–1:20 | 9. An LLM writes ABC | **Demo D** |
-| 1:20–1:30 | 10. Wrap-up, course roadmap, homework | |
+| 0:00–0:20 | 7. Notation for computers, 1940s to the 1990s | input |
+| 0:20–0:45 | 8. Today's formats in Verovio | **Demo B**, students edit inputs |
+| 0:45–1:05 | 9. Binary notation: holes, grids and what survives | **Demo C**, preview of CAMAT |
+| 1:05–1:20 | 10. An LLM writes ABC | **Demo D** |
+| 1:20–1:30 | 11. Wrap-up, course roadmap, homework | |
 
-If time runs short, cut part 3 to three examples (neumes, tablature, jeongganbo) and shorten part 6 to the table.
+Part 3 was added on 2026-10-14 (user's request); to make room, part 2 went from 15 to 10 minutes, part 4 uses the three-example version (neumes, tablature, jeongganbo; the other systems stay on the live page for reading) and part 5 went from 20 to 15 minutes. If time still runs short, shorten part 7 to the table.
 
 ## Live page and notebooks
 
@@ -58,6 +60,7 @@ Every demo exists twice: on the live page (runs in any browser, nothing to insta
 | B. Seven encodings | one editable text box per format, rendered by Verovio | `01_formats_verovio.ipynb`: edit, render, convert to MEI |
 | C. Binary grid | melody → 0/1 grid → notes, grid size adjustable | `01_binary_grid.ipynb`: change the melody and the resolution, compare before/after |
 | D. LLM writes ABC | paste box + recorded LLM answers | cells at the end of `01_formats_verovio.ipynb` |
+| E. Facsimile-linked edition (part 3, showcase only) | one DdT page: Verovio rendering next to the BSB scan (IIIF, fetched at runtime) with its measure zones | none in session 1; the full workflow comes with CAMAT later |
 
 Checked on 2026-10-14:
 
@@ -82,11 +85,11 @@ C4    1000    0000    0000    0000
 ```
 
 - Ask: *Which of these is the music? Which can you read? Which can a computer read?*
-- Then render the six text formats with Verovio: the same score six times. Keep the grid for part 8: it cannot be rendered back into this score without guessing.
+- Then render the six text formats with Verovio: the same score six times. Keep the grid for part 9: it cannot be rendered back into this score without guessing.
 - Point to the sizes: the same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 1,886 in MusicXML and 4,850 in MEI (as Verovio writes it). The difference is not the notes but what else is recorded: title, metadata, identifiers for every element, layout.
-- AI angle: language models read music as text too. ChatMusician (2024) was trained on ABC notation. Part 9 comes back to this.
+- AI angle: language models read music as text too. ChatMusician (2024) was trained on ABC notation. Part 10 comes back to this.
 
-## 2. Why encode music? (15 min)
+## 2. Why encode music? (10 min)
 
 - **Notation is a selection** made for a reader who knows the conventions: performance practice, tuning, ornament realisation, how repeats work.
 - **A computer knows none of this.** A scanned score is an image. For search, analysis, rendering or playback, the machine needs symbols with explicit meaning.
@@ -97,7 +100,20 @@ C4    1000    0000    0000    0000
 - **Written vs. performed.** One written sign (a trill, a grace note, a fermata) stands for performed events that differ from what is written. MEI keeps both, for example `@dur` (written duration) next to `@dur.ges` (performed duration).
 - **The link to this course.** A digital edition (MEI) encodes what the source says. Analysis (kern, CAMAT tables, piano rolls) treats notes as data. The same encoding has to serve both, which is what the semester is about.
 
-## 3. Notation for human readers: systems made for users (15 min)
+## 3. Scores today: scans, PDFs and facsimile-based editions (15 min)
+
+Added on 2026-10-14. Answers "why encode?" from what students meet today, and prefaces CAMAT's facsimile-based editions.
+
+- **Where scores live today.** Library digitisations (for example the Bayerische Staatsbibliothek's digital collections, delivered as IIIF images), PDF archives such as IMSLP, publishers' editions, and a few encoded editions in MEI. Most "digital" music is a picture of a page.
+- **Formats of digitised archives.** Image files (TIFF, JPEG) behind a IIIF viewer; PDFs (a container of page images, at most with a text layer, never with the music as data); encoded scores (MusicXML, MEI, kern). Only the last can be searched for a melody, played, transposed or analysed.
+- **Access: who may use it.** Rights depend on the composer's death year (EU: life + 70 years), on the edition and on the country. Showcase: the eu-pd-composers viewer (<https://egorpol.github.io/eu-pd-composers/>), which lists 20th-century composers whose music is likely public domain in the EU, with IMSLP links. Take its numbers from the deployed viewer, and repeat its "not legal advice" note.
+- **Accessibility: who can use it.** A scan cannot be read aloud by a screen reader, enlarged without blur, played back or turned into music Braille; an encoding can (link to music Braille in part 4).
+- **Facsimile-based editions.** MEI keeps the page images in `<facsimile>` (one `<surface>` per page, one `<zone>` per measure), and each `measure/@facs` points to its zone. The encoding stays tied to its source: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to the witness. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.
+- **CAMAT preview.** CAMAT's edition tools grew out of encoding volumes of *Denkmäler deutscher Tonkunst* (DdT): page-level OMR from musiconn.scoresearch, BSB IIIF facsimiles, correction in mei-friend, automatic checks. A second route links MEI to the pages of a PDF (developed on Webern's *Variations*, Op. 27, Universal Edition print of 1937: nine pages, 143 measure regions). See CAMAT's guides "Editing music with the MEI data format" and "Link MEI to a PDF facsimile".
+- **Demo E (showcase only).** One DdT page from `camat_corpus_editions`: the Verovio rendering next to the BSB scan with its measure zones; click a bar on one side to find it on the other. The full workflow comes later in the course.
+- **Discussion:** *Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?*
+
+## 4. Notation for human readers: systems made for users (10 min)
 
 Short, one slide each, using the "who / what / left out / computational analogy" grid from the background notes:
 
@@ -112,9 +128,9 @@ Short, one slide each, using the "who / what / left out / computational analogy"
 
 One slide on **notations customised for a user group**: shape notes (singing schools), jianpu (scale degrees as numbers, for teaching), music Braille (blind musicians), Klavarskribo (keyboard players). There was never one "music notation"; systems are tools built for a use, and encoding formats continue that tradition.
 
-Forward links to mention: chant is encoded today in GABC and Volpiano (Verovio reads both; see [examples/alleluia_fragment.gabc](examples/alleluia_fragment.gabc)); MEI has a mensural module; jianpu inspired the Essen code in part 5.
+Forward links to mention: chant is encoded today in GABC and Volpiano (Verovio reads both; see [examples/alleluia_fragment.gabc](examples/alleluia_fragment.gabc)); MEI has a mensural module; jianpu inspired the Essen code in part 7.
 
-## 4. Notation for machines: barrels, rolls, punched cards (20 min)
+## 5. Notation for machines: barrels, rolls, punched cards (15 min)
 
 When the reader is a machine, notation becomes a program: positions on a cylinder or holes in paper that trigger sound.
 
@@ -141,7 +157,7 @@ Source: SUPRA (Stanford University Piano Roll Archive), roll `dc920rk8870`. Show
 
 Discussion: *Is a roll a score, a recording or a program? Where are the bar lines and the quarter notes? What is a "note" when 33,508 holes become 6,031 notes?*
 
-## 5. Setup: Jupyter4NFDI login and first notebook (30 min)
+## 6. Setup: Jupyter4NFDI login and first notebook (30 min)
 
 1. Open <https://hub.nfdi-jupyter.de>, sign in with Helmholtz AAI and start JupyterLab on JSC-Cloud (steps as in the CAMAT cloud guide).
 2. Check the kernel: Python 3.11 or later.
@@ -151,7 +167,7 @@ Discussion: *Is a roll a score, a recording or a program? Where are the bar line
 
 Files under `/home/jovyan` persist after a restart; everything else is discarded when the server stops.
 
-## 6. Notation for computers, 1940s to the 1990s (20 min)
+## 7. Notation for computers, 1940s to the 1990s (20 min)
 
 | When | System | People | Made for | Today |
 |---|---|---|---|---|
@@ -170,7 +186,7 @@ Message: the 1960s needed music for **printing** (DARMS) and **cataloguing** (Pl
 
 One bridge slide after 1990: MEI (Perry Roland's XML schema, 1999, built on the principles of TEI) for editions; MusicXML (Recordare, from 2000) for exchange between notation programs; Verovio renders MEI and the other formats in the browser and in Python; language models trained on ABC and kern (2024–).
 
-## 7. Today's formats in Verovio (25 min)
+## 8. Today's formats in Verovio (25 min)
 
 Demo B: first on the live page, then in `01_formats_verovio.ipynb`:
 
@@ -197,7 +213,15 @@ Verovio 6.3 (the pip wheel) input formats as tested on 2026-10-14:
 
 Re-run the check on any machine with `python examples/check_examples.py`.
 
-## 8. Binary notation: holes, grids and what survives (20 min)
+Found while building the live page (2026-10-14, Verovio 6.3.0, Python wheel and npm build alike unless noted):
+
+- **Browser build:** the default `verovio-toolkit-wasm.js` returns `false` for kern and EsAC; the page uses the Humdrum build `verovio-module-hum.mjs` (12.4 MB) with `verovio.mjs`.
+- **Inputs that crash Verovio** (segfault in Python, so the kernel dies; a catchable exception in WASM): ABC without an `X:` line (`T:t\nK:C\nCDEF|`), ABC without a `K:` line, ABC with a `]` that closes nothing (`X:1\nK:C\nCD]EF|`), and kern whose lines have fewer columns than spines (`**kern\t**kern\n4c\t4e\n4d\n*-\t*-`, abort). Page and notebooks check for these before calling Verovio.
+- **kern key signatures:** with `*k[f#c#]`, the token `4f#` becomes `<note pname="f"/>` without `accid.ges`, so `getMIDIValuesForElement()` and `renderToMIDI()` give F natural (65 instead of 66). ABC writes `accid.ges` and is correct. The demos compute pitches from the MEI instead (accid.ges, accid, accidental earlier in the bar, key signature).
+- **ABC chord lengths:** a length after the bracket is ignored, `[DFA]4` becomes an eighth-note chord with `L:1/8`; `[D4F4A4]` works. The page warns about it.
+- **Logs:** in WASM, `enableLogToBuffer(true, module)` makes `getLog()` return the warnings; the Python wheel has no such switch and writes them to stderr, which Jupyter does not show.
+
+## 9. Binary notation: holes, grids and what survives (20 min)
 
 Demo C, a preview of the CAMAT representations used later in the course.
 
@@ -219,7 +243,7 @@ C4    1000    0000    0000    0000
 - **What would fix it?** A separate onset grid, or keeping the note table next to the grid, as CAMAT does with `xml:id`s pointing back to the score.
 - Hands-on: change the melody and the grid size, convert grid → notes → Verovio, and compare with the original.
 
-## 9. An LLM writes ABC (15 min)
+## 10. An LLM writes ABC (15 min)
 
 Demo D.
 
@@ -230,9 +254,9 @@ Demo D.
 - **Data protection:** students do not need their own LLM account; the instructor's demo (or a university service, if available) is enough.
 - **Discussion:** the model writes text that looks like music. Because it is an encoding, we can check it, which a picture of a score would not allow.
 
-## 10. Wrap-up (10 min)
+## 11. Wrap-up (10 min)
 
-- Recap the three questions: who reads it, what it records, what it leaves out. Apply them to the grid and to the LLM's ABC.
+- Recap the three questions: who reads it, what it records, what it leaves out. Apply them to the scan, the grid and the LLM's ABC.
 - Course roadmap: digital edition (MEI) → CAMAT note tables and piano rolls → statistics and pattern search.
 - Homework:
   1. If setup failed in class, finish it with the FAQ on the live page and run `01_formats_verovio.ipynb`.
@@ -243,6 +267,7 @@ Demo D.
 
 - [x] Example encodings, tested with Verovio 6.3 ([examples/](examples/)).
 - [ ] Live page: session text + demos A–D (served locally first).
+- [ ] Part 3: eu-pd-composers showcase and Demo E (facsimile preview).
 - [ ] Notebooks `01_formats_verovio.ipynb`, `01_player_piano.ipynb`, `01_binary_grid.ipynb`.
 - [ ] Recorded LLM answers (ABC and kern) for Demo D.
 - [ ] Run all notebooks once on Jupyter4NFDI.
