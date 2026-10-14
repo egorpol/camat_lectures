@@ -21,8 +21,19 @@ instead of versioned, and the date is the day the change went live on the
 - Session 1, MIDI addendum: the whole melody as messages on a cable (with
   arrival times) and the whole file, the one-byte clock messages, and why MIDI
   does not simply turn back into MEI.
+- Session 1, Demo C and `01_binary_grid.ipynb`: a *Rules* choice between the
+  demo's rules (a cell holds what sounds at its start; the grid is read back
+  column by column) and CAMAT's (`create_binary_matrix` rounds onsets down and
+  ends up; `binary_slice_to_df` reads each row on its own), with messages for
+  notes that move to cell edges and for held notes cut by the column reading.
 
 ### Changed
+
+- Session 1, part 9: the grid is presented as data computed from a note table,
+  as CAMAT uses it for pattern search, and no longer as a model of the piano
+  roll. New bullets on what CAMAT does with the grid, with links to its
+  `binary_roundtrip` and `binary_pattern_search` notebooks. The SUPRA
+  hole-chain numbers moved to Demo A.
 
 - Session 1, part 9 and Demo C: say why `1111` comes back as one whole note
   without the onset grid (a run of 1s is read as one held note, as on a roll)

@@ -31,6 +31,9 @@ grid_rows = _ns["grid_rows"]
 grid_to_text = _ns["grid_to_text"]
 grid_to_events = _ns["grid_to_events"]
 events_to_notes = _ns["events_to_notes"]
+read_grid = _ns["read_grid"]
+grid_to_notes = _ns["grid_to_notes"]
+notes_to_events = _ns["notes_to_events"]
 events_to_kern = _ns["events_to_kern"]
 compare_notes = _ns["compare_notes"]
 precheck = _ns["precheck"]
@@ -55,6 +58,7 @@ def grid_for_json(grid):
     return {
         "res": grid["res"],
         "meter": grid["meter"],
+        "rule": grid["rule"],
         "barCells": grid["barCells"],
         "nCols": grid["nCols"],
         "low": grid["low"],
@@ -62,6 +66,7 @@ def grid_for_json(grid):
         "occ": {k: list(v) for k, v in grid["occ"].items()},
         "ons": {k: list(v) for k, v in grid["ons"].items()},
         "lost": grid["lost"],
+        "moved": grid["moved"],
     }
 
 
@@ -90,7 +95,22 @@ def add_score_cases(cases, labels, mei, timemap, notes=None):
             # Round trip: int qstamps vs float cell times — must keep every note.
             round_trip = events_to_notes(events, res)
             cases.append(("compare_notes", compare_notes, [notes, round_trip]))
+        add_rule_cases(cases, notes, res, meter)
     labels.append(f"score:{len(notes)}notes")
+
+
+def add_rule_cases(cases, notes, res, meter):
+    for rule in ("demo", "camat"):
+        grid = to_grid(notes, res, meter, rule)
+        gjson = grid_for_json(grid)
+        cases.append(("to_grid", to_grid, [notes, res, meter, rule]))
+        for onsets in (True, False):
+            cases.append(("read_grid", read_grid, [gjson, onsets]))
+            cases.append(("grid_to_notes", grid_to_notes, [gjson, onsets]))
+            back = read_grid(grid, onsets)
+            cases.append(("notes_to_events", notes_to_events, [back["notes"], gjson]))
+            cases.append(("events_to_kern", events_to_kern, [back["events"], gjson]))
+            cases.append(("compare_notes", compare_notes, [notes, back["notes"]]))
 
 
 def build_cases():
@@ -189,6 +209,26 @@ def build_cases():
         ),
         # 6/8 meter
         ([{"pitch": 67, "on": 0, "off": 1.5}], 2, m68),
+        # off-beat eighths on a quarter grid: lost (demo) or moved and widened (camat)
+        (
+            [
+                {"pitch": 60, "on": 0, "off": 1.5},
+                {"pitch": 62, "on": 1.5, "off": 2},
+                {"pitch": 64, "on": 2.5, "off": 3},
+            ],
+            1,
+            m34,
+        ),
+        # staggered chord: C4 held, E4 enters later, crossing a bar line
+        (
+            [
+                {"pitch": 60, "on": 0, "off": 3},
+                {"pitch": 64, "on": 1, "off": 5},
+                {"pitch": 60, "on": 3, "off": 4},
+            ],
+            2,
+            m34,
+        ),
     ]
     for notes, res, meter in handmade:
         grid = to_grid(notes, res, meter)
@@ -203,6 +243,7 @@ def build_cases():
         cases.append(("events_to_notes", events_to_notes, [events, res]))
         cases.append(("events_to_kern", events_to_kern, [events, gjson]))
         cases.append(("compare_notes", compare_notes, [notes, events_to_notes(events, res)]))
+        add_rule_cases(cases, notes, res, meter)
         labels.append("handmade")
 
     # --- 3. precheck ---

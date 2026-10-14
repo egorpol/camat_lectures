@@ -8,6 +8,7 @@ import { pitchesFromMEI, meterFromMEI, fifthsFromMEI } from "../../docs/javascri
 import {
   pitchName, isBlackKey, notesFromTimemap, barQuarters, toGrid, gridRows,
   gridToText, gridToEvents, eventsToNotes, kernPitch, eventsToKern, compareNotes,
+  readGrid, gridToNotes, notesToEvents,
 } from "../../docs/javascripts/lib/grid.js";
 import { precheck, cleanAnswer, barLengths, parsePitch, melodyChecks } from "../../docs/javascripts/lib/checks.js";
 
@@ -19,11 +20,14 @@ const FN = {
   is_black_key: isBlackKey,
   notes_from_timemap: notesFromTimemap,
   bar_quarters: barQuarters,
-  to_grid: (notes, res, meter) => toGrid(notes, { res, meter }),
+  to_grid: (notes, res, meter, rule) => toGrid(notes, { res, meter, rule }),
   grid_rows: (grid, compact) => gridRows(normalizeGrid(grid), compact),
   grid_to_text: (grid, compact, onsets) => gridToText(normalizeGrid(grid), { compact, onsets }),
   grid_to_events: (grid, onsets) => gridToEvents(normalizeGrid(grid), { onsets }),
   events_to_notes: eventsToNotes,
+  read_grid: (grid, onsets) => readGrid(normalizeGrid(grid), { onsets }),
+  grid_to_notes: (grid, onsets) => gridToNotes(normalizeGrid(grid), { onsets }),
+  notes_to_events: (notes, grid) => notesToEvents(notes, normalizeGrid(grid)),
   kern_pitch: kernPitch,
   events_to_kern: (events, grid) => eventsToKern(events, normalizeGrid(grid)),
   compare_notes: compareNotes,

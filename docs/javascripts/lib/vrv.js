@@ -12,6 +12,11 @@ const CDN = `https://cdn.jsdelivr.net/npm/verovio@${VEROVIO_VERSION}/dist/`;
 
 let ready = null;
 
+// Verovio 6.3.0's ABC reader keeps a key signature's sharps and flats in the
+// module: after a K:G tune, the F of a later K:C tune comes back as F#
+// (accid.ges="s"), even in a new toolkit. Only a fresh module forgets them.
+let abcKeyLeft = false;
+
 async function createModule() {
   const [{ default: createVerovioModule }, esm] = await Promise.all([
     import(CDN + "verovio-module-hum.mjs"),
@@ -34,6 +39,10 @@ export async function readScore(format, text, { width = 700, scale = 40, header 
   const { errors, warnings } = precheck(format, text);
   const result = { ok: false, errors, warnings, log: "", svg: "", mei: "", timemap: [], notes: [] };
   if (errors.length) return result;
+  if (format === "abc" && abcKeyLeft) {
+    ready = null;
+    abcKeyLeft = false;
+  }
   const { module, esm } = await verovioReady();
   let tk = null;
   try {
@@ -78,6 +87,7 @@ export async function readScore(format, text, { width = 700, scale = 40, header 
     );
     return result;
   } finally {
+    if (format === "abc" && (!result.ok || result.fifths)) abcKeyLeft = true;
     try {
       tk?.destroy?.();
     } catch {

@@ -58,7 +58,7 @@ Every demo exists twice: on the live page (runs in any browser, nothing to insta
 |---|---|---|
 | A. Player-piano roll | piano roll of Debussy's roll, MIDI fetched at runtime | `01_player_piano.ipynb`: raw vs. expressive MIDI, zoom, choose a passage |
 | B. Seven encodings | one editable text box per format, rendered by Verovio | `01_formats_verovio.ipynb`: edit, render, convert to MEI |
-| C. Binary grid | melody → 0/1 grid → notes, grid size adjustable | `01_binary_grid.ipynb`: change the melody and the resolution, compare before/after |
+| C. Binary grid | melody → 0/1 grid → notes, grid size adjustable, the demo's or CAMAT's rules | `01_binary_grid.ipynb`: change the melody, the resolution and the rules, compare before/after |
 | D. LLM writes ABC | paste box + recorded LLM answers | cells at the end of `01_formats_verovio.ipynb` |
 | E. Facsimile-linked edition (part 3, showcase only) | one DdT page: Verovio rendering next to the BSB scan (IIIF, fetched at runtime) with its measure zones | none in session 1; the full workflow comes with CAMAT later |
 
@@ -230,7 +230,7 @@ Found while building the live page (2026-10-14, Verovio 6.3.0, Python wheel and 
 
 Demo C, a preview of the CAMAT representations used later in the course.
 
-- **Back to the roll.** A perforation is binary: hole or no hole at a position. The raw SUPRA file is exactly that, 33,508 hole events.
+- **Roll and grid are different things.** A perforation is binary too (hole or no hole), but a roll is an instruction for a machine: continuous time along the paper, long notes punched as chains of holes (the raw SUPRA file has 33,508 hole events). The grid is an array computed from a note table, as CAMAT builds it for pattern search. Decided 2026-10-15: part 9 presents the grid as CAMAT data, not as a model of the roll; the roll stays in part 5.
 - **The melody as a grid** (from part 1):
 
 ```
@@ -244,9 +244,10 @@ C4    1000    0000    0000    0000
 ```
 
 - *Which bars can you no longer tell apart?* Bar 2 (two half notes), bar 3 (four quarter notes) and bar 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins. CAMAT's `binary_roundtrip.ipynb` shows the same effect: adjacent note events form a single run.
-- **Resolution is a choice.** A quarter-note grid cannot hold eighth notes; CAMAT's default cell is a sixteenth (0.25 quarter lengths). Finer grids cost size.
-- *Why does `1111` come back as a whole note and not as four quarters?* (asked 2026-10-14) Without onsets the read-back treats a run of 1s as one held note, as a roll is read: SUPRA's raw file has 28,365 holes in its two note tracks (median 21 ticks long, median gap 10 ticks on the same key, so long notes are chains of holes) and the expressive file joins them into 6,031 notes (smallest same-key gap 16 ticks). The other rule, every 1 a new note, gets bar 3 right but bars 2 and 4 wrong, and turns every note into sixteenths at `RES = 4`. No rule recovers all three bars without onsets.
-- **What would fix it?** A separate onset grid, or keeping the note table next to the grid, as CAMAT does with `xml:id`s pointing back to the score.
+- **Two rule sets in Demo C** (*Rules*: "this demo's" / "CAMAT's"). Filling: the demo's rule takes what sounds at the start of each cell, so notes shorter than a cell can vanish and on-beat eighths grow to quarters; CAMAT's `create_binary_matrix` floors onsets and ceils ends, so nothing is lost but notes widen to whole cells and two eighths in one quarter cell become a chord. Reading back: the demo reads column by column (chord slices), which cuts a held note under a moving line; CAMAT's `binary_slice_to_df` reads each row on its own. Both points came from the Codex/Cursor review (2026-10-14). CAMAT's default cell is a sixteenth (0.25 quarter lengths); finer grids cost size.
+- *Why does `1111` come back as a whole note and not as four quarters?* (asked 2026-10-14) Without onsets both rule sets read a run of 1s as one held note. (Moved to Demo A on the page: SUPRA's raw file has 28,365 holes in its two note tracks, median 21 ticks long, median gap 10 ticks on the same key, so long notes are chains of holes; the expressive file joins them into 6,031 notes, smallest same-key gap 16 ticks.) The other rule, every 1 a new note, gets bar 3 right but bars 2 and 4 wrong, and turns every note into sixteenths at `RES = 4`. No rule recovers all three bars without onsets.
+- **What would fix it?** A separate onset grid (CAMAT has none yet; see the camat_v2 memo `todos/onset-grid-binary-routines.md`), or keeping the note table next to the grid, as CAMAT does with `xml:id`s pointing back to the score.
+- **What CAMAT does with the grid.** It never reads the grid back as the music: it slides a kernel over the host grid (normalized overlap, cross-correlation, cross-covariance) and follows provenance to the source notes, shown in the original MEI (`binary_pattern_search.ipynb`). Distributions come from `df_pitch`, not from the grid (camat_v2 `docs/guides/statistics.md`).
 - Hands-on: change the melody and the grid size, convert grid → notes → Verovio, and compare with the original.
 
 ## 10. An LLM writes ABC (15 min)

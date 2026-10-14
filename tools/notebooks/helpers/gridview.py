@@ -60,18 +60,24 @@ def set_cell(grid, name, cell, value):
         grid["ons"][pitch][i] = 0 if i > 0 and grid["occ"][pitch][i - 1] else 1
 
 
-# Grid -> events -> notes and **kern, compared with the melody we started from.
+# Grid -> notes and **kern with the grid's rules, compared with the melody we started from.
 def round_trip(source, grid, onsets=False):
-    events = grid_to_events(grid, onsets=onsets)
-    kern = events_to_kern(events, grid)
-    back = events_to_notes(events, grid["res"])
-    cmp = compare_notes(source["notes"], back)
+    back = read_grid(grid, onsets=onsets)
+    kern = events_to_kern(back["events"], grid)
+    cmp = compare_notes(source["notes"], back["notes"])
     n = len(source["notes"])
-    print(f"The melody has {n} notes. Read back from the grid: {len(back)} notes, {cmp['kept']} of them unchanged.")
+    print(f"The melody has {n} notes. Read back from the grid: {len(back['notes'])} notes, {cmp['kept']} of them unchanged.")
+
+    def names(notes):
+        return ", ".join(pitch_name(x["pitch"]) for x in notes)
+
     if grid["lost"]:
-        names = ", ".join(pitch_name(x["pitch"]) for x in grid["lost"])
-        print(f"{len(grid['lost'])} note(s) start and end inside one cell and disappear: {names}. Try a smaller cell.")
-    if cmp["kept"] == n and len(back) == n:
+        print(f"{len(grid['lost'])} note(s) start and end inside one cell and disappear: {names(grid['lost'])}. Try a smaller cell, or rule=\"camat\".")
+    if grid["moved"]:
+        print(f"{len(grid['moved'])} note(s) now start or end on a cell edge instead of where they were written: {names(grid['moved'])}.")
+    if back["cut"]:
+        print(f"Held notes are cut {back['cut']} time(s) where another pitch starts or stops: rule=\"demo\" reads the grid column by column, as chords. CAMAT's rules read each row on its own.")
+    if cmp["kept"] == n and len(back["notes"]) == n:
         print("Nothing lost: the round trip gives back the same notes.")
     elif not onsets:
         print("Without onsets, a run of 1s is read as one held note, so repeated notes of the same pitch merge. Use onsets=True to keep them apart.")

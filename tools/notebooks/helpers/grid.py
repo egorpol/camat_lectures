@@ -1,8 +1,13 @@
 # Melody <-> binary pitch x time grid (Demo C). Pure functions, no DOM.
 # The Python version in 01_binary_grid.ipynb follows the same rules.
 #
-# A cell covers [i / res, (i + 1) / res) quarter notes. A note fills every
-# cell whose start lies inside the note. Notes that cover no cell start are lost.
+# A cell covers [i / res, (i + 1) / res) quarter notes. Two sets of rules:
+# "demo": a note fills every cell whose start lies inside the note (what sounds
+#   at the start of the cell); notes that cover no cell start are lost. The grid
+#   is read back column by column, as a sequence of chords.
+# "camat": as CAMAT's create_binary_matrix, onsets are floored and ends ceiled,
+#   so a note fills every cell it touches. The grid is read back row by row, as
+#   CAMAT's binary_slice_to_df does.
 
 import math
 
@@ -52,8 +57,8 @@ def _js_round(x):
     return math.floor(x + 0.5)
 
 
-# to_grid(notes, res, meter) — res and meter are positional (JS passes {res, meter}).
-def to_grid(notes, res, meter):
+# to_grid(notes, res, meter, rule) — positional (JS passes {res, meter, rule}).
+def to_grid(notes, res, meter, rule="demo"):
     bar_cells = _js_round(bar_quarters(meter) * res)
     end = max([0] + [n["off"] for n in notes])
     bars = max(1, math.ceil(end / bar_quarters(meter) - EPS))
@@ -70,12 +75,18 @@ def to_grid(notes, res, meter):
         ons[p] = [0] * n_cols
         p += 1
     lost = []
+    moved = []  # kept, but starting or ending at a different time
     for n in notes:
-        first = math.ceil(n["on"] * res - EPS)
+        if rule == "camat":
+            first = math.floor(n["on"] * res + EPS)
+        else:
+            first = math.ceil(n["on"] * res - EPS)
         stop = math.ceil(n["off"] * res - EPS)  # first cell not covered
-        if first >= stop:
+        if first >= stop or n["off"] - n["on"] < EPS:
             lost.append(n)
             continue
+        if abs(first - n["on"] * res) > EPS or abs(stop - n["off"] * res) > EPS:
+            moved.append(n)
         i = first
         while i < stop and i < n_cols:
             occ[n["pitch"]][i] = 1
@@ -84,6 +95,7 @@ def to_grid(notes, res, meter):
     return {
         "res": res,
         "meter": meter,
+        "rule": rule,
         "barCells": bar_cells,
         "nCols": n_cols,
         "low": low,
@@ -91,6 +103,7 @@ def to_grid(notes, res, meter):
         "occ": occ,
         "ons": ons,
         "lost": lost,
+        "moved": moved,
     }
 
 
@@ -164,6 +177,60 @@ def grid_to_events(grid, onsets=False):
     return [{"start": e["start"], "len": e["len"], "pitches": e["pitches"]} for e in events]
 
 
+# Read the grid back with its rules: {events (for events_to_kern), notes, cut}.
+# cut: how often the column-by-column reading cuts a held note because
+# another pitch starts or stops while it sounds.
+def read_grid(grid, onsets=False):
+    if grid.get("rule") == "camat":
+        notes = grid_to_notes(grid, onsets)
+        return {"events": notes_to_events(notes, grid), "notes": notes, "cut": 0}
+    events = grid_to_events(grid, onsets)
+    cut = 0
+    for k in range(1, len(events)):
+        i = events[k]["start"]
+        for p in events[k]["pitches"]:
+            if p in events[k - 1]["pitches"] and not (onsets and grid["ons"][p][i]):
+                cut += 1
+    return {"events": events, "notes": events_to_notes(events, grid["res"]), "cut": cut}
+
+
+# Row by row: each run of 1s in one row is one note; with onsets, a cell
+# marked as an onset starts a new one.
+def grid_to_notes(grid, onsets=False):
+    notes = []
+    p = grid["low"]
+    while p <= grid["high"]:
+        start = -1
+        for i in range(grid["nCols"] + 1):
+            on = i < grid["nCols"] and grid["occ"][p][i] == 1
+            if start >= 0 and (not on or (onsets and grid["ons"][p][i])):
+                notes.append({"pitch": p, "on": start / grid["res"], "off": i / grid["res"]})
+                start = -1
+            if on and start < 0:
+                start = i
+        p += 1
+    notes.sort(key=lambda n: (n["on"], n["pitch"]))
+    return notes
+
+
+# Notes -> events for events_to_kern: cut wherever a note starts or ends.
+# tied: pitches that go on sounding from the event before.
+def notes_to_events(notes, grid):
+    res = grid["res"]
+    spans = [(n["pitch"], _js_round(n["on"] * res), _js_round(n["off"] * res)) for n in notes]
+    cuts = sorted({0, grid["nCols"], *(s[1] for s in spans), *(s[2] for s in spans)})
+    events = []
+    for k in range(len(cuts) - 1):
+        here = [s for s in spans if s[1] <= cuts[k] < s[2]]
+        events.append({
+            "start": cuts[k],
+            "len": cuts[k + 1] - cuts[k],
+            "pitches": sorted(s[0] for s in here),
+            "tied": sorted(s[0] for s in here if s[1] < cuts[k]),
+        })
+    return events
+
+
 def events_to_notes(events, res):
     notes = []
     for e in events:
@@ -207,7 +274,7 @@ def _split_duration(quarters):
     return parts
 
 
-# Events (from grid_to_events) -> a **kern score Verovio can render.
+# Events (from grid_to_events or notes_to_events) -> a **kern score Verovio can render.
 def events_to_kern(events, grid):
     res, meter, bar_cells = grid["res"], grid["meter"], grid["barCells"]
     sounding = [p for e in events for p in e["pitches"]]
@@ -220,7 +287,9 @@ def events_to_kern(events, grid):
     ]
     # Cut each event at bar lines, then into writable durations.
     pieces = []
-    for e in events:
+    for k, e in enumerate(events):
+        tied_in = e.get("tied", [])
+        tied_out = events[k + 1].get("tied", []) if k + 1 < len(events) else []
         start = e["start"]
         end = e["start"] + e["len"]
         chunks = []
@@ -230,16 +299,9 @@ def events_to_kern(events, grid):
             for q, recip in _split_duration((stop - start) / res):
                 chunks.append({"recip": recip, "start": start, "bar": math.floor(start / bar_cells)})
             start = stop
-        for k, c in enumerate(chunks):
-            if len(chunks) == 1:
-                tie = ""
-            elif k == 0:
-                tie = "["
-            elif k == len(chunks) - 1:
-                tie = "]"
-            else:
-                tie = "_"
-            pieces.append({**c, "pitches": e["pitches"], "tie": tie})
+        for j, c in enumerate(chunks):
+            pieces.append({**c, "pitches": e["pitches"], "first": j == 0, "last": j == len(chunks) - 1,
+                           "tied_in": tied_in, "tied_out": tied_out})
     bar = -1
     for piece in pieces:
         if piece["bar"] != bar:
@@ -251,10 +313,16 @@ def events_to_kern(events, grid):
         tokens = []
         for p in piece["pitches"]:
             token = piece["recip"] + kern_pitch(p)
-            if piece["tie"] == "[":
+            into = not piece["first"] or p in piece["tied_in"]
+            onward = not piece["last"] or p in piece["tied_out"]
+            if into and onward:
+                tokens.append(token + "_")
+            elif onward:
                 tokens.append("[" + token)
+            elif into:
+                tokens.append(token + "]")
             else:
-                tokens.append(token + piece["tie"])
+                tokens.append(token)
         lines.append(" ".join(tokens))
     lines.extend(["==", "*-"])
     return "\n".join(lines) + "\n"

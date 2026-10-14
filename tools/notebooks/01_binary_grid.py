@@ -3,7 +3,7 @@
 #
 # Session 1, *Why encode music?*, part 9. The same demo runs on the course page; here you can change the inputs and keep your work.
 #
-# A perforation is binary: there is a hole at a position, or there is not. The raw piano roll in Demo A is exactly that. The same idea turns a melody into a grid with one row per pitch and one column per time step: 1 = the pitch sounds, 0 = it does not. We go from the melody to the grid and back, and see what survives.
+# The piano roll in Demo A is binary too: there is a hole at a position, or there is not. But a roll is an instruction for a machine: its time runs on continuously along the paper, and a long note is punched as a chain of holes. The grid in this notebook is something else: an array computed from a list of notes, with one row per pitch and one column per time step: 1 = the pitch sounds, 0 = it does not. CAMAT builds this kind of grid later in the course to search for patterns. We go from the melody to the grid and back, and see what survives.
 #
 # **How to use this notebook:** run the cells from top to bottom with Shift+Enter. Change the values in the cells marked *Try this* and run them again.
 
@@ -37,11 +37,19 @@ for n in source["notes"]:
 # %% [markdown]
 # ## 2. The grid
 #
-# `RES` is the number of cells per quarter note: 1 = one cell per quarter note, 2 = per eighth note, 4 = per sixteenth note. A note fills every cell whose start lies inside the note.
+# `RES` is the number of cells per quarter note: 1 = one cell per quarter note, 2 = per eighth note, 4 = per sixteenth note.
+#
+# `RULE` says which notes fill a cell:
+#
+# - `"demo"`: what sounds at the start of the cell. A note fills every cell whose start lies inside the note.
+# - `"camat"`: what sounds at any time during the cell, as in CAMAT's `create_binary_matrix`: the start of each note is moved back and its end forward to the nearest cell edge.
+#
+# For this melody both rules give the same grid; part 5 shows where they differ.
 
 # %%
 RES = 1  # Try this: 2 or 4
-grid = to_grid(source["notes"], RES, source["meter"])
+RULE = "demo"  # Try this: "camat"
+grid = to_grid(source["notes"], RES, source["meter"], RULE)
 draw_grid(grid)
 print(grid_to_text(grid))
 
@@ -50,7 +58,7 @@ print(grid_to_text(grid))
 #
 # ## 3. Back from the grid to notes
 #
-# Reading the grid back, a new note starts wherever the set of sounding pitches changes. So a run of 1s in one row is read as one held note, the way a roll is read (a long note on a roll is a chain of short holes): `1111` comes back as a whole note. The helper writes the result as `**kern`, renders it, and compares it with the melody.
+# Reading the grid back needs a rule too. Both rules read a run of 1s in one row as one held note, so `1111` comes back as a whole note. `"demo"` reads the grid column by column, as a sequence of chords: a new note starts wherever the set of sounding pitches changes. `"camat"` reads each row on its own, as CAMAT's `binary_slice_to_df` does. For one melodic line the two agree; part 6 holds a note under the melody, where they do not. The helper writes the result as `**kern`, renders it, and compares it with the melody.
 
 # %%
 kern = round_trip(source, grid)
@@ -63,7 +71,7 @@ print(kern)
 #
 # ## 4. A second grid for onsets
 #
-# One fix: keep a second grid that marks where notes start. In the picture, dark cells are note starts and light cells are continuations.
+# One fix: keep a second grid that marks where notes start. In the picture, dark cells are note starts and light cells are continuations. CAMAT's grids have no onset grid yet: CAMAT keeps the onsets in its note table.
 #
 # The two grids together are one grid with three values: **0** = silence, **1** = a note continues, **2** = a note starts. Two yes/no grids would allow four combinations, but "a note starts where nothing sounds" cannot happen, so three are left: the grid is no longer binary but *ternary*. Every cell that is not 0 still means "sounding", so a tool written for the 0/1 grid can read it too. The last block printed below is this ternary grid.
 
@@ -75,7 +83,12 @@ kern = round_trip(source, grid, onsets=True)
 # %% [markdown]
 # ## 5. Resolution is a choice
 #
-# A melody with eighth notes. With one cell per quarter note, a note that starts and ends inside one cell covers no cell start, and it disappears. Finer grids keep more, but cost size: CAMAT's default cell is a sixteenth note.
+# A melody with eighth notes, on a grid with one cell per quarter note. Here the two rules part ways:
+#
+# - `"demo"` keeps only what sounds at the start of each cell. The eighth notes off the beat disappear, and those on the beat grow to quarter notes.
+# - `"camat"` loses nothing, but every note grows to fill whole cells, so two eighth notes in one cell sound together, as a chord.
+#
+# Finer grids keep more, but cost size: CAMAT's default cell is a sixteenth note.
 
 # %%
 melody2 = """X:1
@@ -87,9 +100,10 @@ C D E F G2 G2 | A A A A G4 |]
 """
 source2 = render("abc", melody2, scale=30, header="none")
 
-for res in [1, 2]:  # Try this: add 4
-    print(f"--- {res} cell(s) per quarter note")
-    grid2 = to_grid(source2["notes"], res, source2["meter"])
+RES2 = 1  # Try this: 2
+for rule in ["demo", "camat"]:
+    print(f"--- rule = {rule!r}, {RES2} cell(s) per quarter note")
+    grid2 = to_grid(source2["notes"], RES2, source2["meter"], rule)
     draw_grid(grid2, onsets=True)
     round_trip(source2, grid2, onsets=True)
 
@@ -107,6 +121,18 @@ draw_grid(grid)
 kern = round_trip(source, grid)
 
 # %% [markdown]
+# Now hold a G3 under the first bar. `"demo"` reads column by column, so it cuts the G3 wherever the melody moves; `"camat"` reads the G3's row on its own and keeps one whole note.
+
+# %%
+for rule in ["demo", "camat"]:
+    print(f"--- rule = {rule!r}")
+    grid = to_grid(source["notes"], 1, source["meter"], rule)
+    for cell in range(1, 5):
+        set_cell(grid, "G3", cell, 1)
+    draw_grid(grid)
+    round_trip(source, grid)
+
+# %% [markdown]
 # **Try this:** turn bar 3 (cells 9 to 12) into two half notes on A4. A `1` in a cell right after a sounding cell continues the note instead of starting a new one.
 
 # %%
@@ -118,24 +144,29 @@ kern = round_trip(source, grid, onsets=True)
 # %% [markdown]
 # ## 7. Explore with controls
 #
-# Change the melody in part 1, then choose the cell size and whether to keep onsets. If the controls do not appear, the cell says what to do.
+# Change the melody in part 1, then choose the cell size, the rules and whether to keep onsets. If the controls do not appear, the cell says what to do.
 
 # %%
 import ipywidgets as widgets
 
-def explore(res=1, onsets=False):
-    g = to_grid(source["notes"], res, source["meter"])
+def explore(res=1, rule="demo", onsets=False):
+    g = to_grid(source["notes"], res, source["meter"], rule)
     draw_grid(g, onsets=onsets)
     round_trip(source, g, onsets=onsets)
 
 controls = widgets.interactive(
     explore,
     res=widgets.Dropdown(options=[("quarter note", 1), ("eighth note", 2), ("sixteenth note", 4)], value=1, description="cell"),
+    rule=widgets.Dropdown(options=[("this demo's", "demo"), ("CAMAT's", "camat")], value="demo", description="rules"),
     onsets=widgets.Checkbox(value=False, description="keep an onset grid"),
 )
-show_controls(controls, "explore(res=2, onsets=True)")
+show_controls(controls, 'explore(res=2, rule="camat", onsets=True)')
 
 # %% [markdown]
+# ## 8. What CAMAT does with the grid
+#
+# CAMAT does not read its grid back as the music. It slides a small grid, such as a motif, over the grid of a whole piece and scores each position by the cells they share. For every 1, CAMAT can keep a pointer to the notes in the score behind it, so a match is shown in the original score, not in a score rebuilt from 0s and 1s. Statistics such as how often each pitch occurs come from CAMAT's note table, not from the grid. CAMAT's notebooks [binary_roundtrip.ipynb](https://github.com/egorpol/camat_v2/blob/main/notebooks/binary_roundtrip.ipynb) and [binary_pattern_search.ipynb](https://github.com/egorpol/camat_v2/blob/main/notebooks/binary_pattern_search.ipynb) show both.
+#
 # ## Questions
 #
 # - What does the grid record, and what does it leave out?
