@@ -74,6 +74,6 @@ def round_trip(source, grid, onsets=False):
     if cmp["kept"] == n and len(back) == n:
         print("Nothing lost: the round trip gives back the same notes.")
     elif not onsets:
-        print("Repeated notes of the same pitch merge into one long note. Use onsets=True to keep them apart.")
+        print("Without onsets, a run of 1s is read as one held note, so repeated notes of the same pitch merge. Use onsets=True to keep them apart.")
     render("humdrum", kern, scale=30, header="none")
     return kern

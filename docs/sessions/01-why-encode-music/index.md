@@ -286,6 +286,7 @@ A perforation is binary: there is a hole at a position, or there is not. The raw
 <div data-demo="grid" data-examples="examples/"></div>
 
 - Bars 2 (two half notes), 3 (four quarter notes) and 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins.
+- **Reading the grid back needs a rule.** Without the onset grid, the page reads a run of 1s in one row as one note held down, so `1111` comes back as a whole note in bars 2, 3 and 4 alike. That is how a roll is read: a long note is punched as a chain of short holes, and SUPRA's expressive file in Demo A joins the 28,365 holes in the raw file's note tracks into 6,031 notes. The opposite rule, "every 1 starts a new note", would give four quarter notes: right for bar 3, wrong for bars 2 and 4, and with a sixteenth-note cell every note would come back as sixteenths. Without onsets, no rule gets all three bars right.
 - **Resolution is a choice.** A quarter-note grid cannot hold eighth notes; add some to the melody and watch them disappear. CAMAT's default cell is a sixteenth note. Finer grids cost size.
 - **What would fix it?** A second grid that marks where notes start ("keep an onset grid"), or keeping a note table next to the grid, as CAMAT does, with identifiers that point back into the score.
 - **Two grids are one grid with three values.** With the onset grid ticked, each cell is in one of three states: 0 = silence, 1 = a note continues, 2 = a note starts. Two yes/no grids would allow four combinations, but "a note starts where nothing sounds" cannot happen, so three are left: the notation is no longer binary but *ternary*. Every cell that is not 0 still says "sounding", so a tool written for the 0/1 grid can read the new grid too.
@@ -317,23 +318,74 @@ MIDI comes up in Demo A and in part 7. The name is used for two things: messages
 
 **On a cable: messages, sent as they happen.** MIDI 1.0 was published in August 1983 so that instruments from different makers could control each other. A message says what a player does, not what it sounds like: *channel 1, key 60 down, velocity 90* is three bytes, `90 3C 5A`, and a second message follows when the key is released. The receiving instrument makes the sound; MIDI itself carries no audio. The original cable has five-pin DIN plugs, carries messages in one direction only (from an OUT to an IN socket) at 31,250 bits per second, and has 16 channels, so one cable can play 16 instruments or sounds. A message carries no time: the note starts when the message arrives, and each three-byte message takes about a millisecond on that cable. Today the same messages also travel over USB, Bluetooth and networks, or between programs on one computer.
 
-**In a file: the same messages, each with a wait before it.** A Standard MIDI File (`.mid`) stores the messages and writes before each one how long to wait after the previous one, counted in *ticks*. The header says how many ticks make a quarter note, and a tempo message says how long a quarter note lasts. Verovio writes the four bars of *Alle meine Entchen* as a file of 144 bytes:
+Here is *Alle meine Entchen* on the cable, as a sequencer sends it when it plays the file further down. A *MIDI monitor*, a program that lists the messages coming in, shows each one with the moment it arrived. That time is the monitor's; the cable carries only the bytes.
 
 ```text
-4D 54 68 64  00 00 00 06     "MThd": the header, 6 bytes follow
-00 01  00 02  00 78          format 1, 2 tracks, 120 ticks per quarter
-4D 54 72 6B  00 00 00 0B     "MTrk": track 1, 11 bytes follow
-  00  FF 51 03 07 A1 20        wait 0, tempo
-  00  FF 2F 00                 wait 0, end of track
-4D 54 72 6B  00 00 00 67     "MTrk": track 2, 103 bytes follow
-  00  FF 58 04 04 02 18 08     wait 0, time signature 4/4
-  00  90 3C 5A                 wait 0, key 60 (C4) down, velocity 90
-  77  90 3C 00                 wait 119, key 60 at velocity 0: up
-  01  90 3E 5A                 wait 1, key 62 (D4) down, velocity 90
-  ...
+arrived (s)  bytes      meaning
+ 0.000       90 3C 5A   key 60 (C4) down, velocity 90
+ 0.496       90 3C 00   key 60 up
+ 0.500       90 3E 5A   key 62 (D4) down
+ 0.996       90 3E 00   key 62 up
+ 1.000       90 40 5A   key 64 (E4) down
+ 1.496       90 40 00   key 64 up
+ 1.500       90 41 5A   key 65 (F4) down
+ 1.996       90 41 00   key 65 up
+ 2.000       90 43 5A   key 67 (G4) down
+ 2.996       90 43 00   key 67 up
+ 3.000       90 43 5A   key 67 (G4) down
+ 3.996       90 43 00   key 67 up
+ 4.000       90 45 5A   key 69 (A4) down
+ 4.496       90 45 00   key 69 up
+ 4.500       90 45 5A   key 69 (A4) down
+ 4.996       90 45 00   key 69 up
+ 5.000       90 45 5A   key 69 (A4) down
+ 5.496       90 45 00   key 69 up
+ 5.500       90 45 5A   key 69 (A4) down
+ 5.996       90 45 00   key 69 up
+ 6.000       90 43 5A   key 67 (G4) down
+ 7.996       90 43 00   key 67 up
 ```
 
-The numbers are hexadecimal: `77` is 119, `3C` is 60, and the tempo `07 A1 20` is 500,000 microseconds per quarter note, 120 quarter notes a minute. In `90`, the `9` means "key down" and the `0` channel 1. Each note sounds for 119 of its quarter note's 120 ticks, and the next starts one tick later. The `90` messages are exactly what a cable carries; the `FF` messages (tempo, time signature, end of track) exist only in files. A key "down" at velocity 0 counts as released: the MIDI 1.0 specification allows both this and a separate Note Off message.
+That is the whole tune: 22 messages, 66 bytes, eight seconds. Nothing in it says *bar*, *quarter note* or *tempo*. A G lasts one second because its key-up arrives one second after its key-down. A person playing the tune on a keyboard sends the same kinds of messages, at less even times and with a different velocity for each key.
+
+The MIDI specification also has messages it calls *real-time messages*, in a narrower sense: one-byte messages that keep several machines in step. A sequencer that drives a drum machine sends `FA` (Start), then `F8` (Timing Clock) 24 times per quarter note, at 120 quarter notes a minute one every 21 milliseconds, and `FC` (Stop) at the end. They carry the beat, but no notes.
+
+**In a file: the same messages, each with a wait before it.** A Standard MIDI File (`.mid`) stores the messages and writes before each one how long to wait after the previous one, counted in *ticks*. The header says how many ticks make a quarter note, and a tempo message says how long a quarter note lasts. Verovio writes the four bars of *Alle meine Entchen* as a file of 144 bytes. Here is all of it:
+
+```text
+4D 54 68 64  00 00 00 06       "MThd": the header, 6 bytes follow
+00 01  00 02  00 78            format 1, 2 tracks, 120 ticks per quarter
+4D 54 72 6B  00 00 00 0B       "MTrk": track 1, 11 bytes follow
+  00     FF 51 03 07 A1 20     wait 0, tempo
+  00     FF 2F 00              wait 0, end of track
+4D 54 72 6B  00 00 00 67       "MTrk": track 2, 103 bytes follow
+  00     FF 58 04 04 02 18 08  wait 0, time signature 4/4
+  00     90 3C 5A              wait 0, key 60 (C4) down, velocity 90
+  77     90 3C 00              wait 119, key 60 up
+  01     90 3E 5A              wait 1, key 62 (D4) down
+  77     90 3E 00              wait 119, key 62 up
+  01     90 40 5A              wait 1, key 64 (E4) down
+  77     90 40 00              wait 119, key 64 up
+  01     90 41 5A              wait 1, key 65 (F4) down
+  77     90 41 00              wait 119, key 65 up
+  01     90 43 5A              wait 1, key 67 (G4) down
+  81 6F  90 43 00              wait 239, key 67 up
+  01     90 43 5A              wait 1, key 67 (G4) down
+  81 6F  90 43 00              wait 239, key 67 up
+  01     90 45 5A              wait 1, key 69 (A4) down
+  77     90 45 00              wait 119, key 69 up
+  01     90 45 5A              wait 1, key 69 (A4) down
+  77     90 45 00              wait 119, key 69 up
+  01     90 45 5A              wait 1, key 69 (A4) down
+  77     90 45 00              wait 119, key 69 up
+  01     90 45 5A              wait 1, key 69 (A4) down
+  77     90 45 00              wait 119, key 69 up
+  01     90 43 5A              wait 1, key 67 (G4) down
+  83 5F  90 43 00              wait 479, key 67 up
+  00     FF 2F 00              wait 0, end of track
+```
+
+The numbers are hexadecimal: `77` is 119, `3C` is 60, and the tempo `07 A1 20` is 500,000 microseconds per quarter note, 120 quarter notes a minute. A wait longer than 127 ticks takes two bytes: `81 6F` is 1 × 128 + 111 = 239 (a half note), `83 5F` is 3 × 128 + 95 = 479 (a whole note). In `90`, the `9` means "key down" and the `0` channel 1. Each key goes up one tick before the next key goes down, so the two Gs of bar 2 are struck twice, not held as one note. The `90` messages are exactly the ones on the cable above; only the waits are new. The `FF` messages (tempo, time signature, end of track) exist only in files; on a cable, `FF` alone means Reset. A key "down" at velocity 0 counts as released: the MIDI 1.0 specification allows both this and a separate Note Off message.
 
 | | On a cable (or USB, Bluetooth) | In a file (`.mid`) |
 |---|---|---|
@@ -346,7 +398,17 @@ The numbers are hexadecimal: `77` is 119, `3C` is 60, and the tempo `07 A1 20` i
 
 - *Who reads it?* Instruments, sequencers and recording software; SUPRA turned the Debussy roll into MIDI files.
 - *What does it record?* Which key, how hard (velocity, 0 to 127), when, on which channel, and controllers such as the pedals: the pedal bands in Demo A are Control Change messages 64 (sustain pedal) and 67 (soft pedal).
-- *What does it leave out?* What a score adds for a reader. C♯ and D♭ are the same key, 61. A note lasts so many ticks; it has no note value, so a short quarter note and an eighth note followed by a rest can look the same. There are no stems, beams, voices, ties, slurs or staff layout. Turning a score into MIDI is easy (Verovio does it), but turning MIDI into a score means guessing, as with the grid in part 9.
+- *What does it leave out?* What a score adds for a reader. C♯ and D♭ are the same key, 61. A note lasts so many ticks; it has no note value, so a short quarter note and an eighth note followed by a rest can look the same. There are no stems, beams, voices, ties, slurs or staff layout.
+
+**Why MIDI does not simply turn back into MEI.** Turning a score into MIDI is easy: Verovio does it, and there is one right answer. The way back is not. Verovio itself cannot read MIDI (6.3.0 answers "Input format 'midi' is not supported"). A program that imports MIDI into a score has to put back what the score had and the file dropped, and that means guessing. Even for the file above, which a computer wrote from a score, a converter has to decide:
+
+- *Note values.* The file says "119 ticks", not "quarter note". Here rounding is easy, because every note is one tick short of a quarter, half or whole note. A person playing the same tune holds the keys for uneven times and drifts in tempo, so a converter must first find the beat and then round each length to a note value (*quantisation*). Is a short note a staccato quarter, or an eighth followed by a rest? Are three quick notes a triplet or a dotted rhythm? In Demo A's expressive Debussy file, the tempo changes all the time.
+- *Metre and bars.* The cable carries no bars at all. A file may contain a time signature (Verovio writes `FF 58`, 4/4) or not. Does the tune start on the first beat, or with an upbeat?
+- *Pitch spelling.* Key 61 is C♯ or D♭, key 70 A♯ or B♭. The converter has to guess the key and spell each note from it. A file may contain a key signature (`FF 59`), but it does not have to; Verovio wrote none for this tune.
+- *Voices and staves.* A piano part is one stream of keys. Which notes belong to the melody and which to the accompaniment? Which go on the upper staff and which on the lower? Where does a voice need a rest?
+- *What MIDI never had.* Slurs, dynamics (only velocities: 90 for every note here), articulation, beams, layout, and ornaments: a played trill arrives as many short notes. What was not recorded cannot be converted back.
+
+Each of these questions has several possible answers, and different programs answer them differently. Demo C's "Back from the grid to notes" in [part 9](#9-binary-notation-holes-grids-and-what-survives) is a tiny converter of this kind. It is given the metre, writes every black key as a sharp, chooses the treble or bass clef from the middle pitch, puts all notes into one voice, and needs the onset grid to keep repeated notes apart. MIDI does not need that last help: every note has its own key-down and key-up.
 
 ## Notebooks
 

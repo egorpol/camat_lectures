@@ -479,7 +479,7 @@ async function initGrid(root) {
       items.push(`${grid.lost.length} note(s) start and end inside one cell and disappear: ${grid.lost.map((x) => G.pitchName(x.pitch)).join(", ")}. Try a smaller cell.`);
     }
     if (cmp.kept === n && back.length === n) items.push("Nothing lost: the round trip gives back the same notes.");
-    else if (!onsets) items.push("Repeated notes of the same pitch merge into one long note. Tick “keep an onset grid” to keep them apart.");
+    else if (!onsets) items.push("Without onsets, a run of 1s is read as one held note, so repeated notes of the same pitch merge. Tick “keep an onset grid” to keep them apart.");
     summary.replaceChildren(...items.map((t) => h("p", {}, t)));
   };
 

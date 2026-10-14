@@ -245,6 +245,7 @@ C4    1000    0000    0000    0000
 
 - *Which bars can you no longer tell apart?* Bar 2 (two half notes), bar 3 (four quarter notes) and bar 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins. CAMAT's `binary_roundtrip.ipynb` shows the same effect: adjacent note events form a single run.
 - **Resolution is a choice.** A quarter-note grid cannot hold eighth notes; CAMAT's default cell is a sixteenth (0.25 quarter lengths). Finer grids cost size.
+- *Why does `1111` come back as a whole note and not as four quarters?* (asked 2026-10-14) Without onsets the read-back treats a run of 1s as one held note, as a roll is read: SUPRA's raw file has 28,365 holes in its two note tracks (median 21 ticks long, median gap 10 ticks on the same key, so long notes are chains of holes) and the expressive file joins them into 6,031 notes (smallest same-key gap 16 ticks). The other rule, every 1 a new note, gets bar 3 right but bars 2 and 4 wrong, and turns every note into sixteenths at `RES = 4`. No rule recovers all three bars without onsets.
 - **What would fix it?** A separate onset grid, or keeping the note table next to the grid, as CAMAT does with `xml:id`s pointing back to the score.
 - Hands-on: change the melody and the grid size, convert grid → notes → Verovio, and compare with the original.
 
@@ -280,6 +281,8 @@ tk = verovio.toolkit(); tk.setOptions({"inputFrom": "abc"})
 tk.loadData(open("examples/alle_meine_entchen.abc").read())
 data = base64.b64decode(tk.renderToMIDI()); print(len(data), data[:40].hex(" "))
 ```
+
+Extended 2026-10-14 (user's request: what the messages look like live, the whole file, and why MIDI to MEI is hard). The page now lists the full file and the 22 messages a sequencer sends when it plays it (times = tick / 120 × 0.5 s; key-ups at x.496 s). Waits above 127 ticks are two bytes (`81 6F` = 239, `83 5F` = 479). Verovio writes no key signature (`FF 59`) for this tune. System Real-Time messages from the MIDI Association's [summary of MIDI 1.0 messages](https://midi.org/summary-of-midi-1-0-messages): `F8` Timing Clock 24 per quarter note, `FA` Start, `FB` Continue, `FC` Stop, `FE` Active Sensing, `FF` Reset. Verovio 6.3.0 has no MIDI input: `setOptions({"inputFrom": "midi"})` logs "Input format 'midi' is not supported". The MIDI-to-score list (note values and quantisation, metre, pitch spelling, voices and staves, what MIDI never had) ties back to Demo C's read-back, which is given the metre, spells black keys as sharps, picks the clef from the median pitch (below 57 = bass clef) and writes one voice.
 
 ## To prepare before tomorrow
 

@@ -18,6 +18,16 @@ instead of versioned, and the date is the day the change went live on the
 - Session 1: an addendum on MIDI, as messages on a cable and as a Standard
   MIDI File, with the bytes Verovio writes for the melody.
 
+- Session 1, MIDI addendum: the whole melody as messages on a cable (with
+  arrival times) and the whole file, the one-byte clock messages, and why MIDI
+  does not simply turn back into MEI.
+
+### Changed
+
+- Session 1, part 9 and Demo C: say why `1111` comes back as one whole note
+  without the onset grid (a run of 1s is read as one held note, as on a roll)
+  and why reading every 1 as a new note is no better.
+
 ### Fixed
 
 - Demo A: dragging the speed or start slider no longer makes the slider jump

@@ -50,7 +50,7 @@ print(grid_to_text(grid))
 #
 # ## 3. Back from the grid to notes
 #
-# Reading the grid back, a new note starts wherever the set of sounding pitches changes. The helper writes the result as `**kern`, renders it, and compares it with the melody.
+# Reading the grid back, a new note starts wherever the set of sounding pitches changes. So a run of 1s in one row is read as one held note, the way a roll is read (a long note on a roll is a chain of short holes): `1111` comes back as a whole note. The helper writes the result as `**kern`, renders it, and compares it with the melody.
 
 # %%
 kern = round_trip(source, grid)
@@ -58,6 +58,8 @@ print(kern)
 
 # %% [markdown]
 # Bars 2 (two half notes), 3 (four quarter notes) and 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins.
+#
+# Why not read every 1 as a new note? That would give four quarter notes: right for bar 3, wrong for bars 2 and 4, and with `RES = 4` every note would come back as sixteenths. Without onsets, no rule gets all three bars right.
 #
 # ## 4. A second grid for onsets
 #
