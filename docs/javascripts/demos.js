@@ -4,12 +4,14 @@
 //   roll     Demo A: player-piano roll from MIDI fetched at runtime
 //   grid     Demo C: melody -> 0/1 grid -> notes
 //   llm      Demo D: check an LLM-written melody
+//   facsimile Demo E: MEI measure zones on a scan, linked to the rendering
 
 import { readScore, verovioReady, VEROVIO_VERSION } from "./lib/vrv.js";
 import { parseMidi } from "./lib/midi.js";
 import { drawRoll, TRACK_COLORS } from "./lib/roll.js";
 import * as G from "./lib/grid.js";
 import { cleanAnswer, barLengths, melodyChecks, parsePitch } from "./lib/checks.js";
+import { facsimileFromMEI, iiifUrl, zoneRegion } from "./lib/facs.js";
 
 // ---------------------------------------------------------------- helpers
 
@@ -549,9 +551,184 @@ async function initLLM(root) {
   );
 }
 
+// ---------------------------------------------------------------- Demo E
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function svgEl(tag, attrs = {}, text = "") {
+  const el = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  if (text) el.textContent = text;
+  return el;
+}
+
+// Verovio: the whole page with the source's system breaks, then each bar alone.
+async function renderFacsimilePage(text, measures) {
+  const { module, esm } = await verovioReady();
+  const tk = new esm.VerovioToolkit(module);
+  try {
+    tk.setOptions({
+      inputFrom: "mei",
+      breaks: "encoded",
+      pageWidth: 2400,
+      adjustPageHeight: true,
+      systemDivider: "none",
+      footer: "none",
+      pageMarginTop: 30,
+      pageMarginBottom: 30,
+      pageMarginLeft: 30,
+      pageMarginRight: 30,
+    });
+    if (!tk.loadData(text)) throw new Error("Verovio could not read the MEI file");
+    const page = tk.renderToSVG(1);
+    tk.setOptions({ breaks: "auto", pageWidth: 1100, header: "none" });
+    const bars = measures.map((m) => {
+      tk.select({ measureRange: `${m.n}-${m.n}` });
+      tk.redoLayout();
+      return tk.renderToSVG(1);
+    });
+    return { page, bars };
+  } finally {
+    tk.destroy?.();
+  }
+}
+
+async function initFacsimile(root) {
+  const base = root.dataset.examples || "examples/";
+  root.replaceChildren(loadingNote());
+  const text = await fetchText(base + root.dataset.mei);
+  const { surface, measures } = facsimileFromMEI(text);
+  const { page, bars } = await renderFacsimilePage(text, measures);
+  const noted = measures.filter((m) => m.notes.length);
+
+  // Source: the scan from the IIIF server, with one rectangle per zone.
+  const img = h("img", {
+    src: iiifUrl(surface.target, { size: "1000," }),
+    width: 1000,
+    height: Math.round((1000 * surface.height) / surface.width),
+    alt: `Scan: ${root.dataset.title}`,
+  });
+  const overlay = svgEl("svg", { viewBox: `0 0 ${surface.width} ${surface.height}`, preserveAspectRatio: "none", class: "facs-zones" });
+  const rects = measures.map((m, i) => {
+    const { ulx, uly, lrx, lry } = m.zone;
+    const r = svgEl("rect", { x: ulx, y: uly, width: lrx - ulx, height: lry - uly, class: "facs-zone" + (m.notes.length ? " has-note" : "") });
+    r.dataset.i = i;
+    r.append(svgEl("title", {}, `Bar ${m.n}`));
+    overlay.append(r);
+    return r;
+  });
+  const scan = h("div", { class: "facs-scan" }, img, overlay);
+  img.addEventListener("error", () =>
+    scan.replaceChildren(h("p", { class: "vrv-error" }, "The scan could not be loaded from the library's IIIF server. The encoding still works.")));
+
+  // Encoding: Verovio's SVG keeps the MEI xml:ids, so each bar is g.measure#id.
+  const render = h("div", { class: "vrv-score facs-render" });
+  render.innerHTML = page;
+
+  // One selected bar, enlarged: the zone cut out by the IIIF server, and the bar alone.
+  const barLabel = h("strong", { "aria-live": "polite" });
+  const code = h("p", { class: "facs-code" });
+  const crop = h("img", { class: "facs-crop", alt: "" });
+  const barRender = h("div", { class: "vrv-score facs-bar" });
+  const notes = h("div", { class: "facs-notes" });
+  const showAll = h("input", { type: "checkbox", checked: true, onchange: () => root.classList.toggle("facs-hide-zones", !showAll.checked) });
+
+  let active = 0;
+  let hover = -1;
+  let groups = [];
+  const paint = () => {
+    rects.forEach((r, i) => {
+      r.classList.toggle("is-active", i === active);
+      r.classList.toggle("is-hover", i === hover);
+    });
+    groups.forEach((g, i) => {
+      g?.classList.toggle("is-active", i === active);
+      g?.classList.toggle("is-hover", i === hover);
+    });
+  };
+  const markNotes = (box, m) => {
+    for (const note of m.notes) for (const id of note.targets) box.querySelector(`[id="${id}"]`)?.classList.add("facs-target");
+  };
+  const select = (i) => {
+    active = (i + measures.length) % measures.length;
+    const m = measures[active];
+    const z = m.zone;
+    barLabel.textContent = `Bar ${m.n} of ${measures.length}`;
+    code.replaceChildren(
+      h("code", {}, `<measure n="${m.n}" facs="#${z.id}">`),
+      " points to ",
+      h("code", {}, `<zone xml:id="${z.id}" ulx="${z.ulx}" uly="${z.uly}" lrx="${z.lrx}" lry="${z.lry}"/>`),
+    );
+    crop.src = iiifUrl(surface.target, { region: zoneRegion(z, surface), size: "!840,840" });
+    crop.alt = `Bar ${m.n} in the scan`;
+    barRender.innerHTML = bars[active];
+    markNotes(barRender, m);
+    notes.replaceChildren(...m.notes.map((n) => h("p", {}, h("strong", {}, "Editorial note in the MEI (the note in blue): "), n.text)));
+    paint();
+  };
+  const pick = (selector) => (e) => {
+    const el = e.target.closest?.(selector);
+    if (e.type === "click") el && select(+el.dataset.i);
+    else {
+      hover = el ? +el.dataset.i : -1;
+      paint();
+    }
+  };
+  for (const [box, selector] of [[overlay, "rect.facs-zone"], [render, "g.measure[data-i]"]]) {
+    box.addEventListener("pointerover", pick(selector));
+    box.addEventListener("pointerleave", pick("none"));
+    box.addEventListener("click", pick(selector));
+  }
+
+  const pane = (body, caption) => h("div", { class: "facs-pane" }, body, h("p", { class: "vrv-note" }, caption));
+  root.replaceChildren(
+    h("div", { class: "facs-panes" },
+      pane(scan, "Source: the scan, one zone per bar"),
+      pane(render, "Encoding: the MEI rendered by Verovio, with the source's system breaks")),
+    h("div", { class: "vrv-controls" },
+      h("label", {}, showAll, "Show all zones"),
+      h("span", { class: "vrv-note" },
+        `${measures.length} bars, each linked to a zone on the page. Point at a bar in either view; click to select it.`,
+        noted.length ? ` Bar ${noted.map((m) => m.n).join(", ")} has an editorial note (blue).` : "")),
+    h("div", { class: "facs-detail" },
+      h("div", { class: "vrv-controls" },
+        h("button", { type: "button", class: "md-button", "aria-label": "Previous bar", onclick: () => select(active - 1) }, "◀"),
+        barLabel,
+        h("button", { type: "button", class: "md-button", "aria-label": "Next bar", onclick: () => select(active + 1) }, "▶")),
+      code,
+      h("div", { class: "facs-panes" }, pane(crop, "Scan: the zone, cut out by the IIIF server"), pane(barRender, "Encoding: the same bar")),
+      notes),
+  );
+
+  // Hit areas need the SVG in the document (getBBox). We take the staves'
+  // boxes only: Verovio 6.3 leaves some empty <harm> groups at the page
+  // origin (bar 11 here), which would stretch the whole measure's box.
+  const unionBox = (boxes) => {
+    const x = Math.min(...boxes.map((b) => b.x));
+    const y = Math.min(...boxes.map((b) => b.y));
+    return {
+      x,
+      y,
+      width: Math.max(...boxes.map((b) => b.x + b.width)) - x,
+      height: Math.max(...boxes.map((b) => b.y + b.height)) - y,
+    };
+  };
+  groups = measures.map((m, i) => {
+    const g = render.querySelector(`g.measure[id="${m.id}"]`);
+    if (!g) return null;
+    const staves = [...g.querySelectorAll(":scope > g.staff")].map((s) => s.getBBox());
+    const box = staves.length ? unionBox(staves) : g.getBBox();
+    g.dataset.i = i;
+    g.prepend(svgEl("rect", { x: box.x, y: box.y, width: box.width, height: box.height, class: "facs-hit" }));
+    markNotes(g, m);
+    return g;
+  });
+  select(0);
+}
+
 // ---------------------------------------------------------------- start
 
-const DEMOS = { formats: initFormats, roll: initRoll, grid: initGrid, llm: initLLM };
+const DEMOS = { formats: initFormats, roll: initRoll, grid: initGrid, llm: initLLM, facsimile: initFacsimile };
 
 for (const root of document.querySelectorAll("[data-demo]")) {
   const init = DEMOS[root.dataset.demo];

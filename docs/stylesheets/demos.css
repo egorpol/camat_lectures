@@ -293,3 +293,138 @@
   color: #c62828;
   font-weight: 700;
 }
+
+/* Demo E: measure zones on a scan, linked to Verovio's rendering. Both
+   panes are white paper, so the highlight colours are fixed. */
+
+[data-demo="facsimile"] {
+  --facs-color: #d81b60;
+  --facs-note: #1565c0;
+}
+
+.facs-panes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.8em;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .facs-panes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.facs-pane > .vrv-note {
+  margin: 0.3em 0 0;
+}
+
+.facs-scan {
+  position: relative;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.facs-scan img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.facs-zones {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.facs-zone {
+  fill: transparent;
+  stroke: var(--facs-color);
+  stroke-opacity: 0.45;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.facs-zone.has-note {
+  stroke: var(--facs-note);
+  stroke-dasharray: 4 3;
+}
+
+.facs-hide-zones .facs-zone:not(.is-hover, .is-active) {
+  stroke: none;
+}
+
+.facs-zone.is-hover {
+  fill: var(--facs-color);
+  fill-opacity: 0.08;
+  stroke-opacity: 1;
+}
+
+.facs-zone.is-active {
+  fill: var(--facs-color);
+  fill-opacity: 0.15;
+  stroke-opacity: 1;
+  stroke-width: 2.5;
+}
+
+/* Verovio's own style sheet sets stroke on every rect by id, hence !important. */
+.facs-render g.measure {
+  cursor: pointer;
+}
+
+.facs-render rect.facs-hit {
+  fill: transparent !important;
+  stroke: none !important;
+  pointer-events: all;
+}
+
+.facs-render g.measure.is-hover > rect.facs-hit {
+  fill: var(--facs-color) !important;
+  fill-opacity: 0.08;
+}
+
+.facs-render g.measure.is-active > rect.facs-hit {
+  fill: var(--facs-color) !important;
+  fill-opacity: 0.12;
+}
+
+.facs-render g.measure.is-active g.layer {
+  fill: var(--facs-color);
+  color: var(--facs-color);
+}
+
+[data-demo="facsimile"] g.facs-target {
+  fill: var(--facs-note);
+  color: var(--facs-note);
+}
+
+.facs-detail {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  padding: 0.2em 0.8em 0.8em;
+  margin-top: 0.6em;
+}
+
+.facs-code {
+  font-size: 0.8em;
+  overflow-wrap: anywhere;
+}
+
+.facs-crop,
+.facs-bar > svg {
+  display: block;
+  max-width: 100%;
+  max-height: 420px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+
+.facs-notes p {
+  border-left: 3px solid var(--facs-note);
+  padding-left: 0.6em;
+}

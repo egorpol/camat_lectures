@@ -5,10 +5,13 @@ Usage (from the repository root):
     .venv/bin/python tools/check_site.py [screenshot_dir]
 
 Needs `pip install playwright` and `playwright install chromium`. The roll
-demo fetches the SUPRA MIDI files from GitHub, so it needs network access.
+demo fetches the SUPRA MIDI files from GitHub and the facsimile demo loads
+the scan from the BSB IIIF server, so both need network access.
 Expected on 2026-10-14: 11 notes in each of the six formats, 5 GABC neumes,
 grid round trip 5/11 then 11/11 with onsets, both recorded LLM answers all
-ticks, 6,031 notes (expressive) and 33,508 holes (raw), no console errors.
+ticks, 15 zones, bars and hit areas in Demo E (zone 11 selects bar rfwucfq
+with its editorial note; render bar 5 selects zone 4), 6,031 notes
+(expressive) and 33,508 holes (raw), no console errors.
 """
 
 import functools
@@ -76,6 +79,18 @@ with sync_playwright() as p:
         rows = llm.locator("table.llm-checks tr").all_text_contents()
         print("D", label, "::", " || ".join(r.replace("\n", " ") for r in rows))
     llm.screenshot(path=f"{OUT}/d_llm.png")
+    # Demo E
+    page.wait_for_selector("[data-demo=facsimile] rect.facs-hit", timeout=60000)
+    fac = page.locator("[data-demo=facsimile]")
+    print("E zones:", fac.locator("rect.facs-zone").count(), "bars:", fac.locator(".facs-render g.measure").count(),
+          "hit areas:", fac.locator("rect.facs-hit").count())
+    fac.locator("rect.facs-zone").nth(10).click(force=True)
+    page.wait_for_function("(i => i.complete && i.naturalWidth > 0)(document.querySelector('[data-demo=facsimile] .facs-crop'))", timeout=30000)
+    print("E zone 11:", fac.locator(".facs-detail strong").first.text_content(), "| render bar:",
+          fac.locator(".facs-render g.measure.is-active").get_attribute("id"), "| note:", fac.locator(".facs-notes").text_content()[:80])
+    fac.screenshot(path=f"{OUT}/e_facsimile.png")
+    fac.locator(".facs-render g.measure").nth(4).locator("rect.facs-hit").click(force=True)
+    print("E render bar 5 -> zone", fac.locator("rect.facs-zone.is-active").get_attribute("data-i"))
     # Demo A
     roll = page.locator("[data-demo=roll]")
     roll.get_by_role("button").click()

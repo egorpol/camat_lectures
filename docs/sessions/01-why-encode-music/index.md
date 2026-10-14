@@ -98,7 +98,18 @@ A digital edition (MEI) encodes what a source says. Analysis (kern, note tables,
 | Encoded score (MusicXML, MEI, kern) | symbols with meaning | render, play, search, analyse | see what the source looked like, unless it is linked |
 | Facsimile-linked edition (MEI with `<facsimile>`) | symbols *and* the page images, linked bar by bar | all of the above, and check every bar against the source | — |
 
-**Access: who may use a score?** That depends on rights: in the EU, a composer's works are free 70 years after the end of the year of their death, but an edition, an arrangement or a lyricist can still be protected, and countries differ. The [eu-pd-composers viewer](https://egorpol.github.io/eu-pd-composers/) lists 20th-century composers whose music is likely public domain in the EU, with links to their works on IMSLP. It is a heuristic based on death years, not legal advice: check the work itself before you copy, perform or publish it.
+**Access: who may use a score?** That depends on rights: in the EU, a composer's works are free 70 years after the end of the year of their death, but an edition, an arrangement or a lyricist can still be protected, and countries differ.
+
+!!! example "Showcase: the eu-pd-composers viewer"
+    The [eu-pd-composers viewer](https://egorpol.github.io/eu-pd-composers/) ([data and code on GitHub](https://github.com/egorpol/eu-pd-composers)) applies the EU rule to the 3,369 composers on Wikipedia's *List of 20th-century classical composers*, with life dates from Wikidata:
+
+    - 777 are public domain in the EU now (they died in 1955 or earlier), 1,870 are not yet, and 722 have no death date on record. 21 more follow on 1 January 2027.
+    - 1,254 are matched to their IMSLP category, with links to 29,033 IMSLP work pages; 20,391 of those pages belong to composers who are public domain now.
+    - You can filter by instrumentation, style, citizenship, popularity and the year the works become free.
+
+    *Figures from the published viewer (dump r019, checked on 2026-10-14).* The status is a heuristic based on the composer's death year only, not legal advice: it cannot see lyricists, editions, arrangements or posthumous publications. Check the work itself before you copy, perform or publish it.
+
+    *Try it:* whose music becomes free in the EU on 1 January 2027? Does IMSLP have scores of it?
 
 **Accessibility: who can use a score?** A screen reader cannot read a scan aloud, a scan blurs when enlarged, and it cannot be turned into music Braille or played back. An encoded score can be all of these (music Braille comes up again in [part 4](#4-notation-for-human-readers-systems-made-for-users)).
 
@@ -106,21 +117,33 @@ A digital edition (MEI) encodes what a source says. Analysis (kern, note tables,
 
 ```xml
 <facsimile>
-  <surface xml:id="page1">
-    <graphic target="https://.../page1.jpg" width="4134" height="5634"/>
-    <zone xml:id="zone_m1" ulx="310" uly="702" lrx="1180" lry="1530"/>
+  <surface xml:id="surface_aea1770d9c33" n="1">
+    <graphic target="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00023199_00013/full/4134,/0/default.jpg"
+             width="4134" height="5495"/>
+    <zone xml:id="zone_6ff938b3aec349c48e" type="measure" ulx="852" uly="945" lrx="1593" lry="2290"/>
+    <!-- one zone for each of the other 14 bars on the page -->
   </surface>
 </facsimile>
 ...
-<measure n="1" facs="#zone_m1"> ... </measure>
+<pb n="1" facs="#surface_aea1770d9c33"/>
+<measure n="1" facs="#zone_6ff938b3aec349c48e"> ... </measure>
 ```
 
-*(The coordinates and file name are an invented example.)* The encoding stays tied to its witness: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to what the source shows. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.
+*(Shortened from the file in Demo E below. The coordinates are pixels in the 4,134-pixel-wide version of the scan.)* The encoding stays tied to its witness: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to what the source shows. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.
 
 This is where the course is going. The tools of CAMAT, which we use from the next sessions on, grew out of encoding volumes of *Denkmäler deutscher Tonkunst* from the Bayerische Staatsbibliothek's scans: optical music recognition (OMR) page by page, correction in [mei-friend](https://mei-friend.mdw.ac.at/), automatic checks, and measure zones that link every bar back to the scan.
 
-!!! note "Demo E: a facsimile-linked page (preview)"
-    A short showcase follows here: one page of a *Denkmäler deutscher Tonkunst* edition, with Verovio's rendering next to the scan and its measure zones. The full workflow comes later in the course.
+### Demo E: a facsimile-linked page
+
+The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, viola da gamba and harpsichord, as printed in *Denkmäler deutscher Tonkunst*, vol. 11 (1903). Left: the Bayerische Staatsbibliothek's scan, with the zones from the MEI file drawn on it. Right: the same MEI file rendered by Verovio, with the page's three systems. Point at a bar on either side to find it on the other; click to compare it close up.
+
+<div data-demo="facsimile" data-mei="facsimile/buxtehude_op1_01_page1.mei"
+     data-title="Denkmäler deutscher Tonkunst 11 (1903), page 3: Buxtehude, Sonata I, bars 1 to 15"></div>
+
+Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an `<annot>` in the MEI file says so. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.
+
+!!! info "Source and licence"
+    MEI: the first page (bars 1–15) of `buxtehude_op1_01_sonata_f_major_corr.mei` from the CAMAT corpus edition [*DdT 1, vol. 11: Dietrich Buxtehude, Instrumental Works*](https://github.com/egorpol/DdT_1_vol_11) (work in progress, commit `7af4ae8`), [MIT License](examples/facsimile/LICENSE); two ties into bar 16 on the next page were removed. [Download the MEI file](examples/facsimile/buxtehude_op1_01_page1.mei){: download }. Scan: Bayerische Staatsbibliothek, [`bsb00023199`, image 13](https://www.digitale-sammlungen.de/en/view/bsb00023199?page=13) (copy of the Hochschule für Musik und Theater München, Bibliothek), licensed [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). The page loads the scan from the library's IIIF server when you open it; it is not copied here.
 
 *Discussion: Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?*
 
@@ -256,5 +279,6 @@ The notebooks repeat the demos with inputs you can change. Download them and upl
 - Background reading on historical notation and on the systems in parts 5 and 7: [DARMS](https://en.wikipedia.org/wiki/DARMS_notation), [Plaine & Easie Code](https://en.wikipedia.org/wiki/Plaine_%26_Easie_Code), [ESAC (CCARH)](https://wiki.ccarh.org/wiki/ESAC), [Humdrum review, *Music Theory Online* 2.7 (1996)](https://mtosmt.org/issues/mto.96.2.7/mto.96.2.7.wild.html), [ABC history](https://abcnotation.com/history), [MuseData](https://wiki.ccarh.org/wiki/MuseData), [MEI](https://music-encoding.org/about), [MusicXML: the first decade](https://michaelgood.info/publications/music/musicxml-the-first-decade/).
 - Machines and early computers: [Piano roll](https://en.wikipedia.org/wiki/Piano_roll), [Welte-Mignon](https://en.wikipedia.org/wiki/Welte-Mignon), [CSIRAC music](https://cis.unimelb.edu.au/about/csirac/music), [Ferranti Mark 1](https://en.wikipedia.org/wiki/Ferranti_Mark_1), [Illiac Suite](https://en.wikipedia.org/wiki/Illiac_Suite), [Banū Mūsā reconstruction (ZKM)](https://zkm.de/en/node/62659), [Ada Lovelace (Computer History Museum)](https://www.computerhistory.org/babbage/adalovelace/).
 - SUPRA: [supra.stanford.edu](https://supra.stanford.edu), [GitHub pianoroll/SUPRA](https://github.com/pianoroll/SUPRA).
+- Scores and rights: [eu-pd-composers](https://github.com/egorpol/eu-pd-composers), [IIIF](https://iiif.io), [MEI facsimiles (MEI guidelines)](https://music-encoding.org/guidelines/v5/content/facsimilesrecordings.html), [CAMAT corpus edition DdT 1, vol. 11](https://github.com/egorpol/DdT_1_vol_11), [BSB digital collections](https://www.digitale-sammlungen.de).
 - ChatMusician: [arXiv 2402.16153](https://arxiv.org/abs/2402.16153).
 - Rendering: [Verovio](https://www.verovio.org) 6.3.0.

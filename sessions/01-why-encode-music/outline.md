@@ -106,11 +106,11 @@ Added on 2026-10-14. Answers "why encode?" from what students meet today, and pr
 
 - **Where scores live today.** Library digitisations (for example the Bayerische Staatsbibliothek's digital collections, delivered as IIIF images), PDF archives such as IMSLP, publishers' editions, and a few encoded editions in MEI. Most "digital" music is a picture of a page.
 - **Formats of digitised archives.** Image files (TIFF, JPEG) behind a IIIF viewer; PDFs (a container of page images, at most with a text layer, never with the music as data); encoded scores (MusicXML, MEI, kern). Only the last can be searched for a melody, played, transposed or analysed.
-- **Access: who may use it.** Rights depend on the composer's death year (EU: life + 70 years), on the edition and on the country. Showcase: the eu-pd-composers viewer (<https://egorpol.github.io/eu-pd-composers/>), which lists 20th-century composers whose music is likely public domain in the EU, with IMSLP links. Take its numbers from the deployed viewer, and repeat its "not legal advice" note.
+- **Access: who may use it.** Rights depend on the composer's death year (EU: life + 70 years), on the edition and on the country. Showcase: the eu-pd-composers viewer (<https://egorpol.github.io/eu-pd-composers/>), which lists 20th-century composers whose music is likely public domain in the EU, with IMSLP links. Numbers on the live page are from the deployed viewer, dump r019 (checked 2026-10-14): 3,369 composers; 777 PD now, 1,870 not yet, 722 without death date; 21 more on 1 January 2027; 1,254 IMSLP matches; 29,033 work pages, 20,391 by PD-now composers. The checkout's README (r020, branch `feat/open-licence-sweep`) gives the same values. Repeat its "not legal advice" note. In-class prompt: whose music becomes free on 1 January 2027?
 - **Accessibility: who can use it.** A scan cannot be read aloud by a screen reader, enlarged without blur, played back or turned into music Braille; an encoding can (link to music Braille in part 4).
 - **Facsimile-based editions.** MEI keeps the page images in `<facsimile>` (one `<surface>` per page, one `<zone>` per measure), and each `measure/@facs` points to its zone. The encoding stays tied to its source: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to the witness. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.
 - **CAMAT preview.** CAMAT's edition tools grew out of encoding volumes of *Denkmäler deutscher Tonkunst* (DdT): page-level OMR from musiconn.scoresearch, BSB IIIF facsimiles, correction in mei-friend, automatic checks. A second route links MEI to the pages of a PDF (developed on Webern's *Variations*, Op. 27, Universal Edition print of 1937: nine pages, 143 measure regions). See CAMAT's guides "Editing music with the MEI data format" and "Link MEI to a PDF facsimile".
-- **Demo E (showcase only).** One DdT page from `camat_corpus_editions`: the Verovio rendering next to the BSB scan with its measure zones; click a bar on one side to find it on the other. The full workflow comes later in the course.
+- **Demo E (showcase only).** Page 1 of Buxtehude's Sonata I, Op. I (DdT 11, p. 3, BSB image 00013; bars 1–15), cut from the published `DdT_1_vol_11` (commit `7af4ae8`) with `tools/extract_facsimile_page.py` into `examples/facsimile/`. The scan with its 15 zones next to Verovio's rendering (encoded breaks: 3 systems as in the print); point at or click a bar on either side; the selected bar is shown close up (IIIF crop of the zone and Verovio's rendering of that bar alone). Bar 11 carries the page's one editorial `<annot>` (C♯ eighth instead of DdT's sixteenth, after the first edition). Its text says "the 1696 print", but Op. I is usually dated about 1694 (Op. II 1696); the live page caveats this. The full workflow comes later in the course.
 - **Discussion:** *Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?*
 
 ## 4. Notation for human readers: systems made for users (10 min)
@@ -266,8 +266,8 @@ Demo D.
 ## To prepare before tomorrow
 
 - [x] Example encodings, tested with Verovio 6.3 ([examples/](examples/)).
-- [ ] Live page: session text + demos A–D (served locally first).
-- [ ] Part 3: eu-pd-composers showcase and Demo E (facsimile preview).
+- [x] Live page: session text + demos A–D (served locally first).
+- [x] Part 3: eu-pd-composers showcase and Demo E (facsimile preview).
 - [ ] Notebooks `01_formats_verovio.ipynb`, `01_player_piano.ipynb`, `01_binary_grid.ipynb`.
 - [ ] Recorded LLM answers (ABC and kern) for Demo D.
 - [ ] Run all notebooks once on Jupyter4NFDI.
