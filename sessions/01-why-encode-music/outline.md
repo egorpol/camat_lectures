@@ -161,7 +161,7 @@ Discussion: *Is a roll a score, a recording or a program? Where are the bar line
 
 1. Open <https://hub.nfdi-jupyter.de>, sign in with Helmholtz AAI and start JupyterLab on JSC-Cloud (steps as in the CAMAT cloud guide).
 2. Check the kernel: Python 3.10 or later.
-3. Get the session notebooks into the workspace (download from the live page or clone the course repository; to decide).
+3. Get the session notebooks into the workspace: one cell downloads `get_notebooks.py` from the course repository and runs it (setup page); download and upload from the live page as the fallback.
 4. Run the setup cell (`%pip install ...`) and the first render cell. A rendered score is the success check.
 5. Collect each problem and its fix; they go into a FAQ on the live page for later sessions.
 

@@ -269,7 +269,7 @@ You do not need your own LLM account for this: the recorded answers and the inst
 
 ## Notebooks
 
-The notebooks repeat the demos with inputs you can change. Download them and upload them to Jupyter4NFDI (see [setup](../../setup.md)). Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets).
+The notebooks repeat the demos with inputs you can change. On Jupyter4NFDI, one cell copies them into your workspace (see [setup](../../setup.md#get-the-session-notebooks)); you can also download them here and upload them. Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets).
 
 - [`01_formats_verovio.ipynb`](notebooks/01_formats_verovio.ipynb){: download="01_formats_verovio.ipynb" }: Demos B and D, the seven encodings and the LLM's melody. Start here.
 - [`01_player_piano.ipynb`](notebooks/01_player_piano.ipynb){: download="01_player_piano.ipynb" }: Demo A, Debussy's roll as raw and expressive MIDI. Downloads the MIDI files from GitHub when you run it.

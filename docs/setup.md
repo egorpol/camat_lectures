@@ -10,10 +10,22 @@
 
 ## Get the session notebooks
 
-1. Download the notebook from the session page (section *Notebooks*).
-2. In JupyterLab, click the **Upload** button (arrow icon) above the file browser and choose the file.
-3. Open the notebook and run the first cell. It installs what the notebook needs (`%pip install ...`).
-4. Run the next cells. A rendered score is the sign that everything works.
+1. In JupyterLab, open a new notebook (*File → New → Notebook*), paste this into the first cell and run it:
+
+    ```python
+    import urllib.request
+    urllib.request.urlretrieve("https://raw.githubusercontent.com/egorpol/camat_lectures/main/get_notebooks.py", "get_notebooks.py")
+    %run get_notebooks.py
+    ```
+
+    The notebooks of all sessions so far appear in the folder `camat_lectures/`, one subfolder per session. Save this small notebook (for example as `get_notebooks.ipynb`): you will run it again.
+
+2. Open a session notebook and run its first cell. It installs what the notebook needs (`%pip install ...`).
+3. Run the next cells. A rendered score is the sign that everything works.
+
+After each session, run the cell again to get the new notebooks. Notebooks you already have are kept as they are, so your changes are safe. To start one over, rename or delete your copy and run the cell again.
+
+If the cell cannot download anything, download the notebooks from the session page (section *Notebooks*) and upload them with the **Upload** button (arrow icon) above the file browser.
 
 Files in your home folder (`/home/jovyan`) are kept when the server stops; everything else is discarded. Installed packages may have to be installed again after a restart: just run the first cell again.
 
