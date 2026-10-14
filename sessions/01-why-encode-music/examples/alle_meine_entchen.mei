@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://music-encoding.org/schema/dev/mei-all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="https://music-encoding.org/schema/dev/mei-all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<mei xmlns="http://www.music-encoding.org/ns/mei" meiversion="6.0-dev">
+   <meiHead>
+      <fileDesc>
+         <titleStmt>
+            <title>Alle meine Entchen</title>
+         </titleStmt>
+         <pubStmt>
+            <unpub>This MEI file was created by Verovio's Humdrum converter. When published, this unpub element should be removed, and the enclosing pubStmt element should be properly filled out.</unpub>
+         </pubStmt>
+      </fileDesc>
+      <encodingDesc>
+         <appInfo>
+            <application isodate="2026-10-14T14:24:16" version="6.3.0-425dd7b">
+               <name>Verovio</name>
+               <p>Transcoded from Humdrum</p>
+            </application>
+         </appInfo>
+      </encodingDesc>
+      <workList>
+         <work xml:id="work0_encoded" type="encoded">
+            <title type="uniform">
+               <titlePart type="main" analog="humdrum:OTL">Alle meine Entchen</titlePart>
+            </title>
+         </work>
+      </workList>
+      <extMeta>
+         <frames xmlns="http://www.humdrum.org/ns/humxml">
+            <metaFrame n="0" token="!!!OTL: Alle meine Entchen" xml:id="L1">
+               <frameInfo>
+                  <startTime float="0" />
+                  <frameType>reference</frameType>
+                  <referenceKey>OTL</referenceKey>
+                  <referenceValue>Alle meine Entchen</referenceValue>
+               </frameInfo>
+            </metaFrame>
+         </frames>
+      </extMeta>
+   </meiHead>
+   <music decls="#work0_encoded">
+      <body>
+         <mdiv xml:id="e6nh3r1">
+            <score xml:id="fhc7yxj">
+               <scoreDef xml:id="g185h7q1" tempo.dist="3vu">
+                  <pgHead xml:id="qhtix66" func="first">
+                     <rend xml:id="rjw3qv2" halign="center" valign="middle">
+                        <rend xml:id="scqmx8j" fontsize="large">Alle meine Entchen</rend>
+                        <lb xml:id="u5b79pu" /> 
+<lb xml:id="w1kluom4" /> </rend>
+                  </pgHead>
+                  <staffGrp xml:id="rlpmy72">
+                     <staffDef xml:id="staffdef-L2F1" n="1" lines="5">
+                        <clef xml:id="clef-L3F1" shape="G" line="2" />
+                        <keySig xml:id="keysig-L4F1" sig="0" />
+                        <meterSig xml:id="metersig-L5F1" count="4" unit="4" />
+                     </staffDef>
+                  </staffGrp>
+               </scoreDef>
+               <section xml:id="section-L2F1">
+                  <measure xml:id="measure-L1" n="1">
+                     <staff xml:id="staff-L2F1" n="1">
+                        <layer xml:id="layer-L1F1N1" n="1">
+                           <note xml:id="note-L7F1" dur="4" oct="4" pname="c" />
+                           <note xml:id="note-L8F1" dur="4" oct="4" pname="d" />
+                           <note xml:id="note-L9F1" dur="4" oct="4" pname="e" />
+                           <note xml:id="note-L10F1" dur="4" oct="4" pname="f" />
+                        </layer>
+                     </staff>
+                  </measure>
+                  <measure xml:id="measure-L11" n="2">
+                     <staff xml:id="staff-L11F1N1" n="1">
+                        <layer xml:id="layer-L11F1N1" n="1">
+                           <note xml:id="note-L12F1" dur="2" oct="4" pname="g" />
+                           <note xml:id="note-L13F1" dur="2" oct="4" pname="g" />
+                        </layer>
+                     </staff>
+                  </measure>
+                  <measure xml:id="measure-L14" n="3">
+                     <staff xml:id="staff-L14F1N1" n="1">
+                        <layer xml:id="layer-L14F1N1" n="1">
+                           <note xml:id="note-L15F1" dur="4" oct="4" pname="a" />
+                           <note xml:id="note-L16F1" dur="4" oct="4" pname="a" />
+                           <note xml:id="note-L17F1" dur="4" oct="4" pname="a" />
+                           <note xml:id="note-L18F1" dur="4" oct="4" pname="a" />
+                        </layer>
+                     </staff>
+                  </measure>
+                  <measure xml:id="measure-L19" right="end" n="4">
+                     <staff xml:id="staff-L19F1N1" n="1">
+                        <layer xml:id="layer-L19F1N1" n="1">
+                           <note xml:id="note-L20F1" dur="1" oct="4" pname="g" />
+                        </layer>
+                     </staff>
+                  </measure>
+               </section>
+            </score>
+         </mdiv>
+      </body>
+   </music>
+</mei>
