@@ -561,6 +561,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#addendum-midi-on-a-cable-and-in-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Addendum: MIDI on a cable and in a file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#notebooks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -780,6 +791,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#addendum-midi-on-a-cable-and-in-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Addendum: MIDI on a cable and in a file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#notebooks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -842,8 +864,8 @@
 <li>check an LLM-written melody against what was asked for.</li>
 </ol>
 <h2 id="1-one-melody-seven-encodings">1. One melody, seven encodings<a class="headerlink" href="#1-one-melody-seven-encodings" title="Permanent link">&para;</a></h2>
-<p>Here are the first four bars of <em>Alle meine Entchen</em>, seven times. Before anything is rendered: <em>Which of these is the music? Which can you read? Which can a computer read?</em></p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">ABC</label><label for="__tabbed_1_2">kern</label><label for="__tabbed_1_3">Plaine &amp; Easie</label><label for="__tabbed_1_4">EsAC</label><label for="__tabbed_1_5">MusicXML</label><label for="__tabbed_1_6">MEI</label><label for="__tabbed_1_7">0/1 grid</label></div>
+<p>Here are the first four bars of <em>Alle meine Entchen</em>, seven times. Before anything is rendered: <em>Which of these is the music? Which can you read? Which can a computer read?</em> The last tab shows the same bars as a score, for reference.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">ABC</label><label for="__tabbed_1_2">kern</label><label for="__tabbed_1_3">Plaine &amp; Easie</label><label for="__tabbed_1_4">EsAC</label><label for="__tabbed_1_5">MusicXML</label><label for="__tabbed_1_6">MEI</label><label for="__tabbed_1_7">0/1 grid</label><label for="__tabbed_1_8">Common notation</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>X:1
@@ -1044,6 +1066,10 @@ D4    0100    0000    0000    0000
 C4    1000    0000    0000    0000
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<p>For reference: the four bars in common staff notation, drawn by Verovio from the MEI tab.</p>
+<p data-demo="score" data-file="examples/alle_meine_entchen.mei" data-format="mei"><em>Loading the score…</em></p>
+</div>
 </div>
 </div>
 <p>The same 11 notes take 60 bytes in Plaine &amp; Easie, 75 in ABC, 104 in kern, 120 in EsAC, 1,886 in MusicXML and about 4,850 in MEI (as Verovio writes it; its random IDs change the length by a few bytes each time). The difference is not the notes but what else is recorded: title, metadata, an identifier for every element, layout. Six of the seven can be rendered back into the same score (<a href="#8-todays-formats-in-verovio">part 8</a>). The grid cannot, at least not without guessing (<a href="#9-binary-notation-holes-grids-and-what-survives">part 9</a>).</p>
@@ -1128,11 +1154,11 @@ C4    1000    0000    0000    0000
 <p><em>(Shortened from the file in Demo E below. The coordinates are pixels in the 4,134-pixel-wide version of the scan.)</em> The encoding stays tied to its witness: every bar can be checked against the page, the source's page and system breaks are kept, and the editor's reading sits next to what the source shows. A traditional critical edition replaces the source with a new engraving and moves the differences into a critical report.</p>
 <p>This is where the course is going. The tools of CAMAT, which we use from the next sessions on, grew out of encoding volumes of <em>Denkmäler deutscher Tonkunst</em> from the Bayerische Staatsbibliothek's scans: optical music recognition (OMR) page by page, correction in <a href="https://mei-friend.mdw.ac.at/">mei-friend</a>, automatic checks, and measure zones that link every bar back to the scan.</p>
 <h3 id="demo-e-a-facsimile-linked-page">Demo E: a facsimile-linked page<a class="headerlink" href="#demo-e-a-facsimile-linked-page" title="Permanent link">&para;</a></h3>
-<p>The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, viola da gamba and harpsichord, as printed in <em>Denkmäler deutscher Tonkunst</em>, vol. 11 (1903). Left: the Bayerische Staatsbibliothek's scan, with the zones from the MEI file drawn on it. Right: the same MEI file rendered by Verovio, with the page's three systems. Point at a bar on either side to find it on the other; click to compare it close up.</p>
+<p>The first page of Dietrich Buxtehude's Sonata I in F major, Op. I, for violin, viola da gamba and harpsichord, as printed in <em>Denkmäler deutscher Tonkunst</em>, vol. 11 (1903). Left: the Bayerische Staatsbibliothek's scan, with the zones from the MEI file drawn on it. Right: the same MEI file rendered by Verovio, with the page's three systems. Point at a bar on either side to find it on the other; click to compare it close up. Tick <em>Show the bar's MEI</em> to read how the selected bar is encoded.</p>
 <div data-demo="facsimile" data-mei="facsimile/buxtehude_op1_01_page1.mei"
      data-title="Denkmäler deutscher Tonkunst 11 (1903), page 3: Buxtehude, Sonata I, bars 1 to 15"></div>
 
-<p>Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an <code>&lt;annot&gt;</code> in the MEI file says so. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.</p>
+<p>Look at bar 11. The 1903 print has the violin's C♯ as a sixteenth note; the encoding follows the first edition, printed in Buxtehude's lifetime, and makes it an eighth note, and an <code>&lt;annot&gt;</code> in the MEI file says so. With <em>Show the bar's MEI</em> ticked you can read it in the code: <code>&lt;staff n="1"&gt;</code> is the violin, <code>n="2"</code> the viola da gamba and <code>n="3"</code> the harpsichord's bass line; each <code>&lt;harm&gt;</code> holds a figure of the figured bass; and the <code>&lt;annot&gt;</code> points at the C♯ with <code>plist</code>. The scan stays the witness, and the encoding records where and why it departs from it. (The note calls the first edition "the 1696 print"; sources date Op. I to about 1694 and Op. II to 1696, so treat the year with care.) The full workflow (OMR, correction, checks) comes later in the course.</p>
 <div class="admonition info">
 <p class="admonition-title">Source and licence</p>
 <p>MEI: the first page (bars 1–15) of <code>buxtehude_op1_01_sonata_f_major_corr.mei</code> from the CAMAT corpus edition <a href="https://github.com/egorpol/DdT_1_vol_11"><em>DdT 1, vol. 11: Dietrich Buxtehude, Instrumental Works</em></a> (work in progress, commit <code>7af4ae8</code>), <a href="examples/facsimile/LICENSE">MIT License</a>; two ties into bar 16 on the next page were removed. <a download="buxtehude_op1_01_page1.mei" href="examples/facsimile/buxtehude_op1_01_page1.mei">Download the MEI file</a>. Scan: Bayerische Staatsbibliothek, <a href="https://www.digitale-sammlungen.de/en/view/bsb00023199?page=13"><code>bsb00023199</code>, image 13</a> (copy of the Hochschule für Musik und Theater München, Bibliothek), licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. The page loads the scan from the library's IIIF server when you open it; it is not copied here.</p>
@@ -1363,7 +1389,7 @@ C4    1000    0000    0000    0000
 <td>MIDI</td>
 <td>instrument makers</td>
 <td>performance events between instruments, not notation: the piano roll's descendant</td>
-<td>the two MIDI files of the Debussy roll in <a href="#demo-a-debussy-plays-childrens-corner">Demo A</a></td>
+<td>the two MIDI files of the Debussy roll in <a href="#demo-a-debussy-plays-childrens-corner">Demo A</a>; how MIDI works: <a href="#addendum-midi-on-a-cable-and-in-a-file">addendum</a></td>
 </tr>
 <tr>
 <td>1984</td>
@@ -1401,6 +1427,70 @@ C4    1000    0000    0000    0000
 </details>
 <h2 id="8-todays-formats-in-verovio">8. Today's formats in Verovio<a class="headerlink" href="#8-todays-formats-in-verovio" title="Permanent link">&para;</a></h2>
 <p>Verovio reads all six text encodings from part 1 and renders them as notation. Edit any box: the score follows as you type. <em>Show as MEI</em> converts the text to MEI; <em>Piano roll</em> draws the notes as time × pitch, the view from Demo A.</p>
+<p>Where each format comes from, and where to find real files in it (the history is in <a href="#7-notation-for-computers-1940s-to-the-1990s">part 7</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Made by, when</th>
+<th>Made for</th>
+<th>Documentation</th>
+<th>Real files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABC</td>
+<td>Chris Walshaw, 1980s–1990s</td>
+<td>folk and traditional tunes, typed and shared as plain text</td>
+<td><a href="https://abcnotation.com/wiki/abc:standard:v2.1">ABC standard 2.1</a></td>
+<td><a href="https://thesession.org/tunes">The Session</a>: folk tunes, each setting in ABC and as notation</td>
+</tr>
+<tr>
+<td>Humdrum <code>**kern</code></td>
+<td>David Huron, 1980s–1990s</td>
+<td>analysis with text tools: one column ("spine") per voice</td>
+<td><a href="https://www.humdrum.org/rep/kern/">the <code>**kern</code> reference</a></td>
+<td><a href="https://github.com/craigsapp/bach-370-chorales">Bach's 370 chorales</a> on GitHub; open any kern file in the <a href="https://verovio.humdrum.org/">Verovio Humdrum Viewer</a></td>
+</tr>
+<tr>
+<td>Plaine &amp; Easie</td>
+<td>Barry S. Brook and Murray Gould, 1964</td>
+<td>incipits in library catalogues; RISM still uses it</td>
+<td><a href="https://www.iaml.info/plaine-easie-code">the code</a>, maintained by IAML</td>
+<td><a href="https://rism.online/">RISM Online</a> stores its incipits in it, for example in <a href="https://rism.online/sources/190006990">this Buxtehude sonata</a></td>
+</tr>
+<tr>
+<td>EsAC</td>
+<td>Helmut Schaffrath, Essen, from 1982</td>
+<td>folk-song collections: one record per song, with region (<code>REG</code>), key and metre (<code>KEY</code>) and the melody as scale degrees (<code>MEL</code>)</td>
+<td><a href="https://doc.verovio.humdrum.org/interface/esac/">how the Verovio Humdrum Viewer reads EsAC</a>, with <a href="https://doc.verovio.humdrum.org/interface/esac/b0029.txt">a record from the Essen collection</a></td>
+<td>the <a href="https://github.com/ccarh/essen-folksong-collection">Essen Folksong Collection</a>, over 6,000 songs, converted to kern</td>
+</tr>
+<tr>
+<td>MusicXML</td>
+<td>Michael Good (Recordare), from 2000; now the W3C Music Notation Community Group</td>
+<td>exchange between notation programs</td>
+<td><a href="https://www.w3.org/2021/06/musicxml40/">MusicXML 4.0</a> (2021), with a tutorial</td>
+<td><a href="https://www.musicxml.com/music-in-musicxml/">a list of sites with MusicXML files</a>; notation programs such as MuseScore export it</td>
+</tr>
+<tr>
+<td>MEI</td>
+<td>Perry Roland, from 1999; now the MEI community</td>
+<td>scholarly editions</td>
+<td><a href="https://music-encoding.org/guidelines/v5/content/">the MEI Guidelines</a> (version 5)</td>
+<td><a href="https://github.com/music-encoding/sample-encodings">MEI sample encodings</a> on GitHub; the Buxtehude page in <a href="#demo-e-a-facsimile-linked-page">Demo E</a></td>
+</tr>
+<tr>
+<td>GABC (chant)</td>
+<td>a monk of the Abbey of Sainte-Madeleine du Barroux, improved by Élie Roux and others</td>
+<td>typesetting Gregorian chant with the Gregorio software</td>
+<td><a href="https://gregorio-project.github.io/gabc/">GABC, described by the Gregorio project</a></td>
+<td><a href="https://gregobase.selapa.net/">GregoBase</a>, a database of chants, each one downloadable as GABC</td>
+</tr>
+</tbody>
+</table>
+<p>MIDI is not on this list: it records what a player does, not what a score shows. See the <a href="#addendum-midi-on-a-cable-and-in-a-file">addendum</a>.</p>
 <div data-demo="formats" data-examples="examples/"></div>
 
 <p><strong>Try this:</strong></p>
@@ -1437,6 +1527,60 @@ C4    1000    0000    0000    0000
 <li>Encode the first phrase of a melody of your choice in ABC or kern and render it (here in <a href="#8-todays-formats-in-verovio">part 8</a> or in the notebook).</li>
 <li>Write down one thing about the melody that your encoding cannot express.</li>
 </ol>
+<h2 id="addendum-midi-on-a-cable-and-in-a-file">Addendum: MIDI on a cable and in a file<a class="headerlink" href="#addendum-midi-on-a-cable-and-in-a-file" title="Permanent link">&para;</a></h2>
+<p>MIDI comes up in Demo A and in part 7. The name is used for two things: messages sent between instruments, and files that store them.</p>
+<p><strong>On a cable: messages, sent as they happen.</strong> MIDI 1.0 was published in August 1983 so that instruments from different makers could control each other. A message says what a player does, not what it sounds like: <em>channel 1, key 60 down, velocity 90</em> is three bytes, <code>90 3C 5A</code>, and a second message follows when the key is released. The receiving instrument makes the sound; MIDI itself carries no audio. The original cable has five-pin DIN plugs, carries messages in one direction only (from an OUT to an IN socket) at 31,250 bits per second, and has 16 channels, so one cable can play 16 instruments or sounds. A message carries no time: the note starts when the message arrives, and each three-byte message takes about a millisecond on that cable. Today the same messages also travel over USB, Bluetooth and networks, or between programs on one computer.</p>
+<p><strong>In a file: the same messages, each with a wait before it.</strong> A Standard MIDI File (<code>.mid</code>) stores the messages and writes before each one how long to wait after the previous one, counted in <em>ticks</em>. The header says how many ticks make a quarter note, and a tempo message says how long a quarter note lasts. Verovio writes the four bars of <em>Alle meine Entchen</em> as a file of 144 bytes:</p>
+<div class="highlight"><pre><span></span><code>4D 54 68 64  00 00 00 06     "MThd": the header, 6 bytes follow
+00 01  00 02  00 78          format 1, 2 tracks, 120 ticks per quarter
+4D 54 72 6B  00 00 00 0B     "MTrk": track 1, 11 bytes follow
+  00  FF 51 03 07 A1 20        wait 0, tempo
+  00  FF 2F 00                 wait 0, end of track
+4D 54 72 6B  00 00 00 67     "MTrk": track 2, 103 bytes follow
+  00  FF 58 04 04 02 18 08     wait 0, time signature 4/4
+  00  90 3C 5A                 wait 0, key 60 (C4) down, velocity 90
+  77  90 3C 00                 wait 119, key 60 at velocity 0: up
+  01  90 3E 5A                 wait 1, key 62 (D4) down, velocity 90
+  ...
+</code></pre></div>
+<p>The numbers are hexadecimal: <code>77</code> is 119, <code>3C</code> is 60, and the tempo <code>07 A1 20</code> is 500,000 microseconds per quarter note, 120 quarter notes a minute. In <code>90</code>, the <code>9</code> means "key down" and the <code>0</code> channel 1. Each note sounds for 119 of its quarter note's 120 ticks, and the next starts one tick later. The <code>90</code> messages are exactly what a cable carries; the <code>FF</code> messages (tempo, time signature, end of track) exist only in files. A key "down" at velocity 0 counts as released: the MIDI 1.0 specification allows both this and a separate Note Off message.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>On a cable (or USB, Bluetooth)</th>
+<th>In a file (<code>.mid</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>a live stream of messages</td>
+<td>the same messages, stored</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>the moment a message arrives</td>
+<td>a wait in ticks before each message, and a tempo</td>
+</tr>
+<tr>
+<td>Parts</td>
+<td>up to 16 channels per cable</td>
+<td>channels, and tracks played together (format 1)</td>
+</tr>
+<tr>
+<td>Example</td>
+<td>a keyboard playing a synthesiser</td>
+<td>the two files of the Debussy roll in Demo A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The three questions, asked of MIDI.</strong></p>
+<ul>
+<li><em>Who reads it?</em> Instruments, sequencers and recording software; SUPRA turned the Debussy roll into MIDI files.</li>
+<li><em>What does it record?</em> Which key, how hard (velocity, 0 to 127), when, on which channel, and controllers such as the pedals: the pedal bands in Demo A are Control Change messages 64 (sustain pedal) and 67 (soft pedal).</li>
+<li><em>What does it leave out?</em> What a score adds for a reader. C♯ and D♭ are the same key, 61. A note lasts so many ticks; it has no note value, so a short quarter note and an eighth note followed by a rest can look the same. There are no stems, beams, voices, ties, slurs or staff layout. Turning a score into MIDI is easy (Verovio does it), but turning MIDI into a score means guessing, as with the grid in part 9.</li>
+</ul>
 <h2 id="notebooks">Notebooks<a class="headerlink" href="#notebooks" title="Permanent link">&para;</a></h2>
 <p>The notebooks repeat the demos with inputs you can change. On Jupyter4NFDI, one cell copies them into your workspace (see <a href="../../setup/#get-the-session-notebooks">setup</a>); you can also download them here and upload them. Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets, and Bokeh for interactive piano rolls).</p>
 <ul>
@@ -1451,6 +1595,7 @@ C4    1000    0000    0000    0000
 <li>SUPRA: <a href="https://supra.stanford.edu">supra.stanford.edu</a>, <a href="https://github.com/pianoroll/SUPRA">GitHub pianoroll/SUPRA</a>.</li>
 <li>Scores and rights: <a href="https://github.com/egorpol/eu-pd-composers">eu-pd-composers</a>, <a href="https://iiif.io">IIIF</a>, <a href="https://music-encoding.org/guidelines/v5/content/facsimilesrecordings.html">MEI facsimiles (MEI guidelines)</a>, <a href="https://github.com/egorpol/DdT_1_vol_11">CAMAT corpus edition DdT 1, vol. 11</a>, <a href="https://www.digitale-sammlungen.de">BSB digital collections</a>.</li>
 <li>ChatMusician: <a href="https://arxiv.org/abs/2402.16153">arXiv 2402.16153</a>.</li>
+<li>MIDI: <a href="https://midi.org/midi-1-0">MIDI 1.0 (MIDI Association)</a>, <a href="https://midi.org/summary-of-midi-1-0-messages">summary of the MIDI 1.0 messages</a>, <a href="https://en.wikipedia.org/wiki/MIDI">MIDI (Wikipedia)</a>.</li>
 <li>Rendering: <a href="https://www.verovio.org">Verovio</a> 6.3.0.</li>
 </ul>
 
