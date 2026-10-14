@@ -1133,48 +1133,88 @@ C4    1000    0000    0000    0000
 </div>
 <p><em>Discussion: Is a facsimile-linked encoding more authentic than a clean modern edition? Authentic to what: the source, the work, the performance?</em></p>
 <h2 id="4-notation-for-human-readers-systems-made-for-users">4. Notation for human readers: systems made for users<a class="headerlink" href="#4-notation-for-human-readers-systems-made-for-users" title="Permanent link">&para;</a></h2>
+<p>Click a source to see the notation itself. The manuscripts from St. Gallen and Munich open in the library's own viewer, where you can zoom in and turn the pages; the other pictures are on Wikimedia Commons.</p>
 <table>
 <thead>
 <tr>
 <th>System</th>
 <th>Records</th>
 <th>Computational analogy</th>
+<th>Look at a source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Greek alphabetic notation (Seikilos epitaph)</td>
+<td>Greek alphabetic notation (<a href="https://en.wikipedia.org/wiki/Seikilos_epitaph">Seikilos epitaph</a>)</td>
 <td>symbols mapped to pitches</td>
 <td>lookup table</td>
+<td><a href="https://commons.wikimedia.org/wiki/File:Seikilos_epitaph_04.jpg">the stele</a>, 1st or 2nd century, National Museum of Denmark: the pitch signs are written above the text</td>
 </tr>
 <tr>
-<td>Neumes (9th century onward)</td>
+<td><a href="https://en.wikipedia.org/wiki/Neume">Neumes</a> (9th century onward)</td>
 <td>melodic contour, often without fixed pitch</td>
 <td>relative constraints</td>
+<td><a href="https://www.e-codices.unifr.ch/en/csg/0359/23">Cantatorium of St. Gallen</a>, about 922–925 (Stiftsbibliothek St. Gallen, Cod. Sang. 359, p. 23, on e-codices): neumes above the text, no staff lines</td>
 </tr>
 <tr>
-<td>Guidonian hand, staff lines</td>
+<td><a href="https://en.wikipedia.org/wiki/Guidonian_hand">Guidonian hand</a>, staff lines</td>
 <td>pitch as a position in space</td>
 <td>spatial lookup</td>
+<td><a href="https://commons.wikimedia.org/wiki/File:UCB_Music_Library_MS_1087.jpg">a hand with a small staff on each finger</a>, 16th century (UC Berkeley, Music Library MS 1087)</td>
 </tr>
 <tr>
-<td>Mensural notation</td>
+<td><a href="https://en.wikipedia.org/wiki/Mensural_notation">Mensural notation</a></td>
 <td>durations that depend on context</td>
 <td>rule engine</td>
+<td><a href="https://www.digitale-sammlungen.de/en/view/bsb00079055?page=41">Hartmann Schedel's songbook</a>, 1460s (Bayerische Staatsbibliothek, Cgm 810, f. 18r): one voice after another, no score</td>
 </tr>
 <tr>
-<td>Lute and organ tablature</td>
+<td><a href="https://en.wikipedia.org/wiki/Tablature">Lute and organ tablature</a></td>
 <td>where to put the fingers, not which pitch</td>
 <td>instruction set for one instrument</td>
+<td>organ: <a href="https://www.digitale-sammlungen.de/en/view/bsb00104633?page=31">Buxheim Organ Book</a>, about 1460–1470 (Bayerische Staatsbibliothek, Mus.ms. 3725, f. 9r): the top voice on a staff, the lower voices as letter names; vihuela (a Spanish relative of the lute): <a href="https://commons.wikimedia.org/wiki/File:Vihuela-Tab_Fuenllana_1554.jpg">Miguel de Fuenllana, <em>Orphénica lyra</em></a>, Seville 1554: fret numbers on six lines, one line per course of strings</td>
 </tr>
 <tr>
 <td>Jeongganbo (Korea, 15th century onward)</td>
 <td>time as a grid of cells</td>
 <td>temporal grid, close to a piano roll</td>
+<td><a href="https://commons.wikimedia.org/wiki/File:Museum_of_Traditional_Korean_Music_041.JPG"><em>Daeak hubo</em></a> (1759), a collection of court music, photographed in the Museum of Traditional Korean Music, Seoul: one cell per beat; <a href="https://arxiv.org/abs/2408.01096"><em>Six Dragons Fly Again</em></a> (ISMIR 2024) encodes jeongganbo for machine learning</td>
 </tr>
 </tbody>
 </table>
-<p>Notations were also made for particular groups of users: shape notes for singing schools, jianpu (scale degrees as numbers) for teaching, music Braille for blind musicians, Klavarskribo for keyboard players. There was never one "music notation"; notations are tools built for a use, and encoding formats continue that tradition.</p>
+<p>Notations were also made for particular groups of users:</p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>Made for</th>
+<th>Look at an example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Shape_note">Shape notes</a></td>
+<td>singing schools: the shape of the note head gives the syllable</td>
+<td><a href="https://commons.wikimedia.org/wiki/File:Star_in_the_east.png">"Star in the East"</a> in <em>The Southern Harmony</em> (1854 edition)</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Numbered_musical_notation">Jianpu</a></td>
+<td>teaching and amateur music-making: scale degrees as numbers</td>
+<td><a href="https://commons.wikimedia.org/wiki/File:AmazingGraceNumberedMusicalNotation.png">"Amazing Grace" in jianpu</a></td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Braille_music">Music Braille</a></td>
+<td>blind musicians, who read it with their fingers</td>
+<td><a href="https://commons.wikimedia.org/wiki/File:Braillemusicsummary.gif">a summary of the signs</a></td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Klavarskribo">Klavarskribo</a></td>
+<td>keyboard players: the music runs down the page, low notes left and high notes right, and the staff lines are the black keys</td>
+<td><a href="https://en.wikipedia.org/wiki/File:KlavarExplain_1-E.png">a keyboard with the staff growing out of it</a>: a piano roll on paper</td>
+</tr>
+</tbody>
+</table>
+<p>There was never one "music notation"; notations are tools built for a use, and encoding formats continue that tradition.</p>
 <p>Chant is still encoded today, in GABC and Volpiano; Verovio reads both (the GABC example is in <a href="#8-todays-formats-in-verovio">part 8</a>).</p>
 <h2 id="5-notation-for-machines-barrels-rolls-punched-cards">5. Notation for machines: barrels, rolls, punched cards<a class="headerlink" href="#5-notation-for-machines-barrels-rolls-punched-cards" title="Permanent link">&para;</a></h2>
 <p>When the reader is a machine, notation becomes a program: positions on a cylinder or holes in paper that trigger sound.</p>
