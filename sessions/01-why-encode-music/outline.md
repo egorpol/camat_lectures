@@ -2,7 +2,8 @@
 
 *Von der digitalen Edition zur computergestützten Musikanalyse: Einführung in Musik-Encoding und Tools für die Notentextanalyse* — session 1, 15 October 2026.
 
-Assumed length: **90 minutes**; shift the times in the plan if the slot differs.
+Format: **double session, 2 × 90 minutes**, with about 30 minutes reserved for technical setup (Jupyter4NFDI login).
+Materials: a **live page** (GitHub Pages; served locally for now) carries the content and in-browser demos; **notebooks** on Jupyter4NFDI carry the same demos with inputs students can change (see [Live page and notebooks](#live-page-and-notebooks)).
 Background notes on historical notation: [historical_music_notation_computational_musicology.md](../../historical_music_notation_computational_musicology.md).
 Tested example encodings: [examples/](examples/).
 
@@ -17,30 +18,73 @@ By the end of the session, students can:
 1. Explain why a score made for human readers is not enough for a computer (implicit knowledge, ambiguity, image vs. data).
 2. Ask three questions of any notation or format: *Who reads it? What does it record? What does it leave out?*
 3. Place key systems on a timeline from mechanical instruments to kern and the Essen folksong collection, and relate them to today's formats.
-4. Recognise a short ABC, kern and MEI snippet and render it with Verovio in Jupyter4NFDI.
+4. Edit a short ABC, kern or MEI snippet and render it with Verovio, in the browser and in Jupyter4NFDI.
+5. Turn a melody into a 0/1 pitch × time grid and say what the grid loses.
+6. Check an LLM-written ABC melody against what was asked for.
 
 ## Plan
 
+**Block 1 — concepts and history (90 min)**
+
 | Time | Part | Mode |
 |---|---|---|
-| 0:00–0:10 | 1. Hook: one melody, six encodings | demo + question |
+| 0:00–0:10 | 1. Hook: one melody, seven encodings | live page + question |
 | 0:10–0:25 | 2. Why encode music? | input + discussion |
 | 0:25–0:40 | 3. Notation for human readers: systems made for users | input |
-| 0:40–0:55 | 4. Notation for machines: barrels, rolls, punched cards | input + **Demo A** (player piano) |
-| 0:55–1:10 | 5. Notation for computers, 1940s to the 1990s | input |
-| 1:10–1:25 | 6. Today's formats in Verovio | **Demo B** (hands-on if time allows) |
-| 1:25–1:30 | 7. Wrap-up, course roadmap, homework | |
+| 0:40–1:00 | 4. Notation for machines: barrels, rolls, punched cards | input + **Demo A** on the live page (player piano) |
+| 1:00–1:30 | 5. Setup: Jupyter4NFDI login and first notebook | hands-on troubleshooting |
 
-If time runs short, cut part 3 to three examples (neumes, tablature, jeongganbo) and skip the hands-on in part 6.
+Setup goes at the end of block 1 so the break absorbs overruns and block 2 starts with everyone logged in. Students who are still stuck can follow block 2 on the live page, which needs no login.
 
-## 1. Hook: one melody, six encodings (10 min)
+**Block 2 — encodings hands-on (90 min)**
 
-Show the first four bars of *Alle meine Entchen* as plain text in ABC, kern, Plaine & Easie, EsAC, MusicXML and MEI (all in [examples/](examples/)).
+| Time | Part | Mode |
+|---|---|---|
+| 0:00–0:20 | 6. Notation for computers, 1940s to the 1990s | input |
+| 0:20–0:45 | 7. Today's formats in Verovio | **Demo B**, students edit inputs |
+| 0:45–1:05 | 8. Binary notation: holes, grids and what survives | **Demo C**, preview of CAMAT |
+| 1:05–1:20 | 9. An LLM writes ABC | **Demo D** |
+| 1:20–1:30 | 10. Wrap-up, course roadmap, homework | |
+
+If time runs short, cut part 3 to three examples (neumes, tablature, jeongganbo) and shorten part 6 to the table.
+
+## Live page and notebooks
+
+Every demo exists twice: on the live page (runs in any browser, nothing to install) and as a notebook (students change inputs, rerun, keep their work).
+
+| Demo | Live page | Notebook (Jupyter4NFDI) |
+|---|---|---|
+| A. Player-piano roll | piano roll of Debussy's roll, MIDI fetched at runtime | `01_player_piano.ipynb`: raw vs. expressive MIDI, zoom, choose a passage |
+| B. Seven encodings | one editable text box per format, rendered by Verovio | `01_formats_verovio.ipynb`: edit, render, convert to MEI |
+| C. Binary grid | melody → 0/1 grid → notes, grid size adjustable | `01_binary_grid.ipynb`: change the melody and the resolution, compare before/after |
+| D. LLM writes ABC | paste box + recorded LLM answers | cells at the end of `01_formats_verovio.ipynb` |
+
+Checked on 2026-10-14:
+
+- **Verovio in the browser works.** Verovio 6.3.0 is on npm and jsdelivr serves `verovio-toolkit-wasm.js` (HTTP 200). That is the same version as the Python wheel, so page and notebook render alike.
+- **A static page cannot call an LLM** without an API key, hence the paste box and recorded answers.
+- **CAMAT already has matching pieces** in `camat_v2/notebooks/`: an interactive MEI editor and renderer (`mei_render.ipynb`, `launch_interactive_mei_renderer`), and binary grids and piano rolls (`binary_roundtrip.ipynb`, `binary_pattern_search.ipynb`; `create_binary_matrix_bundle`, `draw_piano_roll`, `binary_matrix_designer`).
+
+Decided (2026-10-14): the live page is built with MkDocs Material, with custom JavaScript blocks for the Verovio demos and notebooks offered as downloads. Session 1's notebooks use plain Verovio (`verovio`, `mido`, `matplotlib`, `ipywidgets`); CAMAT comes in from session 2.
+
+## 1. Hook: one melody, seven encodings (10 min)
+
+Show the first four bars of *Alle meine Entchen* as plain text in ABC, kern, Plaine & Easie, EsAC, MusicXML and MEI (all in [examples/](examples/)), plus a seventh, purely binary version: one row per pitch, one column per quarter note, 1 = sounding.
+
+```
+      bar 1   bar 2   bar 3   bar 4
+A4    0000    0000    1111    0000
+G4    0000    1111    0000    1111
+F4    0001    0000    0000    0000
+E4    0010    0000    0000    0000
+D4    0100    0000    0000    0000
+C4    1000    0000    0000    0000
+```
 
 - Ask: *Which of these is the music? Which can you read? Which can a computer read?*
-- Then render all six with Verovio: the same score six times.
+- Then render the six text formats with Verovio: the same score six times. Keep the grid for part 8: it cannot be rendered back into this score without guessing.
 - Point to the sizes: the same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 1,886 in MusicXML and 4,850 in MEI (as Verovio writes it). The difference is not the notes but what else is recorded: title, metadata, identifiers for every element, layout.
-- AI angle: language models read music as text too. ChatMusician (2024) was trained on ABC notation. Optional: ask an LLM to continue the melody in ABC and render its answer with Verovio.
+- AI angle: language models read music as text too. ChatMusician (2024) was trained on ABC notation. Part 9 comes back to this.
 
 ## 2. Why encode music? (15 min)
 
@@ -70,7 +114,7 @@ One slide on **notations customised for a user group**: shape notes (singing sch
 
 Forward links to mention: chant is encoded today in GABC and Volpiano (Verovio reads both; see [examples/alleluia_fragment.gabc](examples/alleluia_fragment.gabc)); MEI has a mensural module; jianpu inspired the Essen code in part 5.
 
-## 4. Notation for machines: barrels, rolls, punched cards (15 min)
+## 4. Notation for machines: barrels, rolls, punched cards (20 min)
 
 When the reader is a machine, notation becomes a program: positions on a cylinder or holes in paper that trigger sound.
 
@@ -87,7 +131,7 @@ When the reader is a machine, notation becomes a program: positions on a cylinde
 
 ### Demo A: Debussy plays *Children's Corner* (Welte-Mignon roll 2733)
 
-Source: SUPRA (Stanford University Piano Roll Archive), roll `dc920rk8870`.
+Source: SUPRA (Stanford University Piano Roll Archive), roll `dc920rk8870`. Shown on the live page; students repeat it in `01_player_piano.ipynb` in block 2 or at home.
 
 1. Show the scanned roll in Stanford's viewer: <https://purl.stanford.edu/dc920rk8870>. Link only; image rights stay with Stanford Libraries.
 2. In the notebook, download the two MIDI versions at runtime:
@@ -97,7 +141,17 @@ Source: SUPRA (Stanford University Piano Roll Archive), roll `dc920rk8870`.
 
 Discussion: *Is a roll a score, a recording or a program? Where are the bar lines and the quarter notes? What is a "note" when 33,508 holes become 6,031 notes?*
 
-## 5. Notation for computers, 1940s to the 1990s (15 min)
+## 5. Setup: Jupyter4NFDI login and first notebook (30 min)
+
+1. Open <https://hub.nfdi-jupyter.de>, sign in with Helmholtz AAI and start JupyterLab on JSC-Cloud (steps as in the CAMAT cloud guide).
+2. Check the kernel: Python 3.11 or later.
+3. Get the session notebooks into the workspace (download from the live page or clone the course repository; to decide).
+4. Run the setup cell (`%pip install ...`) and the first render cell. A rendered score is the success check.
+5. Collect each problem and its fix; they go into a FAQ on the live page for later sessions.
+
+Files under `/home/jovyan` persist after a restart; everything else is discarded when the server stops.
+
+## 6. Notation for computers, 1940s to the 1990s (20 min)
 
 | When | System | People | Made for | Today |
 |---|---|---|---|---|
@@ -116,15 +170,15 @@ Message: the 1960s needed music for **printing** (DARMS) and **cataloguing** (Pl
 
 One bridge slide after 1990: MEI (Perry Roland's XML schema, 1999, built on the principles of TEI) for editions; MusicXML (Recordare, from 2000) for exchange between notation programs; Verovio renders MEI and the other formats in the browser and in Python; language models trained on ABC and kern (2024–).
 
-## 6. Today's formats in Verovio (15 min)
+## 7. Today's formats in Verovio (25 min)
 
-Demo B, notebook `01_formats_verovio.ipynb` (to build):
+Demo B: first on the live page, then in `01_formats_verovio.ipynb`:
 
 1. Setup on Jupyter4NFDI: `%pip install verovio`.
 2. Load each file in [examples/](examples/) and render the SVGs side by side.
 3. Compare what each records beyond the notes: phrase marks in EsAC (visible as brackets in the render), spines in kern, `<divisions>` in MusicXML, the header and `xml:id`s in MEI.
 4. Convert: kern → MEI with `getMEI()`; MEI → `renderToTimemap()` → piano-roll plot. This links back to Demo A and forward to the CAMAT representations.
-5. Hands-on (if time allows): change a note in the ABC and the kern version, add a sharp, then break the syntax on purpose and read the error.
+5. Hands-on: change a note in the ABC and the kern version, add a sharp, change the metre, then break the syntax on purpose and read the error.
 
 Verovio 6.3 (the pip wheel) input formats as tested on 2026-10-14:
 
@@ -143,23 +197,56 @@ Verovio 6.3 (the pip wheel) input formats as tested on 2026-10-14:
 
 Re-run the check on any machine with `python examples/check_examples.py`.
 
-## 7. Wrap-up (5 min)
+## 8. Binary notation: holes, grids and what survives (20 min)
 
-- Recap the three questions: who reads it, what it records, what it leaves out.
+Demo C, a preview of the CAMAT representations used later in the course.
+
+- **Back to the roll.** A perforation is binary: hole or no hole at a position. The raw SUPRA file is exactly that, 33,508 hole events.
+- **The melody as a grid** (from part 1):
+
+```
+      bar 1   bar 2   bar 3   bar 4
+A4    0000    0000    1111    0000
+G4    0000    1111    0000    1111
+F4    0001    0000    0000    0000
+E4    0010    0000    0000    0000
+D4    0100    0000    0000    0000
+C4    1000    0000    0000    0000
+```
+
+- *Which bars can you no longer tell apart?* Bar 2 (two half notes), bar 3 (four quarter notes) and bar 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins. CAMAT's `binary_roundtrip.ipynb` shows the same effect: adjacent note events form a single run.
+- **Resolution is a choice.** A quarter-note grid cannot hold eighth notes; CAMAT's default cell is a sixteenth (0.25 quarter lengths). Finer grids cost size.
+- **What would fix it?** A separate onset grid, or keeping the note table next to the grid, as CAMAT does with `xml:id`s pointing back to the score.
+- Hands-on: change the melody and the grid size, convert grid → notes → Verovio, and compare with the original.
+
+## 9. An LLM writes ABC (15 min)
+
+Demo D.
+
+- **Why ABC:** compact text with many tune collections online, so language models have seen a lot of it. ChatMusician (2024) was trained on ABC.
+- **Live:** ask an LLM on the projector for a short melody in ABC (given key, metre, length), then the same in kern. Paste both into the live page or the notebook and render them.
+- **Check:** does every bar add up to the metre? Does Verovio warn? Are key and range what was asked for? Is the kern valid at all?
+- **Recorded answers** on the live page keep the demo working without network or LLM access.
+- **Data protection:** students do not need their own LLM account; the instructor's demo (or a university service, if available) is enough.
+- **Discussion:** the model writes text that looks like music. Because it is an encoding, we can check it, which a picture of a score would not allow.
+
+## 10. Wrap-up (10 min)
+
+- Recap the three questions: who reads it, what it records, what it leaves out. Apply them to the grid and to the LLM's ABC.
 - Course roadmap: digital edition (MEI) → CAMAT note tables and piano rolls → statistics and pattern search.
 - Homework:
-  1. Log in to Jupyter4NFDI (<https://hub.nfdi-jupyter.de>, Helmholtz AAI) and run the Verovio notebook.
+  1. If setup failed in class, finish it with the FAQ on the live page and run `01_formats_verovio.ipynb`.
   2. Encode the first phrase of a melody of your choice in ABC or kern and render it.
   3. Write down one thing about the melody that your encoding cannot express.
 
 ## To prepare before tomorrow
 
 - [x] Example encodings, tested with Verovio 6.3 ([examples/](examples/)).
-- [ ] Slides: timeline parts 3–5 (about 15–20 slides).
-- [ ] Notebook `01_formats_verovio.ipynb` (Demo B).
-- [ ] Notebook `01_player_piano.ipynb` (Demo A): downloads the SUPRA MIDI at runtime; `mido` + `matplotlib`.
-- [ ] Run both notebooks once on Jupyter4NFDI.
-- [ ] Optional: LLM-writes-ABC demo.
+- [ ] Live page: session text + demos A–D (served locally first).
+- [ ] Notebooks `01_formats_verovio.ipynb`, `01_player_piano.ipynb`, `01_binary_grid.ipynb`.
+- [ ] Recorded LLM answers (ABC and kern) for Demo D.
+- [ ] Run all notebooks once on Jupyter4NFDI.
+- [ ] Slides for parts 2–4 and 6, or present them from the live page.
 
 Rights: SUPRA MIDI files are CC BY-NC-SA 4.0 according to the GitHub `LICENSE.txt` (the Stanford Digital Repository record for SUPRA-RW 1.1 says 3.0). Attribute them and cite Shi, Sapp, Arul, McBride and Smith, "SUPRA: Digitizing the Stanford University Piano Roll Archive", ISMIR 2019. Download the MIDI in the notebook rather than committing it. Don't put roll images in this repository; link to Stanford's viewer.
 
