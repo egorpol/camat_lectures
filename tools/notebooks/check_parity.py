@@ -104,9 +104,9 @@ def add_rule_cases(cases, notes, res, meter):
         grid = to_grid(notes, res, meter, rule)
         gjson = grid_for_json(grid)
         cases.append(("to_grid", to_grid, [notes, res, meter, rule]))
+        cases.append(("grid_to_notes", grid_to_notes, [gjson]))
         for onsets in (True, False):
             cases.append(("read_grid", read_grid, [gjson, onsets]))
-            cases.append(("grid_to_notes", grid_to_notes, [gjson, onsets]))
             back = read_grid(grid, onsets)
             cases.append(("notes_to_events", notes_to_events, [back["notes"], gjson]))
             cases.append(("events_to_kern", events_to_kern, [back["events"], gjson]))

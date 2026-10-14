@@ -26,7 +26,7 @@ const FN = {
   grid_to_events: (grid, onsets) => gridToEvents(normalizeGrid(grid), { onsets }),
   events_to_notes: eventsToNotes,
   read_grid: (grid, onsets) => readGrid(normalizeGrid(grid), { onsets }),
-  grid_to_notes: (grid, onsets) => gridToNotes(normalizeGrid(grid), { onsets }),
+  grid_to_notes: (grid) => gridToNotes(normalizeGrid(grid)),
   notes_to_events: (notes, grid) => notesToEvents(notes, normalizeGrid(grid)),
   kern_pitch: kernPitch,
   events_to_kern: (events, grid) => eventsToKern(events, normalizeGrid(grid)),

@@ -7,7 +7,8 @@
 #   is read back column by column, as a sequence of chords.
 # "camat": as CAMAT's create_binary_matrix, onsets are floored and ends ceiled,
 #   so a note fills every cell it touches. The grid is read back row by row, as
-#   CAMAT's binary_slice_to_df does.
+#   CAMAT's binary_slice_to_df does: each run of 1s is one note. CAMAT has no
+#   onset layer (yet), so this read-back ignores onsets.
 
 import math
 
@@ -182,7 +183,7 @@ def grid_to_events(grid, onsets=False):
 # another pitch starts or stops while it sounds.
 def read_grid(grid, onsets=False):
     if grid.get("rule") == "camat":
-        notes = grid_to_notes(grid, onsets)
+        notes = grid_to_notes(grid)
         return {"events": notes_to_events(notes, grid), "notes": notes, "cut": 0}
     events = grid_to_events(grid, onsets)
     cut = 0
@@ -194,16 +195,16 @@ def read_grid(grid, onsets=False):
     return {"events": events, "notes": events_to_notes(events, grid["res"]), "cut": cut}
 
 
-# Row by row: each run of 1s in one row is one note; with onsets, a cell
-# marked as an onset starts a new one.
-def grid_to_notes(grid, onsets=False):
+# Row by row, as CAMAT reads its grids: each run of 1s in one row is one note,
+# so repeated notes of the same pitch merge.
+def grid_to_notes(grid):
     notes = []
     p = grid["low"]
     while p <= grid["high"]:
         start = -1
         for i in range(grid["nCols"] + 1):
             on = i < grid["nCols"] and grid["occ"][p][i] == 1
-            if start >= 0 and (not on or (onsets and grid["ons"][p][i])):
+            if start >= 0 and not on:
                 notes.append({"pitch": p, "on": start / grid["res"], "off": i / grid["res"]})
                 start = -1
             if on and start < 0:

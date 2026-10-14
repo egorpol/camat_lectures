@@ -417,6 +417,7 @@ async function initGrid(root) {
     h("option", { value: "demo" }, "this demo's"),
     h("option", { value: "camat" }, "CAMAT's"));
   const onsetBox = h("input", { type: "checkbox" });
+  const onsetWhy = h("span", { class: "vrv-note", hidden: true }, "(CAMAT has no onset layer yet)");
   const compactBox = h("input", { type: "checkbox", checked: true });
   const before = h("div", { class: "vrv-out" }, loadingNote());
   const after = h("div", { class: "vrv-out" });
@@ -432,7 +433,7 @@ async function initGrid(root) {
         h("div", { class: "vrv-controls" },
           h("label", {}, "Grid cell ", resSelect),
           h("label", {}, "Rules ", ruleSelect),
-          h("label", {}, onsetBox, " keep an onset grid"),
+          h("label", {}, onsetBox, " keep an onset grid", onsetWhy),
           h("label", {}, compactBox, " hide empty black-key rows"),
           h("button", { type: "button", class: "md-button", onclick: () => { textarea.value = original; fromMelody(); } }, "Reset"))),
       h("div", {}, h("p", { class: "vrv-label" }, "Original, rendered by Verovio"), before)),
@@ -490,20 +491,30 @@ async function initGrid(root) {
       items.push(`Held notes are cut ${cut} time(s) where another pitch starts or stops: this demo reads the grid column by column, as chords. CAMAT's rules read each row on its own.`);
     }
     if (cmp.kept === n && back.length === n) items.push("Nothing lost: the round trip gives back the same notes.");
+    else if (grid.rule === "camat") items.push("CAMAT reads a run of 1s as one held note, so repeated notes of the same pitch merge: CAMAT has no onset layer (yet).");
     else if (!onsets) items.push("Without onsets, a run of 1s is read as one held note, so repeated notes of the same pitch merge. Tick “keep an onset grid” to keep them apart.");
     summary.replaceChildren(...items.map((t) => h("p", {}, t)));
   };
 
   textarea.addEventListener("input", debounce(fromMelody, 500));
   resSelect.addEventListener("change", buildGrid);
+  // CAMAT has no onset layer (yet), so its rules read the grid without one.
+  const syncOnsets = () => {
+    const camat = ruleSelect.value === "camat";
+    if (camat) onsetBox.checked = false;
+    onsetBox.disabled = camat;
+    onsetWhy.hidden = !camat;
+  };
   // After clicks, keep the cells and change only how the grid is read back.
   ruleSelect.addEventListener("change", () => {
+    syncOnsets();
     if (!state.edited) return buildGrid();
     state.grid.rule = ruleSelect.value;
     fromGrid();
   });
   onsetBox.addEventListener("change", fromGrid);
   compactBox.addEventListener("change", fromGrid);
+  syncOnsets();
   await fromMelody();
 }
 

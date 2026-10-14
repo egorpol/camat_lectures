@@ -11,7 +11,8 @@ Expected on 2026-10-15: 11 notes in each of the six formats, 5 GABC neumes,
 grid round trip 5/11 then 11/11 with onsets; on a quarter grid the eighth-note
 melody loses D4, F4, A4, A4 with the demo's rules and none with CAMAT's (F4,
 not F#4, after Demo B's K:G tune); the clicked C4 under bar 1 is cut 3 times
-with the demo's rules and tied through with CAMAT's; both recorded LLM answers all
+with the demo's rules and tied through with CAMAT's; the onset box is disabled
+under CAMAT's rules (CAMAT has no onset layer yet); both recorded LLM answers all
 ticks, 15 zones, bars and hit areas in Demo E (zone 11 selects bar rfwucfq
 with its editorial note; render bar 5 selects zone 4), 6,031 notes
 (expressive) and 33,508 holes (raw), no console errors.
@@ -93,6 +94,7 @@ with sync_playwright() as p:
     page.wait_for_timeout(1500)
     print("C held C4 camat:", grid.locator(".grid-summary").text_content())
     print("C held C4 camat kern:", " | ".join(grid.locator("details pre").text_content().splitlines()[3:9]))
+    print("C onset box under camat: disabled =", grid.get_by_label("keep an onset grid").is_disabled())
     # Demo D
     llm = page.locator("[data-demo=llm]")
     for label in ["Claude Opus 5.5 · ABC", "Claude Opus 5.5 · kern", "Constructed example with typical errors"]:

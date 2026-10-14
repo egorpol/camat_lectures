@@ -71,7 +71,7 @@ print(kern)
 #
 # ## 4. A second grid for onsets
 #
-# One fix: keep a second grid that marks where notes start. In the picture, dark cells are note starts and light cells are continuations. CAMAT's grids have no onset grid yet: CAMAT keeps the onsets in its note table.
+# One fix: keep a second grid that marks where notes start. In the picture, dark cells are note starts and light cells are continuations. CAMAT has no onset layer yet: it keeps the onsets in its note table, so `rule="camat"` ignores `onsets=True`.
 #
 # The two grids together are one grid with three values: **0** = silence, **1** = a note continues, **2** = a note starts. Two yes/no grids would allow four combinations, but "a note starts where nothing sounds" cannot happen, so three are left: the grid is no longer binary but *ternary*. Every cell that is not 0 still means "sounding", so a tool written for the 0/1 grid can read it too. The last block printed below is this ternary grid.
 
@@ -104,8 +104,9 @@ RES2 = 1  # Try this: 2
 for rule in ["demo", "camat"]:
     print(f"--- rule = {rule!r}, {RES2} cell(s) per quarter note")
     grid2 = to_grid(source2["notes"], RES2, source2["meter"], rule)
-    draw_grid(grid2, onsets=True)
-    round_trip(source2, grid2, onsets=True)
+    onsets = rule == "demo"  # CAMAT has no onset layer yet
+    draw_grid(grid2, onsets=onsets)
+    round_trip(source2, grid2, onsets=onsets)
 
 # %% [markdown]
 # ## 6. Change the grid
@@ -144,7 +145,7 @@ kern = round_trip(source, grid, onsets=True)
 # %% [markdown]
 # ## 7. Explore with controls
 #
-# Change the melody in part 1, then choose the cell size, the rules and whether to keep onsets. If the controls do not appear, the cell says what to do.
+# Change the melody in part 1, then choose the cell size, the rules and whether to keep onsets (only with this demo's rules: CAMAT has no onset layer yet). If the controls do not appear, the cell says what to do.
 
 # %%
 import ipywidgets as widgets
@@ -154,13 +155,22 @@ def explore(res=1, rule="demo", onsets=False):
     draw_grid(g, onsets=onsets)
     round_trip(source, g, onsets=onsets)
 
+rule_menu = widgets.Dropdown(options=[("this demo's", "demo"), ("CAMAT's", "camat")], value="demo", description="rules")
+onset_box = widgets.Checkbox(value=False, description="keep an onset grid")
+
+def no_onsets_for_camat(change):  # CAMAT has no onset layer yet
+    onset_box.disabled = change["new"] == "camat"
+    if onset_box.disabled:
+        onset_box.value = False
+
+rule_menu.observe(no_onsets_for_camat, names="value")
 controls = widgets.interactive(
     explore,
     res=widgets.Dropdown(options=[("quarter note", 1), ("eighth note", 2), ("sixteenth note", 4)], value=1, description="cell"),
-    rule=widgets.Dropdown(options=[("this demo's", "demo"), ("CAMAT's", "camat")], value="demo", description="rules"),
-    onsets=widgets.Checkbox(value=False, description="keep an onset grid"),
+    rule=rule_menu,
+    onsets=onset_box,
 )
-show_controls(controls, 'explore(res=2, rule="camat", onsets=True)')
+show_controls(controls, 'explore(res=2, rule="demo", onsets=True)')
 
 # %% [markdown]
 # ## 8. What CAMAT does with the grid

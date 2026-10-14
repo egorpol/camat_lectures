@@ -7,7 +7,8 @@
 //   is read back column by column, as a sequence of chords.
 // "camat": as CAMAT's create_binary_matrix, onsets are floored and ends ceiled,
 //   so a note fills every cell it touches. The grid is read back row by row, as
-//   CAMAT's binary_slice_to_df does.
+//   CAMAT's binary_slice_to_df does: each run of 1s is one note. CAMAT has no
+//   onset layer (yet), so this read-back ignores onsets.
 
 const NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -137,7 +138,7 @@ export function gridToEvents(grid, { onsets = false } = {}) {
 // another pitch starts or stops while it sounds.
 export function readGrid(grid, { onsets = false } = {}) {
   if (grid.rule === "camat") {
-    const notes = gridToNotes(grid, { onsets });
+    const notes = gridToNotes(grid);
     return { events: notesToEvents(notes, grid), notes, cut: 0 };
   }
   const events = gridToEvents(grid, { onsets });
@@ -151,15 +152,15 @@ export function readGrid(grid, { onsets = false } = {}) {
   return { events, notes: eventsToNotes(events, grid.res), cut };
 }
 
-// Row by row: each run of 1s in one row is one note; with onsets, a cell
-// marked as an onset starts a new one.
-export function gridToNotes(grid, { onsets = false } = {}) {
+// Row by row, as CAMAT reads its grids: each run of 1s in one row is one note,
+// so repeated notes of the same pitch merge.
+export function gridToNotes(grid) {
   const notes = [];
   for (let p = grid.low; p <= grid.high; p++) {
     let start = -1;
     for (let i = 0; i <= grid.nCols; i++) {
       const on = i < grid.nCols && grid.occ[p][i] === 1;
-      if (start >= 0 && (!on || (onsets && grid.ons[p][i]))) {
+      if (start >= 0 && !on) {
         notes.push({ pitch: p, on: start / grid.res, off: i / grid.res });
         start = -1;
       }

@@ -39,6 +39,11 @@ instead of versioned, and the date is the day the change went live on the
   without the onset grid (a run of 1s is read as one held note, as on a roll)
   and why reading every 1 as a new note is no better.
 
+- Session 1, Demo C and `01_binary_grid.ipynb`: under CAMAT's rules the
+  *keep an onset grid* box is greyed out, because CAMAT has no onset layer
+  yet; CAMAT's read-back always joins a run of 1s into one note, as its
+  `binary_slice_to_df` does.
+
 ### Fixed
 
 - Demo A: dragging the speed or start slider no longer makes the slider jump

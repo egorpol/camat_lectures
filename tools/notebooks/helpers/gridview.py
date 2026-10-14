@@ -8,8 +8,10 @@ _EMPTY, _SOUND, _START, _CONT = (1, 1, 1), (0.29, 0.56, 0.85), (0.12, 0.37, 0.66
 
 
 # One row per pitch (highest at the top), one column per cell, a line at each bar.
-# With onsets: dark = a note starts, light = it continues.
+# With onsets: dark = a note starts, light = it continues (not with CAMAT's
+# rules: CAMAT has no onset layer yet).
 def draw_grid(grid, onsets=False, compact=True):
+    onsets = onsets and grid["rule"] != "camat"
     rows = grid_rows(grid, compact)
     n = grid["nCols"]
     image = np.ones((len(rows), n, 3))
@@ -62,6 +64,9 @@ def set_cell(grid, name, cell, value):
 
 # Grid -> notes and **kern with the grid's rules, compared with the melody we started from.
 def round_trip(source, grid, onsets=False):
+    if onsets and grid["rule"] == "camat":
+        print("CAMAT has no onset layer (yet), so rule=\"camat\" reads the grid without onsets.")
+        onsets = False
     back = read_grid(grid, onsets=onsets)
     kern = events_to_kern(back["events"], grid)
     cmp = compare_notes(source["notes"], back["notes"])
@@ -79,6 +84,8 @@ def round_trip(source, grid, onsets=False):
         print(f"Held notes are cut {back['cut']} time(s) where another pitch starts or stops: rule=\"demo\" reads the grid column by column, as chords. CAMAT's rules read each row on its own.")
     if cmp["kept"] == n and len(back["notes"]) == n:
         print("Nothing lost: the round trip gives back the same notes.")
+    elif grid["rule"] == "camat":
+        print("CAMAT reads a run of 1s as one held note, so repeated notes of the same pitch merge: CAMAT has no onset layer (yet).")
     elif not onsets:
         print("Without onsets, a run of 1s is read as one held note, so repeated notes of the same pitch merge. Use onsets=True to keep them apart.")
     render("humdrum", kern, scale=30, header="none")
