@@ -7,6 +7,13 @@ Every notation is already an encoding. It was made for a particular reader and a
 !!! tip "How to use this page"
     The demos on this page run in your browser; nothing needs to be installed. They load [Verovio](https://www.verovio.org) (about 12 MB) the first time you use them. The same demos come as Jupyter notebooks, where you can change the inputs and keep your work: see [Notebooks](#notebooks) at the end.
 
+??? info "What is Verovio?"
+    Verovio is the program that turns an encoding into a score you can see on this page. It *engraves* music: it reads an encoded score and draws it as notation (an SVG image). It is built around MEI and converts the other formats on the fly: kern, MusicXML, ABC, Plaine & Easie, EsAC, and the chant formats GABC and Volpiano. It is free and open source (LGPL licence), and the [RISM Digital Center](https://rism.digital) leads its development.
+
+    Verovio is written in C++ and comes in versions for other languages. This page uses the JavaScript version, which runs inside your browser; the notebooks use the Python version (`pip install verovio`). Both are version 6.3.0, so page and notebooks show the same score. You can also try it in the [Verovio editor](https://editor.verovio.org), and CAMAT, the library we use from session 2, renders scores with it.
+
+    Verovio only shows what the encoding says. When a score looks wrong, look at the encoding first, and then at how Verovio reads it: parts 8 and 10 do both.
+
 **By the end of the session you can**
 
 1. explain why a score made for human readers is not enough for a computer;
@@ -256,6 +263,7 @@ A perforation is binary: there is a hole at a position, or there is not. The raw
 - Bars 2 (two half notes), 3 (four quarter notes) and 4 (one whole note) all become a run of four cells. Pure occupancy loses where one note ends and the next begins.
 - **Resolution is a choice.** A quarter-note grid cannot hold eighth notes; add some to the melody and watch them disappear. CAMAT's default cell is a sixteenth note. Finer grids cost size.
 - **What would fix it?** A second grid that marks where notes start ("keep an onset grid"), or keeping a note table next to the grid, as CAMAT does, with identifiers that point back into the score.
+- **Two grids are one grid with three values.** With the onset grid ticked, each cell is in one of three states: 0 = silence, 1 = a note continues, 2 = a note starts. Two yes/no grids would allow four combinations, but "a note starts where nothing sounds" cannot happen, so three are left: the notation is no longer binary but *ternary*. Every cell that is not 0 still says "sounding", so a tool written for the 0/1 grid can read the new grid too.
 
 ## 10. An LLM writes ABC
 
@@ -280,7 +288,7 @@ You do not need your own LLM account for this: the recorded answers and the inst
 
 ## Notebooks
 
-The notebooks repeat the demos with inputs you can change. On Jupyter4NFDI, one cell copies them into your workspace (see [setup](../../setup.md#get-the-session-notebooks)); you can also download them here and upload them. Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets).
+The notebooks repeat the demos with inputs you can change. On Jupyter4NFDI, one cell copies them into your workspace (see [setup](../../setup.md#get-the-session-notebooks)); you can also download them here and upload them. Each one starts with a cell that installs what it needs (Verovio 6.3.0, mido, matplotlib, ipywidgets, and Bokeh for interactive piano rolls).
 
 - [`01_formats_verovio.ipynb`](notebooks/01_formats_verovio.ipynb){: download="01_formats_verovio.ipynb" }: Demos B and D, the seven encodings and the LLM's melody. Start here.
 - [`01_player_piano.ipynb`](notebooks/01_player_piano.ipynb){: download="01_player_piano.ipynb" }: Demo A, Debussy's roll as raw and expressive MIDI. Downloads the MIDI files from GitHub when you run it.

@@ -13,7 +13,7 @@
 # The first cell installs what the notebook needs; run it once after each server start. The second cell defines helper functions; it is collapsed because you do not need to read it.
 
 # %% install
-%pip install -q verovio==6.3.0 mido matplotlib ipywidgets
+%pip install -q verovio==6.3.0 mido matplotlib ipywidgets bokeh
 
 # %% helpers: mei grid checks vrv roll answers
 
@@ -180,6 +180,7 @@ for name, text in encodings.items():
     print(f"{name:15} {len(text.encode('utf-8')):6,} bytes")
 
 # %%
+# Try this: add backend="bokeh" for an interactive roll (drag to move, wheel to zoom, point at a note).
 score_roll(read_score("abc", abc, svg=False), title="ABC", height=2.5)
 score_roll(read_score("esac", esac, svg=False), title="EsAC", height=2.5)
 

@@ -15,7 +15,7 @@
 # %% install
 %pip install -q verovio==6.3.0 mido matplotlib ipywidgets
 
-# %% helpers: mei grid checks vrv roll gridview
+# %% helpers: mei grid checks vrv roll gridview ui
 
 # %% [markdown]
 # ## 1. The melody
@@ -62,6 +62,8 @@ print(kern)
 # ## 4. A second grid for onsets
 #
 # One fix: keep a second grid that marks where notes start. In the picture, dark cells are note starts and light cells are continuations.
+#
+# The two grids together are one grid with three values: **0** = silence, **1** = a note continues, **2** = a note starts. Two yes/no grids would allow four combinations, but "a note starts where nothing sounds" cannot happen, so three are left: the grid is no longer binary but *ternary*. Every cell that is not 0 still means "sounding", so a tool written for the 0/1 grid can read it too. The last block printed below is this ternary grid.
 
 # %%
 draw_grid(grid, onsets=True)
@@ -92,7 +94,7 @@ for res in [1, 2]:  # Try this: add 4
 # %% [markdown]
 # ## 6. Change the grid
 #
-# On the course page you click cells; here you call `set_cell(grid, pitch, cell, value)`. Cells count from 1; with one cell per quarter note, bar 2 is cells 5 to 8. The value is `0` (silent), `1` (sounding) or `"start"` (sounding, and a note starts here).
+# On the course page you click cells; here you call `set_cell(grid, pitch, cell, value)`. Cells count from 1; with one cell per quarter note, bar 2 is cells 5 to 8. The value is `0` (silent), `1` (sounding) or `2` (sounding, and a note starts here): the three values of the ternary grid.
 
 # %%
 grid = to_grid(source["notes"], 1, source["meter"])
@@ -114,7 +116,7 @@ kern = round_trip(source, grid, onsets=True)
 # %% [markdown]
 # ## 7. Explore with controls
 #
-# Change the melody in part 1, then choose the cell size and whether to keep onsets. If you see "Error displaying widget" instead of controls, reload the browser tab once (the install cell has just added the widget library), or use the cells above.
+# Change the melody in part 1, then choose the cell size and whether to keep onsets. If the controls do not appear, the cell says what to do.
 
 # %%
 import ipywidgets as widgets
@@ -124,11 +126,12 @@ def explore(res=1, onsets=False):
     draw_grid(g, onsets=onsets)
     round_trip(source, g, onsets=onsets)
 
-widgets.interact(
+controls = widgets.interactive(
     explore,
     res=widgets.Dropdown(options=[("quarter note", 1), ("eighth note", 2), ("sixteenth note", 4)], value=1, description="cell"),
     onsets=widgets.Checkbox(value=False, description="keep an onset grid"),
-);
+)
+show_controls(controls, "explore(res=2, onsets=True)")
 
 # %% [markdown]
 # ## Questions

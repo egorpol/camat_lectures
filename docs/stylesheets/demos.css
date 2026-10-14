@@ -201,6 +201,11 @@
   border-radius: 2px;
 }
 
+.vrv-legend i.vrv-ramp {
+  width: 2.6em;
+  background: linear-gradient(to right, color-mix(in srgb, var(--md-default-fg-color) 30%, transparent), var(--md-default-fg-color));
+}
+
 /* Demo C */
 
 .grid-wrap {

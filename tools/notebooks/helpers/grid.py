@@ -131,9 +131,12 @@ def grid_to_text(grid, compact=True, onsets=False):
 
     if not onsets:
         return block(grid["occ"])
+    # Both grids in one: a note can only start where a pitch sounds, so three values are enough.
+    three = {p: [(2 if grid["ons"][p][i] else 1) if v else 0 for i, v in enumerate(grid["occ"][p])] for p in rows}
     return (
         f"Sounding (1 = the pitch sounds):\n{block(grid['occ'])}\n\n"
-        f"Onsets (1 = a note starts):\n{block(grid['ons'])}"
+        f"Onsets (1 = a note starts):\n{block(grid['ons'])}\n\n"
+        f"Both in one grid (2 = a note starts, 1 = it continues, 0 = silence):\n{block(three)}"
     )
 
 

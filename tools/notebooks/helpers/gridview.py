@@ -22,7 +22,8 @@ def draw_grid(grid, onsets=False, compact=True):
     if n <= 96:
         for r, p in enumerate(rows):
             for i in range(n):
-                ax.text(i, r, grid["occ"][p][i], ha="center", va="center", fontsize=8,
+                value = (2 if onsets and grid["ons"][p][i] else 1) if grid["occ"][p][i] else 0
+                ax.text(i, r, value, ha="center", va="center", fontsize=8,
                         color="white" if grid["occ"][p][i] else "0.6")
     for x in np.arange(-0.5, n, 1):
         ax.axvline(x, color="0.85", lw=0.5)
@@ -37,7 +38,7 @@ def draw_grid(grid, onsets=False, compact=True):
 
 
 # Change one cell, as a click on the web page does. Cells count from 1.
-# value: 0 (silent), 1 (sounding) or "start" (sounding, and a note starts here).
+# value: 0 (silent), 1 (sounding) or 2 (sounding, and a note starts here; "start" works too).
 def set_cell(grid, name, cell, value):
     pitch = parse_pitch(name)
     if pitch is None:
@@ -52,7 +53,7 @@ def set_cell(grid, name, cell, value):
     i = cell - 1
     if value == 0:
         grid["occ"][pitch][i] = grid["ons"][pitch][i] = 0
-    elif value == "start":
+    elif value in (2, "start"):
         grid["occ"][pitch][i] = grid["ons"][pitch][i] = 1
     else:
         grid["occ"][pitch][i] = 1

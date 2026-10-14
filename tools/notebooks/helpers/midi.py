@@ -80,7 +80,8 @@ ROLES = {
 }
 
 
-# All notes of one version, with the track number as colour and loudness as opacity.
+# All notes of one version, with the track number as colour and, in the expressive
+# file, loudness as opacity: the softest note in the file is pale, the loudest solid.
 def roll_notes(midi, version):
     notes = []
     for track in midi["tracks"]:
@@ -88,8 +89,12 @@ def roll_notes(midi, version):
             continue
         label, colour = ROLES[version][track["index"]]
         for n in track["notes"]:
-            alpha = 0.9 if version == "raw" else min(1, 0.3 + (n["velocity"] - 20) / 50)
-            notes.append({**n, "track": colour, "role": label, "alpha": alpha})
+            notes.append({**n, "track": colour, "role": label, "alpha": 0.9})
+    if version == "exp" and notes:
+        soft = min(n["velocity"] for n in notes)
+        loud = max(n["velocity"] for n in notes)
+        for n in notes:
+            n["alpha"] = 0.3 + 0.7 * (n["velocity"] - soft) / max(1, loud - soft)
     return sorted(notes, key=lambda n: n["start"])
 
 
@@ -113,14 +118,15 @@ def pedal_bands(midi):
 
 
 # A very plain synthesiser: enough to hear rhythm, chords and dynamics, not a piano.
-def synth(notes, start, length, rate=22050, dynamics=True):
-    out = np.zeros(int(rate * (length + 1)))
+# speed: 0.5 plays the window at half speed (twice as long), 2 at double speed.
+def synth(notes, start, length, rate=22050, dynamics=True, speed=1.0):
+    out = np.zeros(int(rate * (length / speed + 1)))
     for n in notes:
         if not (start <= n["start"] < start + length and 21 <= n["pitch"] <= 108):
             continue
-        dur = max(0.02, min(n["end"], start + length) - n["start"])
+        dur = max(0.02, (min(n["end"], start + length) - n["start"]) / speed)
         level = 0.04 + 0.2 * max(0, n["velocity"] - 20) / 60 if dynamics else 0.12
-        k0 = int((n["start"] - start) * rate)
+        k0 = int((n["start"] - start) / speed * rate)
         k1 = min(len(out), k0 + int((dur + 0.4) * rate))
         t = np.arange(k1 - k0) / rate
         freq = 440 * 2 ** ((n["pitch"] - 69) / 12)

@@ -38,3 +38,20 @@ instead of versioned, and the date is the day the change went live on the
   pictures on Wikimedia Commons, a jeongganbo encoding paper), and the
   notations made for user groups have a table of their own with an example for
   each.
+- Session 1: a "What is Verovio?" box at the top of the page.
+- Demo A: a speed slider (0.25× to 2×) that also works while the window plays,
+  and a legend entry for loudness.
+- Part 9 and Demo C: the sounding and onset grids explained as one grid with
+  three values (0 = silence, 1 = a note continues, 2 = a note starts); with the
+  onset grid ticked, cells show 2 where a note starts.
+- Notebooks: piano rolls can be drawn with matplotlib or Bokeh
+  (`BACKEND = "plt"` or `"bokeh"`, or `backend=` per call, as in CAMAT); the
+  player-piano notebook gets `speed` for its sound and sliders. When the
+  browser cannot draw the sliders, the cell now says what to do instead of
+  printing `interactive(children=(...`.
+
+### Changed
+
+- Demo A and its notebook: the shade of a note now spans the roll's own
+  loudness range (velocity 33 to 85), so soft and loud notes look different;
+  before, most notes had nearly the same shade.

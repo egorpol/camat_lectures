@@ -93,7 +93,11 @@ export function gridToText(grid, { compact = true, onsets = false } = {}) {
     return lines.join("\n");
   };
   if (!onsets) return block(grid.occ);
-  return `Sounding (1 = the pitch sounds):\n${block(grid.occ)}\n\nOnsets (1 = a note starts):\n${block(grid.ons)}`;
+  // Both grids in one: a note can only start where a pitch sounds, so three values are enough.
+  const three = {};
+  for (const p of rows) three[p] = Array.from(grid.occ[p], (v, i) => (v ? (grid.ons[p][i] ? 2 : 1) : 0));
+  return `Sounding (1 = the pitch sounds):\n${block(grid.occ)}\n\nOnsets (1 = a note starts):\n${block(grid.ons)}`
+    + `\n\nBoth in one grid (2 = a note starts, 1 = it continues, 0 = silence):\n${block(three)}`;
 }
 
 // Read the grid back as events: a new event starts whenever the set of

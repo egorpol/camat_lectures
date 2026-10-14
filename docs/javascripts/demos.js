@@ -203,10 +203,17 @@ function buildRollViewer(root, files, status) {
     }
     notes.sort((a, b) => a.start - b.start);
     const pedalTrack = files[key].tracks.find((t) => t.controls.some((c) => c.control === 64));
-    versions[key] = { notes, duration: files[key].duration, bands: pedalTrack ? pedalBands(pedalTrack) : [] };
+    const velocities = notes.map((n) => n.velocity);
+    versions[key] = {
+      notes,
+      duration: files[key].duration,
+      bands: pedalTrack ? pedalBands(pedalTrack) : [],
+      soft: Math.min(...velocities),
+      loud: Math.max(...velocities),
+    };
   }
 
-  const state = { version: "exp", start: 4, length: 20, playhead: null };
+  const state = { version: "exp", start: 4, length: 20, speed: 1, playhead: null };
   const canvas = h("canvas", { class: "vrv-roll vrv-roll-large" });
   const legend = h("div", { class: "vrv-legend" });
   const slider = h("input", { type: "range", min: 0, step: 0.5, value: state.start, "aria-label": "Start time in seconds" });
@@ -215,6 +222,8 @@ function buildRollViewer(root, files, status) {
   const versionSelect = h("select", { "aria-label": "MIDI version" },
     h("option", { value: "exp" }, "expressive: holes merged into notes"),
     h("option", { value: "raw" }, "raw: one event per hole"));
+  const speedSlider = h("input", { type: "range", min: 0.25, max: 2, step: 0.25, value: state.speed, "aria-label": "Playback speed" });
+  const speedLabel = h("span", { class: "vrv-size" }, "1×");
   const playButton = h("button", { type: "button", class: "md-button" }, "▶ Play window");
   const info = h("p", { class: "vrv-note" });
 
@@ -230,7 +239,8 @@ function buildRollViewer(root, files, status) {
       low: raw ? 14 : 21,
       high: raw ? 114 : 108,
       color: (n) => TRACK_COLORS[n.track],
-      alpha: (n) => (raw ? 0.9 : Math.min(1, 0.3 + (n.velocity - 20) / 50)),
+      // Expressive file: the softest note in the file is pale, the loudest solid.
+      alpha: (n) => (raw ? 0.9 : 0.3 + (0.7 * (n.velocity - v.soft)) / Math.max(1, v.loud - v.soft)),
       timeLabel: (t) => `${t} s`,
       timeStep: state.length <= 10 ? 1 : state.length <= 40 ? 5 : state.length <= 80 ? 10 : 20,
       bands: raw ? [] : v.bands,
@@ -239,11 +249,16 @@ function buildRollViewer(root, files, status) {
     const total = v.notes.length;
     info.textContent = raw
       ? `Raw file: ${fmt(total)} hole events in 4 tracks, ${v.duration.toFixed(0)} s. In this window: ${fmt(visible.length)}.`
-      : `Expressive file: ${fmt(total)} notes in 2 tracks, ${v.duration.toFixed(0)} s. In this window: ${fmt(visible.length)}. Darker = louder.`;
+      : `Expressive file: ${fmt(total)} notes in 2 tracks, ${v.duration.toFixed(0)} s. In this window: ${fmt(visible.length)}. `
+        + `The shade of a note is its loudness (MIDI velocity, decoded from the expression holes): pale = soft, solid = loud.`;
     const roles = Object.values(ROLE[state.version]);
     legend.replaceChildren(
       ...roles.map(([label, i]) => h("span", {}, h("i", { style: `background:${TRACK_COLORS[i]}` }), label)),
-      ...(raw ? [] : [h("span", {}, h("i", { style: "background:#2ca02c" }), "sustain pedal"), h("span", {}, h("i", { style: "background:#8c564b" }), "soft pedal")]),
+      ...(raw ? [] : [
+        h("span", {}, h("i", { class: "vrv-ramp" }), `soft → loud (velocity ${v.soft}–${v.loud})`),
+        h("span", {}, h("i", { style: "background:#2ca02c" }), "sustain pedal"),
+        h("span", {}, h("i", { style: "background:#8c564b" }), "soft pedal"),
+      ]),
     );
   };
 
@@ -259,6 +274,11 @@ function buildRollViewer(root, files, status) {
     state.version = versionSelect.value;
     draw();
   });
+  speedSlider.addEventListener("input", () => {
+    state.speed = +speedSlider.value;
+    speedLabel.textContent = `${state.speed}×`;
+    player?.setSpeed(state.speed);
+  });
 
   let player = null;
   playButton.addEventListener("click", () => {
@@ -266,7 +286,7 @@ function buildRollViewer(root, files, status) {
       player.stop();
       return;
     }
-    player = playWindow(versions[state.version].notes, state.start, state.length, state.version === "raw", (t) => {
+    player = playWindow(versions[state.version].notes, state.start, state.length, state.version === "raw", state.speed, (t) => {
       state.playhead = t;
       draw();
     }, () => {
@@ -283,6 +303,7 @@ function buildRollViewer(root, files, status) {
       h("label", {}, "Version ", versionSelect),
       h("label", {}, "Window ", lengthSelect),
       h("label", { class: "vrv-grow" }, "Start ", slider, " ", startLabel),
+      h("label", {}, "Speed ", speedSlider, " ", speedLabel),
       playButton),
     canvas,
     legend,
@@ -294,23 +315,30 @@ function buildRollViewer(root, files, status) {
 }
 
 // A very plain synthesiser: enough to hear rhythm, chords and dynamics.
-function playWindow(notes, start, length, raw, onTime, onEnd) {
+// speed: seconds of roll per second of sound; setSpeed() changes it while playing.
+function playWindow(notes, start, length, raw, speed, onTime, onEnd) {
   const ctx = new AudioContext();
   const master = ctx.createGain();
   master.gain.value = 0.5;
   const limiter = ctx.createDynamicsCompressor();
   master.connect(limiter).connect(ctx.destination);
-  const t0 = ctx.currentTime + 0.1;
   const queue = notes.filter((n) => n.start >= start && n.start < start + length && n.pitch >= 21 && n.pitch <= 108);
+  // Roll time `from` is heard at audio time `anchor`; after that the roll advances `speed` times as fast.
+  let anchor = ctx.currentTime + 0.1;
+  let from = start;
+  const rollTime = (audio) => from + (audio - anchor) * speed;
   let next = 0;
+  let waiting = []; // oscillators that have not started yet
   let stopped = false;
 
   const schedule = () => {
-    const horizon = ctx.currentTime + 1.0;
-    while (next < queue.length && t0 + queue[next].start - start < horizon) {
+    const now = ctx.currentTime;
+    waiting = waiting.filter((w) => w.at > now);
+    const horizon = rollTime(now + 1.0);
+    while (next < queue.length && queue[next].start < horizon) {
       const n = queue[next++];
-      const at = t0 + n.start - start;
-      const dur = Math.min(n.end, start + length) - n.start;
+      const at = anchor + (n.start - from) / speed;
+      const dur = (Math.min(n.end, start + length) - n.start) / speed;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = "triangle";
@@ -323,14 +351,15 @@ function playWindow(notes, start, length, raw, onTime, onEnd) {
       osc.connect(gain).connect(master);
       osc.start(at);
       osc.stop(at + Math.max(0.02, dur) + 0.4);
+      waiting.push({ osc, at });
     }
   };
   schedule();
   const timer = setInterval(schedule, 200);
   const frame = () => {
     if (stopped) return;
-    const t = start + ctx.currentTime - t0;
-    if (t > start + length + 0.5) {
+    const t = rollTime(ctx.currentTime);
+    if (t > start + length + 0.5 * speed) {
       stop();
       return;
     }
@@ -346,7 +375,20 @@ function playWindow(notes, start, length, raw, onTime, onEnd) {
     ctx.close();
     onEnd();
   }
-  return { stop };
+
+  // Notes already sounding keep their length; the ones not yet started are scheduled again.
+  function setSpeed(value) {
+    const now = Math.max(ctx.currentTime, anchor);
+    from = rollTime(now);
+    anchor = now;
+    speed = value;
+    for (const w of waiting) w.osc.disconnect();
+    waiting = [];
+    next = queue.findIndex((n) => n.start >= from);
+    if (next < 0) next = queue.length;
+    schedule();
+  }
+  return { stop, setSpeed };
 }
 
 // ---------------------------------------------------------------- Demo C
@@ -449,7 +491,7 @@ function drawGridTable(container, grid, { onsets, compact, onChange }) {
         const cell = h("td", {
           class: [on ? "on" : "", attack ? "onset" : "", i % grid.barCells === 0 ? "barstart" : ""].join(" ").trim(),
           title: `${G.pitchName(p)}, cell ${i + 1}`,
-        }, on ? "1" : "0");
+        }, attack ? "2" : on ? "1" : "0");
         cell.addEventListener("click", () => {
           if (!onsets) {
             grid.occ[p][i] = on ? 0 : 1;
@@ -469,7 +511,7 @@ function drawGridTable(container, grid, { onsets, compact, onChange }) {
       })));
   container.replaceChildren(h("table", { class: "grid-table" }, h("thead", {}, head), h("tbody", {}, body)));
   container.append(h("p", { class: "vrv-note" }, onsets
-    ? "Click cycles: 0 → note start (dark) → continuation (light) → 0."
+    ? "Click cycles: 0 → 2 (a note starts, dark) → 1 (it continues, light) → 0."
     : "Click switches a cell between 0 and 1."));
 }
 
