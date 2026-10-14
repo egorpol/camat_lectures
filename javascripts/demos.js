@@ -413,6 +413,9 @@ async function initGrid(root) {
     h("option", { value: 1 }, "quarter note"),
     h("option", { value: 2 }, "eighth note"),
     h("option", { value: 4 }, "sixteenth note"));
+  const ruleSelect = h("select", { "aria-label": "Grid rules" },
+    h("option", { value: "demo" }, "this demo's"),
+    h("option", { value: "camat" }, "CAMAT's"));
   const onsetBox = h("input", { type: "checkbox" });
   const compactBox = h("input", { type: "checkbox", checked: true });
   const before = h("div", { class: "vrv-out" }, loadingNote());
@@ -421,13 +424,14 @@ async function initGrid(root) {
   const text = h("pre", { class: "grid-text" });
   const kernPre = h("pre", { class: "vrv-mei" });
   const summary = h("div", { class: "grid-summary" });
-  const state = { source: null, grid: null };
+  const state = { source: null, grid: null, edited: false };
 
   root.replaceChildren(
     h("div", { class: "vrv-card-body" },
       h("div", {}, h("p", { class: "vrv-label" }, "Melody (ABC, edit me)"), textarea,
         h("div", { class: "vrv-controls" },
           h("label", {}, "Grid cell ", resSelect),
+          h("label", {}, "Rules ", ruleSelect),
           h("label", {}, onsetBox, " keep an onset grid"),
           h("label", {}, compactBox, " hide empty black-key rows"),
           h("button", { type: "button", class: "md-button", onclick: () => { textarea.value = original; fromMelody(); } }, "Reset"))),
@@ -456,27 +460,34 @@ async function initGrid(root) {
 
   const buildGrid = () => {
     if (!state.source) return;
-    state.grid = G.toGrid(state.source.notes, { res: +resSelect.value, meter: state.source.meter });
+    state.grid = G.toGrid(state.source.notes, { res: +resSelect.value, meter: state.source.meter, rule: ruleSelect.value });
+    state.edited = false;
     fromGrid();
   };
 
   const fromGrid = async () => {
     const grid = state.grid;
     const onsets = onsetBox.checked;
-    drawGridTable(table, grid, { onsets, compact: compactBox.checked, onChange: fromGrid });
+    drawGridTable(table, grid, { onsets, compact: compactBox.checked, onChange: () => { state.edited = true; fromGrid(); } });
     text.textContent = G.gridToText(grid, { compact: compactBox.checked, onsets });
-    const events = G.gridToEvents(grid, { onsets });
+    const { events, notes: back, cut } = G.readGrid(grid, { onsets });
     const kern = G.eventsToKern(events, grid);
     kernPre.textContent = kern;
     showScore(after, await readScore("humdrum", kern, { width: after.clientWidth || 400, scale: 28, header: "none" }));
-    const back = G.eventsToNotes(events, grid.res);
     const cmp = G.compareNotes(state.source.notes, back);
     const n = state.source.notes.length;
     const items = [
       `The melody has ${n} notes. Read back from the grid: ${back.length} notes, ${cmp.kept} of them unchanged.`,
     ];
+    const names = (list) => list.map((x) => G.pitchName(x.pitch)).join(", ");
     if (grid.lost.length) {
-      items.push(`${grid.lost.length} note(s) start and end inside one cell and disappear: ${grid.lost.map((x) => G.pitchName(x.pitch)).join(", ")}. Try a smaller cell.`);
+      items.push(`${grid.lost.length} note(s) start and end inside one cell and disappear: ${names(grid.lost)}. Try a smaller cell, or CAMAT's rules.`);
+    }
+    if (grid.moved.length) {
+      items.push(`${grid.moved.length} note(s) now start or end on a cell edge instead of where they were written: ${names(grid.moved)}.`);
+    }
+    if (cut) {
+      items.push(`Held notes are cut ${cut} time(s) where another pitch starts or stops: this demo reads the grid column by column, as chords. CAMAT's rules read each row on its own.`);
     }
     if (cmp.kept === n && back.length === n) items.push("Nothing lost: the round trip gives back the same notes.");
     else if (!onsets) items.push("Without onsets, a run of 1s is read as one held note, so repeated notes of the same pitch merge. Tick “keep an onset grid” to keep them apart.");
@@ -485,6 +496,12 @@ async function initGrid(root) {
 
   textarea.addEventListener("input", debounce(fromMelody, 500));
   resSelect.addEventListener("change", buildGrid);
+  // After clicks, keep the cells and change only how the grid is read back.
+  ruleSelect.addEventListener("change", () => {
+    if (!state.edited) return buildGrid();
+    state.grid.rule = ruleSelect.value;
+    fromGrid();
+  });
   onsetBox.addEventListener("change", fromGrid);
   compactBox.addEventListener("change", fromGrid);
   await fromMelody();
