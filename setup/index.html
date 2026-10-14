@@ -540,11 +540,21 @@
 </ol>
 <h2 id="get-the-session-notebooks">Get the session notebooks<a class="headerlink" href="#get-the-session-notebooks" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Download the notebook from the session page (section <em>Notebooks</em>).</li>
-<li>In JupyterLab, click the <strong>Upload</strong> button (arrow icon) above the file browser and choose the file.</li>
-<li>Open the notebook and run the first cell. It installs what the notebook needs (<code>%pip install ...</code>).</li>
+<li>
+<p>In JupyterLab, open a new notebook (<em>File → New → Notebook</em>), paste this into the first cell and run it:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/egorpol/camat_lectures/main/get_notebooks.py"</span><span class="p">,</span> <span class="s2">"get_notebooks.py"</span><span class="p">)</span>
+<span class="o">%</span><span class="n">run</span> <span class="n">get_notebooks</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div>
+<p>The notebooks of all sessions so far appear in the folder <code>camat_lectures/</code>, one subfolder per session. Save this small notebook (for example as <code>get_notebooks.ipynb</code>): you will run it again.</p>
+</li>
+<li>
+<p>Open a session notebook and run its first cell. It installs what the notebook needs (<code>%pip install ...</code>).</p>
+</li>
 <li>Run the next cells. A rendered score is the sign that everything works.</li>
 </ol>
+<p>After each session, run the cell again to get the new notebooks. Notebooks you already have are kept as they are, so your changes are safe. To start one over, rename or delete your copy and run the cell again.</p>
+<p>If the cell cannot download anything, download the notebooks from the session page (section <em>Notebooks</em>) and upload them with the <strong>Upload</strong> button (arrow icon) above the file browser.</p>
 <p>Files in your home folder (<code>/home/jovyan</code>) are kept when the server stops; everything else is discarded. Installed packages may have to be installed again after a restart: just run the first cell again.</p>
 <h2 id="if-something-goes-wrong">If something goes wrong<a class="headerlink" href="#if-something-goes-wrong" title="Permanent link">&para;</a></h2>
 <p>Problems from the first session and their fixes will be collected here.</p>
