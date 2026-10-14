@@ -86,7 +86,7 @@ C4    1000    0000    0000    0000
 
 - Ask: *Which of these is the music? Which can you read? Which can a computer read?*
 - Then render the six text formats with Verovio: the same score six times. Keep the grid for part 9: it cannot be rendered back into this score without guessing.
-- Point to the sizes: the same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 1,886 in MusicXML and 4,850 in MEI (as Verovio writes it). The difference is not the notes but what else is recorded: title, metadata, identifiers for every element, layout.
+- Point to the sizes: the same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 1,886 in MusicXML and about 4,850 in MEI (as Verovio writes it; its random IDs change the length by a few bytes each time). The difference is not the notes but what else is recorded: title, metadata, identifiers for every element, layout.
 - AI angle: language models read music as text too. ChatMusician (2024) was trained on ABC notation. Part 10 comes back to this.
 
 ## 2. Why encode music? (10 min)
@@ -160,7 +160,7 @@ Discussion: *Is a roll a score, a recording or a program? Where are the bar line
 ## 6. Setup: Jupyter4NFDI login and first notebook (30 min)
 
 1. Open <https://hub.nfdi-jupyter.de>, sign in with Helmholtz AAI and start JupyterLab on JSC-Cloud (steps as in the CAMAT cloud guide).
-2. Check the kernel: Python 3.11 or later.
+2. Check the kernel: Python 3.10 or later.
 3. Get the session notebooks into the workspace (download from the live page or clone the course repository; to decide).
 4. Run the setup cell (`%pip install ...`) and the first render cell. A rendered score is the success check.
 5. Collect each problem and its fix; they go into a FAQ on the live page for later sessions.

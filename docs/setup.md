@@ -6,7 +6,7 @@
 
 1. Open <https://hub.nfdi-jupyter.de> and sign in with Helmholtz AAI (choose your university).
 2. Start JupyterLab on **JSC-Cloud**.
-3. Check the Python version: open a notebook and run `import sys; print(sys.version)`. You need Python 3.11 or later.
+3. Check the Python version: open a notebook and run `import sys; print(sys.version)`. You need Python 3.10 or later.
 
 ## Get the session notebooks
 

@@ -71,7 +71,7 @@ Here are the first four bars of *Alle meine Entchen*, seven times. Before anythi
     C4    1000    0000    0000    0000
     ```
 
-The same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 120 in EsAC, 1,886 in MusicXML and 4,850 in MEI (as Verovio writes it). The difference is not the notes but what else is recorded: title, metadata, an identifier for every element, layout. Six of the seven can be rendered back into the same score ([part 8](#8-todays-formats-in-verovio)). The grid cannot, at least not without guessing ([part 9](#9-binary-notation-holes-grids-and-what-survives)).
+The same 11 notes take 60 bytes in Plaine & Easie, 75 in ABC, 104 in kern, 120 in EsAC, 1,886 in MusicXML and about 4,850 in MEI (as Verovio writes it; its random IDs change the length by a few bytes each time). The difference is not the notes but what else is recorded: title, metadata, an identifier for every element, layout. Six of the seven can be rendered back into the same score ([part 8](#8-todays-formats-in-verovio)). The grid cannot, at least not without guessing ([part 9](#9-binary-notation-holes-grids-and-what-survives)).
 
 Language models read music as text too: ChatMusician (2024) was trained on ABC ([part 10](#10-an-llm-writes-abc)).
 
