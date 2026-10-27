@@ -1,0 +1,46 @@
+{
+  "file": "raw.musicxml",
+  "parts": [
+    {
+      "part": "P1",
+      "measures": 21,
+      "labels": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21"
+      ],
+      "pitched_note_elements": 352,
+      "rest_elements": 72,
+      "staff_values": [
+        "1",
+        "2"
+      ],
+      "voice_values": [
+        "1",
+        "2",
+        "5"
+      ]
+    }
+  ],
+  "dynamics": 0,
+  "slur_endpoints": 62,
+  "written_words": []
+}

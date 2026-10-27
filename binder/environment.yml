@@ -1,0 +1,17 @@
+# Environment for the cloud route (Jupyter4NFDI workshop, built by Repo2Docker).
+# Same pins as the laptop setup (docs/setup-laptop.md, step 4). Repo2Docker reads
+# only this folder, because binder/ exists; keep the pins in both places in step.
+name: seminar
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - poppler
+  # Repo2Docker's base image pins requests 2.32, which warns about the chardet 7 that music21 pulls in.
+  - requests>=2.34
+  - pip
+  - pip:
+      - camat[validation,notebooks]==0.2.8
+      - verovio==6.3.0
+      - pypdf==6.10.0

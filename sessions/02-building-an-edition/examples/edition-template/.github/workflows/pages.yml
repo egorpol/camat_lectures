@@ -1,0 +1,44 @@
+name: Build and publish the edition
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+      - run: python -m pip install -r requirements.txt
+      - name: Check XML, schema, references and rendering (images are local-only)
+        run: python scripts/check_edition.py --without-local-images
+      - name: Build the viewer and record its source commit
+        run: python scripts/build_site.py
+      - uses: actions/configure-pages@v6.0.0
+      - uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the built viewer
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

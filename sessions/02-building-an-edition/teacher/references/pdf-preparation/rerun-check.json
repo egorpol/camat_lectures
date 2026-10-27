@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "protected_files": {
+    "sources/imslp-51556-schumann-op68.pdf": "893ab03c376724a9f4474497130eb2d8510ba9d71f05bb270c8f6000b731e289",
+    "sources/schumann-op68-no10-source-page.pdf": "3c634e9fa1c8b4f75df6abbd1f2edf9012625421abf2eee37e641e70e794ef8e",
+    "edition/pages/pages.json": "6c2e187e97cc85d2a782130d05634a56ab88029068c49bd790a05108f8d2331c",
+    "edition/pages/page-0001.png": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+    "edition/measure-page-map.json": "018416fd4d58b7d3e5051ae237293cb38991569007a69d240ffef90f1a896211",
+    "page-preparation-checkpoint.json": "e17a2ac2b5113a11a8fe79e35a735844123a1669cad9f975cf673867e62039a5"
+  }
+}

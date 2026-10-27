@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/bin/python",
+    "-m",
+    "camat.conversion",
+    "--source",
+    "/tmp/camat-schumann-omr-runtime/runs/oemer-fullpage-v3/raw.musicxml",
+    "--output-dir",
+    "/tmp/camat-schumann-omr-runtime/runs/oemer-fullpage-v3/converted",
+    "--mei-version",
+    "5.1"
+  ],
+  "returncode": 0,
+  "status": "completed",
+  "input_sha256": "97eb0ed621dfe503972cee8ce713684b9af14fe36ed6720853472cd758bccc4a",
+  "outputs": [
+    {
+      "file": "raw_4502e5971986_musicxml_verovio.mei",
+      "sha256": "3f88ed4c78b04b78b789cf08117e4bea871e4427744cd01279288e443dc6d558"
+    }
+  ]
+}

@@ -2,3 +2,8 @@
 site/
 __pycache__/
 .ipynb_checkpoints/
+schumann_omr_work/
+schumann_note_entry_work/
+schumann_edition_work/
+svg_introduction_work/
+sessions/*/teacher/**/schematron/cache/

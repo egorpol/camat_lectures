@@ -46,6 +46,7 @@ markdown_extensions:
   - toc:
       permalink: true
   - pymdownx.details
+  - pymdownx.keys
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
@@ -56,5 +57,9 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Setup on Jupyter4NFDI: setup.md
+  - Setup on your laptop: setup-laptop.md
   - Sessions:
       - "1. Why encode music?": sessions/01-why-encode-music/index.md
+      - "2. The source and the notes": sessions/02-building-an-edition/index.md
+      - "3. Linking and editing": sessions/03-linking-and-editing/index.md
+      - "4. Publishing, first analysis": sessions/04-publishing-and-analysis/index.md

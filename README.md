@@ -8,8 +8,10 @@ Notentextanalyse* (winter semester 2026/27). The materials are in English.
 
 Each session has a page on the live site with the content and demos that run
 in the browser. Every demo also comes as a Jupyter notebook, in which you change
-the inputs and keep your work. The notebooks run on
-[Jupyter4NFDI](https://hub.nfdi-jupyter.de); from session 2 on they use
+the inputs and keep your work. In session 1 the notebooks run on
+[Jupyter4NFDI](https://hub.nfdi-jupyter.de); from session 2 on they run on the
+students' own laptops in VS Code
+([setup](https://egorpol.github.io/camat_lectures/setup-laptop/)) and use
 [CAMAT](https://github.com/egorpol/camat_v2), the Computer-Assisted Music
 Analysis Toolbox.
 
@@ -18,6 +20,16 @@ Analysis Toolbox.
 | | Session | Demos |
 |---|---|---|
 | 1 | [Why encode music? From notation to machine-readable scores](https://egorpol.github.io/camat_lectures/sessions/01-why-encode-music/) | player-piano roll, one melody in seven formats, a facsimile-linked page, binary grids, an LLM writes ABC |
+| 2 | [Building an edition: the source and the notes](https://egorpol.github.io/camat_lectures/sessions/02-building-an-edition/) | laptop setup, a wrong note in Schumann Op. 68 No. 10, OMR next to the scan, five notes in ABC, the page and its bars |
+| 3 | [Building an edition: linking and editing](https://egorpol.github.io/camat_lectures/sessions/03-linking-and-editing/) | bars linked to the scan, SVG, live editing, an edit with Copilot, mei-friend, peer review (page in preparation) |
+| 4 | [Publishing the edition, first analysis](https://egorpol.github.io/camat_lectures/sessions/04-publishing-and-analysis/) | Git and GitHub, a release with a viewer, the edition as a note table (page in preparation) |
+
+Sessions 2–4 build one edition of Schumann's *Fröhlicher Landmann*. All its
+notebooks and data live in `sessions/02-building-an-edition/`, because they
+share one working project (`schumann_edition_work`) next to the notebooks.
+Instructor outlines: [session 2](sessions/02-building-an-edition/outline.md),
+[session 3](sessions/03-linking-and-editing/outline.md),
+[session 4](sessions/04-publishing-and-analysis/outline.md).
 
 ## Get the notebooks
 
@@ -29,9 +41,9 @@ urllib.request.urlretrieve("https://raw.githubusercontent.com/egorpol/camat_lect
 %run get_notebooks.py
 ```
 
-This copies the notebooks of all sessions into `camat_lectures/`, one folder
+This copies the notebooks and supporting data ZIPs into `camat_lectures/`, one folder
 per session, without git. Run it again after each session to get the new
-ones; notebooks you already have are never overwritten. In a terminal
+ones; existing notebooks and data files are never overwritten. In a terminal
 (in JupyterLab: *File → New → Terminal*), use the bash version instead:
 
 ```sh
@@ -43,14 +55,33 @@ The
 [setup page](https://egorpol.github.io/camat_lectures/setup/) has the steps
 from the first login.
 
-Each notebook starts with a cell that installs what it needs (Verovio 6.3.0,
+Each Session 1 notebook starts with a cell that installs what it needs (Verovio 6.3.0,
 mido, matplotlib, ipywidgets). Python 3.10 or later.
+
+Session 2 needs the `seminar` environment from the
+[laptop setup](https://egorpol.github.io/camat_lectures/setup-laptop/)
+(Python 3.12, Poppler, CAMAT 0.2.8, Verovio 6.3.0, pypdf 6.10.0), or the
+[cloud route](https://egorpol.github.io/camat_lectures/setup/#from-session-2-the-cloud-route)
+for students without a laptop: a Jupyter4NFDI workshop whose image Repo2Docker
+builds from [`binder/environment.yml`](binder/environment.yml) with the same
+pins. Its notebooks
+are [PDF preparation](sessions/02-building-an-edition/notebooks/02_pdf_preparation.ipynb)
+(with `schumann-edition-inputs.zip`; fetches the IMSLP scan at runtime),
+[OMR results](sessions/02-building-an-edition/notebooks/02_schumann_omr.ipynb)
+(with `schumann-omr-recordings.zip`, recorded HOMR/OeMeR runs) and
+[note entry](sessions/02-building-an-edition/notebooks/02_note_entry.ipynb).
+The notebooks for sessions 3 and 4 (facsimile linking, SVG, live editing,
+review and release) will go into the same folder before session 3, because
+all Schumann notebooks share one working folder; their draft guides are in
+[`sessions/03-linking-and-editing/guides/`](sessions/03-linking-and-editing/guides/)
+and [`sessions/04-publishing-and-analysis/guides/`](sessions/04-publishing-and-analysis/guides/).
 
 ## Repository layout
 
 - `docs/`: the live site ([MkDocs Material](https://squidfunk.github.io/mkdocs-material/)); the demo code is in `docs/javascripts/`.
-- `sessions/NN-slug/`: per session, the outline, the example encodings (`examples/`) and the notebooks (`notebooks/`).
+- `sessions/NN-slug/`: per session, the outline, the example encodings (`examples/`), the notebooks (`notebooks/`) and instructor material (`teacher/`: answer keys, checks, recorded runs, preparation notes).
 - `tools/notebooks/`: the notebook sources (percent format) and their helpers. `tools/build_notebooks.py` builds the `.ipynb` files from them, so edit the sources, not the notebooks.
+- `binder/environment.yml`: the environment for the cloud route (Repo2Docker reads only this folder).
 - `get_notebooks.py`, `get_notebooks.sh`: the download scripts above (Python for a notebook cell, bash for a terminal; they do the same).
 
 ## Build the site
@@ -83,5 +114,12 @@ The MEI excerpt in `sessions/01-why-encode-music/examples/facsimile/` comes
 from the CAMAT corpus edition
 [DdT 1, vol. 11](https://github.com/egorpol/DdT_1_vol_11) under the MIT
 License (see the `LICENSE` file in that folder).
+
+Session 2's Schumann MEI teaching derivatives credit Maja Hartwig and the
+[MEI Sample Collection](https://github.com/music-encoding/sample-encodings).
+They retain the encoding's public-domain statement and the collection's
+[ECL-2.0 license](sessions/02-building-an-edition/examples/schumann/LICENSE).
+OMR recordings are generated notation and text diagnostics; the IMSLP scan
+and model weights are fetched at runtime rather than committed.
 
 Changes are listed in [CHANGELOG.md](CHANGELOG.md).

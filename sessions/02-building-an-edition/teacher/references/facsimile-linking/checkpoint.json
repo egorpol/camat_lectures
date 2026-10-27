@@ -1,0 +1,25 @@
+{
+  "stage": "linked teaching draft before expressive editing",
+  "project": "/home/egor/Nextcloud/code/public_repos/camat_lectures/sessions/02-building-an-edition/teacher/schumann_edition_work/linking-2026-10-25",
+  "input_mei_sha256": "3421818692f3708435a643561932973ffa13876cae3a2e3d051813bf94caa49a",
+  "linked_mei": "edition/mei/linked-starter.mei",
+  "linked_mei_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+  "work_mei": "edition/mei/work.mei",
+  "work_created_now": false,
+  "work_matches_linked_baseline": true,
+  "work_sha256_at_check": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+  "snapshot": "edition/checkpoints/linked-before-editing.mei",
+  "snapshot_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+  "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+  "alignment_sha256": "a8052b3b4b379d0d0fccd5d829abcbe1a98ee2bffa6aa8d08cbe980f0e6d600c",
+  "unreviewed_pages": [
+    "schumann-op68-no10-source-page-p0001"
+  ],
+  "measures_linked": 21,
+  "zones": 21,
+  "surfaces": 1,
+  "pb": 1,
+  "sb": 4,
+  "musical_content_and_existing_ids_preserved": true,
+  "scope": "Labels 1–9 are the core editorial passage; full-piece musical proofreading remains incomplete."
+}

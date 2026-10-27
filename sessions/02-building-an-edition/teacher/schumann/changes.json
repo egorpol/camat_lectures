@@ -1,0 +1,512 @@
+{
+  "prepared_on": "2026-10-24",
+  "source_sha256": "1416c6112cf5cd687cc24f451b021c4c28a20642a76de3d824ec4bd656cd1ca2",
+  "source_unchanged": true,
+  "technical_repairs": {
+    "staff_lines": [
+      "s1",
+      "s2"
+    ],
+    "slurs_relocated": [
+      {
+        "from_measure": "3",
+        "to_measure": "1",
+        "startid": "#d1e60",
+        "endid": "#d1e619"
+      },
+      {
+        "from_measure": "5",
+        "to_measure": "3",
+        "startid": "#d1e634",
+        "endid": "#d1e1193"
+      },
+      {
+        "from_measure": "7",
+        "to_measure": "5",
+        "startid": "#d1e1217",
+        "endid": "#d1e1776"
+      },
+      {
+        "from_measure": "9",
+        "to_measure": "7",
+        "startid": "#d1e1791",
+        "endid": "#d1e2364"
+      },
+      {
+        "from_measure": "10",
+        "to_measure": "9",
+        "startid": "#d1e2388",
+        "endid": "#d1e2660"
+      },
+      {
+        "from_measure": "10",
+        "to_measure": "9",
+        "startid": "#d1e2321",
+        "endid": "#d1e2601"
+      },
+      {
+        "from_measure": "11",
+        "to_measure": "10",
+        "startid": "#d1e2616",
+        "endid": "#d1e2830"
+      },
+      {
+        "from_measure": "11",
+        "to_measure": "10",
+        "startid": "#d1e2675",
+        "endid": "#d1e2944"
+      },
+      {
+        "from_measure": "13",
+        "to_measure": "12",
+        "startid": "#d1e3238",
+        "endid": "#d1e3476"
+      },
+      {
+        "from_measure": "13",
+        "to_measure": "12",
+        "startid": "#d1e3238",
+        "endid": "#d1e3560"
+      },
+      {
+        "from_measure": "15",
+        "to_measure": "13",
+        "startid": "#d1e3575",
+        "endid": "#d1e4248"
+      },
+      {
+        "from_measure": "16",
+        "to_measure": "15",
+        "startid": "#d1e4134",
+        "endid": "#d1e4462"
+      },
+      {
+        "from_measure": "16",
+        "to_measure": "15",
+        "startid": "#d1e4203",
+        "endid": "#d1e4521"
+      },
+      {
+        "from_measure": "17",
+        "to_measure": "16",
+        "startid": "#d1e4477",
+        "endid": "#d1e4718"
+      },
+      {
+        "from_measure": "17",
+        "to_measure": "16",
+        "startid": "#d1e4536",
+        "endid": "#d1e4804"
+      },
+      {
+        "from_measure": "18",
+        "to_measure": "17",
+        "startid": "#d1e4630",
+        "endid": "#d1e4995"
+      },
+      {
+        "from_measure": "18",
+        "to_measure": "17",
+        "startid": "#d1e4819",
+        "endid": "#d1e5054"
+      },
+      {
+        "from_measure": "19",
+        "to_measure": "18",
+        "startid": "#d1e5039",
+        "endid": "#d1e5420"
+      },
+      {
+        "from_measure": "19",
+        "to_measure": "18",
+        "startid": "#d1e5098",
+        "endid": "#d1e5420"
+      },
+      {
+        "from_measure": "21",
+        "to_measure": "19",
+        "startid": "#d1e5435",
+        "endid": "#d1e6090"
+      }
+    ],
+    "historical_reference": "Record unresolved #transformation.xsl as text; do not invent a URL or target ID."
+  },
+  "source_based_pitch_corrections": [
+    {
+      "xml_id": "d1e338",
+      "before": "A3",
+      "after": "F3",
+      "witness": "IMSLP 51556, printed p. 8, systems 1 and 2; final bass eighth of the first full bar in each system."
+    },
+    {
+      "xml_id": "d1e1495",
+      "before": "A3",
+      "after": "F3",
+      "witness": "IMSLP 51556, printed p. 8, systems 1 and 2; final bass eighth of the first full bar in each system."
+    }
+  ],
+  "deliberate_omissions": [
+    {
+      "measure": "1",
+      "element": "dynam",
+      "xml": "<dynam xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" place=\"below\" tstamp=\"1\">f</dynam>"
+    },
+    {
+      "measure": "1",
+      "element": "tempo",
+      "xml": "<tempo xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" place=\"above\" tstamp=\"0.5\">Frisch und munter</tempo>"
+    },
+    {
+      "measure": "1",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" startid=\"#d1e60\" endid=\"#d1e619\" staff=\"2\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "3",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" startid=\"#d1e634\" endid=\"#d1e1193\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "5",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" startid=\"#d1e1217\" endid=\"#d1e1776\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "7",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e1791\" endid=\"#d1e2364\"/>"
+    },
+    {
+      "measure": "9",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" startid=\"#d1e2388\" endid=\"#d1e2660\"/>"
+    },
+    {
+      "measure": "9",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" startid=\"#d1e2321\" endid=\"#d1e2601\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "10",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "10",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "10",
+      "element": "dir",
+      "xml": "<dir xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" place=\"below\" tstamp=\"1\">espressivo</dir>"
+    },
+    {
+      "measure": "10",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" curvedir=\"above\" startid=\"#d1e2616\" endid=\"#d1e2830\"/>"
+    },
+    {
+      "measure": "10",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e2675\" endid=\"#d1e2944\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "11",
+      "element": "dynam",
+      "xml": "<dynam xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" place=\"above\" tstamp=\"4.5\">f</dynam>"
+    },
+    {
+      "measure": "11",
+      "element": "dynam",
+      "xml": "<dynam xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" place=\"below\" tstamp=\"4.5\">f</dynam>"
+    },
+    {
+      "measure": "12",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" startid=\"#d1e3238\" endid=\"#d1e3476\" staff=\"1\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "12",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" startid=\"#d1e3238\" endid=\"#d1e3560\" staff=\"2\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "13",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e3575\" endid=\"#d1e4248\"/>"
+    },
+    {
+      "measure": "15",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" startid=\"#d1e4134\" staff=\"1\" curvedir=\"above\" endid=\"#d1e4462\"/>"
+    },
+    {
+      "measure": "15",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e4203\" endid=\"#d1e4521\"/>"
+    },
+    {
+      "measure": "16",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "16",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "16",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" curvedir=\"above\" startid=\"#d1e4477\" endid=\"#d1e4718\"/>"
+    },
+    {
+      "measure": "16",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e4536\" endid=\"#d1e4804\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"acc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "artic",
+      "xml": "<artic xmlns=\"http://www.music-encoding.org/ns/mei\" artic=\"stacc\" place=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" startid=\"#d1e4630\" endid=\"#d1e4995\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "17",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" startid=\"#d1e4819\" endid=\"#d1e5054\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "18",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e5069\" endid=\"#d1e5083\"/>"
+    },
+    {
+      "measure": "18",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" startid=\"#d1e5010\" endid=\"#d1e5024\" curvedir=\"above\"/>"
+    },
+    {
+      "measure": "18",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"1\" curvedir=\"above\" startid=\"#d1e5039\" endid=\"#d1e5420\"/>"
+    },
+    {
+      "measure": "18",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e5098\" endid=\"#d1e5420\"/>"
+    },
+    {
+      "measure": "19",
+      "element": "slur",
+      "xml": "<slur xmlns=\"http://www.music-encoding.org/ns/mei\" staff=\"2\" curvedir=\"above\" startid=\"#d1e5435\" endid=\"#d1e6090\"/>"
+    }
+  ],
+  "omission_counts": {
+    "artic": 20,
+    "dir": 1,
+    "dynam": 3,
+    "slur": 22,
+    "tempo": 1
+  },
+  "invariants": {
+    "technical_baseline_preserves_upstream_note_rhythm_voice_and_ids": true,
+    "teaching_notes_unchanged_except_documented_pitch_corrections": true,
+    "duplicate_ids": 0,
+    "unresolved_local_pointers": 0
+  },
+  "artifacts": [
+    {
+      "path": "teacher/schumann/baseline.mei",
+      "sha256": "e27d68137f3359e7877fafbacc2f978a9eef9e7ceb2171776a939ac9aa212c97",
+      "body_measures": 21,
+      "body_elements": {
+        "artic": 20,
+        "beam": 15,
+        "body": 1,
+        "chord": 74,
+        "dir": 1,
+        "dynam": 3,
+        "layer": 52,
+        "mdiv": 1,
+        "measure": 21,
+        "note": 354,
+        "rest": 74,
+        "score": 1,
+        "scoreDef": 1,
+        "section": 1,
+        "slur": 22,
+        "staff": 42,
+        "staffDef": 2,
+        "staffGrp": 1,
+        "tempo": 1
+      }
+    },
+    {
+      "path": "examples/schumann/starter.mei",
+      "sha256": "3421818692f3708435a643561932973ffa13876cae3a2e3d051813bf94caa49a",
+      "body_measures": 21,
+      "body_elements": {
+        "beam": 15,
+        "body": 1,
+        "chord": 74,
+        "layer": 52,
+        "mdiv": 1,
+        "measure": 21,
+        "note": 354,
+        "rest": 74,
+        "score": 1,
+        "scoreDef": 1,
+        "section": 1,
+        "staff": 42,
+        "staffDef": 2,
+        "staffGrp": 1
+      }
+    },
+    {
+      "path": "teacher/schumann/exercise-solution.mei",
+      "sha256": "fe7697e0b8c8b8153f7e84070fca69e50cf27ddce8d0f77b0bb36e05e3f905ef",
+      "body_measures": 21,
+      "body_elements": {
+        "annot": 1,
+        "beam": 15,
+        "body": 1,
+        "chord": 74,
+        "dynam": 2,
+        "layer": 52,
+        "mdiv": 1,
+        "measure": 21,
+        "note": 354,
+        "p": 1,
+        "rest": 74,
+        "score": 1,
+        "scoreDef": 1,
+        "section": 1,
+        "slur": 2,
+        "staff": 42,
+        "staffDef": 2,
+        "staffGrp": 1,
+        "tempo": 1
+      }
+    },
+    {
+      "path": "examples/schumann/manual-entry.mei",
+      "sha256": "cf8ae20d95a60c3d293af86d6c1522a5a2b4d65b10b516187d487155689f99c9",
+      "body_measures": 2,
+      "body_elements": {
+        "body": 1,
+        "layer": 4,
+        "mSpace": 2,
+        "mdiv": 1,
+        "measure": 2,
+        "score": 1,
+        "scoreDef": 1,
+        "section": 1,
+        "space": 2,
+        "staff": 4,
+        "staffDef": 2,
+        "staffGrp": 1
+      }
+    },
+    {
+      "path": "teacher/schumann/manual-entry-solution.mei",
+      "sha256": "7c35e4d92a1dbc3dc5adef2652057f07953999f34e9845426493e4f789c0d53c",
+      "body_measures": 2,
+      "body_elements": {
+        "body": 1,
+        "chord": 4,
+        "layer": 4,
+        "mdiv": 1,
+        "measure": 2,
+        "note": 17,
+        "rest": 5,
+        "score": 1,
+        "scoreDef": 1,
+        "section": 1,
+        "staff": 4,
+        "staffDef": 2,
+        "staffGrp": 1
+      }
+    }
+  ]
+}

@@ -6,6 +6,7 @@ sessions/NN-*/notebooks/NN_name.ipynb. Cell markers:
     # %% [markdown]                  Markdown cell; its lines start with "# "
     # %%                             code cell
     # %% install                     the install cell (skipped by --execute: the venv has no pip)
+    # %% source-media                code that displays source scans; clear image outputs in published references
     # %% helpers: mei grid checks    collapsed code cell with helpers/mei.py, grid.py, checks.py, in this order
 
 The helper files are pasted verbatim, so they must not import each other.
@@ -19,6 +20,7 @@ tools/notebooks/check_parity.py.
 """
 
 import argparse
+import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -47,6 +49,8 @@ def parse(path):
             cells.append(nbformat.v4.new_markdown_cell(text))
         elif kind == "install":
             cells.append(nbformat.v4.new_code_cell(text, metadata={"tags": ["install"]}))
+        elif kind == "source-media":
+            cells.append(nbformat.v4.new_code_cell(text, metadata={"tags": ["source-media"]}))
         elif kind.startswith("helpers:"):
             names = kind.split(":", 1)[1].split()
             code = "\n\n".join((HELPERS / f"{name}.py").read_text().strip("\n") for name in names)
@@ -92,14 +96,34 @@ def execute(nb, name, outdir):
     from nbclient.exceptions import CellExecutionError
 
     run = nbformat.from_dict(nb)
-    run.cells = [c for c in run.cells if "install" not in c.metadata.get("tags", [])]
-    client = NotebookClient(run, timeout=600, kernel_name="python3", resources={"metadata": {"path": str(outdir)}})
+    # Match the downloader's notebook-plus-data layout for standalone rehearsals.
+    # Keep an existing, different data file intact rather than silently replacing it.
+    for data in target(SOURCES / f"{name}.py").parent.glob("*.zip"):
+        copied = outdir / data.name
+        if copied.exists() and copied.read_bytes() != data.read_bytes():
+            raise FileExistsError(f"Preserving different notebook data: {copied}")
+        if not copied.exists():
+            shutil.copyfile(data, copied)
+    client = NotebookClient(run, timeout=600, kernel_name="python3", skip_cells_with_tag="install",
+                            resources={"metadata": {"path": str(outdir)}})
     try:
         client.execute()
         ok = True
     except CellExecutionError as error:
         print(f"{name}: FAILED\n{str(error)[:3000]}")
         ok = False
+    # Source scans are fetched at runtime and must not become published notebook
+    # payloads. Keep the text checks; the student's ordinary run still shows images.
+    source_widgets = False
+    for cell in run.cells:
+        if "source-media" in cell.metadata.get("tags", []) and cell.cell_type == "code":
+            source_widgets |= any("application/vnd.jupyter.widget-view+json" in output.get("data", {})
+                                  for output in cell.outputs)
+            cell.outputs = [output for output in cell.outputs if output.output_type == "stream"]
+    # Widget state can retain the full image-bearing HTML even after the output
+    # cell is cleared. Reference copies require a fresh runtime for these widgets.
+    if source_widgets:
+        run.metadata.pop("widgets", None)
     nbformat.write(run, outdir / f"{name}.ipynb")
     outputs = [o for c in run.cells if c.cell_type == "code" for o in c.get("outputs", [])]
     scores = sum(o.get("data", {}).get("text/html", "").count("<svg") for o in outputs)

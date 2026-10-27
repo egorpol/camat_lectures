@@ -1,0 +1,5 @@
+severity,category,origin,check,file,line,element,xml_id,measure_n,staff_n,layer_n,message,expected,actual,context
+warning,rhythm,CAMAT musical_diagnostics,layer_duration_underfull,candidate-svg.mei,316,layer,,1,1,1,Layer is underfull against the active meter.,16,2,"Measure carries @metcon=""false""; the duration mismatch is reported for review and may be intentional, for example an anacrusis or a partial voice."
+warning,rhythm,CAMAT musical_diagnostics,layer_duration_underfull,candidate-svg.mei,321,layer,,1,2,1,Layer is underfull against the active meter.,16,2,"Measure carries @metcon=""false""; the duration mismatch is reported for review and may be intentional, for example an anacrusis or a partial voice."
+warning,rhythm,CAMAT musical_diagnostics,layer_duration_underfull,candidate-svg.mei,904,layer,,15,2,2,Layer is underfull against the active meter.,16,12,No <space> found in this layer; a missing space/rest is a likely cause.
+warning,rhythm,CAMAT musical_diagnostics,layer_duration_underfull,candidate-svg.mei,1167,layer,,21,2,2,Layer is underfull against the active meter.,16,12,No <space> found in this layer; a missing space/rest is a likely cause.

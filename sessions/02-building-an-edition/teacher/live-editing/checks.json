@@ -1,0 +1,230 @@
+{
+  "prepared_on": "2026-10-25",
+  "method": "deterministic teacher fragments on scratch copy; no model inference",
+  "audit": {
+    "protected_structure_unchanged": true,
+    "local_graphics_present": 1,
+    "new_controls": [
+      {
+        "id": "seminar-dynam-opening",
+        "element": "dynam",
+        "measure": "1"
+      },
+      {
+        "id": "seminar-tempo-opening",
+        "element": "tempo",
+        "measure": "1"
+      },
+      {
+        "id": "seminar-slur-pickup",
+        "element": "slur",
+        "measure": "1"
+      },
+      {
+        "id": "seminar-annot-opening-slurs",
+        "element": "annot",
+        "measure": "1"
+      },
+      {
+        "id": "seminar-slur-bar2",
+        "element": "slur",
+        "measure": "3"
+      },
+      {
+        "id": "seminar-dynam-second-system",
+        "element": "dynam",
+        "measure": "6"
+      }
+    ],
+    "before_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+    "after_sha256": "0f9ecfec0a8d133932b3c75449227c5951749baeb41c8e043e377c3aeabca585",
+    "human_source_review": "not_assessed"
+  },
+  "watch": {
+    "direct_save": {
+      "before_revision": 1,
+      "after_revision": 2,
+      "status": "<b style='color:#047857'>Reloaded</b> at 16:47:12 (re-rendered score) \u00b7 trigger=<code>closed</code> \u00b7 mode=<code>events</code>"
+    },
+    "atomic_save": {
+      "before_revision": 2,
+      "after_revision": 3,
+      "status": "<b style='color:#047857'>Reloaded</b> at 16:47:14 (re-rendered score) \u00b7 trigger=<code>moved</code> \u00b7 mode=<code>events</code>"
+    },
+    "new_content_in_viewer_html": true,
+    "stopped_after_test": true
+  },
+  "negative_guard_checks": {
+    "pitch": "rejected",
+    "graphic_path": "rejected",
+    "existing_header": "rejected"
+  },
+  "validation": {
+    "conformance": "passed",
+    "required_checks": [
+      "xml_references",
+      "relaxng",
+      "schematron",
+      "resources",
+      "input_hashes"
+    ],
+    "consumer_diagnostics": "incomplete",
+    "executions": {
+      "xml_references": {
+        "requested": true,
+        "required": true,
+        "status": "passed",
+        "running": false,
+        "findings_count": 0,
+        "files_checked": 1,
+        "remote_references": [
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "http://music-encoding.org/Support/MEI_Sample_Collection"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://imslp.org/wiki/Special:ImagefromIndex/51556"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/mei2012To2013/mei2012To2013.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/mei21To30/mei21To30.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/mei30To40/mei30To40.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/mei40To50/mei40To50.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/meiLint/meiLint.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/mei50To51/mei50To51.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "https://github.com/music-encoding/encoding-tools/blob/main/meiLint/meiLint.xsl"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "http://www.oclc.org/dewey/resources/summaries/default.htm#700"
+          },
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "attribute": "target",
+            "uri": "http://www.bsz-bw.de/cgi-bin/oswd-suche.pl"
+          }
+        ],
+        "remote_reference_policy": "Not fetched; local/bundle integrity only."
+      },
+      "musical_diagnostics": {
+        "requested": true,
+        "required": false,
+        "status": "passed",
+        "running": false,
+        "findings_count": 4
+      },
+      "relaxng": {
+        "requested": true,
+        "required": true,
+        "status": "passed",
+        "running": false,
+        "findings_count": 0,
+        "tool": "xmllint: using libxml version 21504-GITv2.15.4\n   compiled with: Threads Tree Output Push Reader Patterns Writer SAXv1 DTDValid HTML C14N Catalog XPath XPointer XInclude Iconv ICU ISO8859X Regexps Automata RelaxNG Schemas Schematron Modules Debug Zlib",
+        "files_checked": 1
+      },
+      "schematron": {
+        "requested": true,
+        "required": true,
+        "status": "passed",
+        "running": false,
+        "findings_count": 0,
+        "failed_assertions": 0,
+        "error_assertions": 0,
+        "rule_count": 244,
+        "compiler": {
+          "name": "SchXslt",
+          "version": "1.10.1",
+          "sha256": "c23fb6ada31c280447fce7c3239cf25ea19aa768dfbe2a83ab6afb06d1c571c4"
+        },
+        "processor": "SaxonC-HE 13.1 from Saxonica",
+        "extracted_schema_sha256": "d65fba0cfed6b05464616fa7a44d58aa42016de22384f5e0803cfb23ef3379d1",
+        "compiled_validator_sha256": "a4d50fc1eedf90e23eee9dd88c76671d53813c65ad0310788e4fbce40aa5a00d",
+        "svrl": [
+          "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/validation-editing/schematron/0000-work.svrl.xml"
+        ]
+      },
+      "resources": {
+        "requested": true,
+        "required": true,
+        "status": "passed",
+        "running": false,
+        "findings_count": 0,
+        "resources": [
+          {
+            "file": "/tmp/camat-schumann-editing-verified/schumann_edition_work/edition/mei/work.mei",
+            "target": "../pages/page-0001.png",
+            "resolved_uri": "file:///tmp/camat-schumann-editing-verified/schumann_edition_work/edition/pages/page-0001.png",
+            "kind": "local",
+            "status": "passed",
+            "dimensions": [
+              4167,
+              5617
+            ]
+          }
+        ]
+      },
+      "image_network": {
+        "requested": false,
+        "required": false,
+        "status": "skipped",
+        "reason": "Not requested."
+      },
+      "verovio": {
+        "requested": true,
+        "required": false,
+        "status": "passed",
+        "running": false,
+        "findings_count": 0,
+        "version": "6.3.0-425dd7b",
+        "render_pages": true,
+        "files_checked": 1
+      },
+      "camat_parse": {
+        "requested": false,
+        "required": false,
+        "status": "skipped",
+        "reason": "Not requested."
+      },
+      "input_hashes": {
+        "requested": true,
+        "required": true,
+        "status": "passed",
+        "running": false,
+        "findings_count": 0
+      }
+    }
+  },
+  "human_source_approval": "not_asserted",
+  "provider_accounts_and_inference": "not_tested",
+  "vs_code_frontend_navigation": "not_tested"
+}

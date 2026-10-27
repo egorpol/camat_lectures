@@ -15,9 +15,20 @@ FOLDERS = ("examples", "notebooks")
 
 def on_files(files, config):
     for session in sorted((ROOT / "sessions").glob("[0-9][0-9]-*")):
+        # Publish the source record explicitly, without exposing sources/local/.
+        provenance = session / "sources/sources.json"
+        if provenance.is_file():
+            files.append(File(provenance.relative_to(ROOT).as_posix(), src_dir=str(ROOT),
+                              dest_dir=config["site_dir"], use_directory_urls=config["use_directory_urls"]))
         for folder in FOLDERS:
-            for path in sorted((session / folder).rglob("*")):
+            # Notebook runs create ignored working projects containing scans.
+            # Publish only the top-level portable downloads, never runtime trees.
+            paths = ((session / folder).glob("*") if folder == "notebooks"
+                     else (session / folder).rglob("*"))
+            for path in sorted(paths):
                 if not path.is_file() or path.name.startswith(".") or "__pycache__" in path.parts:
+                    continue
+                if folder == "notebooks" and path.suffix not in {".ipynb", ".zip"}:
                     continue
                 if path.suffix == ".md":
                     continue

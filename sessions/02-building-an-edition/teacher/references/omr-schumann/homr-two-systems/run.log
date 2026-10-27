@@ -1,0 +1,43 @@
+# Reading copy: download-progress updates and ANSI colour removed.
+# Exact original: run-original.log.gz (outside the embedded notebook bundle).
+Processing /tmp/camat-schumann-omr-runtime/runs/homr-two-systems-v1/local/schumann-page.png
+Starting Inference.
+Segnet Inference time: 0.9668571250003879; batch_size 8
+Creating bounds for noteheads
+Creating bounds for staff_fragments
+Creating bounds for clefs_keys
+Creating bounds for stems_rest
+Creating bounds for bar_lines
+Found 360 staff line fragments
+Found 110 noteheads
+Average note head height: 13.0
+Found 33 bar lines
+Found 0 clefs
+Found 0 possible other clefs
+Found 88 staff anchors
+Found 4 staffs
+Found 137 notes during segmentation
+[INFO] 2026-10-24 02:31:23,805 [RapidOCR] base.py:23: Using engine_name: onnxruntime
+Found 2 connected staffs (after merging grand staffs, multiple voices):  [1, 1]
+Dewarping staff 0
+[INFO] 2026-10-24 02:31:23,838 [RapidOCR] download_file.py:60: File exists and is valid: /tmp/camat-schumann-omr-runtime/homr-env/lib/python3.11/site-packages/rapidocr/models/PP-OCRv6_det_small.onnx
+[INFO] 2026-10-24 02:31:23,838 [RapidOCR] main.py:63: Using /tmp/camat-schumann-omr-runtime/homr-env/lib/python3.11/site-packages/rapidocr/models/PP-OCRv6_det_small.onnx
+Dewarping staff 0 done
+Running TrOmr inference on staff image 0
+[INFO] 2026-10-24 02:31:24,659 [RapidOCR] base.py:23: Using engine_name: onnxruntime
+[INFO] 2026-10-24 02:31:24,661 [RapidOCR] download_file.py:60: File exists and is valid: /tmp/camat-schumann-omr-runtime/homr-env/lib/python3.11/site-packages/rapidocr/models/ch_ppocr_mobile_v2.0_cls_mobile.onnx
+[INFO] 2026-10-24 02:31:24,661 [RapidOCR] main.py:63: Using /tmp/camat-schumann-omr-runtime/homr-env/lib/python3.11/site-packages/rapidocr/models/ch_ppocr_mobile_v2.0_cls_mobile.onnx
+[INFO] 2026-10-24 02:31:24,785 [RapidOCR] base.py:23: Using engine_name: onnxruntime
+[INFO] 2026-10-24 02:31:24,831 [RapidOCR] download_file.py:60: File exists and is valid: /tmp/camat-schumann-omr-runtime/homr-env/lib/python3.11/site-packages/rapidocr/models/PP-OCRv6_rec_small.onnx
+[INFO] 2026-10-24 02:31:24,832 [RapidOCR] main.py:63: Using /tmp/camat-schumann-omr-runtime/homr-env/lib/python3.11/site-packages/rapidocr/models/PP-OCRv6_rec_small.onnx
+Inference Time Tromr: 2.7894612889940618
+Dewarping staff 1
+Dewarping staff 1 done
+Running TrOmr inference on staff image 1
+Inference Time Tromr: 2.145673920000263
+Removing tuplets from measure # 1
+Removing tuplets from measure # 10
+Found title: Frisch und munter
+Writing XML [[clef_G2 _ _ _ _ upper, chord . . . . ., clef_F4 _ _ _ _ lower, keySignature_-1 . . . . ., timeSignature/4 . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_8 C3 _ _ slurStart lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_4. F3 _ _ _ lower, note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_8 A3 _ _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_4. C4 _ _ _ lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_8 F3 _ _ slurStop lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_8 B3 b _ slurStart lower, note_8 D5 _ _ _ upper, chord . . . . ., note_8 B4 b _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 D4 _ _ _ lower, note_8 D5 _ _ _ upper, chord . . . . ., note_8 B4 b _ _ upper, chord . . . . ., note_8 F4 _ _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_8 D4 _ _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_4. C4 _ _ _ lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_8 A3 _ _ slurStop lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_8 B3 b _ _ lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 B4 b _ _ upper, chord . . . . ., note_8 E4 _ _ _ upper, chord . . . . ., note_8 G3 _ _ _ lower, note_4 C5 _ _ _ upper, chord . . . . ., note_4 B4 b _ _ upper, chord . . . . ., note_4 E4 _ _ _ upper, chord . . . . ., note_8 C3 _ _ _ lower, note_8 B3 b _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_8 A3 _ _ _ lower, note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, chord . . . . ., note_8 F3 _ _ _ lower, note_4 A4 _ _ _ upper, chord . . . . ., note_4 F4 _ _ _ upper, chord . . . . ., note_4 C4 _ _ _ upper, chord . . . . ., note_8 C3 _ _ _ lower, note_8 A3 _ _ _ lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_4 E3 _ _ _ lower, note_8 G4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_4 D3 _ _ _ lower, note_8 B4 _ _ _ upper, chord . . . . ., note_8 G4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_4 C3 _ _ slurStop lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 G4 _ _ _ upper, chord . . . . ., note_8 E4 _ _ _ upper, note_4 C5 _ _ _ upper, chord . . . . ., note_4 G4 _ _ _ upper, chord . . . . ., note_4 E4 _ _ _ upper, chord . . . . ., rest_8 _ _ _ _ lower, note_8 C3 _ _ slurStart lower, barline . . . . ., newline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_4. F3 _ _ _ lower, note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_8 A3 _ _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_4. C4 _ _ _ lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_8 F3 _ _ slurStop lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_8 B3 b _ slurStart lower, note_8 D5 _ _ _ upper, chord . . . . ., note_8 B4 b _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 D4 _ _ _ lower, note_8 D5 _ _ _ upper, chord . . . . ., note_8 B4 b _ _ upper, chord . . . . ., note_8 F4 _ _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_8 D4 _ _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_4. C4 _ _ _ lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, note_8 C5 _ _ _ upper, chord . . . . ., note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_8 A3 _ _ slurStop lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_8 B3 b _ slurStart lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 B4 b _ _ upper, chord . . . . ., note_8 E4 _ _ _ upper, chord . . . . ., note_8 G3 _ _ _ lower, note_4 C5 _ _ _ upper, chord . . . . ., note_4 B4 b _ _ upper, chord . . . . ., note_4 E4 _ _ _ upper, chord . . . . ., note_8 C3 _ _ _ lower, note_8 B3 b _ _ lower, rest_8 _ _ _ _ upper, chord . . . . ., note_8 A3 _ _ _ lower, note_8 A4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, chord . . . . ., note_8 F3 _ _ _ lower, note_4 A4 _ _ _ upper, chord . . . . ., note_4 F4 _ _ _ upper, chord . . . . ., note_4 C4 _ _ _ upper, chord . . . . ., note_8 C3 _ _ _ lower, note_8 A3 _ _ _ lower, barline . . . . ., rest_8 _ _ _ _ upper, chord . . . . ., note_4 E3 _ _ _ lower, note_8 G4 _ _ _ upper, chord . . . . ., note_8 C4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_4 D3 _ _ _ lower, note_8 B4 _ _ _ upper, chord . . . . ., note_8 G4 _ _ _ upper, chord . . . . ., note_8 F4 _ _ _ upper, rest_8 _ _ _ _ upper, chord . . . . ., note_4 C3 _ _ slurStop lower, note_8 C5 _ _ _ upper, chord . . . . ., note_8 G4 _ _ _ upper, chord . . . . ., note_8 E4 _ _ _ upper, note_8 C5 _ _ _ upper, chord . . . . ., note_8 G4 _ _ _ upper, chord . . . . ., note_8 E4 _ _ _ upper, chord . . . . ., rest_8 _ _ _ _ lower, note_8 C4 _ _ slurStart upper, chord . . . . ., note_8 C3 _ _ slurStart lower, doublebarline . . . . ., newline . . . . .]]
+Finished parsing 1 staves
+Result was written to /tmp/camat-schumann-omr-runtime/runs/homr-two-systems-v1/local/schumann-page.musicxml

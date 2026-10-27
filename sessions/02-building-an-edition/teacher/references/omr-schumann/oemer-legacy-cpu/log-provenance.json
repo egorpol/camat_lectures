@@ -1,0 +1,7 @@
+{
+  "original_sha256": "da5418f218786e5f3a5efb8dd9293540f89bc7fef52fc251fbf62b902228e408",
+  "original_bytes": 1861,
+  "original_gzip_sha256": "e68bf2ed2d40a7cc5d3557732081ed1c3213c7a4948955d12678f76f716a907c",
+  "reading_copy_sha256": "2e9153a15908d43e9cadd3e48c03fd65eabd359539aa65f83e75c8de728684c4",
+  "transformation": "Remove CR-separated download progress lines and ANSI colour; prepend notice."
+}

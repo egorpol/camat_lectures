@@ -1,0 +1,103 @@
+[
+  {
+    "conversion_duration_seconds": 0.222047,
+    "conversion_options": {
+      "download": {
+        "allowed_content_types": [],
+        "chunk_size": 65536,
+        "max_bytes": 104857600,
+        "reject_html": true
+      },
+      "mei_version": "5.1",
+      "midi": {
+        "auto_max_quarter_length_divisor": 64,
+        "fill_gaps": true,
+        "quantize": true,
+        "quarter_length_divisors": null,
+        "reconstruct_voices": true,
+        "voice_layout": "layers"
+      },
+      "render_first_page": true,
+      "verovio": {
+        "breaks": "auto",
+        "removeIds": false,
+        "xmlIdSeed": 0
+      }
+    },
+    "conversion_route": "verovio-direct",
+    "conversion_signature": "f14408bb57689b3935522078646e8e1771532d56c90b63ae4974d3cdc23657ab",
+    "converted": false,
+    "download": {
+      "content_length_header": null,
+      "content_type": null,
+      "download_cache_hit": false,
+      "downloaded_bytes": 120585,
+      "http_status": null,
+      "redirect_history": [],
+      "requested_url": null,
+      "resolved_url": null
+    },
+    "error": "ConversionStageError: Verovio subprocess failed (returncode=-11, stderr=Fatal Python error: Segmentation fault\n\nCurrent thread 0x00007fbb6194ebc0 [python] (most recent call first):\n  File \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/verovio.py\", line 178 in loadData\n  File \"<string>\", line 31 in <module>\n\nCurrent thread's C stack trace (most recent call first):\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at _Py_DumpStack+0x4d [0x7fbb612bc6eb]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x157243 [0x7fbb61357243]\n  Binary file \"/usr/lib/libc.so.6\", at +0x44e70 [0x7fbb60e44e70]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput16ReadMusicXmlNoteEN4pugi8xml_nodeEPNS_7MeasureEsPNS_7SectionE+0x9cb [0x7fbb5fd8717b]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput19ReadMusicXmlMeasureEN4pugi8xml_nodeEPNS_7SectionEPNS_7MeasureEssi+0xe09 [0x7fbb5fd919c9]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput16ReadMusicXmlPartEN4pugi8xml_nodeEPNS_7SectionEss+0x232 [0x7fbb5fd91de2]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput12ReadMusicXmlEN4pugi8xml_nodeE+0xed8 [0x7fbb5fd93018]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput6ImportERKSs+0x5e [0x7fbb5fd94bee]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv7Toolkit8LoadDataERKSsb+0x34d [0x7fbb5f6e6a6d]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at +0x4a0fe9 [0x7fbb5f6a0fe9]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x1cf97c [0x7fbb613cf97c]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x18c72b [0x7fbb6138c72b]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x1be4d8 [0x7fbb613be4d8]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x583d0 [0x7fbb612583d0]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x1a6a10 [0x7fbb613a6a10]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at PyEval_EvalCode+0xb6 [0x7fbb614d9ce6]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x326daf [0x7fbb61526daf]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x31e440 [0x7fbb6151e440]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x31e2f9 [0x7fbb6151e2f9]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at Py_RunMain+0x33e [0x7fbb614cc0de]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at Py_BytesMain+0x3b [0x7fbb614c692b]\n  Binary file \"/usr/lib/libc.so.6\", at +0x27d0e [0x7fbb60e27d0e]\n  Binary file \"/usr/lib/libc.so.6\", at __libc_start_main+0x8b [0x7fbb60e27e4b]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/bin/python\", at _start+0x25 [0x55cf4c6d4045]\n\nExtension modules: verovio._verovio (total: 1))",
+    "error_type": "ConversionStageError",
+    "failure_code": "verovio_subprocess_failed",
+    "failure_stage": "verovio_conversion",
+    "input_from": "musicxml",
+    "intermediate_musicxml": null,
+    "local_source": "/tmp/camat-schumann-omr-runtime/runs/homr-fullpage-v1/raw.musicxml",
+    "mei_version_rewrite": null,
+    "mei_version_target": "5.1",
+    "message": null,
+    "music21_diagnostics": null,
+    "options_fingerprint": "e03c211edf6101b83e83d20254a055170ef3484a057b4517008a842c8204bdba",
+    "output_mei": null,
+    "output_sha256": null,
+    "output_size_bytes": null,
+    "overwritten": false,
+    "report_schema_version": 2,
+    "resolved_url": null,
+    "resume_policy": "never",
+    "resume_reason": null,
+    "skipped": false,
+    "source": "/tmp/camat-schumann-omr-runtime/runs/homr-fullpage-v1/raw.musicxml",
+    "source_sha256": "c1c69f59844cb4b594ec4fbc478025ef5617980c7bfdba66db9280c6f47588d4",
+    "source_size_bytes": 120585,
+    "stage_durations_seconds": {
+      "download": 0.001612,
+      "format_detection": 8e-06,
+      "source_fingerprint": 0.00017,
+      "verovio_conversion": 0.177747
+    },
+    "status": "fail",
+    "tool_versions": {
+      "musescore": null,
+      "music21": null,
+      "verovio": "6.3.0-425dd7b"
+    },
+    "validation_stages": {
+      "camat_parsed": {
+        "details": null,
+        "status": "not_run"
+      },
+      "converted": {
+        "details": "Verovio subprocess failed (returncode=-11, stderr=Fatal Python error: Segmentation fault\n\nCurrent thread 0x00007fbb6194ebc0 [python] (most recent call first):\n  File \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/verovio.py\", line 178 in loadData\n  File \"<string>\", line 31 in <module>\n\nCurrent thread's C stack trace (most recent call first):\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at _Py_DumpStack+0x4d [0x7fbb612bc6eb]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x157243 [0x7fbb61357243]\n  Binary file \"/usr/lib/libc.so.6\", at +0x44e70 [0x7fbb60e44e70]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput16ReadMusicXmlNoteEN4pugi8xml_nodeEPNS_7MeasureEsPNS_7SectionE+0x9cb [0x7fbb5fd8717b]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput19ReadMusicXmlMeasureEN4pugi8xml_nodeEPNS_7SectionEPNS_7MeasureEssi+0xe09 [0x7fbb5fd919c9]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput16ReadMusicXmlPartEN4pugi8xml_nodeEPNS_7SectionEss+0x232 [0x7fbb5fd91de2]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput12ReadMusicXmlEN4pugi8xml_nodeE+0xed8 [0x7fbb5fd93018]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv13MusicXmlInput6ImportERKSs+0x5e [0x7fbb5fd94bee]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at _ZN3vrv7Toolkit8LoadDataERKSsb+0x34d [0x7fbb5f6e6a6d]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/lib/python3.14/site-packages/verovio/_verovio.abi3.so\", at +0x4a0fe9 [0x7fbb5f6a0fe9]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x1cf97c [0x7fbb613cf97c]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x18c72b [0x7fbb6138c72b]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x1be4d8 [0x7fbb613be4d8]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x583d0 [0x7fbb612583d0]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x1a6a10 [0x7fbb613a6a10]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at PyEval_EvalCode+0xb6 [0x7fbb614d9ce6]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x326daf [0x7fbb61526daf]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x31e440 [0x7fbb6151e440]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at +0x31e2f9 [0x7fbb6151e2f9]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at Py_RunMain+0x33e [0x7fbb614cc0de]\n  Binary file \"/usr/lib/libpython3.14.so.1.0\", at Py_BytesMain+0x3b [0x7fbb614c692b]\n  Binary file \"/usr/lib/libc.so.6\", at +0x27d0e [0x7fbb60e27d0e]\n  Binary file \"/usr/lib/libc.so.6\", at __libc_start_main+0x8b [0x7fbb60e27e4b]\n  Binary file \"/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/bin/python\", at _start+0x25 [0x55cf4c6d4045]\n\nExtension modules: verovio._verovio (total: 1))",
+        "status": "failed"
+      },
+      "downloaded": {
+        "details": "Local source; no download required.",
+        "status": "not_applicable"
+      },
+      "editorially_inspected": {
+        "details": null,
+        "status": "not_run"
+      },
+      "rendered": {
+        "details": null,
+        "status": "pending"
+      },
+      "valid_mei": {
+        "details": null,
+        "status": "pending"
+      }
+    }
+  }
+]

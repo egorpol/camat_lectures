@@ -1,0 +1,152 @@
+{
+  "prepared_on": "2026-10-25",
+  "camat": "0.2.8",
+  "camat_module": "/tmp/camat-schumann-pdf-rehearsal/env/lib/python3.11/site-packages/camat/__init__.py",
+  "regions": {
+    "source": "AI-assisted manual preparation; external detector not called",
+    "all_five_system_overlays_inspected": true,
+    "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+    "image_pixels": [
+      4167,
+      5617
+    ],
+    "counts_before": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "counts_after": [
+      5,
+      4,
+      4,
+      4,
+      4
+    ],
+    "pickup_solution": [
+      400,
+      600,
+      872,
+      1360
+    ],
+    "human_alignment_approval": "Not asserted; default alignment remains unreviewed until instructor/student inspection."
+  },
+  "merge": {
+    "stage": "linked teaching draft before expressive editing",
+    "project": "/home/egor/Nextcloud/code/public_repos/camat_lectures/sessions/02-building-an-edition/teacher/schumann_edition_work/linking-2026-10-25",
+    "input_mei_sha256": "3421818692f3708435a643561932973ffa13876cae3a2e3d051813bf94caa49a",
+    "linked_mei": "edition/mei/linked-starter.mei",
+    "linked_mei_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+    "work_mei": "edition/mei/work.mei",
+    "work_created_now": false,
+    "work_matches_linked_baseline": true,
+    "work_sha256_at_check": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+    "snapshot": "edition/checkpoints/linked-before-editing.mei",
+    "snapshot_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+    "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+    "alignment_sha256": "a8052b3b4b379d0d0fccd5d829abcbe1a98ee2bffa6aa8d08cbe980f0e6d600c",
+    "unreviewed_pages": [
+      "schumann-op68-no10-source-page-p0001"
+    ],
+    "measures_linked": 21,
+    "zones": 21,
+    "surfaces": 1,
+    "pb": 1,
+    "sb": 4,
+    "musical_content_and_existing_ids_preserved": true,
+    "scope": "Labels 1–9 are the core editorial passage; full-piece musical proofreading remains incomplete."
+  },
+  "validation": {
+    "conformance": "passed",
+    "required_checks": "passed",
+    "executions": {
+      "xml_references": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 0
+      },
+      "musical_diagnostics": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 4
+      },
+      "relaxng": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 0
+      },
+      "schematron": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 0
+      },
+      "resources": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 0
+      },
+      "image_network": {
+        "requested": false,
+        "status": "skipped",
+        "findings_count": null
+      },
+      "verovio": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 0
+      },
+      "camat_parse": {
+        "requested": false,
+        "status": "skipped",
+        "findings_count": null
+      },
+      "input_hashes": {
+        "requested": true,
+        "status": "passed",
+        "findings_count": 0
+      }
+    }
+  },
+  "protection_tests": {
+    "working_mei_edits_preserved_on_rerun": true,
+    "different_baseline_refused_without_overwrite": true
+  },
+  "viewer_browser_checks": [
+    {
+      "action": "click source region 6",
+      "selected_measure": "6",
+      "measure_id": "d1e1231",
+      "zone_suffix": "006"
+    },
+    {
+      "action": "click rendered note d1e980",
+      "selected_measure": "5",
+      "measure_id": "d1e968",
+      "zone_suffix": "005"
+    },
+    {
+      "action": "click rendered note d1e5825",
+      "selected_measure": "21",
+      "measure_id": "d1e5813",
+      "zone_suffix": "021"
+    },
+    {
+      "action": "click rendered pickup note d1e60",
+      "selected_measure": "1",
+      "measure_id": "d1e9",
+      "zone_suffix": "001"
+    }
+  ],
+  "saved_reference": {
+    "errors": 0,
+    "stderr_outputs": 0,
+    "source_scan_and_viewer_payloads": 0
+  },
+  "limits": [
+    "Human geometry/alignment approval remains to be recorded.",
+    "No full-piece musical proofread is asserted.",
+    "The optional CAMAT parse consumer was not requested.",
+    "Live editing/watch and publishing are subsequent blocks."
+  ]
+}

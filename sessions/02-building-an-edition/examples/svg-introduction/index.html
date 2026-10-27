@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What is SVG? — a short introduction for musicologists</title>
+  <link rel="stylesheet" href="intro.css">
+  <script src="score-data.js" defer></script>
+  <script src="intro.js" defer></script>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Session 2 · short introduction · works offline</p>
+    <h1>What is SVG?</h1>
+    <p class="lead">A picture described with text. Your browser reads the description and draws it.</p>
+    <p><strong>SVG</strong> means <strong>Scalable Vector Graphics</strong>. Lines, shapes and their positions describe the picture. You only need to change one value to see the connection.</p>
+    <nav aria-label="Demos"><a href="#draw">1. Change a picture</a><a href="#zoom">2. Zoom in</a><a href="#music">3. Find a note</a></nav>
+  </header>
+
+  <section id="draw" aria-labelledby="draw-title">
+    <p class="eyebrow">1 · Text becomes a picture</p>
+    <h2 id="draw-title">Change one word or number</h2>
+    <p><code>&lt;circle&gt;</code> means “draw a circle”. <code>fill</code> gives its colour; <code>cx</code> gives its horizontal position; <code>r</code> gives its radius.</p>
+    <div class="controls">
+      <label>Colour <select id="circle-colour"><option value="black">black</option><option value="royalblue">royalblue</option><option value="crimson">crimson</option></select></label>
+      <label>Position <input id="circle-position" type="range" min="35" max="205" value="70"><output id="position-value">70</output></label>
+      <label>Radius <input id="circle-radius" type="range" min="8" max="30" value="22"><output id="radius-value">22</output></label>
+      <button id="reset-circle" type="button">Reset</button>
+    </div>
+    <div class="pair">
+      <div><h3>Drawing instructions</h3><pre id="circle-code" aria-live="polite"></pre></div>
+      <div><h3>What the browser draws</h3><div id="circle-picture" class="drawing"></div></div>
+    </div>
+    <p class="takeaway">Try blue, then move the circle. The text and picture describe the same object in two ways.</p>
+    <details><summary>Three words we will use</summary><p>A <strong>tag</strong>, such as <code>&lt;circle&gt;</code>, names an element. An <strong>attribute</strong>, such as <code>fill="black"</code>, gives it a property. A <strong>group</strong>, <code>&lt;g&gt;…&lt;/g&gt;</code>, keeps several elements together.</p></details>
+  </section>
+
+  <section id="zoom" aria-labelledby="zoom-title">
+    <p class="eyebrow">2 · Why “scalable”?</p>
+    <h2 id="zoom-title">Enlarge the same note symbol</h2>
+    <p>The PNG stores a grid of <strong>32 × 32 coloured squares</strong> (pixels). The SVG stores an oval and a line. Both were made from this same simple drawing, not from a historical scan.</p>
+    <div class="controls">
+      <label>Enlargement <input id="zoom-level" type="range" min="1" max="12" value="6"><output id="zoom-value">6×</output></label>
+      <label class="check"><input id="show-pixels" type="checkbox" checked> Show the pixel grid clearly</label>
+    </div>
+    <div class="pair">
+      <div><h3>PNG · a fixed pixel grid</h3><div class="zoom-stage"><img id="raster-note" src="note-32px.png" width="192" height="192" alt="A note symbol in a 32 by 32 pixel PNG"></div></div>
+      <div><h3>SVG · shapes drawn at this size</h3><div class="zoom-stage"><svg id="vector-note" width="192" height="192" viewBox="0 0 48 48" role="img" aria-label="The same note symbol drawn as vector shapes"><ellipse cx="19" cy="35" rx="10" ry="6" transform="rotate(-18 19 35)"/><line x1="28" y1="32" x2="28" y2="5" stroke="black" stroke-width="2"/></svg></div></div>
+    </div>
+    <p class="small">The checked option deliberately reveals the PNG's squares. Uncheck it to see the browser's usual smoothing. Enlarging the PNG cannot recover detail absent from its 32 × 32 source.</p>
+    <details><summary>Does saving a scan as SVG make it sharper?</summary><p>An SVG can contain a PNG through an <code>&lt;image&gt;</code> element. That still contains the same fixed pixel image. A PDF can also contain either scanned images or vector drawings. The file extension alone does not tell us which is inside.</p></details>
+  </section>
+
+  <section id="music" aria-labelledby="music-title">
+    <p class="eyebrow">3 · Back to our edition</p>
+    <h2 id="music-title">One note, two descriptions, the same address</h2>
+    <p>Here is Schumann's pickup. <strong>Our starting MEI records the note as C3, an eighth note.</strong> Verovio draws it as SVG and keeps its address, <code>d1e60</code>. Click the note to connect the drawing with that address.</p>
+    <div class="controls">
+      <button id="highlight-note" type="button" aria-pressed="false">Highlight pickup note</button>
+      <label>MEI pitch <select id="pitch-choice"><option value="c">C3 · original teaching example</option><option value="f">F3 · demonstration change</option></select></label>
+      <label class="check"><input id="extra-attributes" type="checkbox"> Show extra musical attributes in SVG</label>
+      <button id="reset-score" type="button">Reset</button>
+    </div>
+    <div id="score-stage" class="score-stage" aria-label="Engraved pickup"></div>
+    <p id="score-status" class="status" aria-live="polite"></p>
+    <div class="pair">
+      <div><h3>MEI · the musical information</h3><pre id="mei-code"></pre><p class="small"><code>pname="c"</code>: pitch letter C. <code>oct="3"</code>: octave 3. <code>dur="8"</code>: eighth note.</p></div>
+      <div><h3>SVG · the drawing and its address</h3><pre id="score-code"></pre><p class="small"><code>g</code> groups the drawn parts; <code>id</code> gives an address. The shapes inside draw the notehead, stem and flag.</p></div>
+    </div>
+    <p id="pitch-explanation" class="takeaway"></p>
+    <p class="small">The C3 and F3 examples were engraved in advance with Verovio 6.3. The selector switches between those prepared renderings. F3 is an artificial teaching change, not a proposed correction to Schumann.</p>
+    <details><summary>Why can an LLM use this?</summary><p>A model can inspect the score image and use SVG's IDs to name the exact MEI target. Extra <code>data-*</code> attributes copy values from the current encoding; they do not verify them against the scan. Our editorial exercise gives the model the scan, current engraving and MEI together.</p></details>
+  </section>
+
+  <footer>
+    <h2>Three questions before we continue</h2>
+    <ol><li>If we colour a note blue, have we changed its pitch?</li><li>Which file records C3 and its duration: MEI or an ordinary SVG drawing?</li><li>When the engraving differs from the witness, which one do we consult for the reading?</li></ol>
+    <details><summary>Suggested answers</summary><p>Colour changes appearance. MEI carries the musical encoding; SVG may repeat selected MEI values as added metadata. The printed witness supplies the source reading, and we check how that reading is encoded and rendered.</p></details>
+    <p>Background: <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">MDN's SVG introduction</a> · <a href="https://book.verovio.org/interactive-notation/css-and-svg.html">Verovio's MEI-to-SVG structure</a></p>
+    <p class="small">Prepared 26 October 2026. These demos run locally: no model account or internet connection is needed. Preserve the accompanying <a href="LICENSE">license notice</a> for the Schumann-derived examples.</p>
+  </footer>
+</main>
+</body>
+</html>

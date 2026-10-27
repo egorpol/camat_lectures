@@ -1,0 +1,28 @@
+{
+  "integration": {
+    "output_mei": "/home/egor/Nextcloud/code/public_repos/camat_lectures/sessions/02-building-an-edition/teacher/schumann_edition_work/linking-2026-10-25/edition/mei/linked-starter.mei",
+    "mdivs": [
+      "1"
+    ],
+    "surfaces": 1,
+    "zones": 21,
+    "measures_linked": 21,
+    "split_measures": 0,
+    "pb_linked": 0,
+    "pb_not_at_page_start": [],
+    "other_facsimiles": 0,
+    "unreviewed_pages": [
+      "schumann-op68-no10-source-page-p0001"
+    ]
+  },
+  "breaks": {
+    "pb": 1,
+    "sb": 4,
+    "removed": 0,
+    "split_system_starts": [],
+    "pb_without_surface": [],
+    "output_mei": "/home/egor/Nextcloud/code/public_repos/camat_lectures/sessions/02-building-an-edition/teacher/schumann_edition_work/linking-2026-10-25/edition/mei/linked-starter.mei"
+  },
+  "score_projection_unchanged": true,
+  "controlled_change": "Number the sole unnumbered mdiv 1; add facsimile links and source breaks."
+}

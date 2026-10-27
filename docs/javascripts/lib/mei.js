@@ -11,7 +11,7 @@ const ACCID = { s: 1, f: -1, ss: 2, x: 2, ff: -2, n: 0, xs: 3, ts: 3, tf: -3 };
 const SHARP_ORDER = "fcgdaeb";
 const FLAT_ORDER = "beadgcf";
 
-function attrs(text) {
+export function attrs(text) {
   const out = {};
   for (const m of text.matchAll(/([\w.:]+)="([^"]*)"/g)) out[m[1]] = m[2];
   return out;

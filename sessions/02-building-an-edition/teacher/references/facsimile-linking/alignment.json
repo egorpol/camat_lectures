@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "source_id": "schumann-op68-no10-source-page",
+  "pages_json": "pages/pages.json",
+  "pages": [
+    {
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "image": "pages/page-0001.png",
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes": "pages/boxes/schumann-op68-no10-source-page-p0001.json",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "systems": 5
+    }
+  ],
+  "regions": [
+    {
+      "mdiv": "1",
+      "measure_n": "1",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 1,
+      "bbox": [
+        400,
+        600,
+        872,
+        1360
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 20
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "2",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 1,
+      "bbox": [
+        856,
+        600,
+        1600,
+        1360
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 0
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "3",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 1,
+      "bbox": [
+        1584,
+        600,
+        2334,
+        1360
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 1
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "4",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 1,
+      "bbox": [
+        2318,
+        600,
+        3092,
+        1360
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 2
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "5",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 1,
+      "bbox": [
+        3076,
+        600,
+        3920,
+        1360
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 3
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "6",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 2,
+      "bbox": [
+        225,
+        1540,
+        1284,
+        2240
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 4
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "7",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 2,
+      "bbox": [
+        1268,
+        1540,
+        2130,
+        2240
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 5
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "8",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 2,
+      "bbox": [
+        2114,
+        1540,
+        2996,
+        2240
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 6
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "9",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 2,
+      "bbox": [
+        2980,
+        1540,
+        3920,
+        2240
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 7
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "10",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 3,
+      "bbox": [
+        220,
+        2340,
+        1332,
+        3180
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 8
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "11",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 3,
+      "bbox": [
+        1316,
+        2340,
+        2180,
+        3180
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 9
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "12",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 3,
+      "bbox": [
+        2164,
+        2340,
+        3049,
+        3180
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 10
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "13",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 3,
+      "bbox": [
+        3033,
+        2340,
+        3920,
+        3180
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 11
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "14",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 4,
+      "bbox": [
+        220,
+        3320,
+        1300,
+        4110
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 12
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "15",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 4,
+      "bbox": [
+        1284,
+        3320,
+        2140,
+        4110
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 13
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "16",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 4,
+      "bbox": [
+        2124,
+        3320,
+        3028,
+        4110
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 14
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "17",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 4,
+      "bbox": [
+        3012,
+        3320,
+        3920,
+        4110
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 15
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "18",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 5,
+      "bbox": [
+        215,
+        4230,
+        1268,
+        5000
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 16
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "19",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 5,
+      "bbox": [
+        1252,
+        4230,
+        2130,
+        5000
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 17
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "20",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 5,
+      "bbox": [
+        2114,
+        4230,
+        3012,
+        5000
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 18
+    },
+    {
+      "mdiv": "1",
+      "measure_n": "21",
+      "occurrence": 1,
+      "page_id": "schumann-op68-no10-source-page-p0001",
+      "system": 5,
+      "bbox": [
+        2996,
+        4230,
+        3900,
+        5000
+      ],
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c",
+      "box_index": 19
+    }
+  ],
+  "review": {
+    "schumann-op68-no10-source-page-p0001": {
+      "status": "unreviewed",
+      "reviewer": null,
+      "date": null,
+      "notes": "",
+      "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+      "boxes_sha256": "d57b23ad6cd1db8fdf5f1c406ae467613cc5f71f33dce23f91dc58d18dd4ab2c"
+    }
+  }
+}

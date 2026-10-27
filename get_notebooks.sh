@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copy the seminar notebooks from GitHub into camat_lectures/, without git.
+# Copy seminar notebooks and their data ZIPs into camat_lectures/, without git.
 #
 # In a terminal on Jupyter4NFDI (or any JupyterLab: File > New > Terminal):
 #
@@ -29,7 +29,7 @@ fail() {
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
-echo "Downloading the notebooks from $REPO ..."
+echo "Downloading notebooks and data from $REPO ..."
 if command -v curl >/dev/null 2>&1; then
     fetch=(curl -fsSL --max-time 120 -A camat-lectures-get-notebooks -o "$tmp/main.tar.gz" "$ARCHIVE")
 elif command -v wget >/dev/null 2>&1; then
@@ -44,7 +44,7 @@ tar -xzf "$tmp/main.tar.gz" -C "$tmp" || fail "The download is not a valid archi
 # The archive unpacks to camat_lectures-main/sessions/<session>/notebooks/<name>.ipynb.
 new=()
 kept=()
-for src in "$tmp"/*/sessions/*/notebooks/*.ipynb; do
+for src in "$tmp"/*/sessions/*/notebooks/*.ipynb "$tmp"/*/sessions/*/notebooks/*.zip; do
     [ -f "$src" ] || continue
     session=$(basename "$(dirname "$(dirname "$src")")")
     target="$DEST/$session/$(basename "$src")"

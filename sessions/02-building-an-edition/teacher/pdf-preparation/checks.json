@@ -1,0 +1,87 @@
+{
+  "checked_on": "2026-10-25",
+  "status": "passed",
+  "environment": "teacher/references/pdf-preparation/environment.json",
+  "clean_install": {
+    "distribution": "camat==0.2.8 from PyPI",
+    "module_in_temporary_site_packages": true,
+    "editable": false
+  },
+  "notebook": {
+    "execution": "completed with no error or NOT DONE outputs",
+    "source_media_outputs_seen_locally": 2,
+    "source_image_outputs_in_saved_reference": 0
+  },
+  "checkpoint": {
+    "stage": "page preparation; measure boxes and facsimile links are not created yet",
+    "mei_input": "inputs/b02b5197b383/starter.mei",
+    "mei_sha256": "3421818692f3708435a643561932973ffa13876cae3a2e3d051813bf94caa49a",
+    "pages_json": "edition/pages/pages.json",
+    "pages_json_sha256": "6c2e187e97cc85d2a782130d05634a56ab88029068c49bd790a05108f8d2331c",
+    "image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+    "image_pixels": [
+      4167,
+      5617
+    ],
+    "renderer": "pdftoppm version 26.05.0",
+    "original_to_excerpt_to_printed": [
+      8,
+      1,
+      "8"
+    ],
+    "body_measures": 21,
+    "systems": 5,
+    "scope": "Whole-piece technical carrier; labels 1–9 are the core editing passage. Further musical source review remains necessary.",
+    "next_step": "Review one measure box per MEI measure, then merge facsimile links."
+  },
+  "source_mapping": {
+    "original_pdf": "sources/imslp-51556-schumann-op68.pdf",
+    "original_sha256": "893ab03c376724a9f4474497130eb2d8510ba9d71f05bb270c8f6000b731e289",
+    "original_page_count": 50,
+    "excerpt_pdf": "sources/schumann-op68-no10-source-page.pdf",
+    "excerpt_sha256": "3c634e9fa1c8b4f75df6abbd1f2edf9012625421abf2eee37e641e70e794ef8e",
+    "excerpt_page_count": 1,
+    "original_pdf_page": 8,
+    "excerpt_pdf_page": 1,
+    "printed_page": "8",
+    "pypdf": "6.10.0",
+    "transformation": "pypdf PdfWriter.add_page(PdfReader(original).pages[7]), then add_metadata(pdf_metadata); original page retained without crop, resize, rotation or rasterization",
+    "pdf_metadata": {
+      "/Title": "Schumann, Op. 68 No. 10 — source page",
+      "/Subject": "Full page 8 extracted without cropping from IMSLP 51556; printed page 8",
+      "/Creator": "pypdf 6.10.0"
+    },
+    "media_box_points": [
+      0.0,
+      0.0,
+      1000.0,
+      1348.0
+    ],
+    "crop_box_points": [
+      0.0,
+      0.0,
+      1000.0,
+      1348.0
+    ],
+    "rotation": 0
+  },
+  "rerun_preserved_outputs": true,
+  "edited_input_refused_without_overwrite": true,
+  "image_byte_identical_to_recorded_omr_fullpage_input": true,
+  "automated_layout_demonstrations": {
+    "omitting_pickup": "rejected",
+    "wrong_system_boundary_with_same_label_order": "passes label check; human source comparison required"
+  },
+  "visual_review": "Full rendered page inspected; five complete systems and page furniture retained.",
+  "limits": [
+    "This stage creates no measure boxes, facsimile links or viewer.",
+    "No complete musical proofread of the whole piece is asserted.",
+    "Student cloud and GUI editing/publication environments remain to rehearse."
+  ],
+  "runtime_download_check": {
+    "status": "passed",
+    "bytes": 9441076,
+    "sha256": "893ab03c376724a9f4474497130eb2d8510ba9d71f05bb270c8f6000b731e289",
+    "method": "Same urllib URL and User-Agent as the notebook; fetched into memory, no PDF replacement."
+  }
+}

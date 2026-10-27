@@ -1,0 +1,5 @@
+{"verovio": "6.3.0-425dd7b", "pages": 1}
+[Warning] MusicXML import: slur 1 from measure 9 could not be ended
+[Warning] MusicXML import: slur 2 from measure 9 could not be ended
+[Warning] MusicXML import: slur ending for element 'q1yfv6i6' could not be matched to a start element
+[Warning] slur 'c2evj2c' is ignored, since start 'b15cn4n0' does not occur temporally before end 'r18rd6jj'.

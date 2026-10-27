@@ -1,0 +1,14 @@
+name: Schumann Gemini experiment
+version: 1.0.0
+schema: v1
+models:
+  - name: Gemini 3.8 Flash - check Free Tier project
+    provider: gemini
+    model: gemini-3.8-flash
+    apiKey: ${{ secrets.GEMINI_API_KEY }}
+    roles: [chat, edit, apply]
+  - name: Gemini 3.5 Flash-Lite - check Free Tier project
+    provider: gemini
+    model: gemini-3.5-flash-lite
+    apiKey: ${{ secrets.GEMINI_API_KEY }}
+    roles: [chat, edit, apply]

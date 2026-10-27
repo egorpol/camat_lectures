@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+_site/
+validation-runtime/
+local/
+pages/*.png
+site.local.json
+.env
+.ipynb_checkpoints/
+export.json

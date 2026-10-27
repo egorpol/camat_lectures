@@ -1,0 +1,51 @@
+{
+  "checked_on": "2026-10-25",
+  "python": "3.11.16",
+  "verovio": "6.3.0",
+  "scope": "Bass melody only: pickup and first full bar; not full piano-texture or editorial validation.",
+  "notebook_checks": {
+    "routes": [
+      "abc",
+      "pae",
+      "mei",
+      "kern"
+    ],
+    "pitches_midi": [
+      48,
+      53,
+      57,
+      60,
+      53
+    ],
+    "written_durations_quarters": [
+      0.5,
+      1.5,
+      0.5,
+      1.5,
+      0.5
+    ],
+    "measure_durations_quarters": [
+      0.5,
+      4
+    ],
+    "key_fifths": -1,
+    "metre": "4/4",
+    "status": "all four supplied examples passed; all four engravings visually inspected"
+  },
+  "schema": {
+    "path": "/home/egor/Nextcloud/code/public_repos/camat_v2/camat/schemas/mei-CMN-5.1.rng",
+    "sha256": "f6440d5eb59c3e903f2a7a64ea26518646186f8449b86096106846a269eb354b",
+    "status": "direct MEI scaffold and three CAMAT-converted outputs pass"
+  },
+  "camat_checkout": {
+    "git_commit": "8774ad2ef7be9b5d0d98e82de87a85b4fdd69b13",
+    "limit": "Local checkout validation, not a clean-install rehearsal or a GUI export test."
+  },
+  "gui_routes": "MuseScore and mei-friend instructions checked against primary documentation; actual GUI entry/export remains to rehearse.",
+  "source_sha256": {
+    "input.abc": "b5b81adfd74cd0bf065b3888c9ebf241b03c67a1ac1d077d3bf67882b0d7ae4d",
+    "input.krn": "cbc0cbde56f066eb47481163032514688d090fa906d8ca2943141ab5692a9b63",
+    "input.mei": "248e8447a35b2680a5ce00219a232a6c79a74a029ab78b19b320b75635d28ff0",
+    "input.pae": "f1feca14742bf52aeb9b4447181270c02a6cda0b8ec49f48749588d0b473e8f8"
+  }
+}

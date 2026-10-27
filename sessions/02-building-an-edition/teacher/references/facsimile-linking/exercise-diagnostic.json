@@ -1,0 +1,5 @@
+{
+  "source": "Manually prepared teaching data; no detector called.",
+  "status": "rejected as expected",
+  "message": "System count gate failed; review boxes and pages.json:\nschumann-op68-no10-source-page-p0001 (PDF page 1, printed page 8): actual [4, 4, 4, 4, 4], expected [5, 4, 4, 4, 4]"
+}

@@ -1,0 +1,166 @@
+{
+  "conversion_signature": "5fff2b1d63a689c540e64acd657d685e32b39b0e36a6ae0ccfa4a392fb356d7e",
+  "record": {
+    "conversion_duration_seconds": 0.918176,
+    "conversion_options": {
+      "download": {
+        "allowed_content_types": [],
+        "chunk_size": 65536,
+        "max_bytes": 104857600,
+        "reject_html": true
+      },
+      "mei_version": "5.1",
+      "midi": {
+        "auto_max_quarter_length_divisor": 64,
+        "fill_gaps": true,
+        "quantize": true,
+        "quarter_length_divisors": null,
+        "reconstruct_voices": true,
+        "voice_layout": "layers"
+      },
+      "render_first_page": true,
+      "verovio": {
+        "breaks": "auto",
+        "removeIds": false,
+        "xmlIdSeed": 0
+      }
+    },
+    "conversion_route": "verovio-direct",
+    "conversion_signature": "5fff2b1d63a689c540e64acd657d685e32b39b0e36a6ae0ccfa4a392fb356d7e",
+    "converted": true,
+    "download": {
+      "content_length_header": null,
+      "content_type": null,
+      "download_cache_hit": false,
+      "downloaded_bytes": 46471,
+      "http_status": null,
+      "redirect_history": [],
+      "requested_url": null,
+      "resolved_url": null
+    },
+    "duplicate_xml_id_count": 0,
+    "error": null,
+    "error_type": null,
+    "failure_code": null,
+    "failure_stage": null,
+    "input_from": "musicxml",
+    "intermediate_musicxml": null,
+    "load_result": true,
+    "local_source": "/tmp/camat-schumann-omr-runtime/runs/homr-two-systems-v1/raw.musicxml",
+    "measure_count": 9,
+    "mei_version": "5.1",
+    "mei_version_rewrite": {
+      "dynam_enclose_dropped": [],
+      "remaining_errors": [],
+      "remaining_errors_total": 0,
+      "rewrites": {
+        "choice_unwrapped": 0,
+        "dynam_enclose_dropped": 0,
+        "meiversion": 1,
+        "mrest_to_mspace": 0
+      },
+      "source_mei_version": "6.0-dev",
+      "status": "rewritten",
+      "unrewritable": []
+    },
+    "mei_version_target": "5.1",
+    "message": "Converted with Verovio.",
+    "music21_diagnostics": null,
+    "note_count": 138,
+    "options_fingerprint": "e03c211edf6101b83e83d20254a055170ef3484a057b4517008a842c8204bdba",
+    "output_chars": 25584,
+    "output_mei": "/tmp/camat-schumann-omr-runtime/runs/homr-two-systems-v1/converted/raw_8df96d461c00_musicxml_verovio.mei",
+    "output_sha256": "1deb63c6cdd2cae345edf70fedbdc9ab9f358509fea6449eb20eca8ac2e1dc78",
+    "output_size_bytes": 25580,
+    "overwritten": false,
+    "page_count": 1,
+    "report_schema_version": 2,
+    "resolved_url": null,
+    "rest_count": 29,
+    "resume_policy": "never",
+    "resume_reason": null,
+    "skipped": false,
+    "source": "/tmp/camat-schumann-omr-runtime/runs/homr-two-systems-v1/raw.musicxml",
+    "source_sha256": "730d21656c084064ed28d746e25338d8d48ab7c6e3058fc3952eaa193b071fa1",
+    "source_size_bytes": 46471,
+    "stage_durations_seconds": {
+      "download": 0.001591,
+      "format_detection": 1e-05,
+      "mei_validation": 0.010444,
+      "mei_version_rewrite": 0.734131,
+      "output_fingerprint": 0.000196,
+      "source_fingerprint": 0.000126,
+      "verovio_conversion": 0.101309
+    },
+    "status": "ok",
+    "svg_ok": true,
+    "tool_versions": {
+      "musescore": null,
+      "music21": null,
+      "verovio": "6.3.0-425dd7b"
+    },
+    "validation_stages": {
+      "camat_parsed": {
+        "details": null,
+        "status": "not_run"
+      },
+      "converted": {
+        "details": "verovio-direct",
+        "status": "passed"
+      },
+      "downloaded": {
+        "details": "Local source; no download required.",
+        "status": "not_applicable"
+      },
+      "editorially_inspected": {
+        "details": null,
+        "status": "not_run"
+      },
+      "rendered": {
+        "details": "First-page SVG smoke test.",
+        "status": "passed"
+      },
+      "valid_mei": {
+        "details": "Validated against the bundled MEI 5.1 CMN schema.",
+        "status": "passed"
+      }
+    },
+    "verovio_version": "6.3.0-425dd7b",
+    "xml_id_count": 287
+  },
+  "report_schema_version": 2,
+  "signature_payload": {
+    "conversion_options": {
+      "download": {
+        "allowed_content_types": [],
+        "chunk_size": 65536,
+        "max_bytes": 104857600,
+        "reject_html": true
+      },
+      "mei_version": "5.1",
+      "midi": {
+        "auto_max_quarter_length_divisor": 64,
+        "fill_gaps": true,
+        "quantize": true,
+        "quarter_length_divisors": null,
+        "reconstruct_voices": true,
+        "voice_layout": "layers"
+      },
+      "render_first_page": true,
+      "verovio": {
+        "breaks": "auto",
+        "removeIds": false,
+        "xmlIdSeed": 0
+      }
+    },
+    "conversion_route": "verovio-direct",
+    "input_from": "musicxml",
+    "report_schema_version": 2,
+    "source_sha256": "730d21656c084064ed28d746e25338d8d48ab7c6e3058fc3952eaa193b071fa1",
+    "tool_versions": {
+      "musescore": null,
+      "music21": null,
+      "verovio": "6.3.0-425dd7b"
+    }
+  }
+}

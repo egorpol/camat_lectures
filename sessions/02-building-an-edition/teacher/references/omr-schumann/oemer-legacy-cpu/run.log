@@ -1,0 +1,25 @@
+# Reading copy: download-progress updates and ANSI colour removed.
+# Exact original: run-original.log.gz (outside the embedded notebook bundle).
+2026-10-24 02:30:24 Extracting staffline and symbols
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/oemer/ete.py", line 287, in main
+    mxl_path = extract(args)
+               ^^^^^^^^^^^^^
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/oemer/ete.py", line 131, in extract
+    staff, symbols, stems_rests, notehead, clefs_keys = generate_pred(str(img_path), use_tf=args.use_tf)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/oemer/ete.py", line 51, in generate_pred
+    staff_symbols_map, _ = inference(
+                           ^^^^^^^^^^
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/oemer/inference.py", line 48, in inference
+    import onnxruntime as rt
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/onnxruntime/__init__.py", line 56, in <module>
+    raise import_capi_exception
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/onnxruntime/__init__.py", line 23, in <module>
+    from onnxruntime.capi._pybind_state import ExecutionMode  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/onnxruntime/capi/_pybind_state.py", line 32, in <module>
+    from .onnxruntime_pybind11_state import *  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: /tmp/camat-schumann-omr-runtime/oemer-env/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.cpython-311-x86_64-linux-gnu.so: cannot enable executable stack as shared object requires: Invalid argument

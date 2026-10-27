@@ -1,0 +1,152 @@
+{
+  "record_date": "2026-10-23",
+  "work": {
+    "composer": "Robert Schumann",
+    "collection": "Album für die Jugend, Op. 68",
+    "number": 10,
+    "title": "Fröhlicher Landmann, von der Arbeit zurückkehrend"
+  },
+  "printed_witness": {
+    "id": "imslp-51556-clara-schumann-breitkopf",
+    "catalogue_url": "https://imslp.org/wiki/Album_für_die_Jugend,_Op.68_(Schumann,_Robert)",
+    "file_url": "https://imslp.org/wiki/Special:ImagefromIndex/51556",
+    "imslp_file_id": 51556,
+    "editor": "Clara Schumann",
+    "publisher": "Breitkopf & Härtel, Leipzig",
+    "catalogue_date": "1887",
+    "date_evidence": "IMSLP catalogue; no date identified on the inspected title or music page",
+    "plate": "R.S. 67",
+    "scan_credit_as_catalogued": "D-Mbs (Bayerische Staatsbibliothek)",
+    "upload_credit_as_catalogued": "Ivdruiz",
+    "upload_date_as_catalogued": "2009-12-31",
+    "rights_as_catalogued": "Public Domain",
+    "rights_scope": "Catalogue statement recorded as supplied; separate from licenses/notices for the base encoding and teaching derivative",
+    "inspected_original_pdf_pages": [
+      1,
+      8
+    ],
+    "requested_url": "https://s9.imslp.org/files/imglnks/usimg/0/0a/IMSLP51556-PMLP02707-RS67.pdf",
+    "download_url": "https://s9.imslp.org/files/imglnks/usimg/0/0a/IMSLP51556-PMLP02707-RS67.pdf",
+    "retrieved_at": "2026-10-23T19:10:22.435372+00:00",
+    "bytes": 9441076,
+    "sha256": "893ab03c376724a9f4474497130eb2d8510ba9d71f05bb270c8f6000b731e289",
+    "local_path": "local/imslp-51556-schumann-op68.pdf",
+    "content_type": "application/pdf",
+    "page_count": 50
+  },
+  "classroom_pdf": {
+    "id": "imslp-51556-page8-extract",
+    "local_path": "local/schumann-op68-no10-source-page.pdf",
+    "bytes": 156268,
+    "sha256": "3c634e9fa1c8b4f75df6abbd1f2edf9012625421abf2eee37e641e70e794ef8e",
+    "page_count": 1,
+    "derived_from": "imslp-51556-clara-schumann-breitkopf",
+    "page_mapping": [
+      {
+        "original_pdf_page": 8,
+        "excerpt_pdf_page": 1,
+        "printed_page": "8"
+      }
+    ],
+    "transformation": "pypdf PdfWriter.add_page(PdfReader(original).pages[7]); original page retained without crop, resize, rotation or rasterization",
+    "tool": "pypdf",
+    "tool_version": "6.10.0"
+  },
+  "base_encoding": {
+    "id": "mei-sample-schumann-landmann",
+    "repository": "https://github.com/music-encoding/sample-encodings",
+    "revision": "e4a3c4dece588ae0bdb13e5cf956340dcd99b447",
+    "repository_path": "MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei",
+    "url": "https://raw.githubusercontent.com/music-encoding/sample-encodings/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei",
+    "local_path": "local/Schumann_Landmann_Op68_No10.mei",
+    "encoder": "Maja Hartwig",
+    "bytes": 62680,
+    "sha256": "1416c6112cf5cd687cc24f451b021c4c28a20642a76de3d824ec4bd656cd1ca2",
+    "git_blob_sha1": "192a23f37a2a9f634eabf1bee3efd06ffa5ee637",
+    "git_blob_verified": true,
+    "mei_version": "5.1",
+    "header_rights_statement": "This encoding is in the public domain.",
+    "collection_license": "ECL-2.0",
+    "license_url": "https://github.com/music-encoding/sample-encodings/blob/main/LICENSE",
+    "printed_source_agreement": "The header cites a KernScores encoding rather than identifying this printed edition; equivalence is not assumed."
+  },
+  "workshop_scope": {
+    "carrier": "Whole piece: the complete music on one page, retaining source MEI labels 1–21",
+    "reviewed_passage": "Pickup and first eight full bars, i.e. source MEI labels 1–9; first two printed systems",
+    "measure_numbering": "Preserve upstream measure n labels for linking: label 1 = pickup; labels 2–21 = conventional bar numbers 1–20. The print has no bar numbers.",
+    "system_mei_labels": [
+      [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      [
+        "14",
+        "15",
+        "16",
+        "17"
+      ],
+      [
+        "18",
+        "19",
+        "20",
+        "21"
+      ]
+    ],
+    "review_status": "Preliminary inspection of MEI labels 1–9; the later OMR comparison exposed missed pitch discrepancies. This is not a complete note-level proofread. Full-piece expressive content remains unreviewed."
+  },
+  "observations": [
+    {
+      "id": "staff-lines",
+      "finding": "The body score has staffDef s1 and s2 without lines=5. In Verovio 6.3.0 the unmodified source renders without normal staff lines. A temporary diagnostic copy adding only those attributes renders normal staves.",
+      "source_unchanged": true
+    },
+    {
+      "id": "opening-slurs",
+      "finding": "Opening slur in the source MEI spans pickup C3 d1e60 to C4 d1e619 in label 3, whereas the selected print has a slur from the pickup to F3 d1e338 in label 2, followed by a separate slur in label 3 from Bb3 d1e561 to A3 d1e634. Treat the print as the witness when preparing the exercise."
+    },
+    {
+      "id": "second-forte",
+      "finding": "The print shows an f at the start of the second system (musical bar 5, source MEI label 6); the source MEI has no dynamic in label 6."
+    },
+    {
+      "id": "slur-storage",
+      "finding": "Verovio 6.3.0 reports 20 slurs not stored in the measure containing their start. Moving a slur to the starting measure is separate from deciding its correct endpoints."
+    },
+    {
+      "id": "repeats",
+      "finding": "The two opening four-bar phrases are written out in the print and represented by labels 2–5 and 6–9. Do not replace them with an assumed repeat."
+    }
+  ],
+  "next_step": "Step 2 teaching derivatives and change record prepared on 2026-10-24; next link the fixed source page to the working MEI. Both downloaded originals remain byte-identical.",
+  "omr_cross_check_2026_10_24": {
+    "scope": "Printed page 8, first full bar of systems 1 and 2",
+    "corrections": [
+      {
+        "xml_id": "d1e338",
+        "before": "A3",
+        "printed_witness": "F3"
+      },
+      {
+        "xml_id": "d1e1495",
+        "before": "A3",
+        "printed_witness": "F3"
+      }
+    ],
+    "review_limit": "Earlier preliminary passage inspection missed these readings; it was not a complete note-level verification."
+  }
+}

@@ -1,4 +1,4 @@
-"""Copy the seminar notebooks from GitHub into camat_lectures/, without git.
+"""Copy seminar notebooks and their data ZIPs into camat_lectures/, without git.
 
 In a notebook cell on Jupyter4NFDI (or any JupyterLab):
 
@@ -36,17 +36,17 @@ def download():
                  "Check the network, or download them from the session page and upload them.")
 
 
-# Archive members look like camat_lectures-main/sessions/<session>/notebooks/<name>.ipynb.
+# Archive members are sessions/<session>/notebooks/<name>.ipynb or data ZIPs.
 def notebook_path(member):
     parts = PurePosixPath(member.name).parts
     if (member.isfile() and len(parts) == 5 and parts[1] == "sessions" and parts[3] == "notebooks"
-            and parts[4].endswith(".ipynb") and ".." not in parts):
+            and parts[4].endswith((".ipynb", ".zip")) and ".." not in parts):
         return DEST / parts[2] / parts[4]
     return None
 
 
 def main():
-    print(f"Downloading the notebooks from {REPO} ...")
+    print(f"Downloading notebooks and data from {REPO} ...")
     new, kept = [], []
     with tarfile.open(fileobj=io.BytesIO(download()), mode="r:gz") as tar:
         for member in tar.getmembers():

@@ -6,6 +6,9 @@
 //   llm      Demo D: check an LLM-written melody
 //   facsimile Demo E: MEI measure zones on a scan, linked to the rendering
 //   score    one file rendered as notation (part 1's last tab)
+//   compare  session 2: the same bars from two MEI files, one note marked
+//   edit     session 2: one text box rendered as you type, with the notes read
+//   inspect  session 2: click a note or rest; MEI tag and SVG group share one id
 
 import { readScore, verovioReady, VEROVIO_VERSION } from "./lib/vrv.js";
 import { parseMidi } from "./lib/midi.js";
@@ -13,6 +16,7 @@ import { drawRoll, TRACK_COLORS } from "./lib/roll.js";
 import * as G from "./lib/grid.js";
 import { cleanAnswer, barLengths, melodyChecks, parsePitch } from "./lib/checks.js";
 import { facsimileFromMEI, iiifUrl, zoneRegion } from "./lib/facs.js";
+import { attrs } from "./lib/mei.js";
 
 // ---------------------------------------------------------------- helpers
 
@@ -839,9 +843,342 @@ async function initScore(root) {
   }, 100)).observe(root);
 }
 
+// ---------------------------------------------------------------- compare
+
+// Two MEI files side by side: the same bars from each, one note in blue.
+// data-left, data-right: the files; data-left-title, data-right-title;
+// data-views: "Label=range#note-id; ...". The range is Verovio's
+// measureRange, which counts <measure> elements from 1: in a file that
+// starts with a pickup, "1-2" is the pickup and bar 1.
+
+function parseViews(spec) {
+  return spec.split(";").map((part) => {
+    const [label, rest] = part.split("=");
+    const [range, note] = rest.split("#");
+    return { label: label.trim(), range: range.trim(), note: note.trim() };
+  });
+}
+
+// Verovio 6.3 draws a <staffDef> without @lines with no staff lines at all,
+// and the Sample Collection's Schumann file has none. Assume five, as our
+// starting file's repair does. The captions quote the file unchanged.
+const withStaffLines = (text) => text.replace(/<staffDef\b(?![^>]*\blines=)/g, '<staffDef lines="5"');
+
+// One system per range, as narrow as the music. scale defaults to compare's 45.
+async function renderRanges(text, ranges, scale = 45) {
+  const { module, esm } = await verovioReady();
+  const tk = new esm.VerovioToolkit(module);
+  try {
+    tk.setOptions({
+      inputFrom: "mei",
+      scale,
+      breaks: "none",
+      adjustPageWidth: true,
+      adjustPageHeight: true,
+      header: "none",
+      footer: "none",
+      pageMarginTop: 30,
+      pageMarginBottom: 30,
+      pageMarginLeft: 30,
+      pageMarginRight: 30,
+    });
+    if (!tk.loadData(withStaffLines(text))) throw new Error("Verovio could not read the MEI file");
+    return ranges.map((range) => {
+      tk.select({ measureRange: range });
+      tk.redoLayout();
+      return tk.renderToSVG(1);
+    });
+  } finally {
+    tk.destroy?.();
+  }
+}
+
+// The <note> or <rest> tag as written in the file; notes also get pitch as "A3".
+function noteInFile(text, id) {
+  const tag = text.match(new RegExp(`<(?:note|rest)\\b[^>]*\\bxml:id="${id}"[^>]*>`))?.[0];
+  if (!tag) return null;
+  const a = attrs(tag);
+  if (tag.startsWith("<rest")) return { tag, pitch: null };
+  const accid = { s: "♯", f: "♭" }[a.accid ?? a["accid.ges"]] ?? "";
+  return { tag, pitch: `${a.pname.toUpperCase()}${accid}${a.oct}` };
+}
+
+// Quarter-note length of a note or rest; a note inside a <chord> inherits dur/dots.
+function lengthInFile(text, id) {
+  const tag = text.match(new RegExp(`<(?:note|rest)\\b[^>]*\\bxml:id="${id}"[^>]*>`))?.[0];
+  if (!tag) return null;
+  let a = attrs(tag);
+  if (!a.dur) {
+    for (const m of text.matchAll(/<chord\b[^>]*>[\s\S]*?<\/chord>/g)) {
+      if (!m[0].includes(`xml:id="${id}"`)) continue;
+      a = attrs(m[0].match(/^<chord\b[^>]*>/)[0]);
+      break;
+    }
+  }
+  if (!a.dur) return null;
+  const dots = +(a.dots || 0);
+  return (4 / +a.dur) * (2 - 2 ** -dots);
+}
+
+async function initCompare(root) {
+  const views = parseViews(root.dataset.views);
+  root.replaceChildren(loadingNote());
+  const panes = await Promise.all(
+    ["left", "right"].map(async (side) => {
+      const pane = { title: root.dataset[side + "Title"] };
+      try {
+        pane.text = await fetchText(root.dataset[side]);
+        pane.svgs = await renderRanges(pane.text, views.map((v) => v.range));
+      } catch (error) {
+        pane.error = error.message;
+      }
+      return pane;
+    }),
+  );
+  const buttons = views.map((v, i) => h("button", { type: "button", class: "md-button", onclick: () => show(i) }, v.label));
+  for (const p of panes) {
+    p.score = h("div", { class: "vrv-score" });
+    p.caption = h("p", { class: "vrv-note" });
+    p.code = h("p", { class: "cmp-code" });
+  }
+  const show = (i) => {
+    const id = views[i].note;
+    buttons.forEach((b, j) => {
+      b.classList.toggle("md-button--primary", i === j);
+      b.setAttribute("aria-pressed", String(i === j));
+    });
+    for (const p of panes.filter((p) => !p.error)) {
+      p.score.innerHTML = p.svgs[i];
+      p.score.querySelector(`[id="${id}"]`)?.classList.add("cmp-target");
+      const note = noteInFile(p.text, id);
+      p.caption.replaceChildren(...(note ? ["The note in blue: ", h("strong", {}, note.pitch)] : [`This file has no note ${id}.`]));
+      p.code.replaceChildren(note ? h("code", {}, note.tag) : "");
+    }
+  };
+  root.replaceChildren(
+    h("div", { class: "vrv-controls" }, buttons),
+    h("div", { class: "cmp-panes" },
+      panes.map((p) => h("div", { class: "cmp-pane" },
+        h("p", { class: "vrv-label" }, p.title),
+        p.error ? h("p", { class: "vrv-error" }, `This file could not be loaded (${p.error}).`) : [p.score, p.caption, p.code]))),
+  );
+  show(0);
+}
+
+// ---------------------------------------------------------------- edit
+
+// One text box (data-file, data-format, data-title), rendered as you type.
+// Under the score, the notes and rests as Verovio read them, bar by bar, so
+// a wrong octave or length shows up in words as well as in the score.
+
+const LENGTHS = { 0.25: "sixteenth", 0.5: "eighth", 0.75: "dotted eighth", 1: "quarter", 1.5: "dotted quarter", 2: "half", 3: "dotted half", 4: "whole" };
+const SHARP_NAMES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
+const FLAT_NAMES = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"];
+
+const lengthName = (q) => LENGTHS[q] ?? `${fmt(q)} quarter notes`;
+const pitchName = (midi, fifths) => (fifths < 0 ? FLAT_NAMES : SHARP_NAMES)[midi % 12] + (Math.floor(midi / 12) - 1);
+
+// A first bar shorter than the metre is the pickup; the next one is bar 1.
+function barsRead(result) {
+  const starts = result.timemap.filter((e) => e.measureOn).map((e) => e.qstamp);
+  const lengths = barLengths(result.timemap, result.notes);
+  const full = G.barQuarters(result.meter);
+  const pickup = lengths[0] < full - 1e-6;
+  const events = result.notes.map((n) => ({ on: n.on, text: `${pitchName(n.pitch, result.fifths)} ${lengthName(n.off - n.on)}` }));
+  const restEnds = new Map();
+  for (const e of result.timemap) for (const id of e.restsOff || []) restEnds.set(id, e.qstamp);
+  for (const e of result.timemap) {
+    for (const id of e.restsOn || []) events.push({ on: e.qstamp, text: `rest ${lengthName((restEnds.get(id) ?? e.qstamp) - e.qstamp)}` });
+  }
+  events.sort((a, b) => a.on - b.on);
+  return starts.map((start, i) => {
+    const end = i + 1 < starts.length ? starts[i + 1] : Infinity;
+    const isPickup = pickup && i === 0;
+    return {
+      label: isPickup ? "Pickup" : `Bar ${pickup ? i : i + 1}`,
+      events: events.filter((e) => e.on >= start - 1e-6 && e.on < end - 1e-6).map((e) => e.text),
+      short: !isPickup && Math.abs(lengths[i] - full) > 1e-6 ? `${fmt(lengths[i])} of ${fmt(full)} quarter notes` : "",
+    };
+  });
+}
+
+// For data-format="auto": which inputFrom a pasted text needs. Verovio's own
+// "auto" would skip the ABC guards in precheck() and readScore().
+const FORMAT_HINT = "This box reads ABC (with X: and K: lines), MEI, MusicXML, kern (**kern) and Plaine & Easie (@clef, @data).";
+function detectFormat(text) {
+  if (/<mei[\s>]/.test(text)) return "mei";
+  if (/<score-(partwise|timewise)[\s>]/.test(text)) return "xml";
+  if (/^\*\*kern/m.test(text)) return "humdrum";
+  if (/^@(clef|keysig|timesig|data)/m.test(text)) return "pae";
+  if (/^[XK]:/m.test(text)) return "abc";
+  return null;
+}
+
+async function initEdit(root) {
+  const auto = root.dataset.format === "auto";
+  const title = root.dataset.title || root.dataset.format || "abc";
+  const original = root.dataset.file ? await fetchText(root.dataset.file) : "";
+  const textarea = h("textarea", {
+    rows: auto ? 8 : original.split("\n").length + 1, spellcheck: "false", "aria-label": `${title} text`,
+    class: auto ? "edit-any" : null,
+    placeholder: auto ? "Paste ABC, MEI, MusicXML, kern or Plaine & Easie here, or open a file." : null,
+  });
+  textarea.value = original;
+  const label = h("code", {});
+  const out = h("div", { class: "vrv-out" }, auto ? "" : loadingNote());
+  const reads = h("div", { class: "edit-reads" });
+  const mei = h("pre", { class: "vrv-mei", hidden: true });
+  let last = null;
+  let latest = 0;
+  // Show the whole text, also where long lines wrap in a narrow column.
+  const fit = () => {
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight + 2}px`;
+  };
+  const render = async () => {
+    const run = ++latest;
+    // LLM answers often come inside a Markdown code fence.
+    const text = auto ? cleanAnswer(textarea.value) : textarea.value;
+    const format = auto ? detectFormat(text) : root.dataset.format || "abc";
+    label.textContent = `inputFrom: "${format ?? "?"}"`;
+    label.hidden = !text.trim();
+    if (!format) {
+      last = null;
+      reads.replaceChildren();
+      const zipped = text.startsWith("PK");
+      out.replaceChildren(text.trim() ? h("p", { class: "vrv-warning" }, zipped
+        ? "This is a compressed file (.mxl). Export uncompressed MusicXML (.musicxml) instead."
+        : `Which format is this? ${FORMAT_HINT}`) : "");
+      mei.textContent = "";
+      return;
+    }
+    const result = await readScore(format, text, { width: out.clientWidth || 500, scale: 35 });
+    if (run !== latest) return; // a newer edit is on its way
+    last = showScore(out, result);
+    reads.replaceChildren();
+    if (result.ok) {
+      reads.append(
+        h("p", { class: "vrv-label" }, "Verovio reads"),
+        h("ul", {}, barsRead(result).map((b) => h("li", {},
+          h("strong", {}, `${b.label}: `),
+          b.events.join(", ") || "nothing",
+          b.short ? h("span", { class: "vrv-warning" }, ` (${b.short})`) : ""))),
+      );
+    }
+    if (!mei.hidden) mei.textContent = last.mei;
+  };
+  // A file is read in the browser; nothing is uploaded.
+  const file = h("input", { type: "file", accept: ".abc,.mei,.xml,.musicxml,.krn,.pae,.txt", hidden: true });
+  file.addEventListener("change", async () => {
+    if (!file.files[0]) return;
+    textarea.value = await file.files[0].text();
+    file.value = "";
+    fit();
+    render();
+  });
+  root.replaceChildren(
+    h(
+      "section",
+      { class: "vrv-card" },
+      h("header", {}, h("strong", {}, title), " ", label),
+      h("div", { class: "vrv-card-body" }, textarea, h("div", {}, out, reads)),
+      h(
+        "div",
+        { class: "vrv-actions" },
+        auto ? [file, h("button", { type: "button", class: "md-button", onclick: () => file.click() }, "Open a file")] : null,
+        h("button", { type: "button", class: "md-button", onclick: () => {
+          mei.hidden = !mei.hidden;
+          if (!mei.hidden && last) mei.textContent = last.mei;
+        } }, "Show as MEI"),
+        h("button", { type: "button", class: "md-button", onclick: () => {
+          textarea.value = original;
+          fit();
+          render();
+        } }, auto ? "Clear" : "Reset"),
+      ),
+      mei,
+    ),
+  );
+  fit();
+  textarea.addEventListener("input", debounce(render));
+  await render();
+}
+
+// ---------------------------------------------------------------- inspect
+
+// One score (data-file, data-range); click a note or rest to see its MEI tag
+// and the SVG group that shares the same id. data-note is selected on load.
+
+async function initInspect(root) {
+  root.replaceChildren(loadingNote());
+  let text, svg;
+  try {
+    text = await fetchText(root.dataset.file);
+    [svg] = await renderRanges(text, [root.dataset.range], 55);
+  } catch (error) {
+    root.replaceChildren(h("p", { class: "vrv-error" }, `This file could not be loaded (${error.message}).`));
+    return;
+  }
+  const score = h("div", { class: "vrv-score" });
+  score.innerHTML = svg;
+  const panel = h("div", { class: "insp-panel", "aria-live": "polite" });
+  // Opening <g> tags as Verovio drew them, before we add tabindex/role/classes.
+  const openTags = new WeakMap();
+  for (const g of score.querySelectorAll("g.note, g.rest")) {
+    openTags.set(g, g.outerHTML.match(/^<g\b[^>]*>/)[0]);
+    const info = noteInFile(text, g.id);
+    const length = lengthName(lengthInFile(text, g.id));
+    const pitch = info?.pitch ?? "Rest";
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("role", "button");
+    g.setAttribute("aria-label", `${pitch}, ${length}`);
+  }
+  let selected = null;
+  const select = (g) => {
+    selected?.classList.remove("insp-target");
+    selected = g;
+    g.classList.add("insp-target");
+    const info = noteInFile(text, g.id);
+    const length = lengthName(lengthInFile(text, g.id));
+    const pitch = info?.pitch ?? "Rest";
+    // All nested groups: Verovio puts the flag inside the stem.
+    const kids = [...new Set([...g.querySelectorAll("g")].map((c) => c.getAttribute("class")).filter(Boolean))];
+    panel.replaceChildren(
+      h("p", {}, h("strong", {}, pitch), `, ${length}`),
+      h("p", {}, "In the MEI file: ", h("code", {}, info?.tag ?? "")),
+      h("p", {}, "In the drawing (SVG): ", h("code", {}, openTags.get(g) ?? ""),
+        kids.length ? ` — inside it: ${kids.join(", ")}` : null),
+    );
+  };
+  score.addEventListener("click", (e) => {
+    const g = e.target.closest("g.note, g.rest");
+    if (g && score.contains(g)) select(g);
+  });
+  score.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const g = e.target.closest?.("g.note, g.rest");
+    if (!g || !score.contains(g)) return;
+    e.preventDefault();
+    select(g);
+  });
+  root.replaceChildren(score, panel);
+  const initial = score.querySelector(`g[id="${root.dataset.note}"]`);
+  if (initial) select(initial);
+}
+
 // ---------------------------------------------------------------- start
 
-const DEMOS = { formats: initFormats, roll: initRoll, grid: initGrid, llm: initLLM, facsimile: initFacsimile, score: initScore };
+const DEMOS = {
+  formats: initFormats,
+  roll: initRoll,
+  grid: initGrid,
+  llm: initLLM,
+  facsimile: initFacsimile,
+  score: initScore,
+  compare: initCompare,
+  edit: initEdit,
+  inspect: initInspect,
+};
 
 for (const root of document.querySelectorAll("[data-demo]")) {
   const init = DEMOS[root.dataset.demo];

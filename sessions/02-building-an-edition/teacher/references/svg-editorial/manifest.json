@@ -1,0 +1,101 @@
+{
+  "prepared_on": "2026-10-26",
+  "identity": {
+    "input_mei_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+    "source_image_sha256": "bfeb442d31808cb610fc85ee1e0d2e460d70049141abcfae7660f917ab5bdaec",
+    "labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "packet_format": 1
+  },
+  "input_mei": "/home/egor/Nextcloud/code/public_repos/camat_lectures/sessions/02-building-an-edition/teacher/schumann_edition_work/linking-2026-10-25/edition/mei/work.mei",
+  "source_image": "/home/egor/Nextcloud/code/public_repos/camat_lectures/sessions/02-building-an-edition/teacher/schumann_edition_work/linking-2026-10-25/edition/pages/page-0001.png",
+  "source": "IMSLP 51556, original/excerpt/printed pages 8/1/8",
+  "source_crop_pixels": [
+    275,
+    536,
+    4045,
+    1424
+  ],
+  "source_crop_basis": "union of linked measure zones plus context margin; review before use",
+  "measures_in_svg": [
+    "d1e9",
+    "d1e74",
+    "d1e352",
+    "d1e648",
+    "d1e968"
+  ],
+  "events_mapped": 100,
+  "ordinary": {
+    "verovio": "6.3.0-425dd7b",
+    "options": {
+      "header": "none",
+      "footer": "none",
+      "breaks": "none",
+      "pageWidth": 2400,
+      "pageHeight": 10000,
+      "adjustPageHeight": true,
+      "scale": 60,
+      "svgViewBox": true,
+      "xmlIdSeed": 1
+    }
+  },
+  "enriched": {
+    "verovio": "6.3.0-425dd7b",
+    "options": {
+      "header": "none",
+      "footer": "none",
+      "breaks": "none",
+      "pageWidth": 2400,
+      "pageHeight": 10000,
+      "adjustPageHeight": true,
+      "scale": 60,
+      "svgViewBox": true,
+      "xmlIdSeed": 1,
+      "svgAdditionalAttribute": [
+        "measure@n",
+        "staff@n",
+        "layer@n",
+        "note@pname",
+        "note@oct",
+        "note@dur",
+        "note@dots",
+        "note@accid",
+        "note@accid.ges",
+        "note@stem.dir",
+        "chord@dur",
+        "chord@dots",
+        "accid@accid",
+        "slur@startid",
+        "slur@endid",
+        "slur@staff",
+        "slur@curvedir",
+        "dynam@startid",
+        "dynam@tstamp",
+        "dynam@staff",
+        "dynam@place"
+      ]
+    }
+  },
+  "png_renderer": "rsvg-convert",
+  "normal_and_enriched_pixels_identical": true,
+  "glyph_definitions_retained": true,
+  "source_human_review": "not_asserted",
+  "provider_calls": 0,
+  "files_sha256": {
+    "context.xml": "2633f4dc925adf9d58dd2f99db1ea75df33ab1937b04faede90137c55d36137f",
+    "element-map.json": "86f8aa307c620db6a2c94a2553bbf07eee6d30569539f0c5945bb4a888e45c53",
+    "engraving.png": "176efa172e1aa4ffb415755be9800449df21fdbb5470ffc37cf81d20ba295721",
+    "prompt-A.md": "9889e94d7847ae51d3da59a91d717d9ca384bdface33cc3b9b2de1975a384494",
+    "prompt-B.md": "43d3b5f1d5fafeceae6392645e1c42dcfaea81f9f283f71670e97c1e3d32563a",
+    "prompt-C.md": "f453962864422c8bf495a54ea83e442de082053d10b28d68ee1afb7f2ed7693d",
+    "record-template.json": "022b28e45ac38c1df9ef463c9cfa7d0f20cef1b0293f16582f3ad1ac250b66a2",
+    "score-enriched.svg": "1bce2a8205ee40e6745057fec20776640395008cfeedd17e8f70d0c51e780b4b",
+    "score.svg": "6023615706ed2290b201ef07dd5c8d6da87aa97f4b1dbf4fedadfce22eeaed82",
+    "source-system.png": "b84b0ff7373d485c713ce59a1682697a86c42a870b7ea1b9769c74f9dc7a2dc9"
+  }
+}

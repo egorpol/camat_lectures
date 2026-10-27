@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/home/egor/Nextcloud/code/public_repos/camat_v2/.venv/bin/python",
+    "-m",
+    "camat.conversion",
+    "--source",
+    "/tmp/camat-schumann-omr-runtime/runs/homr-fullpage-v1/raw.musicxml",
+    "--output-dir",
+    "/tmp/camat-schumann-omr-runtime/runs/homr-fullpage-v1/converted",
+    "--mei-version",
+    "5.1"
+  ],
+  "returncode": 1,
+  "status": "failed",
+  "input_sha256": "c1c69f59844cb4b594ec4fbc478025ef5617980c7bfdba66db9280c6f47588d4",
+  "outputs": []
+}

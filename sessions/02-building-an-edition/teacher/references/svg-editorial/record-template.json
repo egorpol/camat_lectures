@@ -1,0 +1,22 @@
+{
+  "status": "not_run",
+  "condition": "",
+  "model_id": "",
+  "extension_and_version": "",
+  "actual_input_transport": "unknown: record source text / raster preview / both",
+  "input_mei_sha256": "ad594ea784895a4cb1ded45e9ca311049c346be26711de163b8de6bf7d200885",
+  "manifest": "manifest.json",
+  "prompt_file": "",
+  "response_file": "",
+  "patch_file": "",
+  "elapsed_seconds": null,
+  "usage_or_quota_observation": "",
+  "found_phrase_divisions": "not_reviewed",
+  "correct_staff_and_endpoint_ids": "not_reviewed",
+  "unexpected_changes": [],
+  "schema_reference_resource_checks": "not_run",
+  "render_check": "not_run",
+  "human_source_review": "not_reviewed",
+  "reviewer": "",
+  "decision_and_corrections": ""
+}
