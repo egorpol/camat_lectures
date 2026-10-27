@@ -11,10 +11,10 @@ instead of versioned, and the date is the day the change went live on the
 
 ### Changed
 
-- Session 2: *What is SVG?* is now a page of the site, under session 2 in the
-  menu, in the site's light and dark modes. Its pickup note is drawn live from
-  our starting file; highlighting it adds `fill` and `color` to the note's SVG
-  text, while the MEI stays the same.
+- Session 2: *What is SVG?* is now a page of the site, opened from session 2's
+  *What is SVG?* box, in the site's light and dark modes. Its pickup note is
+  drawn live from our starting file; highlighting it adds `fill` and `color`
+  to the note's SVG text, while the MEI stays the same.
 
 ### Removed
 

@@ -27,7 +27,8 @@ no visible measure number. No page overflow, no console errors.
 
 The "What is SVG?" page (svg/) is checked in light and dark at both widths,
 with assertions: each failure prints "FAIL: ..." and the script exits 1.
-Circle: the code text follows colour, position and radius, the drawn circle
+The sidebar lists both sessions as plain links (Material's navigation.indexes
+once swallowed session 1). Circle: the code text follows colour, position and radius, the drawn circle
 is royalblue, Reset goes back to black/70/22. Zoom: 12× gives both images
 384 px, the slider does not move between 1× and 12×, the box switches
 pixelated/auto. Note d1e60: unhighlighted black, its SVG text has no fill and
@@ -160,7 +161,10 @@ def check_svg_page(b, width, height, scheme):
         return
     expect(page.get_attribute("body", "data-md-color-scheme") == ("slate" if scheme == "dark" else "default"),
            f"{tag}: Material scheme")
-    expect(page.locator("nav.md-nav a", has_text="What is SVG?").count() > 0, f"{tag}: nav entry")
+    if width >= 1220:  # Material shows the left sidebar from 76.25em
+        side = page.locator(".md-sidebar--primary .md-nav__link:visible").all_inner_texts()
+        expect(all(any(t.strip() == want for t in side) for want in ["1. Why encode music?", "2. The source and the notes"]),
+               f"{tag}: sidebar lists both sessions {side}")
 
     # 1. Circle
     circ = page.locator("[data-demo=svg-circle]")

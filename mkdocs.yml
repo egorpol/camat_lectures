@@ -21,7 +21,6 @@ theme:
   features:
     - content.code.copy
     - content.tabs.link
-    - navigation.indexes
     - navigation.sections
     - toc.follow
   palette:
@@ -66,6 +65,4 @@ nav:
   - Setup on your laptop: setup-laptop.md
   - Sessions:
       - "1. Why encode music?": sessions/01-why-encode-music/index.md
-      - "2. The source and the notes":
-          - sessions/02-building-an-edition/index.md
-          - "What is SVG?": sessions/02-building-an-edition/svg.md
+      - "2. The source and the notes": sessions/02-building-an-edition/index.md
