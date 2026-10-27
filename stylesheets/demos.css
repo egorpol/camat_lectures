@@ -312,7 +312,8 @@
   --facs-note: #1565c0;
 }
 
-.facs-panes {
+.facs-panes,
+.cmp-panes {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.8em;
@@ -320,7 +321,8 @@
 }
 
 @media (max-width: 760px) {
-  .facs-panes {
+  .facs-panes,
+  .cmp-panes {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -437,4 +439,83 @@
 .facs-notes p {
   border-left: 3px solid var(--facs-note);
   padding-left: 0.6em;
+}
+
+/* Session 2: the same bars from two MEI files, one note in blue (fixed
+   colour: the score is white paper in both schemes). */
+
+[data-demo="compare"] g.cmp-target {
+  fill: #1565c0;
+  color: #1565c0;
+}
+
+/* Verovio numbers the bar from MEI @n ("6" for bar 5); the buttons name it. */
+[data-demo="compare"] g.mNum {
+  display: none;
+}
+
+.cmp-pane > .vrv-label {
+  margin-top: 0;
+}
+
+.cmp-pane > .vrv-note {
+  margin: 0.4em 0 0;
+}
+
+.cmp-code {
+  font-size: 0.8em;
+  overflow-wrap: anywhere;
+  margin: 0.2em 0 0;
+}
+
+/* Session 2: the notes as Verovio read them, under the score. */
+
+.edit-reads ul {
+  font-size: 0.85em;
+  margin: 0.2em 0 0;
+}
+
+.edit-reads li {
+  margin: 0.1em 0;
+}
+
+/* The any-format box: a pasted MusicXML file can be thousands of lines. */
+.vrv-card textarea.edit-any {
+  max-height: 28em;
+}
+
+/* Session 2: click a note or rest; fixed blue on white paper, as compare. */
+
+[data-demo="inspect"] g.note,
+[data-demo="inspect"] g.rest {
+  cursor: pointer;
+  pointer-events: bounding-box;
+}
+
+[data-demo="inspect"] g.note:focus-visible,
+[data-demo="inspect"] g.rest:focus-visible {
+  outline: 2px solid #1565c0;
+  outline-offset: 2px;
+}
+
+[data-demo="inspect"] g.insp-target {
+  fill: #1565c0;
+  color: #1565c0;
+}
+
+[data-demo="inspect"] g.mNum {
+  display: none;
+}
+
+.insp-panel {
+  font-size: 0.8em;
+  margin: 0.4em 0 0;
+}
+
+.insp-panel p {
+  margin: 0.2em 0 0;
+}
+
+.insp-panel code {
+  overflow-wrap: anywhere;
 }

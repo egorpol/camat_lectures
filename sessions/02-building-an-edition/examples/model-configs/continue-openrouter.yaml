@@ -1,0 +1,10 @@
+name: Schumann OpenRouter experiment
+version: 1.0.0
+schema: v1
+models:
+  - name: Laguna XS 2.1 - explicit free variant
+    provider: openrouter
+    model: poolside/laguna-xs-2.1:free
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: ${{ secrets.OPENROUTER_API_KEY }}
+    roles: [chat, edit, apply]

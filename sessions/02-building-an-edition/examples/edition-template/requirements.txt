@@ -1,0 +1,3 @@
+camat[validation]==0.2.8
+verovio==6.3.0
+pypdf==6.10.0

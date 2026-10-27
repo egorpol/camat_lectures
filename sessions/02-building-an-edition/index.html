@@ -1,0 +1,1272 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Seminar materials: music encoding, Verovio and tools for analysing notated music (WS 2026/27)">
+      
+      
+        <meta name="author" content="Egor Polyakov">
+      
+      
+        <link rel="canonical" href="https://egorpol.github.io/camat_lectures/sessions/02-building-an-edition/">
+      
+      
+        <link rel="prev" href="../01-why-encode-music/">
+      
+      
+        <link rel="next" href="../03-linking-and-editing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>2. The source and the notes - From Digital Edition to Computational Music Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/demos.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-building-an-edition-the-source-and-the-notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="From Digital Edition to Computational Music Analysis" class="md-header__button md-logo" aria-label="From Digital Edition to Computational Music Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            From Digital Edition to Computational Music Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. The source and the notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="From Digital Edition to Computational Music Analysis" class="md-nav__button md-logo" aria-label="From Digital Edition to Computational Music Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    From Digital Edition to Computational Music Analysis
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup on Jupyter4NFDI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup-laptop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup on your laptop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sessions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sessions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-why-encode-music/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Why encode music?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. The source and the notes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. The source and the notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-source-scan-encoding-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Source, scan, encoding, edition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-a-wrong-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. A wrong note
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-from-a-scan-to-notes-omr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. From a scan to notes: OMR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-typing-the-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Typing the notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Typing the notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-more-ways-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two more ways in
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-page-and-its-bars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The page and its bars
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-the-note-in-the-mei-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. The note in the MEI file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Wrap-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-linking-and-editing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Linking and editing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-publishing-and-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Publishing, first analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-source-scan-encoding-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Source, scan, encoding, edition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-a-wrong-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. A wrong note
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-from-a-scan-to-notes-omr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. From a scan to notes: OMR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-typing-the-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Typing the notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Typing the notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#two-more-ways-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two more ways in
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-page-and-its-bars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The page and its bars
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-the-note-in-the-mei-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. The note in the MEI file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Wrap-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2-building-an-edition-the-source-and-the-notes">2. Building an edition: the source and the notes<a class="headerlink" href="#2-building-an-edition-the-source-and-the-notes" title="Permanent link">&para;</a></h1>
+<p>Session 2 (double session, 2 × 90 minutes).</p>
+<p>In sessions 2 to 4 we build a small digital edition of Robert Schumann's <em>Fröhlicher Landmann, von der Arbeit zurückkehrend</em> (<em>Album für die Jugend</em>, Op. 68 No. 10). An edition is more than an encoding of the notes: it names the source it follows, links every bar to a scan of that source, records what the editor changed and why, and lets others check it. Today we set up our laptops, look at the source, and get the notes in three ways: from a scan, by typing them, and from an existing encoding.</p>
+<div class="admonition tip">
+<p class="admonition-title">How to use this page</p>
+<p>The first block is the setup of your laptop, which we do together with the <a href="../../setup-laptop/">setup page</a>. If you can, download the installers at home (the setup page says which). No laptop, only a tablet? Then you work in the cloud: choose the tab <strong>Cloud</strong> in part 1. After the setup, the notebooks of this session are ready: see <a href="#notebooks">Notebooks</a> at the end.</p>
+</div>
+<p><strong>By the end of the session you can</strong></p>
+<ol>
+<li>open and run the seminar notebooks on your own laptop, or in the cloud;</li>
+<li>tell a printed source, its scan, an encoding and an edition apart;</li>
+<li>say what optical music recognition (OMR) gives you, and why you still compare it with the scan;</li>
+<li>type a few notes in ABC and check them against the print;</li>
+<li>find a bar of the print on the page image and in the MEI file.</li>
+</ol>
+<p><strong>Today in short</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>What we do</th>
+<th>Notebook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Block 1</td>
+<td><a href="#1-setup">1. Setup</a>, with <a href="#2-source-scan-encoding-edition">2. Source, scan, encoding, edition</a> and <a href="#3-a-wrong-note">3. A wrong note</a> while the downloads run</td>
+<td><code>02_pdf_preparation.ipynb</code>, up to the first check</td>
+</tr>
+<tr>
+<td>Block 2</td>
+<td><a href="#4-from-a-scan-to-notes-omr">4. From a scan to notes: OMR</a></td>
+<td><code>02_schumann_omr.ipynb</code></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#5-typing-the-notes">5. Typing the notes</a></td>
+<td><code>02_note_entry.ipynb</code></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#6-the-page-and-its-bars">6. The page and its bars</a></td>
+<td><code>02_pdf_preparation.ipynb</code></td>
+</tr>
+<tr>
+<td></td>
+<td><a href="#7-the-note-in-the-mei-file">7. The note in the MEI file</a></td>
+<td>VS Code or JupyterLab</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-setup">1. Setup<a class="headerlink" href="#1-setup" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Laptop</label><label for="__tabbed_1_2">Cloud</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>From this session on, we work on our own laptops. Follow the <a href="../../setup-laptop/">setup page</a> step by step, together in class. It installs VS Code (the editor), Miniforge (Python), the seminar's packages, and Git, and connects VS Code to your GitHub account. It ends with a check: the notebook <code>02_pdf_preparation.ipynb</code> prints <code>CAMAT: 0.2.8</code>.</p>
+<p>Step 4 downloads about 770 MB. While it runs, we look at parts 2 and 3 together.</p>
+</div>
+<div class="tabbed-block">
+<p>If you only have a tablet, or the laptop setup does not work today, you work in the browser: follow the <a href="../../setup/#from-session-2-the-cloud-route">cloud route</a>. It starts a JupyterLab on Jupyter4NFDI with everything already installed, and ends with the same check: <code>02_pdf_preparation.ipynb</code> prints <code>CAMAT: 0.2.8</code>. Instead of VS Code you use JupyterLab, and from session 3 on mei-friend.</p>
+<p>There is no big download, so you are ready early. Help a neighbour with the laptop setup, or read parts 2 and 3 ahead.</p>
+</div>
+</div>
+</div>
+<p>If something does not work by the end of block 1, we fix it at the start of block 2. Work with a neighbour in the meantime: one working setup per pair is enough for today.</p>
+<h2 id="2-source-scan-encoding-edition">2. Source, scan, encoding, edition<a class="headerlink" href="#2-source-scan-encoding-edition" title="Permanent link">&para;</a></h2>
+<p>Four things that are easy to confuse:</p>
+<ul>
+<li><strong>The source.</strong> One particular printed edition: Clara Schumann's edition of the <em>Album für die Jugend</em>, Leipzig: Breitkopf &amp; Härtel, plate number R.S. 67 (IMSLP dates it 1887). Editors call a source like this a <em>witness</em>: it is the evidence of what the music says. Other editions of the same piece differ in details.</li>
+<li><strong>The scan.</strong> A photograph of one copy of that print, made by the Bavarian State Library and shared on IMSLP as <a href="https://imslp.org/wiki/Special:ImagefromIndex/51556">file 51556</a>: a PDF of 50 pages. No. 10 fills page 8 and has five systems. The print has no bar numbers.</li>
+<li><strong>The encoding.</strong> The notes as text a computer can read. We start from Maja Hartwig's MEI file of this piece in the <a href="https://github.com/music-encoding/sample-encodings/blob/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei">MEI Sample Collection</a>. It was made from another source, not from our print.</li>
+<li><strong>The edition.</strong> What we make in the next sessions: the encoding, checked against our source, with every bar linked to its place on the scan, our corrections and explanations in the file, and a viewer that shows all this.</li>
+</ul>
+<h2 id="3-a-wrong-note">3. A wrong note<a class="headerlink" href="#3-a-wrong-note" title="Permanent link">&para;</a></h2>
+<p>The melody of this piece is in the left hand. In the first full bar, the print has F, A, C, F: dotted quarter, eighth, dotted quarter, eighth. The MEI file from the Sample Collection has A instead of the last F. The same happens in bar 5, where the melody starts again.</p>
+<table>
+<thead>
+<tr>
+<th>Last bass note of bar 1 and of bar 5</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>our print (IMSLP 51556, page 8)</td>
+<td><strong>F3</strong></td>
+</tr>
+<tr>
+<td>MEI Sample Collection file</td>
+<td><strong>A3</strong></td>
+</tr>
+<tr>
+<td>our starting file for the seminar</td>
+<td><strong>F3</strong>, corrected</td>
+</tr>
+</tbody>
+</table>
+<p>Compare the two files yourself: the same bars from each, with this note in blue. The button <em>Bar 5</em> shows the second place.</p>
+<div data-demo="compare"
+     data-left="https://raw.githubusercontent.com/music-encoding/sample-encodings/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei"
+     data-left-title="MEI Sample Collection file"
+     data-right="examples/schumann/starter.mei"
+     data-right-title="Our starting file"
+     data-views="Pickup and bar 1=1-2#d1e338; Bar 5=6-6#d1e1495"></div>
+
+<p>The Sample Collection file also has the tempo words <em>Frisch und munter</em> and the dynamic <em>f</em>. Our starting file leaves them out on purpose (<a href="#7-the-note-in-the-mei-file">part 7</a>).</p>
+<div class="admonition info">
+<p class="admonition-title">Source and licence</p>
+<p>Left: Maja Hartwig, <a href="https://github.com/music-encoding/sample-encodings/blob/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei"><em>Fröhlicher Landmann</em>, MEI 5.1</a>, MEI Sample Collection. The file declares itself public domain; the collection is under the <a href="https://github.com/music-encoding/sample-encodings/blob/main/LICENSE">ECL-2.0 licence</a>. The page loads it from GitHub when you open it, and adds the number of staff lines (<code>lines="5"</code>), which the file leaves out: without it, Verovio draws no staff lines. Right: our starting file, made from it for this course: <a download="starter.mei" href="examples/schumann/starter.mei">download <code>starter.mei</code></a>. Its header keeps the credits and says what we changed.</p>
+</div>
+<p>We found this because an OMR program (part 4) read F3 where the file has A3. One look at the scan settled it. So an existing encoding saves a lot of typing, but it does not replace the comparison with your source, note by note. That comparison is the core of editing, and the reason an edition links each bar to the scan.</p>
+<details class="info">
+<summary>Pitch names: C4, c′ and kleines c</summary>
+<p>The notebooks use scientific pitch names: middle C is <strong>C4</strong>, and the number goes up at each C. In German (Helmholtz) names:</p>
+<table>
+<thead>
+<tr>
+<th>Scientific</th>
+<th>C3</th>
+<th>F3</th>
+<th>A3</th>
+<th>C4</th>
+<th>F4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>German</td>
+<td>c (kleines c)</td>
+<td>f</td>
+<td>a</td>
+<td>c′ (eingestrichenes c)</td>
+<td>f′</td>
+</tr>
+</tbody>
+</table>
+<p>The melody of bar 1 is therefore f, a, c′, f.</p>
+</details>
+<h2 id="4-from-a-scan-to-notes-omr">4. From a scan to notes: OMR<a class="headerlink" href="#4-from-a-scan-to-notes-omr" title="Permanent link">&para;</a></h2>
+<p>Optical music recognition (OMR) is a program that looks at the image of a page and proposes notes. It produces a draft, not a transcription: it can miss notes, misread pitches, merge bars, and it usually drops dynamics and words such as <em>Frisch und munter</em>.</p>
+<p>Open <code>02_schumann_omr.ipynb</code>. It shows what two OMR programs, HOMR and OeMeR, made of our page. We ran them before class (each takes minutes), so the notebook only loads the results.</p>
+<p>Both are free, open-source research programs. You start them with a command, not in a window with buttons, and both write their result as MusicXML, a common exchange format for scores.</p>
+<ul>
+<li><strong><a href="https://github.com/liebharc/homr">HOMR</a></strong> reads photos and scans of printed music. It first finds the staff lines, note heads and bar lines in the image, then reads each staff from left to right with a <em>transformer</em>, the same kind of model that language models use. Its documentation says that it concentrates on pitch and rhythm and leaves out dynamics, articulation and other signs. We used version 0.7.0.</li>
+<li><strong><a href="https://github.com/BreezeWhite/oemer">OeMeR</a></strong> is the older program on which HOMR's first step is based. It sorts every pixel of the image into staff lines, note heads, stems, clefs, rests and so on, and then builds the music from these pieces, step by step. It is meant to cope with photos taken at an angle. We used version 0.1.8.</li>
+</ul>
+<p>Other OMR programs work with a window: <a href="https://audiveris.github.io/audiveris/">Audiveris</a>, also free and open source, shows what it recognised on top of the scan, lets you correct it, and then exports MusicXML. Commercial programs work the same way.</p>
+<ol>
+<li>Look at the scan next to HOMR's result for the first two systems.</li>
+<li>Compare bar 1 and bar 5 in the bass: which pitch does HOMR read at the end of each bar?</li>
+<li>Find one thing HOMR got wrong or left out.</li>
+</ol>
+<details class="note">
+<summary>Extension: OeMeR and running OMR yourself</summary>
+<p>Part 4 of the notebook shows OeMeR on the whole page: it reads most of the right hand in the bass clef, finds 19 bars instead of 21 and loses the C3 of the pickup. Part 5 runs both programs again; that needs extra installations and several minutes per page.</p>
+<p>Without installing anything, you can try HOMR on its <a href="https://homr.site">demo website</a>: upload a picture of a page (JPG or PNG; a screenshot of page 8 of the scan works) and download the MusicXML. Open it in the <em>Any format</em> box in part 5 to see what HOMR read. The website does not say who runs it, so upload only pages you may share, such as our public-domain scan.</p>
+</details>
+<h2 id="5-typing-the-notes">5. Typing the notes<a class="headerlink" href="#5-typing-the-notes" title="Permanent link">&para;</a></h2>
+<p>The other way to get notes is to type them. Type the bass melody of the pickup and bar 1 in ABC, as in session 1:</p>
+<ul>
+<li>pickup: C3, eighth</li>
+<li>bar 1: F3 dotted quarter, A3 eighth, C4 dotted quarter, F3 eighth</li>
+</ul>
+<p>The piece is in F major (one flat), in common time, in the bass clef. The box below has the header and the pickup already; type bar 1 after the bar line. Three things you need in ABC:</p>
+<ul>
+<li><code>L:1/8</code> makes the eighth note the unit: <code>G,</code> is an eighth, <code>G,2</code> a quarter, <code>G,3</code> a dotted quarter.</li>
+<li>A comma puts a note one octave lower: <code>C</code> is C4 (middle C), <code>C,</code> is C3.</li>
+<li><code>|</code> is a bar line; <code>|]</code> ends the piece.</li>
+</ul>
+<div data-demo="edit" data-file="examples/schumann/pickup-bar1.abc" data-format="abc" data-title="ABC"></div>
+
+<p>The score changes as you type. Compare it with the print: pitches and octaves, rhythm, pickup, clef and key. Under the score, <em>Verovio reads</em> lists the notes in words, so you can check them against the list above. The same exercise is part 1 of <code>02_note_entry.ipynb</code>; you can also <a download="pickup-bar1.abc" href="examples/schumann/pickup-bar1.abc">download the box's starting text</a>.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code>C, | F,3 A, C3 F, |]
+</code></pre></div>
+</details>
+<p>Then think about the whole piece: 21 bars on two staves. What does an existing encoding save you, and what does it not?</p>
+<h3 id="two-more-ways-in">Two more ways in<a class="headerlink" href="#two-more-ways-in" title="Permanent link">&para;</a></h3>
+<p>Typing an encoding sign by sign is slow for a whole piece. There are two other ways to get the same five notes into the computer. Try one if you have time; the <em>Any format</em> box below the tabs shows the result of either.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">A notation program: MuseScore</label><label for="__tabbed_2_2">A language model</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a href="https://musescore.org">MuseScore</a> is a free notation program: you enter notes with the mouse, the computer keyboard or a MIDI keyboard and see the score as you go, as in Sibelius, Finale or Dorico. It is not part of our setup; <a href="https://musescore.org/en/download">download it</a> if you want to try.</p>
+<ol>
+<li>Create a score with one bass-clef staff (or a piano) in F major, 4/4, with an eighth-note pickup (<a href="https://handbook.musescore.org/notation/rhythm-meter-and-measures/pickup-and-non-metered-measures">how to make a pickup bar</a>).</li>
+<li>Enter the five notes.</li>
+<li>Choose <strong>File → Export</strong> and save the score as <strong>MEI</strong> (MuseScore 4.2 or newer) or as uncompressed <strong>MusicXML</strong> (<code>.musicxml</code>) (<a href="https://handbook.musescore.org/file-management/file-export">exporting</a>).</li>
+<li>Click <strong>Open a file</strong> in the box below and choose the exported file. It is read in your browser; nothing is uploaded.</li>
+</ol>
+<p>A notation program is the quickest way to enter many notes. Once an edition has links to the scan and editorial notes, though, we edit its MEI directly: a round trip through a notation program can lose them.</p>
+</div>
+<div class="tabbed-block">
+<p>A language model can turn notes written in words into an encoding. Write the notes the way you think of them, in English, in German or as letters, and ask for ABC or MEI. For example:</p>
+<div class="highlight"><pre><span></span><code>Write these notes in ABC notation and answer with the ABC only.
+Schumann, Fröhlicher Landmann, left hand.
+F major, common time, bass clef.
+Pickup: C3 eighth.
+Bar 1: F3 dotted quarter, A3 eighth, C4 dotted quarter, F3 eighth.
+</code></pre></div>
+<p>Use Copilot's chat in VS Code (setup, step 6) or any chat assistant in your browser. Paste the answer into the box below; it does not matter if the answer comes inside a code block. Then check it as in session 1: pitches and octaves, lengths, pickup, clef and key. Ask again for MEI instead of ABC, and compare.</p>
+</div>
+</div>
+</div>
+<div data-demo="edit" data-format="auto" data-title="Any format"></div>
+
+<p>The box finds out which format the text is in, draws the score and lists what Verovio reads. <strong>Show as MEI</strong> shows the same notes as MEI: that is how a result from MuseScore or a language model can become part of an MEI edition.</p>
+<details class="note">
+<summary>Extension: three more text formats</summary>
+<p>Part 2 of <code>02_note_entry.ipynb</code> has the same five notes in Plaine &amp; Easie, in MEI written by hand and in kern. You can paste each of them into the <em>Any format</em> box too. Compare your result with a neighbour who used another format.</p>
+</details>
+<h2 id="6-the-page-and-its-bars">6. The page and its bars<a class="headerlink" href="#6-the-page-and-its-bars" title="Permanent link">&para;</a></h2>
+<p>Continue <code>02_pdf_preparation.ipynb</code> from the check where the setup stopped. The notebook</p>
+<ol>
+<li>downloads the scan and keeps it unchanged;</li>
+<li>copies page 8 into a one-page PDF (in that file it is page 1, but its printed number stays 8);</li>
+<li>draws the page as an image, which is what we link the bars to next session;</li>
+<li>lists which bars are on which system and checks that against the MEI file.</li>
+</ol>
+<p>The print has no bar numbers, and the MEI file numbers the pickup as bar 1. To keep one vocabulary, we count bars as musicians do: the pickup is "the pickup", and bar 1 is the first full bar. This table connects the two numberings. The notebooks print the MEI number (<code>n</code>) and each bar's identifier (<code>xml:id</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Bar</th>
+<th>MEI <code>n</code></th>
+<th>System</th>
+<th>Bar's <code>xml:id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pickup</td>
+<td>1</td>
+<td>1</td>
+<td><code>d1e9</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td><code>d1e74</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td><code>d1e352</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td><code>d1e648</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>1</td>
+<td><code>d1e968</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>2</td>
+<td><code>d1e1231</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>7</td>
+<td>2</td>
+<td><code>d1e1509</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+<td>2</td>
+<td><code>d1e1805</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>9</td>
+<td>2</td>
+<td><code>d1e2125</code></td>
+</tr>
+<tr>
+<td>9–12</td>
+<td>10–13</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td>13–16</td>
+<td>14–17</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td>17–20</td>
+<td>18–21</td>
+<td>5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Our edition covers the pickup and bars 1–8: the first two systems.</p>
+<h2 id="7-the-note-in-the-mei-file">7. The note in the MEI file<a class="headerlink" href="#7-the-note-in-the-mei-file" title="Permanent link">&para;</a></h2>
+<p>Now find the wrong note from part 3 in the encoding. First in the score: here are the pickup and bar 1 of our starting file, with the F3 at the end of bar 1 selected. Click or tap any other note or rest, then come back to the F3.</p>
+<div data-demo="inspect" data-file="examples/schumann/starter.mei" data-range="1-2" data-note="d1e338"></div>
+
+<p>Under the score you see the selected note three times: in words, as its line in the MEI file, and as the group of shapes that Verovio drew for it (notehead, stem, flag). The MEI line and the drawing carry the same identifier, here <code>d1e338</code>. That is how the drawing knows which note it shows. The pitch and the length, however, are only in the MEI file: the drawing only knows where to put its shapes.</p>
+<details class="info">
+<summary>What is SVG?</summary>
+<p>Verovio draws scores as SVG (Scalable Vector Graphics): a picture described as text, such as "a circle here, this big, in this colour". Because the picture is text, it stays sharp at any size, and a program can find one note in it by its identifier. The <a href="examples/svg-introduction/">SVG introduction</a> shows a circle written as text, the same note symbol enlarged as pixels and as SVG, and the pickup note as MEI and as SVG. We use SVG again next session, when we link the score to the scan.</p>
+</details>
+<p>Now find the same note in the file itself:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Laptop</label><label for="__tabbed_3_2">Cloud</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ol>
+<li>In VS Code's file list on the left, open the folder <code>schumann_edition_work</code> next to the notebook, then <code>inputs</code>, then the one folder inside it (its name is a code, such as <code>b02b5197b383</code>), and click <code>starter.mei</code>. This is our starting file.</li>
+<li>Press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-f">F</kbd></span> (macOS: <span class="keys"><kbd class="key-command">Cmd</kbd><span>+</span><kbd class="key-f">F</kbd></span>) and type <code>"d1e338"</code>, with the quotation marks.</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>In JupyterLab's file browser, open <code>work</code> → <code>camat_lectures</code> → <code>02-building-an-edition</code> → <code>schumann_edition_work</code> → <code>inputs</code> → the one folder inside it (its name is a code, such as <code>b02b5197b383</code>), and double-click <code>starter.mei</code>. This is our starting file; it opens as text.</li>
+<li>Choose <em>Edit → Find…</em>, type <code>"d1e338"</code>, with the quotation marks, and click the arrow pointing down (<em>Next Match</em>) next to the search field.</li>
+</ol>
+</div>
+</div>
+</div>
+<p>You land on <code>&lt;note xml:id="d1e338" pname="f" oct="3" dur="8" .../&gt;</code>: the last bass note of bar 1, F3, an eighth. Scroll up to the <code>&lt;measure n="2" ...&gt;</code> it belongs to. Without the quotation marks, the search first finds the same ID in the file's header, where our correction is described.</p>
+<p>Every note in the file has such an <code>xml:id</code>. It is how the drawing, the scan links and your corrections point at exactly this note, and how you can name it to a language model next session. HOMR's MusicXML and your ABC from part 5 have no such identifiers. Do not change the file yet: next session we edit a copy of it.</p>
+<details class="note">
+<summary>Extension: the same note in mei-friend</summary>
+<p><a href="https://mei-friend.mdw.ac.at/?file=https://raw.githubusercontent.com/music-encoding/sample-encodings/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei&amp;select=d1e338">Open the MEI Sample Collection's file in mei-friend</a>, the editor we use from session 3 on. Click <strong>Got it!</strong> if a welcome box appears. The link selects this note: it is blue in the score, and the code on the right shows its line. There it is still <code>pname="a"</code>, the A3 from part 3.</p>
+</details>
+<details class="info">
+<summary>Why does the starting file have no slurs or dynamics?</summary>
+<p>We removed the slurs, dynamics, tempo words and articulation from Maja Hartwig's file on purpose. Restoring some of them from the print is one of the editing tasks in session 3. The file's header says exactly what was removed.</p>
+</details>
+<h2 id="8-wrap-up">8. Wrap-up<a class="headerlink" href="#8-wrap-up" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Source, scan, encoding and edition are four different things. The source is the evidence; everything else is checked against it.</li>
+<li>OMR and existing encodings save typing. Neither saves the comparison with the source.</li>
+<li>Next session: we link each bar to its place on the page image, then correct and add to the encoding by hand and with Copilot. In session 4, we put the edition on GitHub and publish it.</li>
+</ul>
+<p><strong>Homework</strong></p>
+<ol>
+<li>If the setup did not finish in class, complete it with the <a href="../../setup-laptop/">setup page</a> until the check prints <code>CAMAT: 0.2.8</code>. If your laptop setup is stuck, use the <a href="../../setup/#from-session-2-the-cloud-route">cloud route</a> for now. If you get stuck, write down the step and the error message and bring them next time.</li>
+<li>Compare the bass of bars 2–4 in the print with what HOMR read (<code>02_schumann_omr.ipynb</code>). Note one difference, if you find one.</li>
+</ol>
+<h2 id="notebooks">Notebooks<a class="headerlink" href="#notebooks" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Laptop</label><label for="__tabbed_4_2">Cloud</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The last step of the setup copies the notebooks into <code>seminar-work/camat_lectures/02-building-an-edition/</code>.</p>
+</div>
+<div class="tabbed-block">
+<p>Step 3 of the cloud route copies the notebooks into <code>work/camat_lectures/02-building-an-edition/</code>. Run them there: the folders they create next to them are then kept too.</p>
+</div>
+</div>
+</div>
+<p>Two of them need a ZIP file with data next to them; the download script copies those too.</p>
+<ul>
+<li><a download="02_pdf_preparation.ipynb" href="notebooks/02_pdf_preparation.ipynb"><code>02_pdf_preparation.ipynb</code></a> with <a href="notebooks/schumann-edition-inputs.zip"><code>schumann-edition-inputs.zip</code></a>: parts 1 and 6. Downloads the scan from IMSLP when you run it. Next session continues in the folder <code>schumann_edition_work</code> that it creates.</li>
+<li><a download="02_schumann_omr.ipynb" href="notebooks/02_schumann_omr.ipynb"><code>02_schumann_omr.ipynb</code></a> with <a href="notebooks/schumann-omr-recordings.zip"><code>schumann-omr-recordings.zip</code></a>: part 4.</li>
+<li><a download="02_note_entry.ipynb" href="notebooks/02_note_entry.ipynb"><code>02_note_entry.ipynb</code></a>: part 5. No ZIP needed.</li>
+</ul>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The print: Robert Schumann, <em>Album für die Jugend</em>, Op. 68, ed. Clara Schumann, Leipzig: Breitkopf &amp; Härtel, plate R.S. 67 (<a href="https://imslp.org/wiki/Album_f%C3%BCr_die_Jugend,_Op.68_(Schumann,_Robert)">IMSLP work page</a>, <a href="https://imslp.org/wiki/Special:ImagefromIndex/51556">file 51556</a>; scan: Bayerische Staatsbibliothek). The notebooks download it when you run them; it is not part of the course files.</li>
+<li>The encoding: Maja Hartwig, <a href="https://github.com/music-encoding/sample-encodings/blob/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Schumann_Landmann_Op68_No10.mei"><em>Fröhlicher Landmann</em>, MEI 5.1</a>, MEI Sample Collection. The file declares itself public domain; the collection is under the <a href="https://github.com/music-encoding/sample-encodings/blob/main/LICENSE">ECL-2.0 licence</a>. Our starting file keeps its credits.</li>
+<li>The full record of source and encoding: <a href="sources/sources.json"><code>sources.json</code></a>.</li>
+<li>OMR programs: <a href="https://github.com/liebharc/homr">HOMR</a>, <a href="https://github.com/BreezeWhite/oemer">OeMeR</a>.</li>
+<li>A finished facsimile-linked edition: <a href="https://egorpol.github.io/webern_op27/">Webern, Variations Op. 27</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tabs.link", "navigation.sections", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/demos.js" type="module"></script>
+      
+    
+  </body>
+</html>

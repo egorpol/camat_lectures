@@ -1,0 +1,25 @@
+{
+  "prepared_on": "2026-10-26",
+  "source": "sessions/02-building-an-edition/teacher/schumann/manual-entry-solution.mei",
+  "source_sha256": "7c35e4d92a1dbc3dc5adef2652057f07953999f34e9845426493e4f789c0d53c",
+  "verovio": "6.3.0-425dd7b",
+  "meaning": "Prepared teaching demonstrations; F3 is artificial, not a source correction",
+  "note_id_preserved": "d1e60",
+  "variants_differ_only_in_note_pname": true,
+  "scan_images_included": false,
+  "files_sha256": {
+    "LICENSE": "2760bdc212cfa4710c8775c073886db924d6013baa41e1f27e4eed8ba8f19312",
+    "index.html": "fead3b9b8aa3e718d7fded4cde7582af1f622092ff2b9575594cf57769b0db0e",
+    "intro.css": "fa6beff8e24c5c4e33ef4ceb34f36532990dd7a435db00017938075c013fe995",
+    "intro.js": "3a61a0d9925ed8f62cbc49891ddb973cd63d106ededcd69c95de7fb0cf52f655",
+    "note-32px.png": "6256a892eb0c350d760adb68b3e43c63a83784e7773ab753f2c4cc19b7fcc8e9",
+    "note-symbol.svg": "078aeb31a2f0157c5a31e6a9237990165381f2616c1d1ebb0d68c1773372399d",
+    "pickup-c3-enriched.svg": "48e79956f6d9d5b28d116c1395906ac5c125b2eaab8daa17f7814f1f8e2cb36b",
+    "pickup-c3.mei": "383df7e78e323bc2cdf3eb169122b3a24810ec5ee9090b88666cb6dbebb8f587",
+    "pickup-c3.svg": "dbca54548442d61a72abacf77c3bf3d89c30505f38e3aedcadab966ed61cd3e3",
+    "pickup-f3-enriched.svg": "5bb61cba0a11bf7f89dcb7857a1af2f024fe2ced53f2034ea78af2f85d357c8f",
+    "pickup-f3.mei": "3b41c7a9f06a1af9ac4b67ab0e15c5ee54a91c61d7963750929f896e0f3b6b43",
+    "pickup-f3.svg": "0d934b6f6e5c81301e1eeb5f471c929aa6e1559cd3f00134760deec3e52bd871",
+    "score-data.js": "d52ab38afba6eef549aabe394909f39aaf886de7ab2901746a8de173df9a5bc0"
+  }
+}
