@@ -9,6 +9,11 @@ instead of versioned, and the date is the day the change went live on the
 
 ## 2026-10-27
 
+### Removed
+
+- Sessions 3 and 4: the overview pages are off the site until they are
+  revised after session 2.
+
 ### Added
 
 - *Setup on your laptop*: a step-by-step page, done together in class, for

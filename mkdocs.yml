@@ -5,6 +5,11 @@ site_author: Egor Polyakov
 docs_dir: docs
 strict: true
 
+# Session 3/4 pages: shown by `mkdocs serve`, left out of the built site until revised
+draft_docs: |
+  sessions/03-linking-and-editing/
+  sessions/04-publishing-and-analysis/
+
 hooks:
   - hooks/session_files.py
 
@@ -61,5 +66,3 @@ nav:
   - Sessions:
       - "1. Why encode music?": sessions/01-why-encode-music/index.md
       - "2. The source and the notes": sessions/02-building-an-edition/index.md
-      - "3. Linking and editing": sessions/03-linking-and-editing/index.md
-      - "4. Publishing, first analysis": sessions/04-publishing-and-analysis/index.md
