@@ -1,6 +1,6 @@
 # 2. Building an edition: the source and the notes
 
-Session 2 (double session, 2 × 90 minutes).
+Session 2, 29 October 2026 (double session, 2 × 90 minutes).
 
 In sessions 2 to 4 we build a small digital edition of Robert Schumann's *Fröhlicher Landmann, von der Arbeit zurückkehrend* (*Album für die Jugend*, Op. 68 No. 10). An edition is more than an encoding of the notes: it names the source it follows, links every bar to a scan of that source, records what the editor changed and why, and lets others check it. Today we set up our laptops, look at the source, and get the notes in three ways: from a scan, by typing them, and from an existing encoding.
 
