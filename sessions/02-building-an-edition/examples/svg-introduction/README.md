@@ -1,8 +1,7 @@
 # Local SVG introduction
 
 Open **index.html** in a browser. All scripts, drawings and data are local; no
-web server, account or model call is needed. Keep the files together. The
-separate notebook asset ZIP has the same browser demo and prepared examples.
+web server, account or model call is needed. Keep the files together.
 
 Three demos cover a circle described as text, PNG versus vector enlargement,
 and the same Schumann pickup note in MEI and Verovio SVG. The SVG source shown
@@ -25,14 +24,3 @@ as SVG `data-*` attributes.
 
 Preserve the header and accompanying [license](LICENSE). `manifest.json`
 records the input identity, renderer and asset hashes. Source scans are absent.
-Regenerate assets and the ZIP from the repository root:
-
-```sh
-python tools/build_svg_introduction.py
-python tools/build_notebooks.py
-```
-
-The asset builder needs Verovio 6.3, lxml and rsvg-convert. The student notebook
-needs only its ordinary IPython kernel and standard-library Python. It contains
-no inline ZIP/base64 payload. Existing files extracted into
-`svg_introduction_work/` are preserved when rerun.

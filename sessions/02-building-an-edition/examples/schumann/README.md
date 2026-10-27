@@ -67,9 +67,7 @@ included. Its publication metadata describes the upstream encoding; the new
 `editionStmt`, project description and revision entry identify this teaching
 derivative. No license for unrelated course material or scans is implied.
 
-Preparation was assisted by an LLM and recorded on 24 October 2026. The
-[teacher's change record](../../teacher/schumann/changes.json) distinguishes
-technical repairs, deliberate omissions and the task solutions. Use the
-printed witness to check every new reading.
+Preparation was assisted by an LLM on 24 October 2026. Use the printed
+witness to check every new reading.
 
 Source-based correction recorded 24 October: the starter changes A3 to F3 at `d1e338` and `d1e1495` (MEI labels 2 and 6, final bass eighth), following IMSLP 51556, printed p. 8. The original and technical baseline retain the inherited A3. This was missed in the preliminary inspection; further source review remains necessary.

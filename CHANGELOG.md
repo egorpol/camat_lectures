@@ -13,6 +13,10 @@ instead of versioned, and the date is the day the change went live on the
 
 - Sessions 3 and 4: the overview pages are off the site until they are
   revised after session 2.
+- Instructor material (outlines, answer keys, preparation notes and the tools
+  that need them) and the drafts for sessions 3 and 4 are out of the
+  repository for now; the site no longer serves the unlinked session 3/4
+  example files.
 
 ### Added
 

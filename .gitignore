@@ -6,4 +6,46 @@ schumann_omr_work/
 schumann_note_entry_work/
 schumann_edition_work/
 svg_introduction_work/
-sessions/*/teacher/**/schematron/cache/
+
+# Only what students use goes into the repository. Instructor material, sketches
+# and session 3/4 drafts stay local for now (decided 2026-10-27).
+sessions/*/outline.md
+sessions/*/teacher/
+sessions/03-*/
+sessions/04-*/
+docs/sessions/03-*/
+docs/sessions/04-*/
+/historical_music_notation_computational_musicology.md
+# Session 3/4 drafts kept in session 2's folder, with their helpers and tools
+sessions/02-building-an-edition/notebooks/02_facsimile_linking.ipynb
+sessions/02-building-an-edition/notebooks/02_live_editing.ipynb
+sessions/02-building-an-edition/notebooks/02_svg_editorial.ipynb
+sessions/02-building-an-edition/notebooks/02_review_and_release.ipynb
+sessions/02-building-an-edition/notebooks/02_what_is_svg.ipynb
+sessions/02-building-an-edition/notebooks/schumann-measure-boxes.zip
+sessions/02-building-an-edition/notebooks/schumann-release-template.zip
+sessions/02-building-an-edition/notebooks/svg-introduction-assets.zip
+sessions/02-building-an-edition/examples/edition-template/
+sessions/02-building-an-edition/examples/model-configs/
+sessions/02-building-an-edition/examples/model-prompts/
+sessions/02-building-an-edition/examples/schumann/facsimile/
+tools/notebooks/02_facsimile_linking.py
+tools/notebooks/02_live_editing.py
+tools/notebooks/02_svg_editorial.py
+tools/notebooks/02_review_and_release.py
+tools/notebooks/02_what_is_svg.py
+tools/notebooks/helpers/facsimile_linking.py
+tools/notebooks/helpers/live_editing.py
+tools/notebooks/helpers/release.py
+tools/notebooks/helpers/svg_editorial.py
+tools/pack_schumann_boxes.py
+tools/pack_schumann_release.py
+tools/export_svg_editorial.py
+tools/serve_mei_friend_preview.py
+tools/snapshot_free_models.py
+# Instructor tools that read teacher/
+tools/prepare_schumann_starter.py
+tools/collect_schumann_omr.py
+tools/pack_schumann_omr.py
+tools/rehearse_schumann_editing.py
+tools/build_svg_introduction.py

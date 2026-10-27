@@ -25,9 +25,6 @@ Analysis Toolbox.
 Sessions 2–4 build one edition of Schumann's *Fröhlicher Landmann*. All its
 notebooks and data live in `sessions/02-building-an-edition/`, because they
 share one working project (`schumann_edition_work`) next to the notebooks.
-Instructor outlines: [session 2](sessions/02-building-an-edition/outline.md),
-[session 3](sessions/03-linking-and-editing/outline.md),
-[session 4](sessions/04-publishing-and-analysis/outline.md).
 
 ## Get the notebooks
 
@@ -68,16 +65,13 @@ are [PDF preparation](sessions/02-building-an-edition/notebooks/02_pdf_preparati
 [OMR results](sessions/02-building-an-edition/notebooks/02_schumann_omr.ipynb)
 (with `schumann-omr-recordings.zip`, recorded HOMR/OeMeR runs) and
 [note entry](sessions/02-building-an-edition/notebooks/02_note_entry.ipynb).
-The notebooks for sessions 3 and 4 (facsimile linking, SVG, live editing,
-review and release) will go into the same folder before session 3, because
-all Schumann notebooks share one working folder; their draft guides are in
-[`sessions/03-linking-and-editing/guides/`](sessions/03-linking-and-editing/guides/)
-and [`sessions/04-publishing-and-analysis/guides/`](sessions/04-publishing-and-analysis/guides/).
+The notebooks for sessions 3 and 4 will go into the same folder, because all
+Schumann notebooks share one working folder.
 
 ## Repository layout
 
 - `docs/`: the live site ([MkDocs Material](https://squidfunk.github.io/mkdocs-material/)); the demo code is in `docs/javascripts/`.
-- `sessions/NN-slug/`: per session, the outline, the example encodings (`examples/`), the notebooks (`notebooks/`) and instructor material (`teacher/`: answer keys, checks, recorded runs, preparation notes).
+- `sessions/NN-slug/`: per session, the example encodings (`examples/`) and the notebooks (`notebooks/`); session 2 also has its source record (`sources/`).
 - `tools/notebooks/`: the notebook sources (percent format) and their helpers. `tools/build_notebooks.py` builds the `.ipynb` files from them, so edit the sources, not the notebooks.
 - `binder/environment.yml`: the environment for the cloud route (Repo2Docker reads only this folder).
 - `get_notebooks.py`, `get_notebooks.sh`: the download scripts above (Python for a notebook cell, bash for a terminal; they do the same).

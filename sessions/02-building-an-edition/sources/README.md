@@ -1,4 +1,4 @@
-# Step 1 complete — fixed source pair
+# Source record: the fixed source pair
 
 Checked on 23 October 2026. Machine-readable provenance, hashes and review limits
 are in [sources.json](sources.json). Files under `local/` are ignored by Git;
@@ -95,11 +95,6 @@ record distinguishing technical repairs, actual source differences and deliberat
 removed markings. Suggested exercises: restore the printed tempo/initial dynamic,
 restore the dynamic at label 6, and encode or explain the opening slur division.
 Keep both downloaded originals byte-identical.
-
-**24 October update:** the [student starter](../examples/schumann/README.md),
-[teacher solutions](../teacher/schumann/answer-key.md) and
-[change record](../teacher/schumann/changes.json) are now prepared. The next
-step is linking the fixed source page to the working MEI.
 
 **24 October OMR cross-check:** the reused MEI reads A3 at `d1e338` and `d1e1495`; the print reads F3 (labels 2 and 6, final bass eighth). Teaching derivatives correct these readings. The earlier preliminary passage inspection missed them and must not be treated as a complete note-level verification. The technical baseline and upstream original preserve the inherited A3.
 
