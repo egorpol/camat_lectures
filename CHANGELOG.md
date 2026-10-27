@@ -9,6 +9,13 @@ instead of versioned, and the date is the day the change went live on the
 
 ## 2026-10-27
 
+### Changed
+
+- Session 2: *What is SVG?* is now a page of the site, under session 2 in the
+  menu, in the site's light and dark modes. Its pickup note is drawn live from
+  our starting file; highlighting it adds `fill` and `color` to the note's SVG
+  text, while the MEI stays the same.
+
 ### Removed
 
 - Sessions 3 and 4: the overview pages are off the site until they are

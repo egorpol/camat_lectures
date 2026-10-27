@@ -519,3 +519,106 @@
 .insp-panel code {
   overflow-wrap: anywhere;
 }
+
+/* What is SVG?: circle, zoom and pickup-note demos. Drawings sit on white
+   paper in both schemes so a black circle and note stay visible. */
+
+.svg-panes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.8em;
+  align-items: start;
+  margin: 0.6em 0;
+}
+
+@media (max-width: 600px) {
+  .svg-panes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.svg-code {
+  margin: 0;
+  padding: 0.6em;
+  font-size: 0.8em;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+  color: var(--md-code-fg-color);
+  background: var(--md-code-bg-color);
+  border-radius: 4px;
+}
+
+.svg-drawing {
+  display: grid;
+  place-items: center;
+  min-height: 170px;
+  padding: 0.4em;
+  background: #fff;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+}
+
+.svg-drawing svg {
+  width: 100%;
+  max-width: 480px;
+  height: 160px;
+}
+
+.svg-zoom-stage {
+  display: grid;
+  place-items: center;
+  height: 420px;
+  padding: 0.6em;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+}
+
+.svg-zoom-stage > img,
+.svg-zoom-stage > svg {
+  max-width: none;
+  flex-shrink: 0;
+}
+
+[data-demo="svg-zoom"] .vrv-fixed {
+  min-width: 3ch;
+  text-align: end;
+}
+
+@media (max-width: 600px) {
+  .svg-zoom-stage {
+    height: 300px;
+  }
+}
+
+[data-demo="svg-note"] .svg-note-score {
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  padding: 0.8em;
+  overflow: auto;
+}
+
+[data-demo="svg-note"] .svg-note-score > svg {
+  width: auto;
+  height: 260px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+[data-demo="svg-note"] g.note {
+  cursor: pointer;
+  pointer-events: bounding-box;
+}
+
+[data-demo="svg-note"] g.note:focus-visible {
+  outline: 2px solid royalblue;
+  outline-offset: 2px;
+}
+
+[data-demo="svg-note"] g.mNum {
+  display: none;
+}

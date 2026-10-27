@@ -204,7 +204,7 @@ Now find the wrong note from part 3 in the encoding. First in the score: here ar
 Under the score you see the selected note three times: in words, as its line in the MEI file, and as the group of shapes that Verovio drew for it (notehead, stem, flag). The MEI line and the drawing carry the same identifier, here `d1e338`. That is how the drawing knows which note it shows. The pitch and the length, however, are only in the MEI file: the drawing only knows where to put its shapes.
 
 ??? info "What is SVG?"
-    Verovio draws scores as SVG (Scalable Vector Graphics): a picture described as text, such as "a circle here, this big, in this colour". Because the picture is text, it stays sharp at any size, and a program can find one note in it by its identifier. The [SVG introduction](examples/svg-introduction/index.html) shows a circle written as text, the same note symbol enlarged as pixels and as SVG, and the pickup note as MEI and as SVG. We use SVG again next session, when we link the score to the scan.
+    Verovio draws scores as SVG (Scalable Vector Graphics): a picture described as text, such as "a circle here, this big, in this colour". Because the picture is text, it stays sharp at any size, and a program can find one note in it by its identifier. The page [What is SVG?](svg.md) shows a circle written as text, a note symbol enlarged as pixels and as SVG, and our pickup note as MEI and as SVG. We use SVG again next session, when we link the score to the scan.
 
 Now find the same note in the file itself:
 

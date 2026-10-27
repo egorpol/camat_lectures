@@ -9,6 +9,9 @@
 //   compare  session 2: the same bars from two MEI files, one note marked
 //   edit     session 2: one text box rendered as you type, with the notes read
 //   inspect  session 2: click a note or rest; MEI tag and SVG group share one id
+//   svg-circle  What is SVG?: a circle as text and as a drawing
+//   svg-zoom    What is SVG?: the same note as PNG pixels and as SVG shapes
+//   svg-note    What is SVG?: the pickup note live from MEI, highlighted in SVG
 
 import { readScore, verovioReady, VEROVIO_VERSION } from "./lib/vrv.js";
 import { parseMidi } from "./lib/midi.js";
@@ -865,7 +868,8 @@ function parseViews(spec) {
 const withStaffLines = (text) => text.replace(/<staffDef\b(?![^>]*\blines=)/g, '<staffDef lines="5"');
 
 // One system per range, as narrow as the music. scale defaults to compare's 45.
-async function renderRanges(text, ranges, scale = 45) {
+// options merges into Verovio's setOptions (e.g. svgAdditionalAttribute).
+async function renderRanges(text, ranges, scale = 45, options = {}) {
   const { module, esm } = await verovioReady();
   const tk = new esm.VerovioToolkit(module);
   try {
@@ -881,6 +885,7 @@ async function renderRanges(text, ranges, scale = 45) {
       pageMarginBottom: 30,
       pageMarginLeft: 30,
       pageMarginRight: 30,
+      ...options,
     });
     if (!tk.loadData(withStaffLines(text))) throw new Error("Verovio could not read the MEI file");
     return ranges.map((range) => {
@@ -1166,6 +1171,242 @@ async function initInspect(root) {
   if (initial) select(initial);
 }
 
+// ---------------------------------------------------------------- svg-circle
+
+// Colour, position and radius: the SVG text and the drawn circle stay in sync.
+
+async function initSvgCircle(root) {
+  const colour = h("select", { "aria-label": "Colour" },
+    h("option", { value: "black", selected: true }, "black"),
+    h("option", { value: "royalblue" }, "royalblue"),
+    h("option", { value: "crimson" }, "crimson"));
+  const position = h("input", { type: "range", min: 35, max: 205, value: 70, "aria-label": "Position" });
+  const positionValue = h("span", { class: "vrv-size vrv-fixed" }, "70");
+  const radius = h("input", { type: "range", min: 8, max: 30, value: 22, "aria-label": "Radius" });
+  const radiusValue = h("span", { class: "vrv-size vrv-fixed" }, "22");
+  const code = h("pre", { class: "svg-code", "aria-live": "polite" });
+  const picture = h("div", { class: "svg-drawing" });
+  const update = () => {
+    const fill = colour.value;
+    const x = Number(position.value);
+    const r = Number(radius.value);
+    const source = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100">\n  <circle cx="${x}" cy="50" r="${r}" fill="${fill}"/>\n</svg>`;
+    code.textContent = source;
+    picture.innerHTML = source;
+    const svg = picture.firstElementChild;
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", `A ${fill} circle at x ${x}, radius ${r}`);
+    positionValue.textContent = String(x);
+    radiusValue.textContent = String(r);
+  };
+  for (const el of [colour, position, radius]) el.addEventListener("input", update);
+  root.replaceChildren(
+    h("div", { class: "vrv-controls" },
+      h("label", {}, "Colour ", colour),
+      h("label", {}, "Position ", position, " ", positionValue),
+      h("label", {}, "Radius ", radius, " ", radiusValue),
+      h("button", { type: "button", class: "md-button", onclick: () => {
+        colour.value = "black";
+        position.value = "70";
+        radius.value = "22";
+        update();
+      } }, "Reset")),
+    h("div", { class: "svg-panes" },
+      h("div", {}, h("p", { class: "vrv-label" }, "Drawing instructions"), code),
+      h("div", {}, h("p", { class: "vrv-label" }, "What the browser draws"), picture)),
+  );
+  update();
+}
+
+// ---------------------------------------------------------------- svg-zoom
+
+// The same 32×32 note as a PNG and as SVG shapes; enlargement keeps both stages fixed height.
+
+async function initSvgZoom(root) {
+  const zoom = h("input", { type: "range", min: 1, max: 12, value: 6, "aria-label": "Enlargement" });
+  const zoomValue = h("span", { class: "vrv-size vrv-fixed" }, "6×");
+  const pixels = h("input", { type: "checkbox", checked: true });
+  const png = h("img", {
+    src: root.dataset.png,
+    alt: "A note symbol in a 32 by 32 pixel PNG",
+    width: 192,
+    height: 192,
+  });
+  // SVG elements need the SVG namespace; document.createElement would put them in HTML.
+  const ns = "http://www.w3.org/2000/svg";
+  const vector = document.createElementNS(ns, "svg");
+  vector.setAttribute("viewBox", "0 0 48 48");
+  vector.setAttribute("role", "img");
+  vector.setAttribute("aria-label", "The same note symbol drawn as vector shapes");
+  const ellipse = document.createElementNS(ns, "ellipse");
+  for (const [k, v] of Object.entries({ cx: 19, cy: 35, rx: 10, ry: 6, transform: "rotate(-18 19 35)" })) {
+    ellipse.setAttribute(k, String(v));
+  }
+  const line = document.createElementNS(ns, "line");
+  for (const [k, v] of Object.entries({ x1: 28, y1: 32, x2: 28, y2: 5, stroke: "black", "stroke-width": 2 })) {
+    line.setAttribute(k, String(v));
+  }
+  vector.append(ellipse, line);
+  const update = () => {
+    const n = Number(zoom.value);
+    const size = String(32 * n);
+    png.setAttribute("width", size);
+    png.setAttribute("height", size);
+    vector.setAttribute("width", size);
+    vector.setAttribute("height", size);
+    png.style.imageRendering = pixels.checked ? "pixelated" : "auto";
+    zoomValue.textContent = `${n}×`;
+  };
+  zoom.addEventListener("input", update);
+  pixels.addEventListener("input", update);
+  root.replaceChildren(
+    h("div", { class: "vrv-controls" },
+      h("label", {}, "Enlargement ", zoom, " ", zoomValue),
+      h("label", {}, pixels, " Show the pixel grid clearly")),
+    h("div", { class: "svg-panes" },
+      h("div", {},
+        h("p", { class: "vrv-label" }, "PNG · a fixed pixel grid"),
+        h("div", { class: "svg-zoom-stage" }, png)),
+      h("div", {},
+        h("p", { class: "vrv-label" }, "SVG · shapes drawn at this size"),
+        h("div", { class: "svg-zoom-stage" }, vector))),
+  );
+  update();
+}
+
+// ---------------------------------------------------------------- svg-note
+
+// Live Verovio pickup: highlight sets fill+color on the note group; pitch edits MEI text.
+
+function withNotePitch(text, id, pname) {
+  const info = noteInFile(text, id);
+  if (!info) return text;
+  const updated = info.tag.replace(/\bpname="[^"]*"/, `pname="${pname}"`);
+  return text.replace(info.tag, updated);
+}
+
+// Opening <g> as shown in the panel: Verovio's attributes plus fill/color when set; never a11y attrs.
+function noteGroupText(g) {
+  const lines = [];
+  for (const attr of g.attributes) {
+    if (attr.name === "tabindex" || attr.name === "role" || attr.name.startsWith("aria-")) continue;
+    lines.push(`  ${attr.name}="${attr.value}"`);
+  }
+  return `<g\n${lines.join("\n")}>\n  <!-- notehead, stem, flag -->\n</g>`;
+}
+
+async function initSvgNote(root) {
+  const noteId = root.dataset.note;
+  root.replaceChildren(loadingNote());
+  let original;
+  try {
+    original = await fetchText(root.dataset.file);
+  } catch (error) {
+    root.replaceChildren(h("p", { class: "vrv-error" }, `This file could not be loaded (${error.message}).`));
+    return;
+  }
+  let highlighted = false;
+  let latest = 0;
+  const highlightBtn = h("button", { type: "button", class: "md-button", "aria-pressed": "false" }, "Highlight the pickup note");
+  const pitch = h("select", { "aria-label": "MEI pitch" },
+    h("option", { value: "c", selected: true }, "C3"),
+    h("option", { value: "f" }, "F3"));
+  const extra = h("input", { type: "checkbox" });
+  const score = h("div", { class: "vrv-score svg-note-score" });
+  const meiCode = h("pre", { class: "svg-code", "aria-live": "polite" });
+  const svgCode = h("pre", { class: "svg-code", "aria-live": "polite" });
+
+  const applyHighlight = (g) => {
+    if (highlighted) {
+      g.setAttribute("fill", "royalblue");
+      g.setAttribute("color", "royalblue");
+    } else {
+      g.removeAttribute("fill");
+      g.removeAttribute("color");
+    }
+    g.setAttribute("aria-pressed", String(highlighted));
+    highlightBtn.setAttribute("aria-pressed", String(highlighted));
+  };
+
+  const wireNote = (g, name) => {
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("role", "button");
+    g.setAttribute("aria-label", `Highlight ${name} pickup note ${noteId}`);
+    applyHighlight(g);
+    const toggle = () => {
+      highlighted = !highlighted;
+      applyHighlight(g);
+      svgCode.textContent = noteGroupText(g);
+    };
+    g.addEventListener("click", toggle);
+    g.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      toggle();
+      g.focus();
+    });
+  };
+
+  const render = async () => {
+    const run = ++latest;
+    const pname = pitch.value;
+    const text = withNotePitch(original, noteId, pname);
+    const info = noteInFile(text, noteId);
+    const name = info?.pitch ?? pname.toUpperCase() + "3";
+    const options = extra.checked
+      ? { svgAdditionalAttribute: ["note@pname", "note@oct", "note@dur"] }
+      : {};
+    let svg;
+    try {
+      [svg] = await renderRanges(text, ["1"], 60, options);
+    } catch (error) {
+      if (run !== latest) return;
+      score.replaceChildren(h("p", { class: "vrv-error" }, error.message));
+      return;
+    }
+    if (run !== latest) return;
+    const hadFocus = score.contains(document.activeElement) && document.activeElement?.id === noteId;
+    score.innerHTML = svg;
+    const g = score.querySelector(`g[id="${noteId}"]`);
+    if (!g) {
+      score.append(h("p", { class: "vrv-error" }, `Note ${noteId} was not in the drawing.`));
+      return;
+    }
+    wireNote(g, name);
+    meiCode.textContent = info?.tag ?? "";
+    svgCode.textContent = noteGroupText(g);
+    if (hadFocus) g.focus();
+  };
+
+  highlightBtn.addEventListener("click", () => {
+    const g = score.querySelector(`g[id="${noteId}"]`);
+    if (!g) return;
+    highlighted = !highlighted;
+    applyHighlight(g);
+    svgCode.textContent = noteGroupText(g);
+  });
+  pitch.addEventListener("change", render);
+  extra.addEventListener("change", render);
+
+  root.replaceChildren(
+    h("div", { class: "vrv-controls" },
+      highlightBtn,
+      h("label", {}, "MEI pitch ", pitch),
+      h("label", {}, extra, " Show extra attributes in the SVG"),
+      h("button", { type: "button", class: "md-button", onclick: () => {
+        highlighted = false;
+        pitch.value = "c";
+        extra.checked = false;
+        render();
+      } }, "Reset")),
+    score,
+    h("div", { class: "svg-panes" },
+      h("div", {}, h("p", { class: "vrv-label" }, "MEI · the musical information"), meiCode),
+      h("div", {}, h("p", { class: "vrv-label" }, "SVG · the drawing in your browser"), svgCode)),
+  );
+  await render();
+}
+
 // ---------------------------------------------------------------- start
 
 const DEMOS = {
@@ -1178,6 +1419,9 @@ const DEMOS = {
   compare: initCompare,
   edit: initEdit,
   inspect: initInspect,
+  "svg-circle": initSvgCircle,
+  "svg-zoom": initSvgZoom,
+  "svg-note": initSvgNote,
 };
 
 for (const root of document.querySelectorAll("[data-demo]")) {
