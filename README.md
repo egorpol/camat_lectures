@@ -63,8 +63,10 @@ pins. Its notebooks
 are [PDF preparation](sessions/02-building-an-edition/notebooks/02_pdf_preparation.ipynb)
 (with `schumann-edition-inputs.zip`; fetches the IMSLP scan at runtime),
 [OMR results](sessions/02-building-an-edition/notebooks/02_schumann_omr.ipynb)
-(with `schumann-omr-recordings.zip`, recorded HOMR/OeMeR runs) and
-[note entry](sessions/02-building-an-edition/notebooks/02_note_entry.ipynb).
+(with `schumann-omr-recordings.zip`, recorded HOMR/OeMeR runs),
+[note entry](sessions/02-building-an-edition/notebooks/02_note_entry.ipynb) and
+[live editing](sessions/02-building-an-edition/notebooks/02_live_editing.ipynb)
+(with `schumann-edition-inputs.zip`; session 3 starts with it).
 The notebooks for sessions 3 and 4 will go into the same folder, because all
 Schumann notebooks share one working folder.
 

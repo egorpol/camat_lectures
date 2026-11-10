@@ -18,7 +18,6 @@ docs/sessions/04-*/
 /historical_music_notation_computational_musicology.md
 # Session 3/4 drafts kept in session 2's folder, with their helpers and tools
 sessions/02-building-an-edition/notebooks/02_facsimile_linking.ipynb
-sessions/02-building-an-edition/notebooks/02_live_editing.ipynb
 sessions/02-building-an-edition/notebooks/02_svg_editorial.ipynb
 sessions/02-building-an-edition/notebooks/02_review_and_release.ipynb
 sessions/02-building-an-edition/notebooks/02_what_is_svg.ipynb
@@ -30,12 +29,10 @@ sessions/02-building-an-edition/examples/model-configs/
 sessions/02-building-an-edition/examples/model-prompts/
 sessions/02-building-an-edition/examples/schumann/facsimile/
 tools/notebooks/02_facsimile_linking.py
-tools/notebooks/02_live_editing.py
 tools/notebooks/02_svg_editorial.py
 tools/notebooks/02_review_and_release.py
 tools/notebooks/02_what_is_svg.py
 tools/notebooks/helpers/facsimile_linking.py
-tools/notebooks/helpers/live_editing.py
 tools/notebooks/helpers/release.py
 tools/notebooks/helpers/svg_editorial.py
 tools/pack_schumann_boxes.py

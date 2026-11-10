@@ -232,7 +232,7 @@ Every note in the file has such an `xml:id`. It is how the drawing, the scan lin
 
 - Source, scan, encoding and edition are four different things. The source is the evidence; everything else is checked against it.
 - OMR and existing encodings save typing. Neither saves the comparison with the source.
-- Next session: we link each bar to its place on the page image, then correct and add to the encoding by hand and with Copilot. In session 4, we put the edition on GitHub and publish it.
+- Next session: we restore marks from the print in the encoding, by hand and with Copilot, and link each bar to its place on the page image. In session 4, we put the edition on GitHub and publish it.
 
 **Homework**
 
@@ -249,11 +249,12 @@ Every note in the file has such an `xml:id`. It is how the drawing, the scan lin
 
     Step 3 of the cloud route copies the notebooks into `work/camat_lectures/02-building-an-edition/`. Run them there: the folders they create next to them are then kept too.
 
-Two of them need a ZIP file with data next to them; the download script copies those too.
+Three of them need a ZIP file with data next to them; the download script copies those too.
 
 - [`02_pdf_preparation.ipynb`](notebooks/02_pdf_preparation.ipynb){: download="02_pdf_preparation.ipynb" } with [`schumann-edition-inputs.zip`](notebooks/schumann-edition-inputs.zip): parts 1 and 6. Downloads the scan from IMSLP when you run it. Next session continues in the folder `schumann_edition_work` that it creates.
 - [`02_schumann_omr.ipynb`](notebooks/02_schumann_omr.ipynb){: download="02_schumann_omr.ipynb" } with [`schumann-omr-recordings.zip`](notebooks/schumann-omr-recordings.zip): part 4.
 - [`02_note_entry.ipynb`](notebooks/02_note_entry.ipynb){: download="02_note_entry.ipynb" }: part 5. No ZIP needed.
+- [`02_live_editing.ipynb`](notebooks/02_live_editing.ipynb){: download="02_live_editing.ipynb" } with [`schumann-edition-inputs.zip`](notebooks/schumann-edition-inputs.zip): the live editing shown at the end of the session. We start session 3 with it.
 
 ## Sources
 

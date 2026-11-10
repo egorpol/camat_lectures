@@ -7,6 +7,15 @@ instead of versioned, and the date is the day the change went live on the
 
 ## Unreleased
 
+### Added
+
+- Session 2: the notebook `02_live_editing`, the editing shown at the end of
+  session 2; session 3 starts with it. It makes a working copy of our starting
+  file, shows the first two systems of the print, draws the score again each
+  time the file is saved, and lists the changes in words, marking those the
+  task did not ask for. A check against the MEI rules shows only the problems
+  that are new since the file was copied.
+
 ## 2026-10-27
 
 ### Changed
