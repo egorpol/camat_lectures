@@ -101,7 +101,7 @@ JupyterLab opens as in session 1, but with the seminar's packages already instal
 2. The first time, a welcome box appears: click **Got it!**.
 3. Click **Login** at the top left and sign in with your GitHub account. You need this from session 3 on, when you save your edition to GitHub.
 
-**✓ Check:** the score appears on the left with one bass note in blue, and the code on the right highlights the line `<note xml:id="d1e338" pname="a" .../>`. It is the wrong note A3 from session 2, part 3.
+**✓ Check:** the score appears on the left with one bass note in blue, and the code on the right highlights the line `<note xml:id="d1e338" pname="a" .../>`. Our print has F3 here: we come back to this note in session 3.
 
 ### If the workshop link does not work
 

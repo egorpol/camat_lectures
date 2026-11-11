@@ -1,6 +1,6 @@
 # What is SVG?
 
-SVG (Scalable Vector Graphics) is a picture described as text: your browser reads the description and draws it. Verovio draws every score on this site as SVG. This page has three short demos. Back to [session 2, part 7](index.md#7-the-note-in-the-mei-file).
+SVG (Scalable Vector Graphics) is a picture described as text: your browser reads the description and draws it. Verovio draws every score on this site as SVG. This page has three short demos. Back to [session 2, part 5](index.md#5-the-score-as-svg).
 
 ## 1. Text becomes a picture
 

@@ -7,6 +7,21 @@ instead of versioned, and the date is the day the change went live on the
 
 ## Unreleased
 
+## 2026-11-11
+
+### Changed
+
+- Session 2: the page now follows the class as it was held: setup, source and
+  scan, the page and its bars, OMR, the score as SVG, linking the bars to the
+  scan, and editing the MEI file live. The parts *A wrong note*, *Typing the
+  notes* and *The note in the MEI file* are gone, with their demos; the wrong
+  note in the bass comes back in session 3. The notebook `02_note_entry` is
+  still there, as an optional extra.
+- Home page, setup page and the session 2 notebooks: descriptions and part
+  numbers match the new session 2 page.
+
+## 2026-11-10
+
 ### Added
 
 - Session 2: the notebook `02_live_editing`, the editing shown at the end of

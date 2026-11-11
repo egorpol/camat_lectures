@@ -1,7 +1,7 @@
 # %% [markdown]
 # # The page and its bars
 #
-# Session 2, *The source and the notes*: the check at the end of the setup, and part 6.
+# Session 2, *The source and the notes*: the check at the end of the setup, and part 3.
 #
 # This notebook prepares our source for the edition. It downloads the scan, copies page 8 into a PDF of its own, draws that page as an image, and lists which bars are on which system. Next session we link every bar to its place on this image.
 #

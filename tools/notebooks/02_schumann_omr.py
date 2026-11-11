@@ -55,7 +55,7 @@ read_bar(RECORDED, BAR)
 # %% [markdown]
 # <details><summary>What we found</summary>
 #
-# - **Bars 1 and 5, bass:** HOMR reads F3 at the end of both bars, like the print. The MEI file from the MEI Sample Collection, on which our starting file is based, has A3 there. That is how we found the wrong note (part 3 on the course page).
+# - **Bars 1 and 5, bass:** HOMR reads F3 at the end of both bars, like the print. The MEI file from the MEI Sample Collection, on which our starting file is based, has A3 there. That is how we found a wrong note in that file; we come back to it in session 3.
 # - **The notes are right:** every pitch and every note length in these two systems.
 # - **Words and dynamics are missing:** the tempo words *Frisch und munter.* and the *f* (forte) at the start of both systems.
 # - **Beams are missing:** the print joins eighth notes with beams; in HOMR's result every eighth has its own flag.

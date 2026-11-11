@@ -16,8 +16,8 @@ generated templates: rebuilding the course materials replaces them.
   first full bar. Its invisible `space` / `mSpace` elements are placeholders,
   not a transcription of silence. Replace each layer's contents with the
   appropriate notes, chords and rests from the print. Keep measure IDs.
-- [pickup-bar1.abc](pickup-bar1.abc): the starting text of the ABC box on the
-  session page (part 5): header and pickup, bar 1 left to type. Written by
+- [pickup-bar1.abc](pickup-bar1.abc): the starting text of the ABC exercise
+  (part 1 of `02_note_entry.ipynb`): header and pickup, bar 1 left to type. Written by
   hand, not generated.
 
 The whole piece is retained so that later facsimile integration can use its

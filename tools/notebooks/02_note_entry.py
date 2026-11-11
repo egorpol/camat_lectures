@@ -1,7 +1,7 @@
 # %% [markdown]
 # # Typing the notes
 #
-# Session 2, *The source and the notes*, part 5.
+# Session 2, *The source and the notes*: an optional extra, which we skipped in class.
 #
 # Besides OMR, the other way to get notes into the computer is to type them. You type the bass (left hand) of the pickup and bar 1 of Schumann's *Fröhlicher Landmann*, as in the first system of page 8:
 #

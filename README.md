@@ -20,10 +20,10 @@ Analysis Toolbox.
 | | Session | Demos |
 |---|---|---|
 | 1 | [Why encode music? From notation to machine-readable scores](https://egorpol.github.io/camat_lectures/sessions/01-why-encode-music/) | player-piano roll, one melody in seven formats, a facsimile-linked page, binary grids, an LLM writes ABC |
-| 2 | [Building an edition: the source and the notes](https://egorpol.github.io/camat_lectures/sessions/02-building-an-edition/) | laptop setup, a wrong note in Schumann Op. 68 No. 10, OMR next to the scan, five notes in ABC, the page and its bars |
+| 2 | [Building an edition: the source and the notes](https://egorpol.github.io/camat_lectures/sessions/02-building-an-edition/) | laptop setup, the page and its bars in Schumann Op. 68 No. 10, OMR next to the scan, the score as SVG, linking bars to the scan, editing MEI live with Copilot |
 
-Sessions 2–4 build one edition of Schumann's *Fröhlicher Landmann*. All its
-notebooks and data live in `sessions/02-building-an-edition/`, because they
+Session 2 works on Schumann's *Fröhlicher Landmann*, and session 3 starts
+from it. All its notebooks and data live in `sessions/02-building-an-edition/`, because they
 share one working project (`schumann_edition_work`) next to the notebooks.
 
 ## Get the notebooks

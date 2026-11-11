@@ -10,7 +10,7 @@ This site carries the content of each session together with demos that run in yo
 | | Session | Demos |
 |---|---|---|
 | 1 | [Why encode music? From notation to machine-readable scores](sessions/01-why-encode-music/index.md) | player-piano roll, one melody in seven formats, binary grids, an LLM writes ABC |
-| 2 | [Building an edition: the source and the notes](sessions/02-building-an-edition/index.md) | setup on your laptop, a wrong note in Schumann, OMR next to the scan, five notes in ABC, the page and its bars |
+| 2 | [Building an edition: the source and the notes](sessions/02-building-an-edition/index.md) | setup on your laptop, the page and its bars, OMR next to the scan, the score as SVG, linking bars to the scan, editing MEI live with Copilot |
 
 ## What the course covers
 

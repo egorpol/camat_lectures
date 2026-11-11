@@ -104,7 +104,7 @@ def show_print(project, width=1000):
     """Show the first two systems of page 8, from 02_pdf_preparation's page image."""
     image = Path(project) / "edition/pages/page-0001.png"
     if not image.is_file():
-        print("The page image is not there yet. 02_pdf_preparation.ipynb makes it (session 2, part 6):\n"
+        print("The page image is not there yet. 02_pdf_preparation.ipynb makes it (session 2, part 3):\n"
               "run that notebook to the end, then run this cell again.\n"
               f"Until then, look at page 8 of the scan on IMSLP: {IMSLP_PAGE}")
         return
