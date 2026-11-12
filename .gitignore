@@ -46,3 +46,7 @@ tools/collect_schumann_omr.py
 tools/pack_schumann_omr.py
 tools/rehearse_schumann_editing.py
 tools/build_svg_introduction.py
+# Session 3 notebook sources and the tool that packs their inputs (until the S3 release)
+tools/notebooks/03_*.py
+tools/notebooks/helpers/grieg_linking.py
+tools/pack_grieg_inputs.py
