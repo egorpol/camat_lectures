@@ -7,6 +7,26 @@ instead of versioned, and the date is the day the change went live on the
 
 ## Unreleased
 
+## 2026-11-14
+
+### Added
+
+- Session 3, *Building an edition: linking, editing, publishing*: the page and
+  four notebooks (`03_grieg_linking`, `03_grieg_repository`,
+  `03_grieg_editing`, `03_grieg_live_page`) with `grieg-edition-inputs.zip`.
+  In pairs, students build an edition of Grieg's *Vöglein*, Op. 43 No. 4:
+  page images from the IMSLP scan, a box around each bar, links from the bars
+  to the pages, the MEI header, the marks of one system, peer review, and a
+  live page on GitHub Pages.
+- The sources of the session 3 notebooks and the tool that packs their inputs
+  (`tools/notebooks/03_*.py`, the Grieg helpers, `tools/pack_grieg_inputs.py`).
+
+### Changed
+
+- Session 2 page: `02_live_editing` is now a warm-up at home before session 3,
+  and the wrap-up points to the session 3 page.
+- Home page: session 3 in the sessions table.
+
 ## 2026-11-11
 
 ### Changed

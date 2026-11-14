@@ -1,0 +1,77 @@
+{
+  "record_date": "2026-11-12",
+  "work": {
+    "composer": "Edvard Grieg",
+    "collection": "Lyrische Stücke, Op. 43",
+    "number": 4,
+    "title": "Vöglein"
+  },
+  "printed_witness": {
+    "id": "imslp-28165-peters-8800",
+    "file_url": "https://imslp.org/wiki/Special:ImagefromIndex/28165",
+    "imslp_file_id": 28165,
+    "as_named_in_the_mei_header": "Edvard Grieg: Klavierwerke Bd. 1, C. F. Peters, plate 8800, ed. Hermann Kretzschmar, [1902]; the header's URI is this file on the old javanese.imslp.info host",
+    "download_url": "https://s9.imslp.org/files/imglnks/usimg/7/75/IMSLP28165-PMLP01778-Grieg-KlavierwerkeBand1-Op43-Peters.pdf",
+    "retrieved_on": "2026-11-12",
+    "bytes": 2561551,
+    "sha256": "5f78faa514434df76d2648e7b70bc289858bd226ffea2e916548227c722245a3",
+    "page_count": 16,
+    "content": "All of Op. 43; No. 4 on PDF pages 9-10 = printed pages 42-43"
+  },
+  "classroom_pdf": {
+    "id": "imslp-28165-pages-9-10-extract",
+    "filename": "grieg-voglein.pdf",
+    "bytes": 296379,
+    "sha256": "214771f97ea4ff57a3f022a3a23e6b5189bbae98329aa0764dd849ff2b1d133a",
+    "page_count": 2,
+    "derived_from": "imslp-28165-peters-8800",
+    "page_mapping": [
+      {"original_pdf_page": 9, "excerpt_pdf_page": 1, "printed_page": "42"},
+      {"original_pdf_page": 10, "excerpt_pdf_page": 2, "printed_page": "43"}
+    ],
+    "transformation": "pypdf PdfWriter.add_page(PdfReader(original).pages[8]) and .pages[9], then add_metadata(pdf_metadata); pages kept without crop, resize, rotation or rasterization",
+    "tool": "pypdf",
+    "tool_version": "6.10.0",
+    "pdf_metadata": {
+      "/Title": "Grieg, Op. 43 No. 4 — source pages",
+      "/Subject": "PDF pages 9–10 extracted without cropping from IMSLP 28165; printed pages 42–43",
+      "/Creator": "pypdf 6.10.0"
+    }
+  },
+  "page_images": {
+    "dpi": 300,
+    "pixels": [2717, 3496],
+    "page_ids": ["grieg-voglein-p0001", "grieg-voglein-p0002"],
+    "renderer_at_preparation": "pdftoppm version 26.10.0",
+    "note": "PNG bytes differ between poppler versions; boxes are matched to the excerpt PDF's SHA-256, the dpi and the pixel size"
+  },
+  "base_encoding": {
+    "id": "mei-sample-grieg-little-bird",
+    "repository": "https://github.com/music-encoding/sample-encodings",
+    "revision": "e4a3c4dece588ae0bdb13e5cf956340dcd99b447",
+    "repository_path": "MEI_5.1/Music/Complete_examples/Grieg_Little_bird_Op43_No4.mei",
+    "url": "https://raw.githubusercontent.com/music-encoding/sample-encodings/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Grieg_Little_bird_Op43_No4.mei",
+    "encoders": ["Maja Hartwig", "Kristina Richts"],
+    "bytes": 109589,
+    "sha256": "41c376dffab26b65783176bde0a03a1860c87036d58e62d942e43be0d55f16fc",
+    "mei_version": "5.1",
+    "header_rights_statement": "This encoding is in the public domain.",
+    "collection_license": "ECL-2.0",
+    "used_as": "unchanged"
+  },
+  "measure_boxes": {
+    "detector": "https://measure-detector.edirom.de/upload",
+    "detected_on": "2026-11-12",
+    "files": {
+      "grieg-voglein-p0001.json": {"measures": 20, "systems": [4, 5, 5, 3, 3], "sha256": "698771df9528f05cf780a7a621e7b00a816a7de31337ee522223ed371c0765f3"},
+      "grieg-voglein-p0002.json": {"measures": 19, "systems": [3, 3, 4, 5, 4], "sha256": "0541c2e978e90a93f152f753691fc5651780332768e1a5352f24e3800d774481"}
+    },
+    "review": "All 39 boxes checked by eye on the CAMAT 0.2.8 overlays on 2026-11-12, including the partial bars n 9, 10, 30, 31. Responses kept unchanged; the .run.json records stay here and are not packed (their image_sha256 is poppler-specific)."
+  },
+  "observations": [
+    {"id": "validation", "finding": "CAMAT 0.2.8 mei_validation on the unchanged file: no schema findings; 2 errors broken_internal_reference (<ref target=\"#xsl_ppq\"> and \"#xsl_header\" in the change list point to IDs that are not in the file); 17 layer_duration_underfull warnings (partial bars 1, 9, 10, 30, 31, 39, and staff 1 of 23, 24, 26, 27, 28); 14 Verovio warnings 'tie ... has both a @startid and an @tstamp'."},
+    {"id": "tie-ids", "finding": "The 14 ties have no xml:id; Verovio names them with IDs it generates on each load, so the IDs in its warnings cannot be searched in the file."},
+    {"id": "pedal", "finding": "Verovio 6.3.0 draws <pedal dir=\"down\"> as SMuFL E650 (Ped.) and dir=\"up\" as E655 (asterisk)."},
+    {"id": "octave", "finding": "The 8va line starts in n 20 with tstamp2=\"4\" and no bar offset; in the print it ends after the first note of n 21 (p. 43). Not changed."}
+  ]
+}

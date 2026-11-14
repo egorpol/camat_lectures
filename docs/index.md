@@ -11,6 +11,7 @@ This site carries the content of each session together with demos that run in yo
 |---|---|---|
 | 1 | [Why encode music? From notation to machine-readable scores](sessions/01-why-encode-music/index.md) | player-piano roll, one melody in seven formats, binary grids, an LLM writes ABC |
 | 2 | [Building an edition: the source and the notes](sessions/02-building-an-edition/index.md) | setup on your laptop, the page and its bars, OMR next to the scan, the score as SVG, linking bars to the scan, editing MEI live with Copilot |
+| 3 | [Building an edition: linking, editing, publishing](sessions/03-linking-and-editing/index.md) | Grieg's *Vöglein* in pairs: page images and bar boxes, linking bars to the pages, your edition on GitHub, the MEI header, restoring marks by hand and with Copilot, peer review, a live edition page |
 
 ## What the course covers
 

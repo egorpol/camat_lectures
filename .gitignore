@@ -6,14 +6,13 @@ schumann_omr_work/
 schumann_note_entry_work/
 schumann_edition_work/
 svg_introduction_work/
+grieg_edition_work/
 
 # Only what students use goes into the repository. Instructor material, sketches
-# and session 3/4 drafts stay local for now (decided 2026-10-27).
+# and session 4 drafts stay local for now (decided 2026-10-27).
 sessions/*/outline.md
 sessions/*/teacher/
-sessions/03-*/
 sessions/04-*/
-docs/sessions/03-*/
 docs/sessions/04-*/
 /historical_music_notation_computational_musicology.md
 # Session 3/4 drafts kept in session 2's folder, with their helpers and tools
@@ -46,7 +45,3 @@ tools/collect_schumann_omr.py
 tools/pack_schumann_omr.py
 tools/rehearse_schumann_editing.py
 tools/build_svg_introduction.py
-# Session 3 notebook sources and the tool that packs their inputs (until the S3 release)
-tools/notebooks/03_*.py
-tools/notebooks/helpers/grieg_*.py
-tools/pack_grieg_inputs.py

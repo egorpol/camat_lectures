@@ -7,7 +7,6 @@ strict: true
 
 # Session 3/4 pages: shown by `mkdocs serve`, left out of the built site until revised
 draft_docs: |
-  sessions/03-linking-and-editing/
   sessions/04-publishing-and-analysis/
 
 hooks:
@@ -66,3 +65,4 @@ nav:
   - Sessions:
       - "1. Why encode music?": sessions/01-why-encode-music/index.md
       - "2. The source and the notes": sessions/02-building-an-edition/index.md
+      - "3. Linking, editing, publishing": sessions/03-linking-and-editing/index.md

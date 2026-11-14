@@ -129,17 +129,17 @@ In class we saw examples in mei-friend, an MEI editor in the browser, with the s
 
 At the end of class we opened `work.mei`, a copy of our starting file, in VS Code next to its score in `02_live_editing.ipynb`. Copilot added a slur from the print. The notebook drew the score again each time the file was saved and listed the changes in words.
 
-Session 3 starts with this notebook: you add the tempo words *Frisch und munter* and the *f* by hand, and a slur with Copilot. To try it at home, open [`02_live_editing.ipynb`](notebooks/02_live_editing.ipynb) and follow its steps.
+Before session 3, you can work through this notebook at home as a warm-up: you add the tempo words *Frisch und munter* and the *f* by hand, and a slur with Copilot. Open [`02_live_editing.ipynb`](notebooks/02_live_editing.ipynb) and follow its steps.
 
 ??? info "Why does the starting file have no slurs or dynamics?"
-    We removed the slurs, dynamics, tempo words and articulation from Maja Hartwig's file on purpose. Restoring some of them from the print is one of the editing tasks in session 3. The file's header says exactly what was removed.
+    We removed the slurs, dynamics, tempo words and articulation from Maja Hartwig's file on purpose: in this notebook you restore some of them from the print. The file's header says exactly what was removed.
 
 ## 8. Wrap-up
 
 - Source, scan, encoding and edition are four different things. The source is the evidence; everything else is checked against it.
 - OMR and existing encodings save typing. Neither saves the comparison with the source.
 - Each note in Verovio's drawing keeps the `xml:id` of its MEI element, so we can find the same note in the drawing and the file.
-- Session 3 starts with time for setup and `02_live_editing.ipynb`. Then you go through the whole route again, hands-on and step by step, with the PDF of a different piece with several pages: make page images, draw a box around each bar, add the links in the MEI file, and combine the pages into one file. You also work on the MEI header: the part that describes the music and its sources, and why we need it. In session 4, we put the edition on GitHub and publish it.
+- In [session 3](../03-linking-and-editing/index.md) you build an edition yourselves, in pairs, with the two pages of Grieg's *Vöglein*: you make the page images, check the box around each bar, link the bars to the pages, read and extend the MEI header, restore the marks of one system, and publish the edition on GitHub as a live page. Session 3 starts with time for setup.
 
 **Homework**
 
@@ -160,7 +160,7 @@ Three of them need a ZIP file with data next to them; the download script copies
 
 - [`02_pdf_preparation.ipynb`](notebooks/02_pdf_preparation.ipynb){: download="02_pdf_preparation.ipynb" } with [`schumann-edition-inputs.zip`](notebooks/schumann-edition-inputs.zip): parts 1 and 3. Downloads the scan from IMSLP when you run it. The live-editing notebook uses the folder `schumann_edition_work` that it creates.
 - [`02_schumann_omr.ipynb`](notebooks/02_schumann_omr.ipynb){: download="02_schumann_omr.ipynb" } with [`schumann-omr-recordings.zip`](notebooks/schumann-omr-recordings.zip): part 4.
-- [`02_live_editing.ipynb`](notebooks/02_live_editing.ipynb){: download="02_live_editing.ipynb" } with [`schumann-edition-inputs.zip`](notebooks/schumann-edition-inputs.zip): part 7; session 3 starts with it.
+- [`02_live_editing.ipynb`](notebooks/02_live_editing.ipynb){: download="02_live_editing.ipynb" } with [`schumann-edition-inputs.zip`](notebooks/schumann-edition-inputs.zip): part 7; a warm-up at home before session 3.
 - Optional: [`02_note_entry.ipynb`](notebooks/02_note_entry.ipynb){: download="02_note_entry.ipynb" }, skipped in class: you type bar 1 of our piece in ABC, then see the same notes in the other text formats from session 1. No ZIP needed.
 
 ## Sources
