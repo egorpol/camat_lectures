@@ -18,6 +18,8 @@
         <link rel="prev" href="../01-why-encode-music/">
       
       
+        <link rel="next" href="../03-linking-and-editing/">
+      
       
         
       
@@ -579,6 +581,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-linking-and-editing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Linking, editing, publishing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -972,17 +1002,17 @@
 <p>In class we saw examples in mei-friend, an MEI editor in the browser, with the scan beside the score, and a notebook that made these links for our page. In session 3 you make the links yourself, step by step. For a finished edition with such links, see <a href="https://egorpol.github.io/webern_op27/">Webern, Variations Op. 27</a>.</p>
 <h2 id="7-editing-the-mei-file-live">7. Editing the MEI file live<a class="headerlink" href="#7-editing-the-mei-file-live" title="Permanent link">&para;</a></h2>
 <p>At the end of class we opened <code>work.mei</code>, a copy of our starting file, in VS Code next to its score in <code>02_live_editing.ipynb</code>. Copilot added a slur from the print. The notebook drew the score again each time the file was saved and listed the changes in words.</p>
-<p>Session 3 starts with this notebook: you add the tempo words <em>Frisch und munter</em> and the <em>f</em> by hand, and a slur with Copilot. To try it at home, open <a href="notebooks/02_live_editing.ipynb"><code>02_live_editing.ipynb</code></a> and follow its steps.</p>
+<p>Before session 3, you can work through this notebook at home as a warm-up: you add the tempo words <em>Frisch und munter</em> and the <em>f</em> by hand, and a slur with Copilot. Open <a href="notebooks/02_live_editing.ipynb"><code>02_live_editing.ipynb</code></a> and follow its steps.</p>
 <details class="info">
 <summary>Why does the starting file have no slurs or dynamics?</summary>
-<p>We removed the slurs, dynamics, tempo words and articulation from Maja Hartwig's file on purpose. Restoring some of them from the print is one of the editing tasks in session 3. The file's header says exactly what was removed.</p>
+<p>We removed the slurs, dynamics, tempo words and articulation from Maja Hartwig's file on purpose: in this notebook you restore some of them from the print. The file's header says exactly what was removed.</p>
 </details>
 <h2 id="8-wrap-up">8. Wrap-up<a class="headerlink" href="#8-wrap-up" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Source, scan, encoding and edition are four different things. The source is the evidence; everything else is checked against it.</li>
 <li>OMR and existing encodings save typing. Neither saves the comparison with the source.</li>
 <li>Each note in Verovio's drawing keeps the <code>xml:id</code> of its MEI element, so we can find the same note in the drawing and the file.</li>
-<li>Session 3 starts with time for setup and <code>02_live_editing.ipynb</code>. Then you go through the whole route again, hands-on and step by step, with the PDF of a different piece with several pages: make page images, draw a box around each bar, add the links in the MEI file, and combine the pages into one file. You also work on the MEI header: the part that describes the music and its sources, and why we need it. In session 4, we put the edition on GitHub and publish it.</li>
+<li>In <a href="../03-linking-and-editing/">session 3</a> you build an edition yourselves, in pairs, with the two pages of Grieg's <em>Vöglein</em>: you make the page images, check the box around each bar, link the bars to the pages, read and extend the MEI header, restore the marks of one system, and publish the edition on GitHub as a live page. Session 3 starts with time for setup.</li>
 </ul>
 <p><strong>Homework</strong></p>
 <ol>
@@ -1004,7 +1034,7 @@
 <ul>
 <li><a download="02_pdf_preparation.ipynb" href="notebooks/02_pdf_preparation.ipynb"><code>02_pdf_preparation.ipynb</code></a> with <a href="notebooks/schumann-edition-inputs.zip"><code>schumann-edition-inputs.zip</code></a>: parts 1 and 3. Downloads the scan from IMSLP when you run it. The live-editing notebook uses the folder <code>schumann_edition_work</code> that it creates.</li>
 <li><a download="02_schumann_omr.ipynb" href="notebooks/02_schumann_omr.ipynb"><code>02_schumann_omr.ipynb</code></a> with <a href="notebooks/schumann-omr-recordings.zip"><code>schumann-omr-recordings.zip</code></a>: part 4.</li>
-<li><a download="02_live_editing.ipynb" href="notebooks/02_live_editing.ipynb"><code>02_live_editing.ipynb</code></a> with <a href="notebooks/schumann-edition-inputs.zip"><code>schumann-edition-inputs.zip</code></a>: part 7; session 3 starts with it.</li>
+<li><a download="02_live_editing.ipynb" href="notebooks/02_live_editing.ipynb"><code>02_live_editing.ipynb</code></a> with <a href="notebooks/schumann-edition-inputs.zip"><code>schumann-edition-inputs.zip</code></a>: part 7; a warm-up at home before session 3.</li>
 <li>Optional: <a download="02_note_entry.ipynb" href="notebooks/02_note_entry.ipynb"><code>02_note_entry.ipynb</code></a>, skipped in class: you type bar 1 of our piece in ABC, then see the same notes in the other text formats from session 1. No ZIP needed.</li>
 </ul>
 <h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>

@@ -1,0 +1,1073 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Seminar materials: music encoding, Verovio and tools for analysing notated music (WS 2026/27)">
+      
+      
+        <meta name="author" content="Egor Polyakov">
+      
+      
+        <link rel="canonical" href="https://egorpol.github.io/camat_lectures/sessions/03-linking-and-editing/">
+      
+      
+        <link rel="prev" href="../02-building-an-edition/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>3. Linking, editing, publishing - From Digital Edition to Computational Music Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/demos.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-building-an-edition-linking-editing-publishing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="From Digital Edition to Computational Music Analysis" class="md-header__button md-logo" aria-label="From Digital Edition to Computational Music Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            From Digital Edition to Computational Music Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Linking, editing, publishing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="From Digital Edition to Computational Music Analysis" class="md-nav__button md-logo" aria-label="From Digital Edition to Computational Music Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    From Digital Edition to Computational Music Analysis
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup on Jupyter4NFDI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup-laptop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup on your laptop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sessions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sessions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-why-encode-music/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Why encode music?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-building-an-edition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. The source and the notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Linking, editing, publishing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Linking, editing, publishing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-piece-print-scan-and-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The piece: print, scan and encoding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pages-and-boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pages and boxes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-linking-the-bars-to-the-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Linking the bars to the pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-your-edition-on-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Your edition on GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The header
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-restoring-the-marks-of-one-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Restoring the marks of one system
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-peer-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Peer review
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-the-live-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. The live page
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Wrap-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-piece-print-scan-and-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The piece: print, scan and encoding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pages-and-boxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Pages and boxes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-linking-the-bars-to-the-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Linking the bars to the pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-your-edition-on-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Your edition on GitHub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The header
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-restoring-the-marks-of-one-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Restoring the marks of one system
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-peer-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Peer review
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-the-live-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. The live page
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-wrap-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Wrap-up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notebooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notebooks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3-building-an-edition-linking-editing-publishing">3. Building an edition: linking, editing, publishing<a class="headerlink" href="#3-building-an-edition-linking-editing-publishing" title="Permanent link">&para;</a></h1>
+<p>Session 3 (double session, 2 × 90 minutes).</p>
+<p>In session 2 you saw, mostly on the projector, how an edition links each bar of an encoding to its place on a scan of the print. Today you make an edition yourselves, from the start, and put it online: Edvard Grieg's <em>Vöglein</em> (Little bird) from the <em>Lyric Pieces</em>, Op. 43 No. 4, two pages of a printed edition. You work in pairs, on one laptop per pair. In block 1 you turn the PDF into page images, find a box around every bar, link the MEI file to both pages, and publish your edition as a repository on GitHub. In block 2 you work on the encoding itself: you read its header, the part that says where the encoding comes from, and restore the slurs, dynamics and pedal marks of one system from the print. Another pair checks your marks against the print. At the end, your edition becomes a live page on the web.</p>
+<div class="admonition tip">
+<p class="admonition-title">Before the session</p>
+<p>Your laptop should be set up as in session 2: <code>02_pdf_preparation.ipynb</code> prints <code>CAMAT: 0.2.8</code>, and VS Code is signed in to your GitHub account. Then get today's notebooks: in your folder <code>seminar-work</code>, run <code>python get_notebooks.py</code> again (on the cloud route, run your <code>get_notebooks.ipynb</code>). It adds the folder <code>03-linking-and-editing</code> and keeps everything you already have. If your setup did not work in session 2, don't worry: the first 15 minutes of class are for finishing it, with help.</p>
+<p>To warm up, you can work through <code>02_live_editing.ipynb</code> from session 2 at home: you add tempo words and a dynamic to the Schumann piece by hand, and a slur with Copilot. Block 2 works the same way.</p>
+</div>
+<p><strong>By the end of the session you can</strong></p>
+<ol>
+<li>turn the PDF of a printed volume into images of the pages you need, and keep the original file unchanged;</li>
+<li>describe a page system by system, and check the boxes around its bars;</li>
+<li>follow the link from a bar in the MEI file to its box on the page, and back;</li>
+<li>say what the MEI header records and why: where the encoding came from, which print it follows, and who changed what;</li>
+<li>restore a printed mark in the MEI file and check it against the print and the score;</li>
+<li>keep an edition in a Git repository, record each change as a commit, and publish it on GitHub as a live page.</li>
+</ol>
+<p><strong>Today in short</strong></p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>When</th>
+<th>Notebook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#1-setup">1. Setup</a></td>
+<td>block 1, first 15 minutes</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#2-the-piece-print-scan-and-encoding">2. The piece: print, scan and encoding</a></td>
+<td>block 1</td>
+<td><a href="notebooks/03_grieg_linking.ipynb"><code>03_grieg_linking.ipynb</code></a>, part 1</td>
+</tr>
+<tr>
+<td><a href="#3-pages-and-boxes">3. Pages and boxes</a></td>
+<td>block 1</td>
+<td><a href="notebooks/03_grieg_linking.ipynb"><code>03_grieg_linking.ipynb</code></a>, parts 2–5</td>
+</tr>
+<tr>
+<td><a href="#4-linking-the-bars-to-the-pages">4. Linking the bars to the pages</a></td>
+<td>block 1</td>
+<td><a href="notebooks/03_grieg_linking.ipynb"><code>03_grieg_linking.ipynb</code></a>, parts 6–8</td>
+</tr>
+<tr>
+<td><a href="#5-your-edition-on-github">5. Your edition on GitHub</a></td>
+<td>end of block 1</td>
+<td><a href="notebooks/03_grieg_repository.ipynb"><code>03_grieg_repository.ipynb</code></a></td>
+</tr>
+<tr>
+<td><a href="#6-the-header">6. The header</a></td>
+<td>block 2</td>
+<td><a href="notebooks/03_grieg_editing.ipynb"><code>03_grieg_editing.ipynb</code></a>, parts 1–3</td>
+</tr>
+<tr>
+<td><a href="#7-restoring-the-marks-of-one-system">7. Restoring the marks of one system</a></td>
+<td>block 2</td>
+<td><a href="notebooks/03_grieg_editing.ipynb"><code>03_grieg_editing.ipynb</code></a>, parts 4–5</td>
+</tr>
+<tr>
+<td><a href="#8-peer-review">8. Peer review</a></td>
+<td>block 2</td>
+<td><a href="notebooks/03_grieg_editing.ipynb"><code>03_grieg_editing.ipynb</code></a>, part 6</td>
+</tr>
+<tr>
+<td><a href="#9-the-live-page">9. The live page</a></td>
+<td>end of block 2</td>
+<td><a href="notebooks/03_grieg_live_page.ipynb"><code>03_grieg_live_page.ipynb</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-setup">1. Setup<a class="headerlink" href="#1-setup" title="Permanent link">&para;</a></h2>
+<p>If your setup did not work in session 2, come to the front: we finish it together. Everyone else checks that VS Code is signed in to GitHub (the account icon at the bottom left), runs <code>get_notebooks.py</code> as in the tip above, and opens <code>03_grieg_linking.ipynb</code>.</p>
+<p><strong>Checkpoint:</strong> each pair has a laptop that prints <code>CAMAT: 0.2.8</code> and is signed in to GitHub.</p>
+<h2 id="2-the-piece-print-scan-and-encoding">2. The piece: print, scan and encoding<a class="headerlink" href="#2-the-piece-print-scan-and-encoding" title="Permanent link">&para;</a></h2>
+<p>As in session 2, keep three things apart:</p>
+<ul>
+<li><strong>The print.</strong> Volume 1 of Grieg's piano works, published by C. F. Peters in Leipzig with plate number 8800 and edited by Hermann Kretzschmar (the encoding's header dates it 1902). <em>Vöglein</em> fills printed pages 42 and 43, with five systems on each page. The print has no bar numbers.</li>
+<li><strong>The scan.</strong> <a href="https://imslp.org/wiki/Special:ImagefromIndex/28165">IMSLP file 28165</a>: a PDF of 16 pages with all of Op. 43. Our piece is on PDF pages 9 and 10. The notebook downloads it (2.6 MB) and checks that it is exactly the file we prepared the course with.</li>
+<li><strong>The encoding.</strong> Maja Hartwig and Kristina Richts's MEI file of the piece in the <a href="https://github.com/music-encoding/sample-encodings/blob/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Grieg_Little_bird_Op43_No4.mei">MEI Sample Collection</a>. It has the notes and rhythms, the ties, the staccato dots and the accents, but only two dynamics, and no slurs, pedal marks, fingerings or tempo words. We use it as it is: unlike the Schumann file of session 2, nothing was removed on purpose. Block 2 restores some of what is missing.</li>
+</ul>
+<p><strong>Bar numbers.</strong> As the print has none, we use the numbers of the MEI file (its attribute <code>n</code>): the short first bar, the <em>pickup</em>, is bar 1, and the piece ends with bar 39. Around the two repeat signs, the file counts the two halves of a bar as two bars: bars 9 and 10 on page 42, bars 30 and 31 on page 43. The notebooks, the boxes and the score all use these numbers.</p>
+<h2 id="3-pages-and-boxes">3. Pages and boxes<a class="headerlink" href="#3-pages-and-boxes" title="Permanent link">&para;</a></h2>
+<p><code>03_grieg_linking.ipynb</code> first prepares the pages:</p>
+<ol>
+<li>it copies PDF pages 9 and 10 into a PDF of their own, <code>grieg-voglein.pdf</code>. There they are PDF pages 1 and 2, but their printed numbers stay 42 and 43. The volume itself stays unchanged;</li>
+<li>it draws both pages as images, at 300 dots per inch. The boxes refer to these images pixel by pixel.</li>
+</ol>
+<p>Then, for each page, three steps:</p>
+<ul>
+<li><strong>Describe the page.</strong> A <em>system</em> is the group of staves played together, joined by a brace at the left. You write one line per page that says which bars are on which system, for example <code>1 | 42 | 1-4, 5-9, 10-14, 15-17, 18-20</code> (PDF page, printed page, the bars of each system). CAMAT checks the line against the MEI file: it can tell whether every bar is there, in order, but it cannot see where a system ends on the page. Only you can.</li>
+<li>
+<p><strong>Find the boxes.</strong> A <em>box</em> is a rectangle around one bar, across both staves, given by four numbers in pixels: left, top, right and bottom. You choose one of two ways to find them:</p>
+<ul>
+<li><strong>with a chat model</strong> that can read images, such as Copilot Chat in VS Code: the notebook writes the prompt, you attach the page image and save the answer as a file;</li>
+<li><strong>with the Edirom measure detector</strong>, a service of the Edirom project that finds the bars on a page image. When you ask it to, the notebook sends the image of one page there, and nothing else.</li>
+</ul>
+<p>If neither works, the notebook uses boxes we saved for the course.</p>
+</li>
+<li>
+<p><strong>Check the boxes.</strong> The notebook draws the page with its boxes, numbered by bar and coloured by system, and compares the number of boxes in each system with your line. Matching numbers do not prove that the boxes are right: look at the pickup, the half bars and the end of each system. If a box is wrong, change its numbers in the box file and save; the picture is redrawn within a second.</p>
+</li>
+</ul>
+<p>Page 42 comes first, step by step. Page 43 repeats the same steps with less help.</p>
+<h2 id="4-linking-the-bars-to-the-pages">4. Linking the bars to the pages<a class="headerlink" href="#4-linking-the-bars-to-the-pages" title="Permanent link">&para;</a></h2>
+<p>When both pages are checked, CAMAT pairs the 39 boxes with the 39 bars, system by system, and draws both pages with the bar numbers on the boxes. You look at both once more and record your names as the reviewers. Then the notebook adds the links to your working file, <code>work.mei</code>, together with the page and system breaks of the print, so that the score is drawn with the same systems as the page.</p>
+<p>The links form a chain in the MEI file:</p>
+<ul>
+<li>each bar, a <code>&lt;measure&gt;</code>, has an attribute <code>facs</code> that points to a zone, for example <code>facs="#zone-grieg-voglein-p0001-020"</code>. The <code>#</code> means "the element with this <code>xml:id</code> in the same file";</li>
+<li>the <code>&lt;zone&gt;</code> holds the four numbers of the box: <code>ulx</code> and <code>uly</code> for the upper left corner, <code>lrx</code> and <code>lry</code> for the lower right;</li>
+<li>the zone sits inside a <code>&lt;surface&gt;</code>, one per page, whose <code>&lt;graphic&gt;</code> names the page image.</li>
+</ul>
+<p>You follow this chain once by hand, for a bar you choose, in <code>work.mei</code> with Ctrl+F (Cmd+F on a Mac). Then the other way round, in the score viewer: click a bar and its box lights up on the page; click a box and its bar lights up in the score.</p>
+<p><strong>Checkpoint:</strong> the notebook's check finds no new problems in <code>work.mei</code>, all 39 bars point to boxes on two pages, and both pages are reviewed.</p>
+<h2 id="5-your-edition-on-github">5. Your edition on GitHub<a class="headerlink" href="#5-your-edition-on-github" title="Permanent link">&para;</a></h2>
+<p>Your edition is now a folder of files: <code>work.mei</code>, the two page images, the boxes and CAMAT's records. <code>03_grieg_repository.ipynb</code> turns this folder into a <em>repository</em>: a folder whose versions Git records. Each version is a <em>commit</em>, a snapshot of all the files with a short message that says what changed, who changed it and when. GitHub keeps a copy of the repository on the web, where anyone can see it.</p>
+<p>The notebook writes a description of the edition (<code>README.md</code>), the licence of the encoding, and a list of what Git leaves out (the check reports and the PDFs). Then you publish the folder from VS Code with <strong>Publish to GitHub</strong>, as a public repository. The notebook checks that GitHub has your commit and prints a link that opens your file in <a href="https://mei-friend.mdw.ac.at/">mei-friend</a>, an MEI editor in the browser: the score, the file, and page 42 with your boxes. mei-friend finds the page images because they sit next to the MEI file in your repository.</p>
+<p>From now on, after each task you record your change as a commit: in VS Code's Source Control view, a message, <strong>Commit</strong>, <strong>Sync Changes</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Your repository is public</p>
+<p>Anyone can read it, including the names you write into it: in the review of the boxes, in the header and on the review sheet. Use your names, your initials or your GitHub usernames, as you prefer.</p>
+</div>
+<p><strong>Checkpoint:</strong> your repository is on GitHub, and mei-friend shows your file with page 42.</p>
+<h2 id="6-the-header">6. The header<a class="headerlink" href="#6-the-header" title="Permanent link">&para;</a></h2>
+<p><code>03_grieg_editing.ipynb</code> continues with the same <code>work.mei</code>.</p>
+<p>Remember the Schumann piece of session 2: in bars 1 and 5, the encoding has an A3 in the left hand where our print has an F3. Nobody typed it wrong: the encoding was made from another source, a file from the KernScores collection. Its <em>header</em> said so, for anyone who read it. The header is the first part of an MEI file, before the music. It describes the work, the sources the encoding follows, and every change made to the file: what, by whom and when. Reusing an encoding saves a lot of typing; the header tells you what you are reusing.</p>
+<p>The Grieg header names two sources, our Peters print and a KernScores file, and lists 14 changes over 17 years, from a Humdrum file through MusicXML to MEI 5.1. The notebook shows it in plain words, with the line numbers where you find each part in the file. You add two things:</p>
+<ol>
+<li>exactly which scan we use: the IMSLP file number and the scan's <em>fingerprint</em>, a code computed from every byte of the file (SHA-256), so that anyone can check later that they have the same file;</li>
+<li>a <code>&lt;change&gt;</code> that records your own work today: the links, and the marks you restore.</li>
+</ol>
+<h2 id="7-restoring-the-marks-of-one-system">7. Restoring the marks of one system<a class="headerlink" href="#7-restoring-the-marks-of-one-system" title="Permanent link">&para;</a></h2>
+<p>Each pair restores the marks of one system; your teacher gives you a page and a system. With your system in the print, the score and <code>work.mei</code> side by side:</p>
+<ol>
+<li><strong>by hand, the dynamics:</strong> letters such as <em>p</em> or <em>pp</em>, words such as <em>cresc.</em>, and <em>hairpins</em>, the opening or closing wedges. In the first system of page 42 also the tempo words <em>Allegro leggiero</em>;</li>
+<li><strong>with Copilot, the slurs:</strong> the notebook writes a prompt with the bars of your system, and you add the first and last note of each slur;</li>
+<li><strong>by hand, the pedal marks:</strong> <em>Ped.</em> and ✻ under the lower staff.</li>
+</ol>
+<p>A mark says where it belongs: in which bar, on which staff and on which <em>beat</em>. In 6/8 a bar has six beats, one for each eighth note. The notebook lists the notes of your system with their beats and their <code>xml:id</code>s. After each step it lists, in words, what changed in the file, and flags any change outside your task or your system. Notes, rhythms, <code>xml:id</code>s and links stay as they are. After each step you also commit and sync.</p>
+<p>If you work in the cloud, or Copilot does not answer, you write the slurs by hand; the notebook shows how.</p>
+<p><strong>Extensions:</strong> fingerings; the words <em>poco ritardando</em> near the end; the 8va line at the page turn (does the encoding end it where the print does?).</p>
+<h2 id="8-peer-review">8. Peer review<a class="headerlink" href="#8-peer-review" title="Permanent link">&para;</a></h2>
+<p>Pairs swap: you review another pair's system on their laptop, and they review yours. For every new mark, compare with the print:</p>
+<ul>
+<li>the right bar and the right beat;</li>
+<li>for a slur, the right first and last note;</li>
+<li>the right staff, above or below;</li>
+<li>nothing changed that should not have.</li>
+</ul>
+<p>The notebook shows each changed bar in words and in the print; on GitHub, the other pair's commits show the same changes line by line. The notebook also writes a review sheet with one entry for each change. Under each entry you write <strong>accept</strong>, <strong>correct</strong> (the other pair fixes it while you watch) or <strong>unresolved</strong>, and in a few words why. The sheet goes into the repository too.</p>
+<p>A file that passes the notebook's check is valid MEI, but not yet a checked transcription: only the comparison with the print shows that.</p>
+<p><strong>Checkpoint:</strong> every entry on the review sheet has a decision, and the sheet is committed.</p>
+<h2 id="9-the-live-page">9. The live page<a class="headerlink" href="#9-the-live-page" title="Permanent link">&para;</a></h2>
+<p><code>03_grieg_live_page.ipynb</code> writes two files into your repository: <code>site.json</code>, which says what the page shows, and a <em>workflow</em>, instructions that GitHub follows each time a commit arrives. GitHub then builds the page with CAMAT's site builder and publishes it with GitHub Pages: the score drawn by Verovio with the systems of the print, and the page image beside it. Point at a note and its bar lights up on the page; click it, and the address in the browser becomes a link to that bar.</p>
+<p>You switch on GitHub Pages in your repository's settings, commit and sync, and after about a minute your edition is online, at an address of the form <code>https://your-account.github.io/your-repository/</code>. Every later commit updates it.</p>
+<p><strong>Checkpoint:</strong> your live page shows the score and the print, with the marks you restored.</p>
+<h2 id="10-wrap-up">10. Wrap-up<a class="headerlink" href="#10-wrap-up" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Each pair shows its live page: one restored mark and where the print shows it. We discuss the unresolved points from the review sheets.</li>
+<li>An encoding you reuse comes with a header. Read it before you trust the notes, and add to it what you did.</li>
+<li>Boxes, links and marks are checked twice: by the software for their form, by a person against the print.</li>
+<li>A repository keeps every version with its message; a live page shows the current one to anyone.</li>
+</ul>
+<p><strong>Homework</strong></p>
+<ol>
+<li>If you did not reach a checkpoint in class, finish that notebook at home. Without boxes of your own, <code>03_grieg_linking.ipynb</code> uses the boxes we saved. Then commit and sync, and check that your live page shows your work.</li>
+<li>Send the link of your live page to your teacher.</li>
+</ol>
+<h2 id="notebooks">Notebooks<a class="headerlink" href="#notebooks" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Laptop</label><label for="__tabbed_1_2">Cloud</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><code>python get_notebooks.py</code> in your folder <code>seminar-work</code> copies them into <code>seminar-work/camat_lectures/03-linking-and-editing/</code>.</p>
+</div>
+<div class="tabbed-block">
+<p>Your <code>get_notebooks.ipynb</code> copies them into <code>work/camat_lectures/03-linking-and-editing/</code>. Run them there: the folders they create next to them are then kept too. Parts 5 and 9 need VS Code: do them on your partner's laptop.</p>
+</div>
+</div>
+</div>
+<p>All four notebooks work in the folder <code>grieg_edition_work</code>, which the first one creates next to itself. Your repository is its subfolder <code>edition</code>.</p>
+<ul>
+<li><a download="03_grieg_linking.ipynb" href="notebooks/03_grieg_linking.ipynb"><code>03_grieg_linking.ipynb</code></a> with <a href="notebooks/grieg-edition-inputs.zip"><code>grieg-edition-inputs.zip</code></a>: parts 2–4. Downloads the scan from IMSLP when you run it.</li>
+<li><a download="03_grieg_repository.ipynb" href="notebooks/03_grieg_repository.ipynb"><code>03_grieg_repository.ipynb</code></a>: part 5.</li>
+<li><a download="03_grieg_editing.ipynb" href="notebooks/03_grieg_editing.ipynb"><code>03_grieg_editing.ipynb</code></a>: parts 6–8.</li>
+<li><a download="03_grieg_live_page.ipynb" href="notebooks/03_grieg_live_page.ipynb"><code>03_grieg_live_page.ipynb</code></a>: part 9.</li>
+<li>For the warm-up at home, from session 2: <a download="02_live_editing.ipynb" href="../02-building-an-edition/notebooks/02_live_editing.ipynb"><code>02_live_editing.ipynb</code></a> with <a href="../02-building-an-edition/notebooks/schumann-edition-inputs.zip"><code>schumann-edition-inputs.zip</code></a>.</li>
+</ul>
+<p>Each notebook continues the work of the one before, so run them in this order.</p>
+<h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The print: Edvard Grieg, <em>Lyrische Stücke</em>, Op. 43, in <em>Klavierwerke</em>, vol. 1, ed. Hermann Kretzschmar, Leipzig: C. F. Peters, plate 8800 (<a href="https://imslp.org/wiki/Special:ImagefromIndex/28165">IMSLP file 28165</a>, scanned by piupianissimo; public domain). The notebook downloads it when you run it; it is not part of the course files. The page images in your repository are drawn from it.</li>
+<li>The encoding: Maja Hartwig and Kristina Richts, <a href="https://github.com/music-encoding/sample-encodings/blob/e4a3c4dece588ae0bdb13e5cf956340dcd99b447/MEI_5.1/Music/Complete_examples/Grieg_Little_bird_Op43_No4.mei"><em>Vöglein</em> (Little bird), MEI 5.1</a>, MEI Sample Collection. The file declares itself public domain; the collection is under the <a href="https://github.com/music-encoding/sample-encodings/blob/main/LICENSE">ECL-2.0 licence</a>. We start from it unchanged.</li>
+<li>The saved boxes: found by the <a href="https://measure-detector.edirom.de">Edirom measure detector</a> and checked by eye.</li>
+<li>The full record of print, scan, encoding and boxes: <a href="sources/sources.json"><code>sources.json</code></a>.</li>
+<li>CAMAT's own guides: <a href="https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/mei_pdf_facsimile_guided.ipynb">linking a PDF</a> and <a href="https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/mei_web_edition.ipynb">building a web edition</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.tabs.link", "navigation.sections", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/demos.js" type="module"></script>
+      
+    
+  </body>
+</html>
