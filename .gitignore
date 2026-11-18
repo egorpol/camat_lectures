@@ -38,6 +38,10 @@ tools/pack_schumann_boxes.py
 tools/pack_schumann_release.py
 tools/export_svg_editorial.py
 tools/serve_mei_friend_preview.py
+# Session 4 notebook sources and their helper, local until release (as S3 was)
+tools/notebooks/04_*.py
+tools/notebooks/helpers/grieg_analysis.py
+tools/notebooks/test_grieg_analysis.py
 tools/snapshot_free_models.py
 # Instructor tools that read teacher/
 tools/prepare_schumann_starter.py
