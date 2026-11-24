@@ -42,6 +42,8 @@ tools/serve_mei_friend_preview.py
 tools/notebooks/04_*.py
 tools/notebooks/helpers/grieg_analysis.py
 tools/notebooks/test_grieg_analysis.py
+tools/notebooks/helpers/grieg_search.py
+tools/notebooks/test_grieg_search.py
 tools/snapshot_free_models.py
 # Instructor tools that read teacher/
 tools/prepare_schumann_starter.py
