@@ -164,7 +164,7 @@ def check_repository(context):
               "Run the cell again in a minute.")
         return
     if changed:
-        files = [line[3:] for line in changed.splitlines()]
+        files = [line.split(maxsplit=1)[1] for line in changed.splitlines()]  # _git strips the first " M"
         print(f"! Not committed yet ({len(files)}): {', '.join(files[:6])}{' …' if len(files) > 6 else ''}")
     raw = f"https://raw.githubusercontent.com/{owner}/{repo}/{on_github}/mei/work.mei"
     print(f"\nYour file in mei-friend (as in the commit GitHub has now):\n  https://mei-friend.mdw.ac.at/?file={raw}")
