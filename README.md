@@ -21,10 +21,14 @@ Analysis Toolbox.
 |---|---|---|
 | 1 | [Why encode music? From notation to machine-readable scores](https://egorpol.github.io/camat_lectures/sessions/01-why-encode-music/) | player-piano roll, one melody in seven formats, a facsimile-linked page, binary grids, an LLM writes ABC |
 | 2 | [Building an edition: the source and the notes](https://egorpol.github.io/camat_lectures/sessions/02-building-an-edition/) | laptop setup, the page and its bars in Schumann Op. 68 No. 10, OMR next to the scan, the score as SVG, linking bars to the scan, editing MEI live with Copilot |
+| 3 | [Building an edition: linking, editing, publishing](https://egorpol.github.io/camat_lectures/sessions/03-linking-and-editing/) | Grieg's *Vöglein* Op. 43 No. 4 in pairs: page images and bar boxes, linking bars to the pages, an edition on GitHub, the MEI header, restoring marks, peer review, a live edition page |
+| 4 | [The class edition, first analysis](https://egorpol.github.io/camat_lectures/sessions/04-publishing-and-analysis/) | the class edition and its coverage, CAMAT's two tables, piano rolls, notes and marks per bar, pitch, length and pitch-class counts, the bird call search, a finding on the live page |
 
-Session 2 works on Schumann's *Fröhlicher Landmann*, and session 3 starts
-from it. All its notebooks and data live in `sessions/02-building-an-edition/`, because they
-share one working project (`schumann_edition_work`) next to the notebooks.
+Session 2 works on Schumann's *Fröhlicher Landmann*: its notebooks share one
+working folder (`schumann_edition_work`) next to them in
+`sessions/02-building-an-edition/notebooks/`. Sessions 3 and 4 work on Grieg's
+*Vöglein*: the session 3 notebooks create `grieg_edition_work`, and the
+session 4 notebooks find it in the session 3 folder.
 
 ## Get the notebooks
 
@@ -66,14 +70,13 @@ are [PDF preparation](sessions/02-building-an-edition/notebooks/02_pdf_preparati
 (with `schumann-omr-recordings.zip`, recorded HOMR/OeMeR runs),
 [note entry](sessions/02-building-an-edition/notebooks/02_note_entry.ipynb) and
 [live editing](sessions/02-building-an-edition/notebooks/02_live_editing.ipynb)
-(with `schumann-edition-inputs.zip`; session 3 starts with it).
-The notebooks for sessions 3 and 4 will go into the same folder, because all
-Schumann notebooks share one working folder.
+(with `schumann-edition-inputs.zip`; a warm-up before session 3).
+Sessions 3 and 4 use the same environment.
 
 ## Repository layout
 
 - `docs/`: the live site ([MkDocs Material](https://squidfunk.github.io/mkdocs-material/)); the demo code is in `docs/javascripts/`.
-- `sessions/NN-slug/`: per session, the example encodings (`examples/`) and the notebooks (`notebooks/`); session 2 also has its source record (`sources/`).
+- `sessions/NN-slug/`: per session, the example encodings (`examples/`) and the notebooks (`notebooks/`); sessions 2 and 3 also have their source records (`sources/`).
 - `tools/notebooks/`: the notebook sources (percent format) and their helpers. `tools/build_notebooks.py` builds the `.ipynb` files from them, so edit the sources, not the notebooks.
 - `binder/environment.yml`: the environment for the cloud route (Repo2Docker reads only this folder).
 - `get_notebooks.py`, `get_notebooks.sh`: the download scripts above (Python for a notebook cell, bash for a terminal; they do the same).
@@ -115,5 +118,10 @@ They retain the encoding's public-domain statement and the collection's
 [ECL-2.0 license](sessions/02-building-an-edition/examples/schumann/LICENSE).
 OMR recordings are generated notation and text diagnostics; the IMSLP scan
 and model weights are fetched at runtime rather than committed.
+
+Sessions 3 and 4 use Maja Hartwig and Kristina Richts's encoding of Grieg's
+*Vöglein* from the same collection, unchanged, with the collection's
+[ECL-2.0 license](sessions/03-linking-and-editing/examples/grieg/LICENSE); the
+IMSLP scan of the Peters print (file 28165) is fetched at runtime.
 
 Changes are listed in [CHANGELOG.md](CHANGELOG.md).

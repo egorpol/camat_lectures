@@ -7,6 +7,40 @@ instead of versioned, and the date is the day the change went live on the
 
 ## Unreleased
 
+## 2026-11-25
+
+### Added
+
+- Session 4, *The class edition, first analysis*: the page and two notebooks
+  (`04_class_edition`, `04_pattern_search`). In block 1 the class joins the
+  pairs' systems of Grieg's *Vöglein* into one class edition, with a table of
+  who restored what. CAMAT gives two tables, piano rolls and note, mark,
+  pitch, length and pitch-class counts. In block 2 each pair searches
+  its own edition for the bird call of bar 1 with CAMAT's grid search, sorts its
+  hits by looking at the score and the print, and adds a finding to its live
+  page.
+- The sources of the session 4 notebooks, their helpers and the helpers' tests
+  (`tools/notebooks/04_*.py`, `helpers/grieg_analysis.py`,
+  `helpers/grieg_search.py`, `test_grieg_analysis.py`, `test_grieg_search.py`).
+- Tests for the session 3 linking helper's page drawing
+  (`tools/notebooks/test_grieg_linking.py`).
+
+### Changed
+
+- Session 3 page: the wrap-up points to the session 4 page.
+- Home page: session 4 in the sessions table. README: sessions 3 and 4 in the
+  table, the Grieg encoding under third-party material.
+
+### Fixed
+
+- Session 3, `03_grieg_repository` and `03_grieg_live_page`: the list of files
+  not yet committed shows whole file names; before, the first one could lose
+  its first letter.
+- Session 3, `03_grieg_linking`: `draw_pages` runs again after poppler is
+  updated. CAMAT refused to reuse the page images when only the poppler version
+  had changed. The helper now reuses them when the PDF, the resolution and every
+  image are unchanged.
+
 ## 2026-11-14
 
 ### Added

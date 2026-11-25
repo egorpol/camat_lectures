@@ -155,11 +155,30 @@ def cut_pages(context):
 
 # --- 3. The pages as images ------------------------------------------------------
 
+def _drawn_before(context):
+    """pages.json when its images come from our PDF at our dpi and are unchanged.
+
+    CAMAT also refuses to reuse them after a poppler update; the boxes depend only on
+    the PDF, the dpi and the images, so the poppler version does not matter here."""
+    path = context["pages_json"]
+    if not path.is_file() or not context["excerpt"].is_file():
+        return None
+    manifest = json.loads(path.read_text())
+    same = (manifest.get("pdf_sha256") == sha256_of(context["excerpt"])
+            and manifest.get("dpi") == context["settings"]["dpi"]
+            and manifest.get("source_id") == context["excerpt"].stem
+            and all((path.parent / page["image"]).is_file()
+                    and sha256_of(path.parent / page["image"]) == page["sha256"] for page in manifest["pages"]))
+    return manifest if same else None
+
+
 def draw_pages(context):
     """Draw both pages as PNG images at 300 dpi; CAMAT writes pages.json beside them."""
     from camat.pdf_facsimile import check_poppler, render_pdf_pages
     check_poppler()
-    manifest = render_pdf_pages(context["excerpt"], context["pages_json"].parent, dpi=context["settings"]["dpi"])
+    manifest = _drawn_before(context)
+    if manifest is None:
+        manifest = render_pdf_pages(context["excerpt"], context["pages_json"].parent, dpi=context["settings"]["dpi"])
     if manifest["pdf_sha256"] != context["sources"]["classroom_pdf"]["sha256"]:
         raise ValueError("The images do not come from our two-page PDF. Run the cells of parts 1 and 2 again.")
     for page in manifest["pages"]:

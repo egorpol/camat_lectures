@@ -149,6 +149,7 @@ You switch on GitHub Pages in your repository's settings, commit and sync, and a
 - An encoding you reuse comes with a header. Read it before you trust the notes, and add to it what you did.
 - Boxes, links and marks are checked twice: by the software for their form, by a person against the print.
 - A repository keeps every version with its message; a live page shows the current one to anyone.
+- In [session 4](../04-publishing-and-analysis/index.md) the class joins the pairs' systems into one edition and takes the first counts. Then you search your own edition for the bird call of bar 1 and add a finding to your live page.
 
 **Homework**
 
