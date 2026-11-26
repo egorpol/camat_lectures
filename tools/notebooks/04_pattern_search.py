@@ -63,7 +63,8 @@ show_query(GRIEG)
 #   0.75 or more.
 #
 # In the table, `source_onset_QL` is where a hit starts, in quarter notes on the piano roll's time
-# line. `shared_cells` counts the call's dark cells that are dark there too.
+# line. `grid_onset_QL` is the same place on the grid, which starts at the pickup, so it is 0.5
+# more. `shared_cells` counts the call's dark cells that are dark there too.
 
 # %%
 from camat import display_filtered_piano_roll, parse_files
@@ -115,9 +116,28 @@ if results and not results[0]["df_pitch"].empty:
         )
         camat_hits = result["matches"]
         print(f"CAMAT finds {len(camat_hits)} hits.")
-        display(camat_hits[["score", "transpose_semitones", "source_onset_QL", "shared_cells", "required_cells"]])
+        display(camat_hits[[
+            "score", "transpose_semitones", "source_onset_QL", "grid_onset_QL", "shared_cells", "required_cells",
+        ]])
 elif GRIEG is not None:
     print("Skipped. CAMAT found no notes in your work.mei.")
+
+# %% [markdown]
+# CAMAT's `plot_query_heatmaps` draws the score of every place the search tried as a *heatmap*.
+# Time runs to the right, on the grid's time line. Each thin column is one start position, and its
+# colour is the score there: dark for 0, yellow for 1.0. The numbered circles are the hits: the
+# table above counts them from 0, the circles and the next table from 1. Where else is the colour
+# bright without a circle?
+
+# %%
+import matplotlib.pyplot as plt
+from camat.binary_query import plot_query_heatmaps
+
+if camat_hits is None:
+    print("Skipped. Run the search cell above first.")
+else:
+    plot_query_heatmaps({"Search at the printed pitch": result}, 0.125, rank=None)
+    plt.show()
 
 # %% [markdown]
 # The next cell runs the same search with the course's own `search`. It numbers the hits from 1,
@@ -138,8 +158,7 @@ show_hits(GRIEG, PRINTED_HITS, [2])
 #
 # ## 3. Search at every pitch
 #
-# This time the same grid can move up and down in pitch, and the hits are numbered again. In
-# CAMAT's terms, `search_binary_query` gets `transpositions="all"` instead of `[0]`. With the
+# This time the same grid can move up and down in pitch, and the hits are numbered again. With the
 # source notes you get 23 hits. When two hits would share more than two thirds of their time, even
 # at different pitches, CAMAT keeps only the one with the higher score. A new hit in bars 6–7 joins
 # the hits with a score of 1.0: read its pitch shift. The hits that score 0.75 fill 12 of the call's
@@ -147,6 +166,29 @@ show_hits(GRIEG, PRINTED_HITS, [2])
 
 # %%
 HITS = search(GRIEG)
+
+# %% [markdown]
+# Here is the same search with CAMAT's own functions: `search_binary_query` gets
+# `transpositions="all"` instead of `[0]`. Now the heatmap has one row for each pitch shift, in
+# semitones (`st`): `+0 st` is the printed pitch. The cell sorts CAMAT's hits like the table above,
+# so each circle has the same number as there. Find the circle of the hit in bars 6–7. Which row
+# is it on?
+
+# %%
+every_result = None
+if camat_hits is None:
+    print("Skipped. Run the search cell in part 2 first.")
+else:
+    every_result = search_binary_query(
+        piece_grid, call_grid, transpositions="all", min_score=0.75, top_n=None,
+    )
+    # Highest score first, then in the order of the piece, as in the table above.
+    every_result["matches"] = every_result["matches"].sort_values(
+        ["score", "source_onset_QL", "transpose_semitones"], ascending=[False, True, True],
+    ).reset_index(drop=True)
+    print(f"CAMAT finds {len(every_result['matches'])} hits.")
+    plot_query_heatmaps({"Search at every pitch": every_result}, 0.125, rank=None)
+    plt.show()
 
 # %% [markdown]
 # <details><summary>How can a held chord score 0.75?</summary>
@@ -170,6 +212,27 @@ HITS = search(GRIEG)
 # %%
 MY_HITS = [4, 10, 11]
 show_hits(GRIEG, HITS, MY_HITS)
+
+# %% [markdown]
+# CAMAT's `plot_binary_query_match` lays each hit's grid next to the call's. In CAMAT's words, the
+# call is the *query* and your piece is the *host*. On the left are the call's cells, moved to the
+# hit's pitch. On the right is the piece around the hit, with the hit's place in a dashed box. A
+# pink outline marks a cell of the call that is filled here, a red cross one that is missing. Dark
+# cells in the box without an outline are extra notes. They do not lower the score.
+
+# %%
+from camat.binary_query import plot_binary_query_match
+
+if every_result is None:
+    print("Skipped. Run the CAMAT search cell in part 3 first.")
+else:
+    for number in MY_HITS:
+        if number in range(1, len(every_result["matches"]) + 1):
+            figure = plot_binary_query_match(piece_grid, every_result, rank=number - 1)
+            figure.suptitle(f"Hit {number}")
+            plt.show()
+        else:
+            print(f"! There is no hit {number}. Choose a number from 1 to {len(every_result['matches'])}.")
 
 # %% [markdown]
 # **Checkpoint:** each hit has a kind and a reason you can point to in the music.
@@ -204,6 +267,7 @@ write_finding(GRIEG, HITS, MY_HIT, MY_CATEGORY, MY_SENTENCE);
 # %%
 if GRIEG is not None:
     check_repository(GRIEG)
+if GRIEG is not None and (GRIEG.get("github") or {}).get("commit"):  # once GitHub shows your branch
     try:
         check_live_page(GRIEG)
     except OSError:

@@ -7,6 +7,20 @@ instead of versioned, and the date is the day the change went live on the
 
 ## Unreleased
 
+## 2026-11-26
+
+### Added
+
+- Session 4, `04_pattern_search`: CAMAT's own heatmaps of the search score, at the printed
+  pitch (part 2) and at every pitch, one row per pitch shift (part 3), with the hits as numbered
+  circles; and CAMAT's view of each hit's grid next to the call's, with missing cells crossed
+  (part 4), as in CAMAT's `chord_progression_search` notebook. The session page says so.
+
+### Fixed
+
+- Session 4, `04_pattern_search`: an edition with no address on GitHub no longer gets two
+  "run the repository check first" messages in the last cell, right after that check ran.
+
 ## 2026-11-25
 
 ### Added

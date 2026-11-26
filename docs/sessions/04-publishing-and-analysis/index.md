@@ -97,8 +97,8 @@ The search works on a grid, like the binary grid of session 1: each row is a pit
 
 ## 6. Searching for the call
 
-- **At the printed pitch.** First the call's grid keeps its own pitch. One cell runs the search with CAMAT's own functions: `parse_files` reads your edition into `df_pitch`, a piano roll shows bars 1–5, and `search_binary_query` slides the call's grid along the piece. The search keeps the hits with a score of 0.75 or more. The next cell numbers them from the highest score down, and in the order of the piece where scores are equal. You follow hit 2 to the score and the scan.
-- **At every pitch.** Then the grid may move up and down by any number of *semitones* (a semitone is the step from one key of the piano to the next, black keys included). The notebook numbers the hits again, in a new table. New hits appear: one in bars 6–7 with a score of 1.0, and many with a score of 0.75, which fill 12 of the call's 16 cells. Some of them sound like the call, others do not.
+- **At the printed pitch.** First the call's grid keeps its own pitch. One cell runs the search with CAMAT's own functions: `parse_files` reads your edition into `df_pitch`, a piano roll shows bars 1–5, and `search_binary_query` slides the call's grid along the piece. The search keeps the hits with a score of 0.75 or more. A *heatmap* shows the score at every place the grid was tried, with the hits as numbered circles. The next cell numbers them from the highest score down, and in the order of the piece where scores are equal. You follow hit 2 to the score and the scan.
+- **At every pitch.** Then the grid may move up and down by any number of *semitones* (a semitone is the step from one key of the piano to the next, black keys included). The notebook numbers the hits again, in a new table. New hits appear: one in bars 6–7 with a score of 1.0, and many with a score of 0.75, which fill 12 of the call's 16 cells. Some of them sound like the call, others do not. CAMAT's heatmap now has one row for each pitch shift.
 
 A score counts cells, not music. A held note fills the same cells as the same note repeated, and extra notes do not lower the score. Even a score of 1.0 only says that all the call's cells are filled.
 
@@ -106,7 +106,7 @@ A score counts cells, not music. A held note fills the same cells as the same no
 
 ## 7. Sorting your hits
 
-Your teacher gives your pair three hit numbers from the table *at every pitch*. Put them into `MY_HITS` in place of the three example numbers, and run the cell. If the notebook warned that your notes differ from the source, your numbers may point at other passages: check the bars with your teacher. For each hit, look at the score and the scan: follow the rhythm, the shape of the pitches and the landing note. Decide together which kind it is:
+Your teacher gives your pair three hit numbers from the table *at every pitch*. Put them into `MY_HITS` in place of the three example numbers, and run the cell. If the notebook warned that your notes differ from the source, your numbers may point at other passages: check the bars with your teacher. For each hit, look at the score and the scan: follow the rhythm, the shape of the pitches and the landing note. CAMAT also lays the hit's grid next to the call's and marks the cells that are missing. Decide together which kind it is:
 
 - a **repeat**: the call again, with the same rhythm and intervals, at its own pitch or transposed;
 - a **sequence step**: one step of a sequence, the call's shape at new pitches with some intervals changed;
@@ -168,4 +168,4 @@ Both notebooks work in your session-3 folder `grieg_edition_work`: the first add
 
 - The print and the encoding are the same as in session 3: see [its sources](../03-linking-and-editing/index.md#sources).
 - The marks in the class edition come from the pairs' own repositories on GitHub, at the commits on the class list.
-- CAMAT's own guides: [reading an MEI file as tables](https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/mei_parse_tables.ipynb) and [searching with a binary grid](https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/binary_pattern_search.ipynb).
+- CAMAT's own guides: [reading an MEI file as tables](https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/mei_parse_tables.ipynb), [searching with a binary grid](https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/binary_pattern_search.ipynb) and [comparing searches in heatmaps](https://github.com/egorpol/camat_v2/blob/v0.2.8/notebooks/chord_progression_search.ipynb).
